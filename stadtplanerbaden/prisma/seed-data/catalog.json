@@ -1,0 +1,1628 @@
+{
+  "generatedAt": "2026-10-08",
+  "places": [
+    {
+      "slug": "historische-altstadt-baden",
+      "name": "Historische Altstadt Baden",
+      "category": "ENTDECKEN",
+      "shortDescription": "Verwinkelte Gassen, gotische Bauten und malerische Plätze zwischen Schlossberg und Limmat.",
+      "description": "Die Badener Altstadt liegt zwischen dem Schlossberg und dem steilen Abhang zur Limmat und entstand im 13. und 14. Jahrhundert. Der Grossteil der Bauten stammt aus dem 16. bis 18. Jahrhundert; das Ortsbild gilt als Kulturgut von nationaler Bedeutung. Stadtturm, Stadtkirche, Rathaus mit dem historischen Tagsatzungssaal und die gedeckte Holzbrücke liegen nur wenige Schritte voneinander entfernt.",
+      "address": {
+        "street": "Weite Gasse",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47291,
+      "lng": 8.30799,
+      "websiteUrl": "https://www.deinbaden.ch/de/erleben/sehenswuerdigkeiten",
+      "durationMinutes": 90,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Altstadt",
+        "Geschichte",
+        "Spaziergang",
+        "Architektur"
+      ],
+      "sources": [
+        "https://de.wikipedia.org/wiki/Baden_AG",
+        "https://www.deinbaden.ch/de/erleben/sehenswuerdigkeiten"
+      ]
+    },
+    {
+      "slug": "ruine-stein",
+      "name": "Ruine Stein",
+      "category": "ENTDECKEN",
+      "shortDescription": "Burgruine auf dem Schlossberg hoch über der Altstadt – mit weitem Blick über Baden und die Limmat.",
+      "description": "Die Burg Stein wurde vermutlich im 11. Jahrhundert von den Grafen von Lenzburg erbaut und kam später an die Kyburger und Habsburger. 1415 wurde sie bei der Eroberung des Aargaus durch die Eidgenossen zerstört; Wachtturm und Burgkapelle sind bis heute erhalten. Vom Schlossbergplatz führt der Weg durch den Stadtturm und eine steile Treppe hinauf zur Ruine mit ihrem Panorama.",
+      "address": {
+        "street": "Schlossbergweg",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47301,
+      "lng": 8.30524,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/ruine-stein",
+      "durationMinutes": 45,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Aussicht",
+        "Burgruine",
+        "Mittelalter",
+        "Habsburger"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/ruine-stein",
+        "https://de.wikipedia.org/wiki/Baden_AG"
+      ]
+    },
+    {
+      "slug": "holzbruecke-baden",
+      "name": "Gedeckte Holzbrücke",
+      "category": "ENTDECKEN",
+      "shortDescription": "Die gedeckte Holzbrücke von 1809 überspannt die Limmat ohne Pfeiler und führt zum Landvogteischloss.",
+      "description": "Schon im 13. Jahrhundert verband eine Brücke an dieser Stelle die beiden Limmatufer. Die heutige gedeckte Holzbrücke wurde 1809 nach einem Entwurf des Laufenburger Baumeisters Blasius Balteschwiler errichtet und überspannt den 37 Meter breiten Fluss ohne Pfeiler. Sie verbindet die Altstadt mit dem Landvogteischloss und bietet schöne Blicke auf Fluss und Stadt.",
+      "address": {
+        "street": "Unter Halde 1",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.4725,
+      "lng": 8.31035,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/holzbruecke",
+      "durationMinutes": 15,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": true,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Brücke",
+        "Limmat",
+        "Wahrzeichen",
+        "Fotospot"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/holzbruecke"
+      ]
+    },
+    {
+      "slug": "landvogteischloss-historisches-museum",
+      "name": "Landvogteischloss – Historisches Museum Baden",
+      "category": "KULTUR",
+      "shortDescription": "Ehemaliger Sitz der eidgenössischen Landvögte mit Museum zu Bäder-, Industrie- und Tagsatzungsgeschichte.",
+      "description": "Die Grundmauern des Wehrturms gehen auf das 13. Jahrhundert zurück; bis 1798 war das Schloss Amtssitz des eidgenössischen Landvogts. Seit 1913 beherbergt es ein Museum, das heute als Teil des Historischen Museums Baden eingerichtete Wohnräume vom Mittelalter bis ins 20. Jahrhundert zeigt. Im modernen Erweiterungsbau an der Limmat erzählt die multimediale Dauerausstellung «Geschichte >verlinkt<» von Badens Bäder-, Industrie- und Tagsatzungsvergangenheit.",
+      "address": {
+        "street": "Wettingerstrasse 2",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47334,
+      "lng": 8.31083,
+      "websiteUrl": "https://museum.baden.ch/",
+      "durationMinutes": 90,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Di–Sa 13–17 Uhr, Do 12–19 Uhr, So 10–17 Uhr, Mo geschlossen (abweichende Zeiten an Feiertagen)",
+      "tags": [
+        "Museum",
+        "Schloss",
+        "Geschichte",
+        "Familie"
+      ],
+      "sources": [
+        "https://museum.baden.ch/",
+        "https://museum.baden.ch/de/startseite/informationen/oeffnungszeiten-preise.html/403",
+        "https://www.deinbaden.ch/de/ort/landvogteischloss",
+        "https://de.wikipedia.org/wiki/Landvogteischloss_Baden"
+      ]
+    },
+    {
+      "slug": "grand-casino-baden",
+      "name": "Grand Casino Baden",
+      "category": "ENTDECKEN",
+      "shortDescription": "Spielcasino im historischen Kursaal mit Tischspielen, Automaten, Bars und Restaurants – derzeit im Umbau.",
+      "description": "Das Grand Casino Baden befindet sich im Kursaal am Kurpark und bietet Spielautomaten, Tischspiele und Poker sowie Bars und Restaurants. Wegen des Umbaus 2026 wird der Spielbetrieb vorübergehend im Pop-up-Casino im ehemaligen Club COCO geführt; der Eingang befindet sich dort. Zutritt ab 18 Jahren mit gültigem Ausweis.",
+      "address": {
+        "street": "Haselstrasse 2",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47889,
+      "lng": 8.31041,
+      "websiteUrl": "https://www.grandcasinobaden.ch/",
+      "durationMinutes": 120,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "UNKNOWN",
+      "openingHours": "So–Do 11–4 Uhr, Fr–Sa 11–5 Uhr (Pop-up-Casino während des Umbaus)",
+      "tags": [
+        "Casino",
+        "Abend",
+        "Unterhaltung",
+        "Kursaal"
+      ],
+      "sources": [
+        "https://www.grandcasinobaden.ch/",
+        "https://www.grandcasinobaden.ch/ueber-grand-casino-baden/umbau",
+        "https://www.deinbaden.ch/de/ort/grand-casino-baden",
+        "https://de.wikipedia.org/wiki/Kursaal_(Baden)"
+      ]
+    },
+    {
+      "slug": "thermalbad-fortyseven",
+      "name": "Wellness-Therme FORTYSEVEN",
+      "category": "WELLNESS",
+      "shortDescription": "Moderne Wellness-Therme von Mario Botta im Bäderquartier – mit Thermalbecken, Saunen und Spa.",
+      "description": "Das FORTYSEVEN ist das Herzstück des historischen Bäderquartiers und nach der Quelltemperatur des Thermalwassers von rund 47 °C benannt. Die Therme bietet drei Aussen- und fünf Innenbecken, zwölf Saunen (Textil-, textilfreie und Ladies-Sauna), den Erlebnisbereich «Kosmos» sowie ein Spa mit Behandlungsräumen. Das Gebäude des Tessiner Architekten Mario Botta öffnet sich zur Limmat.",
+      "address": {
+        "street": "Grosse Bäder 1",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48121,
+      "lng": 8.31304,
+      "websiteUrl": "https://www.fortyseven.ch/",
+      "durationMinutes": 180,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Täglich 8–22 Uhr (Badeschluss 30 Min. vor Schliessung, letzter Einlass 1 Std. vor Badeschluss)",
+      "tags": [
+        "Thermalbad",
+        "Sauna",
+        "Spa",
+        "Architektur",
+        "Regenwetter"
+      ],
+      "sources": [
+        "https://www.fortyseven.ch/",
+        "https://www.fortyseven.ch/oeffnungszeiten",
+        "https://www.deinbaden.ch/de/ort/fortyseven"
+      ]
+    },
+    {
+      "slug": "kurpark-baden",
+      "name": "Kurpark",
+      "category": "NATUR",
+      "shortDescription": "Historischer Park rund um den Kursaal mit exotischem Baumbestand und Wasseranlagen.",
+      "description": "Mit dem Bau des Kursaals um 1875 entstand auch die Parkanlage, die ihn umgibt. Erhalten geblieben sind ein eindrücklicher Bestand an zeittypischen, exotischen Bäumen und die Wasseranlagen. Der Park liegt zwischen Bahnhof, Kurtheater und Bäderquartier und lädt zu einer ruhigen Pause im Grünen ein.",
+      "address": {
+        "street": null,
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47896,
+      "lng": 8.31053,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/kurpark",
+      "durationMinutes": 30,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Park",
+        "Bäume",
+        "Erholung",
+        "Kursaal"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/kurpark"
+      ]
+    },
+    {
+      "slug": "limmatpromenade",
+      "name": "Limmatpromenade",
+      "category": "NATUR",
+      "shortDescription": "Uferweg unter Kastanienbäumen entlang der Limmat – zum Spazieren, Joggen und Verweilen.",
+      "description": "Entlang der Limmat ist ein vielseitiger Erholungsraum mit schattigen Ruheplätzen und Sitzstufen am Wasser entstanden. In den warmen Monaten ergänzen zwei Bars unter freiem Himmel – die Kajüte beim Tränenbrunnen und das Triebguet bei der Hochbrücke – das Angebot. Vom Bahnhof erreicht man die Promenade am schnellsten mit dem Promenadenlift am Unteren Bahnhofplatz.",
+      "address": {
+        "street": "Limmatsteg",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47574,
+      "lng": 8.30916,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/limmatpromenade",
+      "durationMinutes": 45,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Limmat",
+        "Spaziergang",
+        "Flussufer",
+        "Sommer"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/limmatpromenade"
+      ]
+    },
+    {
+      "slug": "museum-langmatt",
+      "name": "Museum Langmatt",
+      "category": "KULTUR",
+      "shortDescription": "Impressionisten in einer Jugendstilvilla mit Park – seit Mai 2026 nach Renovation wieder geöffnet.",
+      "description": "Das Museum Langmatt zeigt im ehemaligen Wohnhaus von Sidney und Jenny Brown-Sulzer eine der bedeutendsten Privatsammlungen des französischen Impressionismus in Europa, darunter Werke von Renoir, Monet, Pissarro, Gauguin, Degas und Cézanne. Die Bilder hängen in original erhaltenen Wohnräumen, umgeben von einem weitläufigen Park. Nach der Gesamtrenovation 2024–2026 feiert die Ausstellung «Welcome back – Die Sammlung kehrt zurück» (9. Mai 2026 bis 10. Januar 2027) die Rückkehr der Sammlung.",
+      "address": {
+        "street": "Römerstrasse 30",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.4815,
+      "lng": 8.30767,
+      "websiteUrl": "https://www.langmatt.ch/",
+      "durationMinutes": 90,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Museum: Di–Fr 14–17 Uhr, Sa–So 11–17 Uhr; Café & Park: Di–Fr 12–17 Uhr, Sa–So 10–17 Uhr; Mo geschlossen",
+      "tags": [
+        "Kunst",
+        "Impressionismus",
+        "Villa",
+        "Park"
+      ],
+      "sources": [
+        "https://www.langmatt.ch/",
+        "https://www.langmatt.ch/besuch",
+        "https://www.deinbaden.ch/de/ort/museum-langmatt"
+      ]
+    },
+    {
+      "slug": "baederquartier",
+      "name": "Bäderquartier",
+      "category": "ENTDECKEN",
+      "shortDescription": "2000 Jahre Bädergeschichte am Limmatknie – mit Thermalquellen, historischen Hotels und neuer Therme.",
+      "description": "Schon die Römer nutzten die heissen Quellen am Limmatknie und gründeten hier die Siedlung «Aquae Helveticae». Das Thermalwasser sprudelt aus 18 Quellen, ist rund 47 °C warm und gilt als das mineralreichste der Schweiz. Heute verbinden die Wellness-Therme FORTYSEVEN, historische Hotelbauten und die öffentlichen Heissen Brunnen das alte Bäderquartier mit zeitgemässer Badekultur.",
+      "address": {
+        "street": "Grosse Bäder",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48121,
+      "lng": 8.31304,
+      "websiteUrl": "https://www.deinbaden.ch/de/erleben/wellbeing",
+      "durationMinutes": 60,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Thermalwasser",
+        "Geschichte",
+        "Römer",
+        "Rundgang"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/erleben/wellbeing",
+        "https://de.wikipedia.org/wiki/Baden_AG"
+      ]
+    },
+    {
+      "slug": "heisse-brunnen",
+      "name": "Heisse Brunnen",
+      "category": "WELLNESS",
+      "shortDescription": "Zwei öffentliche Thermalbecken beidseits der Limmat – zum Füsse- oder Händewärmen im Freien.",
+      "description": "Am 6. November 2021 wurden in Baden und Ennetbaden die beiden Heissen Brunnen eröffnet, entwickelt vom Verein Bagni Popolari und gestiftet von der Ortsbürgergemeinde Baden und der Gemeinde Ennetbaden. Die Becken werden mit naturbelassenem Thermalwasser gespeist und sind je nach Witterung etwa 37 bis 43 °C warm. Der Badener Brunnen liegt direkt unterhalb des FORTYSEVEN an der Limmat, der Ennetbadener gegenüber im Park am Ende der Promenade.",
+      "address": {
+        "street": "Parkstrasse 31",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48147,
+      "lng": 8.31307,
+      "websiteUrl": "https://bagnopopolare.ch/projekte/heisse-brunnen/",
+      "durationMinutes": 30,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": "Täglich ca. 7–22 Uhr; Mo, Mi, Fr Reinigung (Baden ca. 6.30–11 Uhr, Ennetbaden ca. 9–13 Uhr)",
+      "tags": [
+        "Thermalwasser",
+        "Gratis",
+        "Fussbad",
+        "Limmat"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/heisse-brunnen",
+        "https://bagnopopolare.ch/projekte/heisse-brunnen/",
+        "https://www.srf.ch/kultur/gesellschaft-religion/dank-buergerinitiative-thermalbaden-fuer-alle-es-begann-mit-einer-guerilla-aktion"
+      ]
+    },
+    {
+      "slug": "schweizer-kindermuseum",
+      "name": "Schweizer Kindermuseum",
+      "category": "KULTUR",
+      "shortDescription": "Interaktives Museum zu 300 Jahren Kindheitsgeschichte – ein Ausflug für Gross und Klein.",
+      "description": "Das Schweizer Kindermuseum ist seit 1985 ein Treffpunkt der Generationen und zeigt, wie sich Kindheit und Spiel über die Jahrhunderte verändert haben. Die Dauerausstellung «Die Welt des Kindes entdecken» lädt mit interaktiven Stationen zum Mitmachen ein; dazu kommen Ausstellungen wie «Rakete, Mond und Sterne» oder «Lueg id Wält». Das Museum befindet sich in einer Villa von 1896/97.",
+      "address": {
+        "street": "Ländliweg 7",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.46962,
+      "lng": 8.30912,
+      "websiteUrl": "https://www.kindermuseum.ch/",
+      "durationMinutes": 120,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Di–Sa 14–17 Uhr, So 10–17 Uhr, Mo geschlossen (Herbstferien 26.9.–18.10.2026: Di–So 10–17 Uhr)",
+      "tags": [
+        "Familie",
+        "Kinder",
+        "Museum",
+        "Regenwetter"
+      ],
+      "sources": [
+        "https://www.kindermuseum.ch/aktuell/",
+        "https://kindermuseum.ch/praktische-informationen/eintrittspreise/",
+        "https://www.deinbaden.ch/de/ort/schweizer-kindermuseum",
+        "https://commons.wikimedia.org/wiki/File:Kindermuseum_Architektur.jpg"
+      ]
+    },
+    {
+      "slug": "kurtheater-baden",
+      "name": "Kurtheater Baden",
+      "category": "KULTUR",
+      "shortDescription": "Theater von 1952 beim Kurpark, 2018–2020 renoviert und erweitert – mit Schauspiel, Tanz und Musik.",
+      "description": "Das Kurtheater wurde 1952 nach Plänen der Architektin Lisbeth Sachs in der Nähe des Kursaals erbaut. Von 2018 bis 2020 wurde es renoviert und erweitert und zur Saison 2020/21 wieder bezogen. Der Theatersaal bietet rund 560 Plätze; im Programm stehen Gastspiele und Eigenproduktionen.",
+      "address": {
+        "street": "Parkstrasse 20",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48023,
+      "lng": 8.31015,
+      "websiteUrl": "https://www.kurtheater.ch/",
+      "durationMinutes": 150,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Theaterbüro: Mo–Do 10–17 Uhr (Vorstellungen gemäss Spielplan)",
+      "tags": [
+        "Theater",
+        "Kultur",
+        "Abend",
+        "Architektur"
+      ],
+      "sources": [
+        "https://www.kurtheater.ch/",
+        "https://www.kurtheater.ch/kontakt",
+        "https://de.wikipedia.org/wiki/Kurtheater_Baden"
+      ]
+    },
+    {
+      "slug": "stadtturm-baden",
+      "name": "Stadtturm",
+      "category": "ENTDECKEN",
+      "shortDescription": "Einziger erhaltener Wehrturm der mittelalterlichen Stadtbefestigung – Tor zur Weiten Gasse.",
+      "description": "Der Stadtturm wurde in der zweiten Hälfte des 15. Jahrhunderts erbaut und ist der einzige erhaltene Wehrturm der mittelalterlichen Befestigung. Sein Walmdach in den Stadtfarben Schwarz, Rot und Weiss macht ihn unverwechselbar; von 1846 bis 1985 diente er als Bezirksgefängnis. Das Innere kann im Rahmen von Stadtführungen besichtigt werden.",
+      "address": {
+        "street": "Schlossbergplatz 3",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47329,
+      "lng": 8.30772,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/stadtturm",
+      "durationMinutes": 15,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Wahrzeichen",
+        "Mittelalter",
+        "Altstadt",
+        "Stadtführung"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/stadtturm",
+        "https://de.wikipedia.org/wiki/Stadtturm_(Baden)"
+      ]
+    },
+    {
+      "slug": "baldegg",
+      "name": "Baldegg mit Wasserturm",
+      "category": "NATUR",
+      "shortDescription": "Naherholungsgebiet über Baden mit Aussichtsturm, Spielplatz und Waldgasthaus – 15 Min. mit Bus 5.",
+      "description": "Die Baldegg ist eines der beliebtesten Ausflugsziele Badens, mit Spazierwegen durch Wälder und weiten Ausblicken. Der 34,5 Meter hohe Wasserturm dient zugleich als Aussichtsturm: Über 172 Stufen gelangt man zur Kanzel mit Rundumblick über Mittelland, Alpen und Schwarzwald. Neben dem Turm liegen das Waldgasthaus Baldegg und ein grosser Spielplatz; vom Bahnhof Baden fährt die Buslinie 5 in rund 15 Minuten hinauf.",
+      "address": {
+        "street": "Baldegg 1",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47035,
+      "lng": 8.27935,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/baldegg",
+      "durationMinutes": 120,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Aussicht",
+        "Wandern",
+        "Familie",
+        "Aussichtsturm"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/baldegg",
+        "https://www.deinbaden.ch/de/ort/wasserturm-baldegg"
+      ]
+    },
+    {
+      "slug": "teufelskeller",
+      "name": "Teufelskeller",
+      "category": "NATUR",
+      "shortDescription": "Wildes Naturreservat mit Felsblöcken und urwaldähnlichem Wald – seit 1987 geschützt.",
+      "description": "Der Teufelskeller ist seit 1987 Naturreservat; der Wald wird nicht mehr bewirtschaftet und darf sich frei entwickeln. Ein ausgeschilderter, familienfreundlicher Wanderweg führt durch das Schutzgebiet, unterwegs gibt es Grillstellen. Zugang über die Treppe bei der KV-Schule, vom Friedhof Liebenfels oder ab der Bushaltestelle Täfern.",
+      "address": {
+        "street": "Kreuzlibergstrasse 10",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.4693,
+      "lng": 8.30359,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/teufelskeller",
+      "durationMinutes": 90,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Wald",
+        "Naturschutz",
+        "Wandern",
+        "Grillstelle"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/teufelskeller"
+      ]
+    },
+    {
+      "slug": "restaurant-roter-turm",
+      "name": "Restaurant Roter Turm",
+      "category": "ESSEN_TRINKEN",
+      "shortDescription": "Altstadt-Restaurant mit neu interpretierter Schweizer Küche, Gerichten aus aller Welt und Innenhof.",
+      "description": "Im Restaurant Roter Turm werden fast vergessene Schweizer Rezepte mit saisonalen und regionalen Produkten neu interpretiert, ergänzt durch Gerichte aus aller Welt; Integration spielt im Betrieb eine zentrale Rolle. Neben dem Restaurant mit rund 60 Plätzen gibt es eine Bistro-Bar und einen Innenhof für Apéros.",
+      "address": {
+        "street": "Rathausgasse 5",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47304,
+      "lng": 8.30858,
+      "websiteUrl": "https://roterturm-baden.ch/",
+      "durationMinutes": 75,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Mo–Fr 10–23 Uhr, Sa 9.30–23 Uhr, So geschlossen",
+      "tags": [
+        "Restaurant",
+        "Schweizer Küche",
+        "Altstadt",
+        "Vegetarisch"
+      ],
+      "sources": [
+        "https://roterturm-baden.ch/",
+        "https://www.deinbaden.ch/de/ort/roter-turm"
+      ]
+    },
+    {
+      "slug": "restaurant-trudelkeller",
+      "name": "Restaurant Trudelkeller",
+      "category": "ESSEN_TRINKEN",
+      "shortDescription": "Saisonale, kreative Küche in der Altstadt – mit Gaststube, Kellergewölbe und Gartenterrasse.",
+      "description": "Der Trudelkeller verbindet kreative, saisonale Küche mit entspanntem Ambiente mitten in der Badener Altstadt. Die Gaststube im 60er-Jahre-Stil bietet einen Blick über die Dächer, dazu kommen ein Kellergewölbe und eine grüne Gartenterrasse. Die Karte reicht von herzhaft bis vegan.",
+      "address": {
+        "street": "Obere Halde 36",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47297,
+      "lng": 8.30939,
+      "websiteUrl": "https://www.trudelkeller.ch/",
+      "durationMinutes": 90,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Di–Sa ab 18 Uhr, So & Mo geschlossen",
+      "tags": [
+        "Restaurant",
+        "Abendessen",
+        "Altstadt",
+        "Vegan"
+      ],
+      "sources": [
+        "https://www.trudelkeller.ch/",
+        "https://www.deinbaden.ch/de/ort/trudelkeller"
+      ]
+    },
+    {
+      "slug": "waldgasthaus-baldegg",
+      "name": "Waldgasthaus Baldegg",
+      "category": "ESSEN_TRINKEN",
+      "shortDescription": "«Top of Baden»: Ausflugsrestaurant mit Panoramaterrasse, Bistro und Spielplatz auf der Baldegg.",
+      "description": "Das Waldgasthaus Baldegg verbindet Schweizer Klassiker mit französisch inspirierter Leichtigkeit; im Stübli und auf der Terrasse gibt es eine einfachere Bistrokarte. Auch vegane und vegetarische Gäste finden ein Angebot. Gleich nebenan liegen ein grosser Abenteuerspielplatz und der Wasserturm mit Aussichtskanzel.",
+      "address": {
+        "street": "Baldegg 1",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47035,
+      "lng": 8.27935,
+      "websiteUrl": "https://www.baldegg.ch/",
+      "durationMinutes": 90,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Täglich 9–22 Uhr (warme Küche bis 20.30 Uhr)",
+      "tags": [
+        "Ausflugsrestaurant",
+        "Terrasse",
+        "Familie",
+        "Aussicht"
+      ],
+      "sources": [
+        "https://www.baldegg.ch/",
+        "https://www.deinbaden.ch/de/ort/waldgasthaus-baldegg"
+      ]
+    },
+    {
+      "slug": "cafe-confiserie-himmel",
+      "name": "Café Confiserie Himmel",
+      "category": "ESSEN_TRINKEN",
+      "shortDescription": "Traditionsreiches Café am Bahnhofplatz – bekannt für Amaretti und Badener Spanischbrödli.",
+      "description": "Das Café Confiserie Himmel am Bahnhofplatz gehört seit rund 150 Jahren zu Baden. Serviert werden Frühstück, warme Gerichte und Bäckersnacks aus eigener Herstellung. Bekannt ist das Haus für seine Amaretti und die traditionellen Badener Spanischbrödli.",
+      "address": {
+        "street": "Bahnhofplatz 9",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47601,
+      "lng": 8.30882,
+      "websiteUrl": "https://www.himmel-baden.ch/",
+      "durationMinutes": 45,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": null,
+      "tags": [
+        "Café",
+        "Confiserie",
+        "Spanischbrödli",
+        "Frühstück"
+      ],
+      "sources": [
+        "https://www.himmel-baden.ch/de-ch/aktuelles.html",
+        "https://www.deinbaden.ch/de/ort/himmel"
+      ]
+    },
+    {
+      "slug": "frau-meise",
+      "name": "Frau Meise",
+      "category": "ESSEN_TRINKEN",
+      "shortDescription": "Café mit Wohnzimmergefühl an der Unteren Halde – Hausgemachtes, Brunch und kleine Boutique.",
+      "description": "Frau Meise ist ein gemütliches Café mit kleiner Boutique an der Unteren Halde, nahe der Holzbrücke. Auf den Tisch kommen Frühstück, Bagels, Salate sowie Kuchen und Konfitüre aus eigener Herstellung, vieles mit regionalen Zutaten. In der Boutique gibt es handgefertigten Schmuck und Accessoires.",
+      "address": {
+        "street": "Untere Halde 15",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47224,
+      "lng": 8.30962,
+      "websiteUrl": "https://fraumeise.ch/",
+      "durationMinutes": 60,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Mi–Mo 9.30–18 Uhr, Di geschlossen",
+      "tags": [
+        "Café",
+        "Brunch",
+        "Hausgemacht",
+        "Altstadt"
+      ],
+      "sources": [
+        "https://fraumeise.ch/",
+        "https://www.deinbaden.ch/de/ort/frau-meise"
+      ]
+    },
+    {
+      "slug": "wochenmarkt-baden",
+      "name": "Badener Wochenmarkt",
+      "category": "SHOPPING",
+      "shortDescription": "Samstagsmarkt am Schlossbergplatz und in der Weiten Gasse – regionale Produkte das ganze Jahr.",
+      "description": "Am Wochenmarkt bieten Produzentinnen und Produzenten aus der Region ihre Waren an. Der Samstagsmarkt findet ganzjährig am Schlossbergplatz und in der Weiten Gasse statt, von April bis September zusätzlich dienstags am Schlossbergplatz. Zwischen Weihnachten und Neujahr findet kein Markt statt; wegen Bauarbeiten in der Innenstadt können die Märkte 2026 eingeschränkt sein.",
+      "address": {
+        "street": "Schlossbergplatz",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47329,
+      "lng": 8.30772,
+      "websiteUrl": "https://www.baden.ch/de/home/leben-wohnen/sicherheit-und-recht/gewerbe-verkehr/informationen-fuer-marktbetreibende.html/186",
+      "durationMinutes": 45,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": "Sa 7.30–11.30 Uhr (Okt.–März ab 8 Uhr); Di 7–11 Uhr (nur April–September)",
+      "tags": [
+        "Markt",
+        "Regional",
+        "Samstag",
+        "Altstadt"
+      ],
+      "sources": [
+        "https://www.baden.ch/de/home/leben-wohnen/sicherheit-und-recht/gewerbe-verkehr/informationen-fuer-marktbetreibende.html/186",
+        "https://www.deinbaden.ch/de/erleben/shopping"
+      ]
+    },
+    {
+      "slug": "einkaufen-innenstadt",
+      "name": "Einkaufen in der Innenstadt",
+      "category": "SHOPPING",
+      "shortDescription": "Boutiquen, Concept Stores und Traditionsläden von der Badstrasse bis rund um den Stadtturm.",
+      "description": "Zwischen historischen Gassen und moderner Architektur finden sich in Baden kuratierte Boutiquen, Concept Stores und Traditionsgeschäfte. Von der Badstrasse über die Cordulapassage bis rund um den Stadtturm gibt es Mode, Design und regionale Spezialitäten, dazwischen Cafés für die Pause. Die Badener CITY CARD kann in zahlreichen Geschäften und Gastrobetrieben eingelöst werden.",
+      "address": {
+        "street": "Badstrasse",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": null,
+      "lng": null,
+      "websiteUrl": "https://www.deinbaden.ch/de/erleben/shopping",
+      "durationMinutes": 90,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": true,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "tags": [
+        "Shopping",
+        "Boutiquen",
+        "Altstadt",
+        "Geschenke"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/erleben/shopping"
+      ]
+    },
+    {
+      "slug": "badenfahrt",
+      "name": "Badenfahrt 2027",
+      "category": "VERANSTALTUNGEN",
+      "shortDescription": "Das grosse Badener Stadtfest, das in der Regel nur alle zehn Jahre stattfindet – nächste Ausgabe 2027.",
+      "description": "Die Badenfahrt ist das grosse Stadtfest von Baden und findet in der Regel alle zehn Jahre statt; die letzten Ausgaben zogen jeweils über eine Million Besucherinnen und Besucher an. Getragen wird das Fest von zahlreichen Freiwilligen und Vereinen. Die nächste Badenfahrt ist für den 20. bis 29. August 2027 angekündigt.",
+      "address": {
+        "street": null,
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": null,
+      "lng": null,
+      "websiteUrl": "https://badenfahrt.ch/",
+      "durationMinutes": 240,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "UNKNOWN",
+      "openingHours": null,
+      "eventInfo": {
+        "startDate": "2027-08-20",
+        "endDate": "2027-08-29",
+        "note": "Daten gemäss Festivalübersicht von Baden Tourismus (deinbaden.ch); badenfahrt.ch nennt «Badenfahrt 2027» ohne Datum."
+      },
+      "tags": [
+        "Stadtfest",
+        "Festival",
+        "Tradition",
+        "Sommer"
+      ],
+      "sources": [
+        "https://badenfahrt.ch/",
+        "https://www.deinbaden.ch/de/erleben/kultur/festivals",
+        "https://de.wikipedia.org/wiki/Badenfahrt"
+      ]
+    },
+    {
+      "slug": "fantoche",
+      "name": "Fantoche – Internationales Festival für Animationsfilm",
+      "category": "VERANSTALTUNGEN",
+      "shortDescription": "Jährliches internationales Animationsfilmfestival in Baden, gegründet 1995.",
+      "description": "Fantoche ist ein internationales Festival für Animationsfilm, das seit 1995 in Baden stattfindet und heute jährlich durchgeführt wird. Gezeigt werden vor allem Kurzfilme in Wettbewerben und Spezialprogrammen; das Festival steht auf der Liste der Oscar-qualifizierenden Festivals. Die Ausgabe 2026 fand vom 1. bis 6. September statt; die 25. Ausgabe ist für den 7. bis 12. September 2027 angekündigt.",
+      "address": {
+        "street": "Bruggerstrasse 37",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": null,
+      "lng": null,
+      "websiteUrl": "https://www.fantoche.ch/",
+      "durationMinutes": 180,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "UNKNOWN",
+      "openingHours": null,
+      "eventInfo": {
+        "startDate": "2027-09-07",
+        "endDate": "2027-09-12",
+        "note": "25. Ausgabe gemäss fantoche.ch. 2026 fand das Festival vom 1. bis 6. September statt (deinbaden.ch). Adresse = Festivalbüro, Spielorte variieren."
+      },
+      "tags": [
+        "Film",
+        "Animation",
+        "Festival",
+        "Kino"
+      ],
+      "sources": [
+        "https://www.fantoche.ch/",
+        "https://www.deinbaden.ch/de/erleben/kultur/festivals",
+        "https://de.wikipedia.org/wiki/Fantoche"
+      ]
+    },
+    {
+      "slug": "badener-wunderdorf",
+      "name": "Badener WunderDorf (Weihnachtsmarkt)",
+      "category": "VERANSTALTUNGEN",
+      "shortDescription": "Weihnachtsdorf auf dem Theaterplatz mit Street Food, Glühwein-Bars und Gschänkli-Dörfli.",
+      "description": "Das Badener WunderDorf verwandelt den Theaterplatz rund sieben Wochen lang in einen Weihnachtsmarkt. Es gibt Street Food, ein Gschänkli-Dörfli mit Handwerkshütten, mehrere Bars mit Glühwein, ein Lounge-Zelt, eine Schiessbude und ein Chasperlihüüsli. Der Eintritt ist frei.",
+      "address": {
+        "street": "Theaterplatz",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": null,
+      "lng": null,
+      "websiteUrl": "https://www.wunderdorf.ch/",
+      "durationMinutes": 90,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": "Di–Mi 16–22 Uhr, Do–Fr 16–24 Uhr, Sa 12–24 Uhr, So 12–22 Uhr, Mo geschlossen",
+      "eventInfo": {
+        "startDate": "2026-10-29",
+        "endDate": "2026-12-23",
+        "note": "Daten und Öffnungszeiten 2026 gemäss wunderdorf.ch."
+      },
+      "tags": [
+        "Weihnachtsmarkt",
+        "Advent",
+        "Glühwein",
+        "Familie"
+      ],
+      "sources": [
+        "https://www.wunderdorf.ch/"
+      ]
+    },
+    {
+      "slug": "stadtkirche-baden",
+      "name": "Stadtkirche Maria Himmelfahrt",
+      "category": "ENTDECKEN",
+      "kind": "SIGHT",
+      "shortDescription": "Spätgotische Stadtkirche mit buntem Spitzturm im Herzen der Altstadt – Kulturgut von nationaler Bedeutung.",
+      "description": "Die römisch-katholische Stadtkirche wurde 1457–1460 als dreischiffige gotische Kirche erbaut; Vorgängerbauten an dieser Stelle reichen bis ins 9. Jahrhundert zurück. 1526 fand hier die Badener Disputation zwischen Johannes Eck und Johannes Oekolampad statt. Der Turm wurde 1493 auf 52 Meter erhöht und trägt ein buntes, spitzes Ziegeldach; zur barocken Ausstattung gehören die Hochaltargemälde von Renward Forer.",
+      "address": {
+        "street": "Kirchplatz 1",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47258,
+      "lng": 8.30879,
+      "websiteUrl": "https://www.pastoralraum-aargauer-limmattal.ch/baden/pfarreileben/kirchen-kapellen/stadtkirche-maria-himmelfahrt/",
+      "durationMinutes": 20,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "FREE",
+      "openingHours": "Mo–Fr 7–19 Uhr, Sa 8–18.30 Uhr, So 8–19.15 Uhr (während Gottesdiensten keine Besichtigung)",
+      "eventInfo": null,
+      "tags": [
+        "Kirche",
+        "Gotik",
+        "Altstadt",
+        "Geschichte"
+      ],
+      "sources": [
+        "https://www.pastoralraum-aargauer-limmattal.ch/baden/pfarreileben/kirchen-kapellen/stadtkirche-maria-himmelfahrt/",
+        "https://de.wikipedia.org/wiki/Stadtpfarrkirche_Maria_Himmelfahrt_(Baden)"
+      ]
+    },
+    {
+      "slug": "rathaus-tagsatzungssaal",
+      "name": "Rathaus mit Tagsatzungssaal",
+      "category": "ENTDECKEN",
+      "kind": "SIGHT",
+      "shortDescription": "Hier tagte von 1426 bis 1712 die Eidgenössische Tagsatzung – der Saal ist im Rahmen von Stadtführungen zu sehen.",
+      "description": "Das spätgotische Rathaus geht im Kern auf die Zeit um 1360 zurück und war von 1426 bis 1712 der wichtigste Versammlungsort der Tagsatzungen der Alten Eidgenossenschaft. Der 1497 neu gestaltete Tagsatzungssaal mit Kopien der Wappenscheiben von Lukas Zeiner (1500) ist ein Kulturgut von nationaler Bedeutung; 1714 wurde hier der Friede von Baden unterzeichnet. An der Ostfassade zur Limmat hin prangt eine bemalte Uhr von 1599; den Saal besichtigt man im Rahmen öffentlicher Stadtführungen von Baden Tourismus.",
+      "address": {
+        "street": "Rathausgasse 1",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47323,
+      "lng": 8.30909,
+      "websiteUrl": "https://www.deinbaden.ch/de/erlebnis/heimliche-hauptstadt",
+      "durationMinutes": 15,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "eventInfo": null,
+      "tags": [
+        "Tagsatzung",
+        "Mittelalter",
+        "Altstadt",
+        "Stadtführung"
+      ],
+      "sources": [
+        "https://de.wikipedia.org/wiki/Rathaus_(Baden)",
+        "https://www.deinbaden.ch/de/erlebnis/heimliche-hauptstadt",
+        "https://www.deinbaden.ch/de/erlebnis/altstadt-geschichten"
+      ]
+    },
+    {
+      "slug": "stadtfuehrung-altstadt-geschichten",
+      "name": "Stadtführung «Altstadt-Geschichten»",
+      "category": "ENTDECKEN",
+      "kind": "ACTIVITY",
+      "shortDescription": "Öffentliche Stadtführung von Baden Tourismus durch 2000 Jahre Stadtgeschichte – inklusive Tagsatzungssaal.",
+      "description": "Die rund 1,5-stündige Führung reicht von den Römern am Limmatknie über das Mittelalter bis zu Badens Rolle als «heimliche Hauptstadt» der Eidgenossenschaft. Höhepunkte sind der Besuch des Tagsatzungssaals, die Aussenansicht der Stadtkirche und ein Spaziergang durch die Altstadtgassen. Start ist beim Info Baden Tourist Office am Bahnhofplatz, Ende beim Stadthaus; öffentliche Führungen kosten CHF 20 pro Person.",
+      "address": {
+        "street": "Bahnhofplatz 1",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.4761,
+      "lng": 8.30863,
+      "websiteUrl": "https://www.deinbaden.ch/de/erlebnis/altstadt-geschichten",
+      "durationMinutes": 90,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": false,
+      "priceInfo": "PAID",
+      "openingHours": null,
+      "eventInfo": null,
+      "tags": [
+        "Stadtführung",
+        "Geschichte",
+        "Tagsatzung",
+        "Altstadt"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/erlebnis/altstadt-geschichten",
+        "https://www.deinbaden.ch/de/erleben/stadtfuehrungen"
+      ]
+    },
+    {
+      "slug": "stadtfuehrung-baederquartier-geschichten",
+      "name": "Stadtführung «Bäderquartier-Geschichten»",
+      "category": "ENTDECKEN",
+      "kind": "ACTIVITY",
+      "shortDescription": "Führung durch 2000 Jahre Badekultur – mit der Apsis eines römischen Bades und Thermalwasser zum Probieren.",
+      "description": "Die Führung von Baden Tourismus beginnt bei den Römern, die vor 2000 Jahren am Limmatknie Thermenanlagen errichteten, und folgt der Bädergeschichte bis zur heutigen Wellness-Therme FORTYSEVEN. Zu sehen sind unter anderem die Apsis eines römischen Bades und das Kesselbad im Untergeschoss des FORTYSEVEN/Residenz 47 sowie das Hotel BLUME. am Kurplatz. Start ist vor dem Inhalatorium an der Limmatpromenade 26, Ende bei den Heissen Brunnen; öffentliche Führungen kosten CHF 20 pro Person.",
+      "address": {
+        "street": "Limmatpromenade 26",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47983,
+      "lng": 8.31356,
+      "websiteUrl": "https://www.deinbaden.ch/de/erlebnis/baederquartier-geschichten",
+      "durationMinutes": 90,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": false,
+      "priceInfo": "PAID",
+      "openingHours": null,
+      "eventInfo": null,
+      "tags": [
+        "Stadtführung",
+        "Römer",
+        "Thermalwasser",
+        "Bäderquartier"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/erlebnis/baederquartier-geschichten",
+        "https://de.wikipedia.org/wiki/Aquae_Helveticae"
+      ]
+    },
+    {
+      "slug": "gapscup",
+      "name": "GapsCup",
+      "category": "ESSEN_TRINKEN",
+      "kind": "CAFE",
+      "shortDescription": "Kaffeebar von Latte-Art-Meister Gap am Gstühlplatz – rund 100 Bohnen aus aller Welt und Workshops.",
+      "description": "Hinter GapsCup steht Barista Gijtipong «Gap» Thangsubutr, zweifacher Schweizer Meister in Latte Art. Er führt rund 100 ausgewählte Kaffeebohnen aus aller Welt; an der Theke kann man den Baristas bei der Arbeit zuschauen. Vor Ort werden auch Workshops angeboten.",
+      "address": {
+        "street": "Gstühlplatz 2",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47496,
+      "lng": 8.30595,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/gapscup",
+      "durationMinutes": 30,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": null,
+      "eventInfo": null,
+      "tags": [
+        "Kaffee",
+        "Specialty Coffee",
+        "Latte Art",
+        "Workshop"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/gapscup",
+        "https://www.gapscup.ch/"
+      ]
+    },
+    {
+      "slug": "caffe-uno-espressobar",
+      "name": "caffè UNO Espressobar",
+      "category": "ESSEN_TRINKEN",
+      "kind": "CAFE",
+      "shortDescription": "Espressobar direkt an Gleis 1 im Bahnhof Baden – mit Kaffee aus der eigenen Badener Mikrorösterei.",
+      "description": "Die Espressobar von caffè UNO liegt direkt am Gleis 1 des Bahnhofs Baden – ideal für einen Espresso vor der Abfahrt oder eine ruhige Kaffeepause. Die Bohnen röstet caffè UNO selbst in der eigenen Mikrorösterei im Oederlin-Areal, nur 654 Meter von der Bar entfernt. Kaffee, Zubehör und Baristakurse gibt es auch über die Website.",
+      "address": {
+        "street": "Bahnhofstrasse 25",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47641,
+      "lng": 8.30786,
+      "websiteUrl": "https://caffe-uno.ch/pages/die-espressobar-in-baden",
+      "durationMinutes": 20,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Mo–Fr 6–18 Uhr, Sa–So 7–18 Uhr (Feiertage ab 7 Uhr)",
+      "eventInfo": null,
+      "tags": [
+        "Kaffee",
+        "Espresso",
+        "Rösterei",
+        "Bahnhof"
+      ],
+      "sources": [
+        "https://caffe-uno.ch/pages/die-espressobar-in-baden",
+        "https://caffe-uno.ch/pages/oederlin-areal",
+        "https://www.deinbaden.ch/de/ort/caffe-uno"
+      ]
+    },
+    {
+      "slug": "kafi-raab",
+      "name": "Kafi Raab",
+      "category": "ESSEN_TRINKEN",
+      "kind": "CAFE",
+      "shortDescription": "Café mit Wohnzimmer-Atmosphäre am Kurplatz im Bäderquartier – hausgemachte Kuchen und Kaffee von UNO.",
+      "description": "Das Kafi Raab liegt am Kurplatz im Bäderquartier, direkt an der Limmat. Serviert werden Kaffee der lokalen Rösterei UNO, Frühstück (auch vegan), süsse und herzhafte Wähen sowie täglich frisch gebackene, hausgemachte Kuchen. Bei schönem Wetter lädt die Pflasterstein-Terrasse am Platz zum Verweilen ein.",
+      "address": {
+        "street": "Kurplatz 3",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48051,
+      "lng": 8.31394,
+      "websiteUrl": "https://www.kafiraab.ch/",
+      "durationMinutes": 45,
+      "indoorOutdoor": "MIXED",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Do–Mo 9–17 Uhr, Di & Mi geschlossen",
+      "eventInfo": null,
+      "tags": [
+        "Kaffee",
+        "Kuchen",
+        "Frühstück",
+        "Bäderquartier"
+      ],
+      "sources": [
+        "https://www.kafiraab.ch/",
+        "https://www.deinbaden.ch/de/ort/kafi-raab"
+      ]
+    },
+    {
+      "slug": "yanacocha",
+      "name": "YanaCocha Coffee Bar",
+      "category": "ESSEN_TRINKEN",
+      "kind": "CAFE",
+      "shortDescription": "Coffee Bar und Outdoor-Shop unter einem Dach am Theaterplatz – mit viel Upcycling im Lokal.",
+      "description": "YanaCocha verbindet einen Outdoor-Shop mit einer gemütlichen Coffee Bar am Theaterplatz. In der Bar gibt es Kaffeespezialitäten von Espresso über Flat White bis Affogato, im Laden ausgewählte Outdoor-Ausrüstung. Viele Upcycling-Elemente prägen das Lokal.",
+      "address": {
+        "street": "Theaterplatz 3",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47379,
+      "lng": 8.30845,
+      "websiteUrl": "https://www.yanacocha.ch/",
+      "durationMinutes": 30,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": "Di–Fr 10–18.30 Uhr, Sa 9–16 Uhr, Mo geschlossen",
+      "eventInfo": null,
+      "tags": [
+        "Kaffee",
+        "Coffee Bar",
+        "Outdoor",
+        "Theaterplatz"
+      ],
+      "sources": [
+        "https://www.yanacocha.ch/",
+        "https://www.yanacocha.ch/coffee-bar"
+      ]
+    },
+    {
+      "slug": "kunstraum-baden",
+      "name": "Kunstraum Baden",
+      "category": "KULTUR",
+      "kind": "MUSEUM",
+      "shortDescription": "Städtischer Ausstellungsraum für zeitgenössische Kunst im Merker-Areal – Eintritt frei.",
+      "description": "Der Kunstraum Baden wird seit über fünf Jahrzehnten von der Stadt Baden als nichtkommerzieller Ausstellungsraum für zeitgenössische Kunst betrieben. Seit Anfang 2024 befindet er sich im Merker-Areal (Gebäude E), einer ehemaligen Metallwarenfabrik nahe dem Bahnhof Baden West. Jährlich entstehen zwei bis drei Ausstellungen, oft ortsbezogen und in Zusammenarbeit mit Gastkuratorinnen und -kuratoren.",
+      "address": {
+        "street": "Bruggerstrasse 37",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47569,
+      "lng": 8.30476,
+      "websiteUrl": "https://kunstraum.baden.ch/",
+      "durationMinutes": 45,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "FREE",
+      "openingHours": "Mi–Fr 15–18 Uhr, Sa–So 12–17 Uhr",
+      "eventInfo": null,
+      "tags": [
+        "Kunst",
+        "Zeitgenössisch",
+        "Ausstellung",
+        "Gratis"
+      ],
+      "sources": [
+        "https://kunstraum.baden.ch/de/institution/oeffnungszeiten.html/701",
+        "https://kunstraum.baden.ch/de/institution.html/685"
+      ]
+    },
+    {
+      "slug": "thik-theater-im-kornhaus",
+      "name": "ThiK Theater im Kornhaus",
+      "category": "KULTUR",
+      "kind": "CULTURE",
+      "shortDescription": "Kleintheater im Kornhaus von 1511 in der Altstadt – Gastspiele und Koproduktionen für alle Generationen.",
+      "description": "Das ThiK ist ein Kleintheater mit maximal 132 Plätzen im ehemaligen Kornhaus von 1511 in der unteren Altstadt. Auf dem Programm stehen ausgewählte Gastspiele und Koproduktionen für alle Generationen, von Schauspiel und Kabarett bis zu Familienstücken. Seit 1953 wird im Kornhaus Theater gespielt; heute ist das ThiK ein professionell geführtes Haus ohne eigenes Ensemble.",
+      "address": {
+        "street": "Kronengasse 10",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47309,
+      "lng": 8.30988,
+      "websiteUrl": "https://www.thik.ch/",
+      "durationMinutes": 120,
+      "indoorOutdoor": "INDOOR",
+      "rainSuitable": true,
+      "priceInfo": "PAID",
+      "openingHours": null,
+      "eventInfo": null,
+      "tags": [
+        "Theater",
+        "Kleinkunst",
+        "Altstadt",
+        "Abend"
+      ],
+      "sources": [
+        "https://www.thik.ch/haus",
+        "https://www.thik.ch/kontakt",
+        "https://de.wikipedia.org/wiki/ThiK_Theater_im_Kornhaus"
+      ]
+    },
+    {
+      "slug": "parkanlage-villa-boveri",
+      "name": "Park der Villa Boveri",
+      "category": "NATUR",
+      "kind": "NATURE",
+      "shortDescription": "Denkmalgeschützter Villengarten mit Landschaftsgarten, neubarockem Terrassengarten und altem Baumbestand.",
+      "description": "Die rund zwei Hektar grosse Parkanlage der Villa Boveri gilt als bedeutendste private Gartenanlage der Stadt Baden und steht unter Denkmalschutz. Der englische Landschaftsgarten von Evariste Mertens entstand mit der Villa ab 1895, der neubarocke Terrassengarten mit Wasserspielen und Skulpturen 1908 nach Plänen von Carl Sattler. Der Park ist täglich geöffnet; Hunde, Grillieren und Alkohol sind gemäss Parkordnung nicht erlaubt.",
+      "address": {
+        "street": "Ländliweg 5",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.4701,
+      "lng": 8.30781,
+      "websiteUrl": "https://www.villaboveri.ch/ueber-uns/park/",
+      "durationMinutes": 45,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": "Täglich 7–21 Uhr",
+      "eventInfo": null,
+      "tags": [
+        "Park",
+        "Garten",
+        "Villa",
+        "Denkmal"
+      ],
+      "sources": [
+        "https://www.villaboveri.ch/ueber-uns/park/",
+        "https://www.villaboveri.ch/media/villa_boveri_parkordnung_1.pdf",
+        "https://www.deinbaden.ch/de/ort/parkanlage-villa-boveri",
+        "https://de.wikipedia.org/wiki/Villa_Boveri"
+      ]
+    },
+    {
+      "slug": "alter-stadtfriedhof",
+      "name": "Alter Stadtfriedhof",
+      "category": "NATUR",
+      "kind": "NATURE",
+      "shortDescription": "Verwunschene Parkanlage von 1821 mit Eibenallee, historischen Gräbern und Spielplatz.",
+      "description": "Der 1821 eingeweihte Alte Stadtfriedhof ist heute eine öffentliche Parkanlage mit integriertem Spielplatz. Prägend sind die Mittelachse mit kegelförmig geschnittenen Eiben, alte Bäume und künstlerisch wie stadtgeschichtlich wertvolle Familiengräber. 2013 wurde die geschützte Gartenanlage sanft saniert.",
+      "address": {
+        "street": "Bruggerstrasse 53",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47707,
+      "lng": 8.3048,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/alter-stadtfriedhof",
+      "durationMinutes": 45,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "eventInfo": null,
+      "tags": [
+        "Park",
+        "Spielplatz",
+        "Familie",
+        "Geschichte"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/alter-stadtfriedhof"
+      ]
+    },
+    {
+      "slug": "kappisee",
+      "name": "Kappisee",
+      "category": "NATUR",
+      "kind": "NATURE",
+      "shortDescription": "Kleiner See mit Insel, Feuerstellen und schattigen Plätzen – rund 30 Gehminuten vom Zentrum.",
+      "description": "Der Kappisee ist besonders im Sommer ein beliebter Ort zum Erholen am Wasser. Auf der kleinen Insel mitten im See gibt es Bänke, Tische und Feuerstellen; Feuerholz muss selbst mitgebracht werden. In der Nähe liegt das Elektromuseum; erreichbar ist der See zu Fuss (ca. 30 Minuten ab Zentrum) oder mit den Buslinien 1 und 4 bis Haltestelle Baden, Schellenacker.",
+      "address": {
+        "street": "Im Roggebode",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48319,
+      "lng": 8.29892,
+      "websiteUrl": "https://www.deinbaden.ch/de/ort/kappisee",
+      "durationMinutes": 90,
+      "indoorOutdoor": "OUTDOOR",
+      "rainSuitable": false,
+      "priceInfo": "FREE",
+      "openingHours": null,
+      "eventInfo": null,
+      "tags": [
+        "See",
+        "Grillstelle",
+        "Familie",
+        "Sommer"
+      ],
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/kappisee"
+      ]
+    }
+  ],
+  "accommodations": [
+    {
+      "slug": "limmathof-baden-hotel-spa",
+      "name": "Limmathof Baden Hotel & Spa",
+      "type": "HOTEL",
+      "address": {
+        "street": "Limmatpromenade 28",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48016,
+      "lng": 8.3139,
+      "websiteUrl": "https://www.limmathof.ch/",
+      "phone": "+41 56 200 17 17",
+      "checkInTime": null,
+      "checkOutTime": null,
+      "shortDescription": "4-Sterne-Hotel in zwei Häusern beidseits der Limmat im Bäderquartier, mit Thermalbad Novum Spa.",
+      "sources": [
+        "https://www.limmathof.ch/",
+        "https://www.deinbaden.ch/de/ort/limmathof"
+      ]
+    },
+    {
+      "slug": "blume-baden",
+      "name": "BLUME. Baden Hotel & Restaurant",
+      "type": "HOTEL",
+      "address": {
+        "street": "Kurplatz 4",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48043,
+      "lng": 8.31347,
+      "websiteUrl": "https://blume-baden.ch/",
+      "phone": "+41 56 200 0 200",
+      "checkInTime": null,
+      "checkOutTime": null,
+      "shortDescription": "Historisches Boutique-Hotel mit Atrium, 32 Zimmern, eigenem Thermalwasser und Restaurant im Bäderquartier.",
+      "sources": [
+        "https://blume-baden.ch/",
+        "https://www.deinbaden.ch/de/ort/blume-baden-hotel-and-restaurant"
+      ]
+    },
+    {
+      "slug": "hotel-du-parc-baden",
+      "name": "Hotel du Parc Baden (Ramada by Wyndham)",
+      "type": "HOTEL",
+      "address": {
+        "street": "Römerstrasse 24",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48108,
+      "lng": 8.30906,
+      "websiteUrl": "https://hotelduparcbaden.ch/",
+      "phone": "+41 56 203 15 15",
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "shortDescription": "4-Sterne-Business- und Seminarhotel mit 107 Zimmern beim Kurpark, fünf Gehminuten vom Bahnhof.",
+      "sources": [
+        "https://hotelduparcbaden.ch/",
+        "https://www.deinbaden.ch/de/ort/ramada-by-wyndham-baden-hotel-du-parc"
+      ]
+    },
+    {
+      "slug": "blue-city-hotel",
+      "name": "Blue City Hotel",
+      "type": "HOTEL",
+      "address": {
+        "street": "Haselstrasse 17",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.4779,
+      "lng": 8.30625,
+      "websiteUrl": "https://www.bluecityhotel.ch/",
+      "phone": "+41 56 200 18 18",
+      "checkInTime": null,
+      "checkOutTime": null,
+      "shortDescription": "4-Sterne-Boutiquehotel mit 29 Zimmern, Restaurant Lemon und Rooftop Lounge, zwei Minuten vom Bahnhof.",
+      "sources": [
+        "https://www.bluecityhotel.ch/",
+        "https://www.deinbaden.ch/de/ort/blue-city-hotel"
+      ]
+    },
+    {
+      "slug": "trafo-hotel",
+      "name": "Trafo Hotel",
+      "type": "HOTEL",
+      "address": {
+        "street": "Bruggerstrasse 56",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.47819,
+      "lng": 8.30508,
+      "websiteUrl": "https://www.trafohotel.ch/",
+      "phone": "+41 56 203 80 80",
+      "checkInTime": null,
+      "checkOutTime": null,
+      "shortDescription": "Zentrales Design- und Businesshotel beim Trafo Kongresszentrum, wenige Gehminuten vom Bahnhof; velofreundlich.",
+      "sources": [
+        "https://www.trafohotel.ch/",
+        "https://www.deinbaden.ch/de/ort/trafo-hotel"
+      ]
+    },
+    {
+      "slug": "business-hotel-linde",
+      "name": "Business Hotel Linde",
+      "type": "HOTEL",
+      "address": {
+        "street": "Mellingerstrasse 22",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.4711,
+      "lng": 8.30464,
+      "websiteUrl": "https://www.linde-baden.ch/",
+      "phone": "+41 56 511 24 74",
+      "checkInTime": null,
+      "checkOutTime": null,
+      "shortDescription": "Familiengeführtes Businesshotel mit 53 Zimmern, Panoramablick, Restaurant und 24/7-Self-Check-in.",
+      "sources": [
+        "https://www.linde-baden.ch/",
+        "https://www.deinbaden.ch/de/ort/business-hotel-linde"
+      ]
+    },
+    {
+      "slug": "jugendherberge-baden",
+      "name": "Jugendherberge Baden",
+      "type": "OTHER",
+      "address": {
+        "street": "Kanalstrasse 7",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.46941,
+      "lng": 8.31111,
+      "websiteUrl": "https://www.youthhostel.ch/de/hostels/jugendherberge-baden",
+      "phone": "+41 56 221 67 36",
+      "checkInTime": null,
+      "checkOutTime": null,
+      "shortDescription": "Jugendherberge in einem ehemaligen Pferdestall direkt an der Limmat, mit 83 Betten, nahe der Altstadt.",
+      "sources": [
+        "https://www.youthhostel.ch/de/hostels/jugendherberge-baden",
+        "https://www.deinbaden.ch/de/ort/jugendherberge-baden"
+      ]
+    },
+    {
+      "slug": "river-residence",
+      "name": "River Residence",
+      "type": "APARTMENT",
+      "address": {
+        "street": "Limmatpromenade 27",
+        "postalCode": "5400",
+        "city": "Baden"
+      },
+      "lat": 47.48003,
+      "lng": 8.31348,
+      "websiteUrl": "https://www.rresidence.ch/",
+      "phone": null,
+      "checkInTime": null,
+      "checkOutTime": null,
+      "shortDescription": "Vollmöblierte Apartments an der Limmatpromenade im Bäderquartier, für kurze und längere Aufenthalte.",
+      "sources": [
+        "https://www.deinbaden.ch/de/ort/river-residence"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "slug": "historische-altstadt-baden",
+      "file": "public/images/places/historische-altstadt-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_AG_Altstadt.jpg",
+      "author": "Badener",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    {
+      "slug": "ruine-stein",
+      "file": "public/images/places/ruine-stein.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Ruine_Stein_7873.jpg",
+      "author": "Badener",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    {
+      "slug": "grand-casino-baden",
+      "file": "public/images/places/grand-casino-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Kursaal_Stirnfront.jpg",
+      "author": "Voyager",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "teufelskeller",
+      "file": "public/images/places/teufelskeller.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Teufelskeller_2228.jpg",
+      "author": "Badener",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    {
+      "slug": "badenfahrt",
+      "file": "public/images/places/badenfahrt.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Badenfahrt_2017_003.jpg",
+      "author": "Badener",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "hero-baden",
+      "file": "public/images/hero-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Altstadt_160515.jpg",
+      "author": "Johannes Menzel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "holzbruecke-baden",
+      "file": "public/images/places/holzbruecke-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gedeckte_Holzbr%C3%BCcke_%C3%BCber_die_Limmat,_Baden_AG_20180910-jag9889.jpg",
+      "author": "Jag9889",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "landvogteischloss-historisches-museum",
+      "file": "public/images/places/landvogteischloss-historisches-museum.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_HolzbrueckeSchloss.jpg",
+      "author": "Voyager",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "thermalbad-fortyseven",
+      "file": "public/images/places/thermalbad-fortyseven.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thermalbad_Fortyseven_Baden_AG.jpg",
+      "author": "Paebi",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "kurpark-baden",
+      "file": "public/images/places/kurpark-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kurpark_Baden_03.jpg",
+      "author": "Nelson Pérez",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "museum-langmatt",
+      "file": "public/images/places/museum-langmatt.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Museum_Langmatt.jpg",
+      "author": "Voyager",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "baederquartier",
+      "file": "public/images/places/baederquartier.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_B%C3%A4derquartier_2014-11-24.jpg",
+      "author": "Lutz Fischer-Lamprecht",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "heisse-brunnen",
+      "file": "public/images/places/heisse-brunnen.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heisse_Brunnen,_Baden.jpg",
+      "author": "Sfs90",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "kurtheater-baden",
+      "file": "public/images/places/kurtheater-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kurtheater_Baden.jpg",
+      "author": "Voyager",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "stadtturm-baden",
+      "file": "public/images/places/stadtturm-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Stadtturm_9388.jpg",
+      "author": "Badener",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    {
+      "slug": "limmathof-baden-hotel-spa",
+      "file": "public/images/places/limmathof-baden-hotel-spa.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Limmat_und_Limmathof_in_Baden_AG_(2021).jpg",
+      "author": "JoachimKohler-HB",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "blume-baden",
+      "file": "public/images/places/blume-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotel_Blume_Baden_2014-11-02.jpg",
+      "author": "Badener",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "schweizer-kindermuseum",
+      "file": "public/images/places/schweizer-kindermuseum.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kindermuseum_Architektur.jpg",
+      "author": "Daniel Kaysel",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "stadtkirche-baden",
+      "file": "public/images/places/stadtkirche-baden.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Stadtkirche_Stadtturm_8428.jpg",
+      "author": "Badener",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    {
+      "slug": "rathaus-tagsatzungssaal",
+      "file": "public/images/places/rathaus-tagsatzungssaal.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Rathaus_170429.jpg",
+      "author": "Johannes Menzel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    {
+      "slug": "stadtfuehrung-altstadt-geschichten",
+      "file": "public/images/places/stadtfuehrung-altstadt-geschichten.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baden_Tagsatzungssaal_Wappenscheiben.jpg",
+      "author": "WillYs Fotowerkstatt",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    {
+      "slug": "parkanlage-villa-boveri",
+      "file": "public/images/places/parkanlage-villa-boveri.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Villa_Boveri,_Parkeinsichten.JPG",
+      "author": "Fanimu",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "alter-stadtfriedhof",
+      "file": "public/images/places/alter-stadtfriedhof.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alter_Friedhof_Baden_2015-03-26_03.jpg",
+      "author": "Badener",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    {
+      "slug": "thik-theater-im-kornhaus",
+      "file": "public/images/places/thik-theater-im-kornhaus.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:ThiK_Eingang_Kronengasse.jpg",
+      "author": "Andrin Winteler",
+      "license": "CC0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  ],
+  "notes": [
+    "Koordinaten stammen überwiegend aus den Google-Maps-Links der offiziellen Tourismus-Website deinbaden.ch (TourismusRegion Baden AG), teils aus de.wikipedia.org (Altstadt = Stadtkoordinate von Baden AG; Kurtheater). Für Bäderquartier wurde die Koordinate des FORTYSEVEN (Grosse Bäder) verwendet; Wochenmarkt = Schlossbergplatz/Stadtturm.",
+    "Die offizielle Tourismus-Website ist www.deinbaden.ch (baden.ch/tourismus leitet dorthin weiter). Sie liefert mit einfachen curl-Requests teils HTTP 429 (Bot-Schutz); im Browser bzw. mit Browser-Headern lädt sie mit 200.",
+    "Grand Casino Baden: Der Kursaal wird 2026 umgebaut. Seit 16.7.2026 läuft der Spielbetrieb im Pop-up-Casino (ehem. Club COCO), Eingang dort. Kein Wiedereröffnungsdatum publiziert. Tischspiele laut Website ab 13 Uhr (Footer nennt 15 Uhr – widersprüchlich, daher nicht in openingHours). Eintrittspreis nicht publiziert -> priceInfo UNKNOWN.",
+    "Heisse Brunnen: priceInfo FREE gestützt auf SRF-Bericht («unentgeltlich») und Beschreibung als öffentliche Thermalbecken auf deinbaden.ch; bagnopopolare.ch nennt «kostenlos» nicht explizit. Adresse «Parkstrasse 31» gemäss deinbaden.ch. Der Ennetbadener Brunnen liegt in der Nachbargemeinde Ennetbaden.",
+    "Kurpark: deinbaden.ch nennt als Adresse «Bäderstrasse 3530» (vermutlich fehlerhaft) – daher street null.",
+    "priceInfo FREE bei Altstadt, Holzbrücke, Ruine Stein, Stadtturm (Aussenbesichtigung), Kurpark, Limmatpromenade, Baldegg, Teufelskeller, Bäderquartier, Wochenmarkt und Einkaufsstrassen beruht darauf, dass es frei zugängliche öffentliche Orte sind (kein Eintritt); Stadtturm-Innenbesichtigung nur via (kostenpflichtige) Stadtführung.",
+    "Trudelkeller: Website meldet Betriebsferien 5.–11. Oktober (Jahr nicht angegeben, vermutlich 2026 – betrifft heute 8.10.2026).",
+    "Café Confiserie Himmel: Öffnungszeiten auf der Website nicht auffindbar -> null.",
+    "Badenfahrt: Daten 20.–29.8.2027 stammen von der Festival-Übersicht auf deinbaden.ch; badenfahrt.ch selbst zeigt noch kein Datum. Laut Wikipedia gab es 2023 eine (Jubiläums-)Badenfahrt.",
+    "Fantoche 2026 (1.–6.9.2026) ist bereits vorbei; eventInfo enthält die publizierten Daten 2027 (7.–12.9.2027).",
+    "Badener WunderDorf 2026: 29.10.–23.12.2026, Theaterplatz, Eintritt frei (wunderdorf.ch). Koordinaten nicht verifiziert -> null.",
+    "Wochenmarkt: Bauarbeiten in der Innenstadt 2026 können zu Einschränkungen führen (baden.ch).",
+    "Hotel du Parc: Die Domain duparc.ch ist NICHT mehr das Hotel (Casino-Affiliate-Seite). Offizielle Seite ist hotelduparcbaden.ch. Check-in/out (14:00/12:00) von dort.",
+    "Check-in/Check-out-Zeiten waren nur bei Hotel du Parc auf der offiziellen Website angegeben; bei allen anderen null. Linde und Trafo erwähnen Self-/Online-Check-in ohne Uhrzeiten.",
+    "River Residence: Telefonnummer nicht verifiziert -> null; Website rresidence.ch erreichbar (200).",
+    "Martinsberg wurde nicht als eigener Ort aufgenommen (keine verlässliche touristische Beschreibung gefunden; dort befindet sich das BBB Restaurant Martinsberg, Wiesenstrasse 32, laut deinbaden.ch).",
+    "Kurtheater-Bild auf Commons (2009) zeigt den Bau vor der Renovation 2018–2020. Kurtheater-Website nennt Postadresse «Parkstrasse 20, Postfach, 5401 Baden»; hier 5400 verwendet.",
+    "Schweizer Kindermuseum: Koordinaten von deinbaden.ch (47.46962, 8.30912) weichen von Wikipedia (47.46967, 8.30777) um ca. 100 m ab; deinbaden-Wert verwendet.",
+    "Keine Bilder für: limmatpromenade, baldegg (einziges gefundenes Bild zeigte nur Nebel/Wiese – verworfen), restaurants/cafés, wochenmarkt, einkaufen-innenstadt, fantoche, badener-wunderdorf, sowie Hotels ausser Limmathof und Blume.",
+    "Bilder: Commons liefert Thumbnails nur in Standardgrössen (1920/1280/960 px); daher meist 1280 px Breite verwendet, um < 600 KB zu bleiben. Lizenzen CC BY / CC BY-SA erfordern Namensnennung + Lizenzlink; CC BY-SA zusätzlich Weitergabe unter gleichen Bedingungen bei Bearbeitung.",
+    "durationMinutes sind redaktionelle Schätzwerte.",
+    "[Erweiterung 2026-10-11] Koordinaten der neuen Orte: Adresskoordinaten aus api3.geo.admin.ch (SearchServer, Gebäudeadressen) für Kafi Raab, caffè UNO, YanaCocha, GapsCup, Kunstraum, ThiK, Villa Boveri, Info Baden (Start Altstadt-Führung) und Limmatpromenade 26; Stadtkirche und Rathaus aus de.wikipedia.org; Alter Stadtfriedhof und Kappisee aus den Google-Maps-Links auf deinbaden.ch (Bruggerstrasse 53 im geo.admin-Adressverzeichnis nicht gefunden).",
+    "[Erweiterung 2026-10-11] GapsCup: deinbaden.ch nennt Koordinaten 47.46851, 8.29722, die nicht zum Gstühlplatz passen (ca. 800 m daneben) – stattdessen geo.admin-Adresskoordinate verwendet. Die eigene Website gapscup.ch ist eine «under construction»-Seite (© 2016–2019); Betrieb 2026 nur durch den aktuellen Eintrag auf deinbaden.ch belegt. Öffnungszeiten nicht verifizierbar -> null; websiteUrl = deinbaden-Seite.",
+    "[Erweiterung 2026-10-11] caffè UNO: Die Domain caffeuno.ch gehört einem anderen Anbieter (Lavazza Caffè Uno, Westschweiz) – korrekt ist caffe-uno.ch. Adresse «Bahnhofstrasse 25» gemäss deinbaden.ch; die eigene Website nennt «direkt am Gleis 1». Die Rösterei im Oederlin-Areal wurde nicht als eigener Ort aufgenommen (keine publizierten Besuchszeiten; Besichtigung nur auf Anfrage via Kontaktformular).",
+    "[Erweiterung 2026-10-11] YanaCocha ist nicht in der Café-Liste von deinbaden.ch; Angaben stammen von yanacocha.ch (Last-Modified 7.10.2026). Für Sonntag nennt die Website keine Zeiten (vermutlich geschlossen, nicht explizit) – openingHours enthält nur die publizierten Tage.",
+    "[Erweiterung 2026-10-11] Kafi Raab: Website nennt «Do–Mo 09:00–17:00, Di/Mi geschlossen». Kaffee laut Website von der «Rösterei Uno».",
+    "[Erweiterung 2026-10-11] Rathaus/Tagsatzungssaal: Kein freier Zugang mit Öffnungszeiten gefunden; der Saal ist Teil der öffentlichen Stadtführungen «Altstadt-Geschichten» und «Heimliche Hauptstadt der Eidgenossen» (je CHF 20 p. P., 1,5 Std.). priceInfo FREE bezieht sich (analog Stadtturm) auf die Aussenbesichtigung. deinbaden.ch spricht vom Tagsatzungssaal «im Stadthaus», Wikipedia verortet ihn im Rathaus (Teil desselben Gebäudeblocks Rathaus/Stadthaus).",
+    "[Erweiterung 2026-10-11] Stadtführungen: Preise (CHF 20 p. P. öffentlich, CHF 280 privat bis 25 Personen), Dauer, Start-/Endpunkte von deinbaden.ch. Konkrete Termine wurden nicht erfasst (nur via Buchungssystem / Drittportale sichtbar) -> openingHours null. Weitere öffentliche Führungen auf deinbaden.ch: «Heimliche Hauptstadt der Eidgenossen», «Finstere Gestalten Badens», «Badens starke Frauen», «Badens Industriegeschichte», «Kinderführung» u. a.",
+    "[Erweiterung 2026-10-11] Römische Spuren: Die 2020 am Kurplatz freigelegten Bäder (Verenabad/Freibad, teils auf römischen Becken) wurden laut Stadt Baden wieder zugedeckt; dauerhaft sichtbar ist keine römische Substanz im öffentlichen Raum. Die Apsis eines römischen Bades im Untergeschoss FORTYSEVEN/Residenz 47 ist laut deinbaden.ch Teil der Führung «Bäderquartier-Geschichten» – daher als Führung statt als frei zugänglicher Ort aufgenommen. Die Museumsausstellung «Die Römer sind unter uns» (bis 29.6.2025) ist vorbei.",
+    "[Erweiterung 2026-10-11] Stadtbefestigung: Laut Wikipedia/Katalog ist der Stadtturm der einzige erhaltene Wehrturm; ein weiteres Stadttor («Bruggerturm») wurde nicht als bestehend verifiziert und daher nicht aufgenommen. Das Kapuzinerkloster Baden wurde 1841 aufgehoben und bis 1877 abgebrochen (heute Altes Schulhaus/Bezirksgebäude) – nicht aufgenommen.",
+    "[Erweiterung 2026-10-11] Stadtkirche: Öffnungszeiten von der Website des Pastoralraums Aargauer Limmattal («tagsüber öffentlich zugänglich»); Hinweis zu Gottesdiensten redaktionell ergänzt.",
+    "[Erweiterung 2026-10-11] Villa Boveri: Öffnungszeiten (täglich 7–21 Uhr) und Regeln aus der Parkordnung (PDF, Stand 04/2026). Ein Eintritt wird nirgends erwähnt -> FREE als öffentlich geöffnete Parkanlage. Das Gartencafé Villa Boveri (laut deinbaden.ch bei guter Witterung Mo–Fr) wurde nicht separat aufgenommen.",
+    "[Erweiterung 2026-10-11] Kunstraum Baden: Seit 2024 im Merker-Areal, Bruggerstrasse 37 (ältere Verzeichnisse nennen noch Haselstrasse 15). Aktuelle Ausstellung «Was bleibt? Praktiken des Sammelns» 22.8.–8.11.2026 – nicht in die Beschreibung übernommen, da zeitgebunden; zwischen Ausstellungen kann der Kunstraum geschlossen sein.",
+    "[Erweiterung 2026-10-11] ThiK: Keine festen Öffnungszeiten (Vorstellungen gemäss Spielplan) -> null. Die Kasse/Theaterbar öffnet laut Drittportal 45 Min. vor Vorstellungsbeginn (nicht auf thik.ch verifiziert, daher nicht übernommen).",
+    "[Erweiterung 2026-10-11] Kino (Orient/Royal/Sterk) nicht aufgenommen: Zuständigkeit/Programm 2026 nicht sauber verifiziert.",
+    "[Erweiterung 2026-10-11] Bilder: ThiK-Bild (CC0, Hochformat) in 960 px Breite, da die 1280-px-Version > 1 MB war. Das Bild zur Altstadt-Führung zeigt die Wappenscheiben im Tagsatzungssaal (Teil der Führung). Keine Bilder gefunden für: stadtfuehrung-baederquartier-geschichten, gapscup, caffe-uno-espressobar, kafi-raab, yanacocha, kunstraum-baden, kappisee. Commons-Bild «Stadtfriedhof Baden …» (Karl Gruber) zeigt Baden bei Wien – verworfen.",
+    "[Erweiterung 2026-10-11] Englische Übersetzungen: Eigennamen (Ausstellungstitel, Betriebsnamen, Strassen und Plätze) wurden im Original belassen; Öffnungszeiten im britischen Format (am/pm, en dash)."
+  ]
+}

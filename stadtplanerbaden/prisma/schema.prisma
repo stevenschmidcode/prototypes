@@ -1,0 +1,407 @@
+// baden. – Datenmodell MVP 0.1 «Mein Aufenthalt»
+//
+// Konventionen
+// - Alle IDs sind UUIDs (stabil, nicht erratbar).
+// - Kalendertage (Aufenthalt, Agenda) werden als DATE ohne Zeitzone gespeichert und
+//   immer als lokale Daten in Europe/Zurich interpretiert.
+// - Uhrzeiten werden als Minuten seit Mitternacht gespeichert (0–1439).
+// - Persönliche Daten hängen immer an einer VisitorSession (Ownership).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Katalog ─────────────────────────────────────────────────────────────────
+
+model City {
+  id        String   @id @default(uuid()) @db.Uuid
+  slug      String   @unique
+  name      String
+  canton    String
+  country   String   @default("CH")
+  timezone  String   @default("Europe/Zurich")
+  currency  String   @default("CHF")
+  locale    String   @default("de-CH")
+  latitude  Float?
+  longitude Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  places         Place[]
+  accommodations Accommodation[]
+  trips          Trip[]
+  journeys       Journey[]
+}
+
+/// Kategorie im Bereich «Entdecken» (Entdecken, Essen & Trinken, Wellness, …)
+model PlaceCategory {
+  id          String   @id @default(uuid()) @db.Uuid
+  slug        String   @unique
+  name        String
+  description String?
+  icon        String
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  places Place[]
+}
+
+/// Feinere Art eines Ortes – Grundlage für den Favoritenfilter.
+enum PlaceKind {
+  SIGHT
+  RESTAURANT
+  CAFE
+  WELLNESS
+  CULTURE
+  MUSEUM
+  NATURE
+  ACTIVITY
+  SHOP
+  EVENT
+}
+
+enum PlaceSetting {
+  INDOOR
+  OUTDOOR
+  MIXED
+}
+
+enum PriceInfo {
+  FREE
+  PAID
+  UNKNOWN
+}
+
+model Place {
+  id               String       @id @default(uuid()) @db.Uuid
+  cityId           String       @db.Uuid
+  categoryId       String       @db.Uuid
+  slug             String
+  name             String
+  kind             PlaceKind
+  shortDescription String
+  description      String
+  street           String?
+  postalCode       String?
+  locality         String?
+  /// Nur gesetzt, wenn verifiziert
+  latitude         Float?
+  longitude        Float?
+  durationMinutes  Int
+  websiteUrl       String?
+  /// Nur gesetzt, wenn verifiziert – sonst «unbekannt» im UI
+  openingHours     String?
+  /// Zusatzinformation für Veranstaltungen (z. B. Durchführungsdaten), nur verifiziert
+  eventInfo        String?
+  tags             String[]
+  setting          PlaceSetting
+  rainSuitable     Boolean      @default(false)
+  priceInfo        PriceInfo    @default(UNKNOWN)
+  imageUrl         String?
+  imageAlt         String?
+  imageCredit      String?
+  imageLicense     String?
+  imageSourceUrl   String?
+  featured         Boolean      @default(false)
+  sortOrder        Int          @default(0)
+  published        Boolean      @default(true)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  city         City               @relation(fields: [cityId], references: [id], onDelete: Restrict)
+  category     PlaceCategory      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  favorites    Favorite[]
+  agendaItems  AgendaItem[]
+  translations PlaceTranslation[]
+  journeyStops JourneyStop[]
+
+  @@unique([cityId, slug])
+  @@index([cityId, categoryId, sortOrder])
+  @@index([cityId, featured])
+}
+
+enum AccommodationType {
+  HOTEL
+  APARTMENT
+  PRIVATE
+  OTHER
+}
+
+/// Unterkunft aus dem kuratierten Katalog
+model Accommodation {
+  id               String            @id @default(uuid()) @db.Uuid
+  cityId           String            @db.Uuid
+  slug             String
+  name             String
+  type             AccommodationType @default(HOTEL)
+  shortDescription String?
+  street           String?
+  postalCode       String?
+  locality         String?
+  latitude         Float?
+  longitude        Float?
+  phone            String?
+  websiteUrl       String?
+  /// "HH:mm" – nur gesetzt, wenn auf der offiziellen Website angegeben
+  defaultCheckIn   String?
+  defaultCheckOut  String?
+  imageUrl         String?
+  imageAlt         String?
+  imageCredit      String?
+  imageLicense     String?
+  imageSourceUrl   String?
+  sortOrder        Int               @default(0)
+  published        Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  city               City                       @relation(fields: [cityId], references: [id], onDelete: Restrict)
+  tripAccommodations TripAccommodation[]
+  favorites          Favorite[]
+  translations       AccommodationTranslation[]
+
+  @@unique([cityId, slug])
+  @@index([cityId, sortOrder])
+}
+
+// ─── Übersetzungen ───────────────────────────────────────────────────────────
+// Die Grundfelder von Place/Accommodation sind Deutsch (Standardsprache).
+// Weitere Sprachen liegen in Übersetzungstabellen; fehlt eine Übersetzung,
+// wird auf Deutsch zurückgefallen.
+
+model PlaceTranslation {
+  id               String   @id @default(uuid()) @db.Uuid
+  placeId          String   @db.Uuid
+  locale           String
+  name             String
+  shortDescription String
+  description      String
+  tags             String[]
+  openingHours     String?
+  eventInfo        String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  place Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([placeId, locale])
+}
+
+model AccommodationTranslation {
+  id               String   @id @default(uuid()) @db.Uuid
+  accommodationId  String   @db.Uuid
+  locale           String
+  shortDescription String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  accommodation Accommodation @relation(fields: [accommodationId], references: [id], onDelete: Cascade)
+
+  @@unique([accommodationId, locale])
+}
+
+// ─── Thementouren (Reiseprofile) ────────────────────────────────────────────
+
+/// Kuratierte Thementour, z. B. «Mittelalter & Geschichte». Dient auch als Reiseprofil eines Aufenthalts.
+model Journey {
+  id        String   @id @default(uuid()) @db.Uuid
+  cityId    String   @db.Uuid
+  slug      String
+  /// Lucide-Iconname
+  icon      String
+  /// Farbthema (forest | terracotta | sand | sky | sage | plum)
+  theme     String
+  imageUrl  String?
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  city         City                 @relation(fields: [cityId], references: [id], onDelete: Restrict)
+  translations JourneyTranslation[]
+  stops        JourneyStop[]
+  trips        Trip[]
+
+  @@unique([cityId, slug])
+  @@index([cityId, sortOrder])
+}
+
+model JourneyTranslation {
+  id        String @id @default(uuid()) @db.Uuid
+  journeyId String @db.Uuid
+  locale    String
+  title     String
+  /// «Für Geschichtsfans» – kurze Zielgruppe/Persona
+  persona   String
+  tagline   String
+  intro     String
+
+  journey Journey @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+
+  @@unique([journeyId, locale])
+}
+
+model JourneyStop {
+  id              String @id @default(uuid()) @db.Uuid
+  journeyId       String @db.Uuid
+  placeId         String @db.Uuid
+  position        Int
+  durationMinutes Int
+
+  journey      Journey                  @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  place        Place                    @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  translations JourneyStopTranslation[]
+
+  @@unique([journeyId, position])
+  @@index([placeId])
+}
+
+model JourneyStopTranslation {
+  id     String @id @default(uuid()) @db.Uuid
+  stopId String @db.Uuid
+  locale String
+  /// «Warum hier?» – erzählerischer Kontext zur Station
+  note   String
+
+  stop JourneyStop @relation(fields: [stopId], references: [id], onDelete: Cascade)
+
+  @@unique([stopId, locale])
+}
+
+// ─── Persönliche Daten (Gast) ────────────────────────────────────────────────
+
+/// Anonyme Gastidentität. Das Cookie enthält ein zufälliges 256-Bit-Token;
+/// gespeichert wird nur dessen SHA-256-Hash.
+model VisitorSession {
+  id         String   @id @default(uuid()) @db.Uuid
+  tokenHash  String   @unique
+  /// Vorbereitet für späteren Magic-Link-Login (Übernahme der Gastdaten)
+  userId     String?  @db.Uuid
+  lastSeenAt DateTime @default(now())
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  trips     Trip[]
+  favorites Favorite[]
+
+  @@index([expiresAt])
+  @@index([userId])
+}
+
+model Trip {
+  id               String   @id @default(uuid()) @db.Uuid
+  visitorSessionId String   @db.Uuid
+  cityId           String   @db.Uuid
+  name             String
+  startDate        DateTime @db.Date
+  endDate          DateTime @db.Date
+  notes            String?
+  lastOpenedAt     DateTime @default(now())
+  /// Gewähltes Reiseprofil (Thementour) – optional
+  journeyId        String?  @db.Uuid
+  /// Idempotenzschlüssel gegen doppelte Speichervorgänge
+  clientRequestId  String?  @unique @db.Uuid
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  visitorSession VisitorSession     @relation(fields: [visitorSessionId], references: [id], onDelete: Cascade)
+  city           City               @relation(fields: [cityId], references: [id], onDelete: Restrict)
+  journey        Journey?           @relation(fields: [journeyId], references: [id], onDelete: SetNull)
+  accommodation  TripAccommodation?
+  agendaItems    AgendaItem[]
+
+  @@index([visitorSessionId, lastOpenedAt])
+  @@index([visitorSessionId, startDate])
+  @@index([journeyId])
+}
+
+/// Unterkunft eines Aufenthalts – aus dem Katalog verknüpft oder manuell erfasst
+model TripAccommodation {
+  id              String            @id @default(uuid()) @db.Uuid
+  tripId          String            @unique @db.Uuid
+  accommodationId String?           @db.Uuid
+  type            AccommodationType @default(HOTEL)
+  name            String
+  street          String?
+  postalCode      String?
+  locality        String?
+  latitude        Float?
+  longitude       Float?
+  checkInDate     DateTime?         @db.Date
+  /// Minuten seit Mitternacht
+  checkInTime     Int?
+  checkOutDate    DateTime?         @db.Date
+  checkOutTime    Int?
+  phone           String?
+  websiteUrl      String?
+  notes           String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  trip          Trip           @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  accommodation Accommodation? @relation(fields: [accommodationId], references: [id], onDelete: SetNull)
+
+  @@index([accommodationId])
+}
+
+enum AgendaCategory {
+  SIGHTSEEING
+  FOOD
+  CULTURE
+  WELLNESS
+  NATURE
+  SHOPPING
+  EVENT
+  ACCOMMODATION
+  TRAVEL
+  OTHER
+}
+
+model AgendaItem {
+  id              String         @id @default(uuid()) @db.Uuid
+  tripId          String         @db.Uuid
+  /// Optional: Verknüpfung mit einem Katalogeintrag. Null = freier Termin.
+  placeId         String?        @db.Uuid
+  title           String
+  date            DateTime       @db.Date
+  /// Minuten seit Mitternacht (0–1439)
+  startMinutes    Int
+  durationMinutes Int
+  location        String?
+  category        AgendaCategory @default(OTHER)
+  notes           String?
+  clientRequestId String?        @unique @db.Uuid
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  trip  Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  place Place? @relation(fields: [placeId], references: [id], onDelete: SetNull)
+
+  @@index([tripId, date, startMinutes])
+  @@index([placeId])
+}
+
+/// Gemerkter Ort oder gemerkte Unterkunft. Genau eines von placeId/accommodationId
+/// ist gesetzt (CHECK-Constraint in der Migration).
+model Favorite {
+  id               String   @id @default(uuid()) @db.Uuid
+  visitorSessionId String   @db.Uuid
+  placeId          String?  @db.Uuid
+  accommodationId  String?  @db.Uuid
+  createdAt        DateTime @default(now())
+
+  visitorSession VisitorSession @relation(fields: [visitorSessionId], references: [id], onDelete: Cascade)
+  place          Place?         @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  accommodation  Accommodation? @relation(fields: [accommodationId], references: [id], onDelete: Cascade)
+
+  @@unique([visitorSessionId, placeId])
+  @@unique([visitorSessionId, accommodationId])
+  @@index([visitorSessionId, createdAt])
+}

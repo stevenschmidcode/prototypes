@@ -1,0 +1,329 @@
+{
+  "_comment": "Kuratierte Thementouren (Reiseprofile). Stationen verweisen auf Orte in catalog.json (Slug). Erzähltexte basieren ausschliesslich auf den verifizierten Ortsbeschreibungen. minutes = empfohlene Zeit vor Ort im Tourtempo.",
+  "journeys": [
+    {
+      "slug": "mittelalter-geschichte",
+      "icon": "castle",
+      "theme": "forest",
+      "image": "ruine-stein",
+      "de": {
+        "title": "Mittelalter & Geschichte",
+        "persona": "Für Geschichtsfans",
+        "tagline": "Burgruine, Wehrturm, Landvogtei – eine Zeitreise vom Mittelalter bis zu den Römern am Limmatknie.",
+        "intro": "Baden war Tagsatzungsort der Alten Eidgenossenschaft und Bäderstadt seit der Römerzeit. Diese Tour führt von der Burgruine hoch über der Stadt zu Stadtkirche und Tagsatzungssaal, durch die Altstadt und über die Holzbrücke zum Landvogteischloss – und endet dort, wo alles begann: bei den heissen Quellen. Tipp: Den Tagsatzungssaal und die Reste eines römischen Bades zeigen die öffentlichen Stadtführungen von Baden Tourismus."
+      },
+      "en": {
+        "title": "Middle Ages & History",
+        "persona": "For history lovers",
+        "tagline": "Castle ruins, a defensive tower and the bailiff's castle – a journey through time from the Middle Ages to the Romans on the Limmat.",
+        "intro": "Baden hosted the Diet of the Old Swiss Confederacy and has been a spa town since Roman times. This journey leads from the castle ruins high above the town to the town church and the Diet Hall, through the old town and across the wooden bridge to the bailiff’s castle – and ends where it all began: at the hot springs. Tip: Baden Tourism’s public guided tours show the Diet Hall and the remains of a Roman bath."
+      },
+      "stops": [
+        {
+          "place": "ruine-stein",
+          "minutes": 45,
+          "de": "Hier oben beginnt Badens Geschichte: Die Burg Stein entstand vermutlich im 11. Jahrhundert und wurde 1415 bei der Eroberung des Aargaus durch die Eidgenossen zerstört. Wachtturm, Burgkapelle und der Blick über die Stadt sind geblieben.",
+          "en": "Baden's story starts up here: Stein Castle was probably built in the 11th century and destroyed in 1415 when the Swiss Confederates conquered Aargau. The watchtower, the castle chapel and the view over the town remain."
+        },
+        {
+          "place": "stadtturm-baden",
+          "minutes": 15,
+          "de": "Der einzige erhaltene Wehrturm der mittelalterlichen Stadtbefestigung, erbaut in der zweiten Hälfte des 15. Jahrhunderts. Von 1846 bis 1985 diente er als Bezirksgefängnis.",
+          "en": "The only surviving defensive tower of the medieval town walls, built in the second half of the 15th century. From 1846 to 1985 it served as the district prison."
+        },
+        {
+          "place": "stadtkirche-baden",
+          "minutes": 20,
+          "de": "1457–1460 als gotische Kirche erbaut, mit Vorgängerbauten bis ins 9. Jahrhundert. 1526 stritten hier Johannes Eck und Johannes Oekolampad in der Badener Disputation um die Reformation.",
+          "en": "Built as a Gothic church in 1457–1460, on a site with buildings going back to the 9th century. In 1526 Johannes Eck and Johannes Oecolampadius debated the Reformation here in the Baden Disputation."
+        },
+        {
+          "place": "rathaus-tagsatzungssaal",
+          "minutes": 15,
+          "de": "Von 1426 bis 1712 tagten hier die Gesandten der Alten Eidgenossenschaft; 1714 wurde im Tagsatzungssaal der Friede von Baden unterzeichnet. Den Saal sieht man im Rahmen öffentlicher Stadtführungen.",
+          "en": "From 1426 to 1712 the envoys of the Old Swiss Confederacy met here; in 1714 the Peace of Baden was signed in the Diet Hall. The hall can be seen on public guided tours."
+        },
+        {
+          "place": "historische-altstadt-baden",
+          "minutes": 30,
+          "de": "Gassen aus dem 13. und 14. Jahrhundert, Häuser aus dem 16. bis 18. Jahrhundert – das Ortsbild gilt als Kulturgut von nationaler Bedeutung. Zeit für einen Bummel bis hinunter zur Limmat.",
+          "en": "Lanes laid out in the 13th and 14th centuries, houses from the 16th to 18th centuries – the townscape is a cultural asset of national importance. Time for a stroll down to the Limmat."
+        },
+        {
+          "place": "holzbruecke-baden",
+          "minutes": 15,
+          "de": "Schon im 13. Jahrhundert stand hier eine Brücke. Die heutige gedeckte Holzbrücke von 1809 überspannt die Limmat ohne einen einzigen Pfeiler.",
+          "en": "A bridge already stood here in the 13th century. Today's covered wooden bridge from 1809 spans the Limmat without a single pier."
+        },
+        {
+          "place": "landvogteischloss-historisches-museum",
+          "minutes": 75,
+          "de": "Bis 1798 regierte von hier aus der eidgenössische Landvogt. Heute erzählt das Historische Museum vom Mittelalter bis zur Bäder- und Industriegeschichte.",
+          "en": "Until 1798 the Confederation's bailiff governed from here. Today the Historical Museum tells Baden's story from the Middle Ages to its spa and industrial past."
+        },
+        {
+          "place": "baederquartier",
+          "minutes": 40,
+          "de": "Zum Schluss zurück zu den Anfängen: Schon die Römer nutzten die heissen Quellen am Limmatknie und nannten ihre Siedlung «Aquae Helveticae».",
+          "en": "Finally, back to the beginning: the Romans already used the hot springs at the bend of the Limmat and named their settlement “Aquae Helveticae”."
+        }
+      ]
+    },
+    {
+      "slug": "wellness-thermalwasser",
+      "icon": "waves",
+      "theme": "sky",
+      "image": "heisse-brunnen",
+      "de": {
+        "title": "Wellness & Thermalwasser",
+        "persona": "Für Erholungssuchende",
+        "tagline": "Rund 47 °C warmes Wasser aus 18 Quellen – vom Spaziergang im Kurpark bis zum Abend in der Therme.",
+        "intro": "Baden ist seit der Römerzeit ein Ort zum Baden. Diese Tour nimmt sich Zeit: ein ruhiger Spaziergang durch Kurpark und Bäderquartier, die öffentlichen Heissen Brunnen zum Füsse-Wärmen und zum Schluss ausgiebig Zeit in der Wellness-Therme FORTYSEVEN."
+      },
+      "en": {
+        "title": "Wellness & Thermal Waters",
+        "persona": "For those seeking relaxation",
+        "tagline": "Water at around 47 °C from 18 springs – from a stroll in the spa park to an evening in the thermal baths.",
+        "intro": "Baden has been a place for bathing since Roman times. This journey takes its time: a gentle walk through the spa park and the historic baths quarter, the public hot-spring fountains to warm your feet and, to finish, plenty of time at the FORTYSEVEN thermal baths."
+      },
+      "stops": [
+        {
+          "place": "kurpark-baden",
+          "minutes": 30,
+          "de": "Der Park rund um den Kursaal entstand um 1875 – mit exotischen Bäumen und Wasseranlagen. Ein ruhiger Auftakt.",
+          "en": "The park around the Kursaal was laid out around 1875, with exotic trees and water features. A peaceful start."
+        },
+        {
+          "place": "baederquartier",
+          "minutes": 40,
+          "de": "Hier sprudelt Thermalwasser aus 18 Quellen; es gilt als das mineralreichste der Schweiz. Historische Hotelbauten erinnern an die grosse Zeit der Badekultur.",
+          "en": "Thermal water rises here from 18 springs and is considered the most mineral-rich in Switzerland. Historic hotel buildings recall the heyday of bathing culture."
+        },
+        {
+          "place": "heisse-brunnen",
+          "minutes": 30,
+          "de": "Öffentlich und frei zugänglich: In den beiden Becken an der Limmat ist das naturbelassene Thermalwasser je nach Witterung etwa 37 bis 43 °C warm – ideal für Füsse und Hände.",
+          "en": "Public and freely accessible: in the two basins on the Limmat the untreated thermal water is around 37 to 43 °C depending on the weather – perfect for warming feet and hands."
+        },
+        {
+          "place": "limmatpromenade",
+          "minutes": 30,
+          "de": "Ein paar Schritte am Wasser entlang, Sitzstufen am Fluss – Zeit zum Durchatmen vor dem Bad.",
+          "en": "A few steps along the water and seats right by the river – time to breathe before your bath."
+        },
+        {
+          "place": "thermalbad-fortyseven",
+          "minutes": 180,
+          "de": "Der Höhepunkt: Mario Bottas Therme mit Aussen- und Innenbecken, zwölf Saunen und Spa, benannt nach der Quelltemperatur von rund 47 °C.",
+          "en": "The highlight: Mario Botta's thermal baths with indoor and outdoor pools, twelve saunas and a spa, named after the spring temperature of around 47 °C."
+        }
+      ]
+    },
+    {
+      "slug": "coffee-lover",
+      "icon": "coffee",
+      "theme": "terracotta",
+      "image": null,
+      "de": {
+        "title": "Coffee Lover",
+        "persona": "Für Kaffeeliebhaber:innen",
+        "tagline": "Vom Espresso am Gleis 1 über Latte-Art-Meister und Outdoor-Coffee-Bar bis zur Terrasse an der Limmat.",
+        "intro": "Baden hat eine lebendige Kaffeeszene – mit eigener Mikrorösterei, preisgekrönter Latte Art und Cafés mit Wohnzimmergefühl. Diese Tour führt vom Bahnhof durch die Altstadt bis ins Bäderquartier. Kleine Tassen helfen: Es sind sechs Cafés."
+      },
+      "en": {
+        "title": "Coffee Lover",
+        "persona": "For coffee lovers",
+        "tagline": "From an espresso on platform 1 to a latte art champion, an outdoor coffee bar and a terrace on the Limmat.",
+        "intro": "Baden has a lively coffee scene – with its own micro-roastery, award-winning latte art and cafés that feel like a living room. This journey leads from the station through the old town to the historic baths quarter. Small cups help: there are six cafés."
+      },
+      "stops": [
+        {
+          "place": "caffe-uno-espressobar",
+          "minutes": 20,
+          "de": "Der Auftakt direkt am Gleis 1: Die Bohnen röstet caffè UNO selbst – in der eigenen Mikrorösterei, nur rund 650 Meter entfernt.",
+          "en": "Start right on platform 1: caffè UNO roasts its own beans in its micro-roastery, only around 650 metres away."
+        },
+        {
+          "place": "cafe-confiserie-himmel",
+          "minutes": 30,
+          "de": "Seit rund 150 Jahren am Bahnhofplatz – zum Kaffee vielleicht Amaretti oder ein traditionelles Badener Spanischbrödli.",
+          "en": "On Bahnhofplatz for around 150 years – perhaps with amaretti or a traditional Baden “Spanischbrödli” pastry."
+        },
+        {
+          "place": "gapscup",
+          "minutes": 30,
+          "de": "Barista «Gap», zweifacher Schweizer Meister in Latte Art, führt rund 100 ausgewählte Bohnen aus aller Welt. An der Theke kann man zuschauen.",
+          "en": "Barista “Gap”, twice Swiss latte art champion, offers around 100 selected beans from all over the world. You can watch the baristas at work at the counter."
+        },
+        {
+          "place": "yanacocha",
+          "minutes": 30,
+          "de": "Coffee Bar und Outdoor-Shop unter einem Dach: von Espresso über Flat White bis Affogato, mit viel Upcycling im Lokal.",
+          "en": "A coffee bar and outdoor shop under one roof: from espresso and flat white to affogato, with lots of upcycled design."
+        },
+        {
+          "place": "frau-meise",
+          "minutes": 45,
+          "de": "Wohnzimmergefühl an der Unteren Halde, nahe der Holzbrücke: Kuchen und Konfitüre aus eigener Herstellung, dazu eine kleine Boutique.",
+          "en": "A living-room atmosphere on Untere Halde near the wooden bridge: homemade cakes and jams, plus a small boutique."
+        },
+        {
+          "place": "kafi-raab",
+          "minutes": 45,
+          "de": "Zum Schluss am Kurplatz im Bäderquartier: Kaffee der lokalen Rösterei UNO, hausgemachte Kuchen und eine Terrasse direkt an der Limmat.",
+          "en": "To finish, on Kurplatz in the baths quarter: coffee from the local UNO roastery, homemade cakes and a terrace right by the Limmat."
+        }
+      ]
+    },
+    {
+      "slug": "kunst-kultur",
+      "icon": "palette",
+      "theme": "plum",
+      "image": "museum-langmatt",
+      "de": {
+        "title": "Kunst & Kultur",
+        "persona": "Für Kunstinteressierte",
+        "tagline": "Zeitgenössische Kunst in einer alten Fabrik, Impressionisten in einer Villa, Gartenkunst und Theater im Kornhaus von 1511.",
+        "intro": "Baden hat eine bemerkenswerte Kulturdichte. Diese Tour beginnt mit zeitgenössischer Kunst im Kunstraum, führt zu einer der bedeutendsten Impressionisten-Sammlungen Europas und durch einen denkmalgeschützten Villengarten zu den Theatern der Stadt – und endet im Historischen Museum."
+      },
+      "en": {
+        "title": "Art & Culture",
+        "persona": "For art lovers",
+        "tagline": "Contemporary art in an old factory, Impressionists in a villa, garden design and theatre in a granary from 1511.",
+        "intro": "Baden has a remarkable density of culture. This journey begins with contemporary art at the Kunstraum, leads to one of Europe’s most important Impressionist collections and through a listed villa garden to the town’s theatres – and ends at the Historical Museum."
+      },
+      "stops": [
+        {
+          "place": "kunstraum-baden",
+          "minutes": 45,
+          "de": "Seit über fünf Jahrzehnten der städtische Ausstellungsraum für zeitgenössische Kunst – seit 2024 in einer ehemaligen Metallwarenfabrik im Merker-Areal. Eintritt frei.",
+          "en": "For over five decades the town’s exhibition space for contemporary art – since 2024 in a former metalware factory on the Merker site. Free entry."
+        },
+        {
+          "place": "museum-langmatt",
+          "minutes": 90,
+          "de": "Renoir, Monet, Pissarro, Gauguin, Degas und Cézanne – in den original erhaltenen Wohnräumen der Familie Brown-Sulzer, umgeben von einem weitläufigen Park.",
+          "en": "Renoir, Monet, Pissarro, Gauguin, Degas and Cézanne – in the Brown-Sulzer family's original rooms, surrounded by an extensive park."
+        },
+        {
+          "place": "parkanlage-villa-boveri",
+          "minutes": 30,
+          "de": "Landschaftsgarten ab 1895 und neubarocker Terrassengarten von 1908 mit Wasserspielen und Skulpturen – die bedeutendste private Gartenanlage Badens.",
+          "en": "A landscape garden from 1895 and a neo-baroque terraced garden from 1908 with fountains and sculptures – Baden’s most important private garden."
+        },
+        {
+          "place": "kurtheater-baden",
+          "minutes": 20,
+          "de": "1952 nach Plänen der Architektin Lisbeth Sachs erbaut, 2018–2020 renoviert und erweitert. Wer abends wiederkommt, erlebt eines der Gastspiele oder Eigenproduktionen.",
+          "en": "Built in 1952 to designs by architect Lisbeth Sachs and renovated and extended in 2018–2020. Come back in the evening to see a guest performance or in-house production."
+        },
+        {
+          "place": "thik-theater-im-kornhaus",
+          "minutes": 15,
+          "de": "Seit 1953 wird im Kornhaus von 1511 Theater gespielt: ein Kleintheater mit höchstens 132 Plätzen, von Kabarett bis Familienstück.",
+          "en": "Theatre has been staged in the granary of 1511 since 1953: a small theatre with at most 132 seats, from cabaret to family shows."
+        },
+        {
+          "place": "landvogteischloss-historisches-museum",
+          "minutes": 75,
+          "de": "Eingerichtete Wohnräume vom Mittelalter bis ins 20. Jahrhundert – und im modernen Erweiterungsbau die multimediale Ausstellung zu Badens Geschichte.",
+          "en": "Furnished rooms from the Middle Ages to the 20th century – and, in the modern extension, a multimedia exhibition on Baden's history."
+        }
+      ]
+    },
+    {
+      "slug": "natur-aussicht",
+      "icon": "mountain",
+      "theme": "sage",
+      "image": "teufelskeller",
+      "de": {
+        "title": "Natur & Aussicht",
+        "persona": "Für Draussen-Menschen",
+        "tagline": "Vom Fluss durch einen urwüchsigen Wald hinauf zum Aussichtsturm – mit Weitblick bis zu den Alpen.",
+        "intro": "Baden liegt mitten im Grünen. Diese Tour startet an der Limmat, steigt zur Burgruine hinauf, führt durch das Naturreservat Teufelskeller und endet auf der Baldegg mit Rundumblick und einer Einkehr im Waldgasthaus."
+      },
+      "en": {
+        "title": "Nature & Views",
+        "persona": "For outdoor people",
+        "tagline": "From the river through wild woodland up to a lookout tower – with views as far as the Alps.",
+        "intro": "Baden is surrounded by green. This journey starts on the Limmat, climbs to the castle ruins, passes through the Teufelskeller nature reserve and ends on the Baldegg with panoramic views and a meal at the forest inn."
+      },
+      "stops": [
+        {
+          "place": "limmatpromenade",
+          "minutes": 30,
+          "de": "Auftakt am Wasser: schattige Ruheplätze und Sitzstufen direkt an der Limmat.",
+          "en": "Start by the water: shady resting places and seats right on the Limmat."
+        },
+        {
+          "place": "ruine-stein",
+          "minutes": 30,
+          "de": "Über die steile Treppe hinauf zur Burgruine – der erste grosse Blick über Stadt und Fluss.",
+          "en": "Up the steep steps to the castle ruins – your first big view over the town and the river."
+        },
+        {
+          "place": "teufelskeller",
+          "minutes": 90,
+          "de": "Seit 1987 Naturreservat: Hier darf sich der Wald frei entwickeln. Ein ausgeschilderter, familienfreundlicher Weg führt hindurch, unterwegs gibt es Grillstellen.",
+          "en": "A nature reserve since 1987, where the forest is left to grow wild. A signposted, family-friendly trail leads through it, with barbecue spots along the way."
+        },
+        {
+          "place": "baldegg",
+          "minutes": 60,
+          "de": "172 Stufen hinauf auf den Wasserturm – und oben Rundumblick über Mittelland, Alpen und Schwarzwald.",
+          "en": "172 steps up the water tower – and at the top a panoramic view over the Swiss Plateau, the Alps and the Black Forest."
+        },
+        {
+          "place": "waldgasthaus-baldegg",
+          "minutes": 75,
+          "de": "Zum Abschluss Einkehr: Schweizer Klassiker mit französisch inspirierter Leichtigkeit, auf der Terrasse eine einfachere Bistrokarte.",
+          "en": "To finish, stop for a meal: Swiss classics with a light French touch, and a simpler bistro menu on the terrace."
+        }
+      ]
+    },
+    {
+      "slug": "familie",
+      "icon": "baby",
+      "theme": "sand",
+      "image": "schweizer-kindermuseum",
+      "de": {
+        "title": "Familie & Entdeckerkinder",
+        "persona": "Für Familien",
+        "tagline": "Mitmach-Museum, warme Brunnen und ein Abenteuerspielplatz mit Aussichtsturm.",
+        "intro": "Ein Tag, an dem Kinder den Takt angeben: Spielen und Entdecken im Schweizer Kindermuseum, Toben auf dem Spielplatz im Alten Stadtfriedhof, warme Hände am Heissen Brunnen und am Nachmittag Abenteuer auf der Baldegg."
+      },
+      "en": {
+        "title": "Family & Little Explorers",
+        "persona": "For families",
+        "tagline": "A hands-on museum, warm fountains and an adventure playground with a lookout tower.",
+        "intro": "A day where children set the pace: playing and discovering at the Swiss Children’s Museum, running around the playground in the Old Town Cemetery Park, warm hands at the hot-spring fountain and an afternoon of adventure on the Baldegg."
+      },
+      "stops": [
+        {
+          "place": "schweizer-kindermuseum",
+          "minutes": 120,
+          "de": "Interaktive Stationen zeigen, wie sich Kindheit und Spiel über die Jahrhunderte verändert haben – in einer Villa von 1896/97.",
+          "en": "Interactive stations show how childhood and play have changed over the centuries – in a villa from 1896/97."
+        },
+        {
+          "place": "alter-stadtfriedhof",
+          "minutes": 45,
+          "de": "Eine verwunschene Parkanlage von 1821 mit Eibenallee, alten Bäumen – und einem Spielplatz.",
+          "en": "An enchanting park from 1821 with an avenue of yews, old trees – and a playground."
+        },
+        {
+          "place": "heisse-brunnen",
+          "minutes": 20,
+          "de": "Hände ins warme Thermalwasser – ein Erlebnis für Gross und Klein, frei zugänglich an der Limmat.",
+          "en": "Hands into the warm thermal water – a treat for young and old, freely accessible on the Limmat."
+        },
+        {
+          "place": "baldegg",
+          "minutes": 120,
+          "de": "Mit dem Bus Nr. 5 in rund 15 Minuten hinauf: grosser Spielplatz, Waldwege und 172 Stufen auf den Aussichtsturm.",
+          "en": "Up in about 15 minutes on bus no. 5: a big playground, forest paths and 172 steps up the lookout tower."
+        }
+      ]
+    }
+  ]
+}

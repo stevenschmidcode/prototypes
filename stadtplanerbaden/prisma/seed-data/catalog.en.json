@@ -1,0 +1,538 @@
+{
+  "places": {
+    "historische-altstadt-baden": {
+      "name": "Baden Old Town",
+      "shortDescription": "Winding lanes, Gothic buildings and picturesque squares between the Schlossberg and the River Limmat.",
+      "description": "Baden’s Old Town lies between the Schlossberg hill and the steep slope down to the Limmat, and grew up in the 13th and 14th centuries. Most of its buildings date from the 16th to 18th centuries, and the townscape is listed as a cultural asset of national importance. The Stadtturm, the town church, the Rathaus with its historic Diet Hall (Tagsatzungssaal) and the covered wooden bridge are all just a few steps apart.",
+      "tags": [
+        "Old Town",
+        "History",
+        "Stroll",
+        "Architecture"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "ruine-stein": {
+      "name": "Stein Castle Ruins (Ruine Stein)",
+      "shortDescription": "Castle ruins on the Schlossberg high above the Old Town – with sweeping views over Baden and the Limmat.",
+      "description": "Stein Castle was probably built in the 11th century by the Counts of Lenzburg and later passed to the Kyburgs and the Habsburgs. It was destroyed in 1415 when the Swiss Confederates conquered the Aargau; the watchtower and castle chapel survive to this day. From the Schlossbergplatz, the path leads through the Stadtturm and up a steep flight of steps to the ruins and their panorama.",
+      "tags": [
+        "Views",
+        "Castle ruins",
+        "Middle Ages",
+        "Habsburgs"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "holzbruecke-baden": {
+      "name": "Covered Wooden Bridge (Holzbrücke)",
+      "shortDescription": "Built in 1809, the covered wooden bridge spans the Limmat without piers and leads to the Landvogteischloss.",
+      "description": "A bridge has linked the two banks of the Limmat at this spot since the 13th century. Today’s covered wooden bridge was built in 1809 to a design by master builder Blasius Balteschwiler of Laufenburg and spans the 37-metre-wide river without any piers. It connects the Old Town with the Landvogteischloss and offers lovely views of the river and town.",
+      "tags": [
+        "Bridge",
+        "Limmat",
+        "Landmark",
+        "Photo spot"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "landvogteischloss-historisches-museum": {
+      "name": "Landvogteischloss – Baden Historical Museum",
+      "shortDescription": "Former seat of the Confederation’s bailiffs, now a museum on Baden’s spa, industrial and Diet history.",
+      "description": "The foundations of the defensive tower date back to the 13th century, and until 1798 the castle was the official seat of the Confederation’s bailiff. It has housed a museum since 1913 and, as part of the Historisches Museum Baden, now shows furnished living rooms from the Middle Ages to the 20th century. In the modern extension on the Limmat, the multimedia permanent exhibition «Geschichte >verlinkt<» tells the story of Baden’s past as a spa town, an industrial centre and a meeting place of the Swiss Diet.",
+      "tags": [
+        "Museum",
+        "Castle",
+        "History",
+        "Family"
+      ],
+      "openingHours": "Tue–Sat 1–5 pm, Thu 12 noon–7 pm, Sun 10 am–5 pm, closed Mondays (different hours on public holidays)",
+      "eventNote": null
+    },
+    "grand-casino-baden": {
+      "name": "Grand Casino Baden",
+      "shortDescription": "Casino in the historic Kursaal with table games, slot machines, bars and restaurants – currently being refurbished.",
+      "description": "Grand Casino Baden is housed in the Kursaal by the spa park and offers slot machines, table games and poker, along with bars and restaurants. Because of the 2026 refurbishment, gaming is temporarily taking place in the pop-up casino in the former Club COCO, where the entrance is now located. Admission from age 18 with valid ID.",
+      "tags": [
+        "Casino",
+        "Evening",
+        "Entertainment",
+        "Kursaal"
+      ],
+      "openingHours": "Sun–Thu 11 am–4 am, Fri–Sat 11 am–5 am (pop-up casino during the refurbishment)",
+      "eventNote": null
+    },
+    "thermalbad-fortyseven": {
+      "name": "FORTYSEVEN Wellness Spa",
+      "shortDescription": "Contemporary thermal spa by Mario Botta in the spa quarter – with thermal pools, saunas and treatments.",
+      "description": "FORTYSEVEN is the centrepiece of the historic spa quarter and takes its name from the roughly 47 °C temperature of the thermal water at source. The spa has three outdoor and five indoor pools, twelve saunas (with swimwear, swimwear-free and ladies-only), the «Kosmos» experience area and a spa with treatment rooms. The building by Ticino architect Mario Botta opens out towards the Limmat.",
+      "tags": [
+        "Thermal bath",
+        "Sauna",
+        "Spa",
+        "Architecture",
+        "Rainy day"
+      ],
+      "openingHours": "Daily 8 am–10 pm (bathing ends 30 min before closing; last admission 1 hour before bathing ends)",
+      "eventNote": null
+    },
+    "kurpark-baden": {
+      "name": "Spa Park (Kurpark)",
+      "shortDescription": "Historic park around the Kursaal with exotic trees and water features.",
+      "description": "The park was laid out around 1875 together with the Kursaal it surrounds. An impressive collection of exotic trees typical of the period has survived, as have the water features. Set between the railway station, the Kurtheater and the spa quarter, the park is an inviting spot for a quiet break in the green.",
+      "tags": [
+        "Park",
+        "Trees",
+        "Relaxation",
+        "Kursaal"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "limmatpromenade": {
+      "name": "Limmat Promenade (Limmatpromenade)",
+      "shortDescription": "Riverside path beneath chestnut trees along the Limmat – for strolling, jogging and lingering.",
+      "description": "Along the Limmat, a varied recreational space has emerged with shady resting places and seating steps down to the water. In the warmer months two open-air bars add to the mix – the Kajüte by the Tränenbrunnen fountain and the Triebguet by the Hochbrücke. The quickest way down from the station is the promenade lift at the Unterer Bahnhofplatz.",
+      "tags": [
+        "Limmat",
+        "Stroll",
+        "Riverside",
+        "Summer"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "museum-langmatt": {
+      "name": "Museum Langmatt",
+      "shortDescription": "Impressionist masterpieces in an Art Nouveau villa with park – reopened in May 2026 after renovation.",
+      "description": "In the former home of Sidney and Jenny Brown-Sulzer, Museum Langmatt displays one of Europe’s most important private collections of French Impressionism, including works by Renoir, Monet, Pissarro, Gauguin, Degas and Cézanne. The paintings hang in the original living rooms, surrounded by an extensive park. Following the complete renovation of 2024–2026, the exhibition «Welcome back – Die Sammlung kehrt zurück» (9 May 2026 to 10 January 2027) celebrates the collection’s return.",
+      "tags": [
+        "Art",
+        "Impressionism",
+        "Villa",
+        "Park"
+      ],
+      "openingHours": "Museum: Tue–Fri 2–5 pm, Sat–Sun 11 am–5 pm; café & park: Tue–Fri 12 noon–5 pm, Sat–Sun 10 am–5 pm; closed Mondays",
+      "eventNote": null
+    },
+    "baederquartier": {
+      "name": "Spa Quarter (Bäderquartier)",
+      "shortDescription": "2,000 years of bathing history at the bend of the Limmat – with thermal springs, historic hotels and a new spa.",
+      "description": "The Romans were already using the hot springs at the bend of the Limmat, where they founded the settlement of «Aquae Helveticae». The thermal water rises from 18 springs at around 47 °C and is considered the most mineral-rich in Switzerland. Today the FORTYSEVEN wellness spa, historic hotel buildings and the public Hot Springs Fountains link the old spa quarter with contemporary bathing culture.",
+      "tags": [
+        "Thermal water",
+        "History",
+        "Romans",
+        "Walking tour"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "heisse-brunnen": {
+      "name": "Hot Springs Fountains (Heisse Brunnen)",
+      "shortDescription": "Two public thermal basins on either side of the Limmat – for warming your feet or hands in the open air.",
+      "description": "The two Hot Springs Fountains in Baden and Ennetbaden opened on 6 November 2021; they were developed by the Bagni Popolari association and donated by the Ortsbürgergemeinde Baden and the municipality of Ennetbaden. The basins are fed with untreated thermal water and, depending on the weather, are around 37 to 43 °C. The Baden fountain sits right below FORTYSEVEN on the Limmat, the Ennetbaden one opposite in the park at the end of the promenade.",
+      "tags": [
+        "Thermal water",
+        "Free",
+        "Foot bath",
+        "Limmat"
+      ],
+      "openingHours": "Daily approx. 7 am–10 pm; cleaning on Mon, Wed and Fri (Baden approx. 6.30–11 am, Ennetbaden approx. 9 am–1 pm)",
+      "eventNote": null
+    },
+    "schweizer-kindermuseum": {
+      "name": "Swiss Children’s Museum (Schweizer Kindermuseum)",
+      "shortDescription": "Interactive museum covering 300 years of childhood history – a day out for young and old.",
+      "description": "Since 1985 the Swiss Children’s Museum has been a meeting place for the generations, showing how childhood and play have changed over the centuries. The permanent exhibition «Die Welt des Kindes entdecken» invites visitors to join in at interactive stations, alongside exhibitions such as «Rakete, Mond und Sterne» and «Lueg id Wält». The museum is housed in a villa built in 1896/97.",
+      "tags": [
+        "Family",
+        "Children",
+        "Museum",
+        "Rainy day"
+      ],
+      "openingHours": "Tue–Sat 2–5 pm, Sun 10 am–5 pm, closed Mondays (autumn holidays 26 Sept–18 Oct 2026: Tue–Sun 10 am–5 pm)",
+      "eventNote": null
+    },
+    "kurtheater-baden": {
+      "name": "Kurtheater Baden",
+      "shortDescription": "Theatre from 1952 beside the spa park, renovated and extended in 2018–2020 – with drama, dance and music.",
+      "description": "The Kurtheater was built in 1952 near the Kursaal to plans by architect Lisbeth Sachs. It was renovated and extended between 2018 and 2020 and reopened for the 2020/21 season. The auditorium seats around 560, and the programme features both touring productions and in-house productions.",
+      "tags": [
+        "Theatre",
+        "Culture",
+        "Evening",
+        "Architecture"
+      ],
+      "openingHours": "Box office: Mon–Thu 10 am–5 pm (performances as per programme)",
+      "eventNote": null
+    },
+    "stadtturm-baden": {
+      "name": "City Tower (Stadtturm)",
+      "shortDescription": "The only surviving tower of the medieval town fortifications – gateway to the Weite Gasse.",
+      "description": "The Stadtturm was built in the second half of the 15th century and is the only defensive tower of the medieval fortifications still standing. Its hipped roof in the town colours of black, red and white makes it unmistakable; from 1846 to 1985 it served as the district prison. The interior can be visited on guided city tours.",
+      "tags": [
+        "Landmark",
+        "Middle Ages",
+        "Old Town",
+        "Guided tour"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "baldegg": {
+      "name": "Baldegg and Water Tower",
+      "shortDescription": "Recreation area above Baden with a lookout tower, playground and forest inn – 15 minutes by bus no. 5.",
+      "description": "The Baldegg is one of Baden’s most popular excursion spots, with footpaths through the woods and far-reaching views. The 34.5-metre water tower doubles as a lookout tower: 172 steps lead up to the platform, with a panoramic view over the Swiss Plateau, the Alps and the Black Forest. Next to the tower are the Waldgasthaus Baldegg and a large playground; bus no. 5 runs up from Baden station in around 15 minutes.",
+      "tags": [
+        "Views",
+        "Hiking",
+        "Family",
+        "Lookout tower"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "teufelskeller": {
+      "name": "Teufelskeller Nature Reserve",
+      "shortDescription": "Wild nature reserve with rock boulders and near-primeval forest – protected since 1987.",
+      "description": "The Teufelskeller has been a nature reserve since 1987; the forest is no longer managed and is left to develop freely. A signposted, family-friendly trail leads through the reserve, with barbecue spots along the way. Access is via the steps by the KV school, from the Liebenfels cemetery or from the Täfern bus stop.",
+      "tags": [
+        "Forest",
+        "Nature reserve",
+        "Hiking",
+        "Barbecue spot"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "restaurant-roter-turm": {
+      "name": "Restaurant Roter Turm",
+      "shortDescription": "Old Town restaurant with reinterpreted Swiss cuisine, dishes from around the world and a courtyard.",
+      "description": "At Restaurant Roter Turm, almost forgotten Swiss recipes are given a new twist using seasonal, regional produce, complemented by dishes from around the world; integration plays a central role in the business. Alongside the restaurant with around 60 seats there is a bistro bar and a courtyard for aperitifs.",
+      "tags": [
+        "Restaurant",
+        "Swiss cuisine",
+        "Old Town",
+        "Vegetarian"
+      ],
+      "openingHours": "Mon–Fri 10 am–11 pm, Sat 9.30 am–11 pm, closed Sundays",
+      "eventNote": null
+    },
+    "restaurant-trudelkeller": {
+      "name": "Restaurant Trudelkeller",
+      "shortDescription": "Creative seasonal cooking in the Old Town – with a dining room, vaulted cellar and garden terrace.",
+      "description": "The Trudelkeller pairs creative, seasonal cooking with a relaxed atmosphere in the heart of Baden’s Old Town. The 1960s-style dining room looks out over the rooftops, and there is also a vaulted cellar and a leafy garden terrace. The menu ranges from hearty to vegan.",
+      "tags": [
+        "Restaurant",
+        "Dinner",
+        "Old Town",
+        "Vegan"
+      ],
+      "openingHours": "Tue–Sat from 6 pm, closed Sundays and Mondays",
+      "eventNote": null
+    },
+    "waldgasthaus-baldegg": {
+      "name": "Waldgasthaus Baldegg",
+      "shortDescription": "«Top of Baden»: excursion restaurant with panoramic terrace, bistro and playground on the Baldegg.",
+      "description": "The Waldgasthaus Baldegg combines Swiss classics with a French-inspired lightness of touch; a simpler bistro menu is served in the Stübli and on the terrace. There are also options for vegan and vegetarian guests. Right next door are a large adventure playground and the water tower with its viewing platform.",
+      "tags": [
+        "Excursion restaurant",
+        "Terrace",
+        "Family",
+        "Views"
+      ],
+      "openingHours": "Daily 9 am–10 pm (hot food until 8.30 pm)",
+      "eventNote": null
+    },
+    "cafe-confiserie-himmel": {
+      "name": "Café Confiserie Himmel",
+      "shortDescription": "Long-established café on the Bahnhofplatz – known for its amaretti and Baden’s traditional Spanischbrödli.",
+      "description": "Café Confiserie Himmel on the Bahnhofplatz has been part of Baden for around 150 years. It serves breakfast, hot dishes and baked snacks made on the premises. The house is known for its amaretti and the traditional Badener Spanischbrödli pastries.",
+      "tags": [
+        "Café",
+        "Confectionery",
+        "Spanischbrödli",
+        "Breakfast"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "frau-meise": {
+      "name": "Frau Meise",
+      "shortDescription": "Café with a living-room feel on the Untere Halde – homemade treats, brunch and a small boutique.",
+      "description": "Frau Meise is a cosy café with a small boutique on the Untere Halde, near the wooden bridge. On the menu are breakfast, bagels, salads and homemade cakes and jams, many made with regional ingredients. The boutique sells handmade jewellery and accessories.",
+      "tags": [
+        "Café",
+        "Brunch",
+        "Homemade",
+        "Old Town"
+      ],
+      "openingHours": "Wed–Mon 9.30 am–6 pm, closed Tuesdays",
+      "eventNote": null
+    },
+    "wochenmarkt-baden": {
+      "name": "Baden Weekly Market (Wochenmarkt)",
+      "shortDescription": "Saturday market on the Schlossbergplatz and in the Weite Gasse – regional produce all year round.",
+      "description": "At the weekly market, producers from the region sell their goods. The Saturday market takes place all year round on the Schlossbergplatz and in the Weite Gasse, with an additional Tuesday market on the Schlossbergplatz from April to September. There is no market between Christmas and New Year, and construction work in the town centre may restrict the markets in 2026.",
+      "tags": [
+        "Market",
+        "Regional",
+        "Saturday",
+        "Old Town"
+      ],
+      "openingHours": "Sat 7.30–11.30 am (Oct–March from 8 am); Tue 7–11 am (April–September only)",
+      "eventNote": null
+    },
+    "einkaufen-innenstadt": {
+      "name": "Shopping in the Town Centre",
+      "shortDescription": "Boutiques, concept stores and traditional shops from the Badstrasse to the streets around the Stadtturm.",
+      "description": "Between historic lanes and modern architecture, Baden offers curated boutiques, concept stores and traditional shops. From the Badstrasse via the Cordulapassage to the area around the Stadtturm you will find fashion, design and regional specialities, with cafés for a break in between. The Badener CITY CARD can be redeemed in many shops, restaurants and cafés.",
+      "tags": [
+        "Shopping",
+        "Boutiques",
+        "Old Town",
+        "Gifts"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "badenfahrt": {
+      "name": "Badenfahrt 2027",
+      "shortDescription": "Baden’s great town festival, usually held only once every ten years – next edition in 2027.",
+      "description": "The Badenfahrt is Baden’s great town festival and usually takes place every ten years; recent editions have each drawn more than a million visitors. The festival is run by numerous volunteers and local clubs. The next Badenfahrt has been announced for 20 to 29 August 2027.",
+      "tags": [
+        "Town festival",
+        "Festival",
+        "Tradition",
+        "Summer"
+      ],
+      "openingHours": null,
+      "eventNote": "Dates as given in the festival overview by Baden Tourism (deinbaden.ch); badenfahrt.ch announces «Badenfahrt 2027» without dates."
+    },
+    "fantoche": {
+      "name": "Fantoche – International Animation Film Festival",
+      "shortDescription": "Annual international animation film festival in Baden, founded in 1995.",
+      "description": "Fantoche is an international animation film festival that has been held in Baden since 1995 and now takes place every year. The programme focuses mainly on short films in competitions and special programmes, and the festival is on the list of Oscar-qualifying festivals. The 2026 edition took place from 1 to 6 September; the 25th edition has been announced for 7 to 12 September 2027.",
+      "tags": [
+        "Film",
+        "Animation",
+        "Festival",
+        "Cinema"
+      ],
+      "openingHours": null,
+      "eventNote": "25th edition according to fantoche.ch. In 2026 the festival took place from 1 to 6 September (deinbaden.ch). Address = festival office; venues vary."
+    },
+    "badener-wunderdorf": {
+      "name": "Badener WunderDorf (Christmas Market)",
+      "shortDescription": "Christmas village on the Theaterplatz with street food, mulled wine bars and a little gift village.",
+      "description": "For around seven weeks the Badener WunderDorf transforms the Theaterplatz into a Christmas market. There is street food, a «Gschänkli-Dörfli» of craft huts, several bars serving mulled wine, a lounge tent, a shooting gallery and a Punch-and-Judy booth. Admission is free.",
+      "tags": [
+        "Christmas market",
+        "Advent",
+        "Mulled wine",
+        "Family"
+      ],
+      "openingHours": "Tue–Wed 4–10 pm, Thu–Fri 4 pm–midnight, Sat 12 noon–midnight, Sun 12 noon–10 pm, closed Mondays",
+      "eventNote": "2026 dates and opening hours as published on wunderdorf.ch."
+    },
+    "stadtkirche-baden": {
+      "name": "Town Church of the Assumption (Stadtkirche Maria Himmelfahrt)",
+      "shortDescription": "Late-Gothic town church with a colourful spire at the heart of the Old Town – a cultural asset of national importance.",
+      "description": "The Roman Catholic town church was built in 1457–1460 as a three-aisled Gothic church; earlier churches on this site date back to the 9th century. In 1526 it hosted the Disputation of Baden between Johannes Eck and Johannes Oecolampadius. The tower was raised to 52 metres in 1493 and wears a colourful, pointed tiled roof; the Baroque furnishings include the high-altar paintings by Renward Forer.",
+      "tags": [
+        "Church",
+        "Gothic",
+        "Old Town",
+        "History"
+      ],
+      "openingHours": "Mon–Fri 7 am–7 pm, Sat 8 am–6.30 pm, Sun 8 am–7.15 pm (no sightseeing during services)",
+      "eventNote": null
+    },
+    "rathaus-tagsatzungssaal": {
+      "name": "Town Hall and Diet Hall (Tagsatzungssaal)",
+      "shortDescription": "From 1426 to 1712 the Swiss Diet met here – the historic hall can be seen on guided city tours.",
+      "description": "The late-Gothic Rathaus dates back at its core to around 1360 and, from 1426 to 1712, was the most important meeting place of the Diet of the Old Swiss Confederacy. The Diet Hall, redesigned in 1497 and featuring copies of Lukas Zeiner’s heraldic stained-glass panels (1500), is a cultural asset of national importance; the Peace of Baden was signed here in 1714. A painted clock from 1599 adorns the east façade facing the Limmat; the hall itself is visited on public city tours run by Baden Tourism.",
+      "tags": [
+        "Swiss Diet",
+        "Middle Ages",
+        "Old Town",
+        "Guided tour"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "stadtfuehrung-altstadt-geschichten": {
+      "name": "Guided Tour: «Old Town Stories» (Altstadt-Geschichten)",
+      "shortDescription": "Public walking tour by Baden Tourism through 2,000 years of town history – including the Diet Hall.",
+      "description": "This tour of around 1.5 hours runs from the Romans at the bend of the Limmat through the Middle Ages to Baden’s role as the «secret capital» of the Swiss Confederacy. Highlights include a visit to the Diet Hall (Tagsatzungssaal), the exterior of the town church and a stroll through the Old Town lanes. It starts at the Info Baden Tourist Office on the Bahnhofplatz and ends at the Stadthaus; public tours cost CHF 20 per person.",
+      "tags": [
+        "Guided tour",
+        "History",
+        "Swiss Diet",
+        "Old Town"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "stadtfuehrung-baederquartier-geschichten": {
+      "name": "Guided Tour: «Spa Quarter Stories» (Bäderquartier-Geschichten)",
+      "shortDescription": "Tour through 2,000 years of bathing culture – with the apse of a Roman bath and thermal water to taste.",
+      "description": "Baden Tourism’s tour begins with the Romans, who built thermal baths at the bend of the Limmat 2,000 years ago, and follows the story of the baths up to today’s FORTYSEVEN wellness spa. Sights include the apse of a Roman bath and the Kesselbad in the basement of FORTYSEVEN/Residenz 47, as well as the Hotel BLUME. on the Kurplatz. It starts in front of the Inhalatorium at Limmatpromenade 26 and ends at the Hot Springs Fountains; public tours cost CHF 20 per person.",
+      "tags": [
+        "Guided tour",
+        "Romans",
+        "Thermal water",
+        "Spa quarter"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "gapscup": {
+      "name": "GapsCup",
+      "shortDescription": "Coffee bar run by latte-art champion Gap on the Gstühlplatz – some 100 beans from around the world, plus workshops.",
+      "description": "GapsCup is run by barista Gijtipong «Gap» Thangsubutr, two-time Swiss latte-art champion. He stocks around 100 carefully chosen coffee beans from around the world, and at the counter you can watch the baristas at work. Workshops are also held on site.",
+      "tags": [
+        "Coffee",
+        "Speciality coffee",
+        "Latte art",
+        "Workshop"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "caffe-uno-espressobar": {
+      "name": "caffè UNO Espresso Bar",
+      "shortDescription": "Espresso bar right on platform 1 at Baden station – serving coffee from its own Baden micro-roastery.",
+      "description": "caffè UNO’s espresso bar sits right on platform 1 of Baden station – ideal for an espresso before your train or for a quiet coffee break. The beans are roasted in-house at caffè UNO’s own micro-roastery in the Oederlin-Areal, just 654 metres from the bar. Coffee, accessories and barista courses are also available via the website.",
+      "tags": [
+        "Coffee",
+        "Espresso",
+        "Roastery",
+        "Station"
+      ],
+      "openingHours": "Mon–Fri 6 am–6 pm, Sat–Sun 7 am–6 pm (public holidays from 7 am)",
+      "eventNote": null
+    },
+    "kafi-raab": {
+      "name": "Kafi Raab",
+      "shortDescription": "Café with a living-room feel on the Kurplatz in the spa quarter – homemade cakes and coffee from UNO.",
+      "description": "Kafi Raab is on the Kurplatz in the spa quarter, right by the Limmat. It serves coffee from the local UNO roastery, breakfast (including vegan options), sweet and savoury tarts (Wähen) and homemade cakes baked fresh every day. In fine weather the cobbled terrace on the square invites you to linger.",
+      "tags": [
+        "Coffee",
+        "Cake",
+        "Breakfast",
+        "Spa quarter"
+      ],
+      "openingHours": "Thu–Mon 9 am–5 pm, closed Tuesdays and Wednesdays",
+      "eventNote": null
+    },
+    "yanacocha": {
+      "name": "YanaCocha Coffee Bar",
+      "shortDescription": "Coffee bar and outdoor shop under one roof on the Theaterplatz – with plenty of upcycling in the interior.",
+      "description": "YanaCocha combines an outdoor shop with a cosy coffee bar on the Theaterplatz. The bar serves coffee specialities from espresso and flat white to affogato, while the shop stocks a curated range of outdoor gear. Many upcycled elements shape the interior.",
+      "tags": [
+        "Coffee",
+        "Coffee bar",
+        "Outdoor",
+        "Theaterplatz"
+      ],
+      "openingHours": "Tue–Fri 10 am–6.30 pm, Sat 9 am–4 pm, closed Mondays",
+      "eventNote": null
+    },
+    "kunstraum-baden": {
+      "name": "Kunstraum Baden",
+      "shortDescription": "The town’s exhibition space for contemporary art in the Merker-Areal – free admission.",
+      "description": "For more than five decades, Kunstraum Baden has been run by the town of Baden as a non-commercial exhibition space for contemporary art. Since early 2024 it has been located in the Merker-Areal (building E), a former metalware factory near Baden West station. Two to three exhibitions are created each year, often site-specific and in collaboration with guest curators.",
+      "tags": [
+        "Art",
+        "Contemporary",
+        "Exhibition",
+        "Free"
+      ],
+      "openingHours": "Wed–Fri 3–6 pm, Sat–Sun 12 noon–5 pm",
+      "eventNote": null
+    },
+    "thik-theater-im-kornhaus": {
+      "name": "ThiK Theater im Kornhaus",
+      "shortDescription": "Small theatre in the 1511 granary in the Old Town – touring shows and co-productions for all generations.",
+      "description": "ThiK is a small theatre with up to 132 seats in the former granary (Kornhaus) of 1511 in the lower Old Town. The programme features selected touring productions and co-productions for all generations, from drama and cabaret to family shows. Theatre has been staged in the Kornhaus since 1953; today ThiK is a professionally run venue without a resident ensemble.",
+      "tags": [
+        "Theatre",
+        "Cabaret",
+        "Old Town",
+        "Evening"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "parkanlage-villa-boveri": {
+      "name": "Villa Boveri Park",
+      "shortDescription": "Listed villa garden with an English landscape garden, a neo-Baroque terraced garden and mature trees.",
+      "description": "Covering around two hectares, the grounds of the Villa Boveri are regarded as the most important private garden in Baden and are a protected monument. Evariste Mertens’ English landscape garden was laid out with the villa from 1895, and the neo-Baroque terraced garden with fountains and sculptures followed in 1908 to plans by Carl Sattler. The park is open daily; under the park rules, dogs, barbecues and alcohol are not permitted.",
+      "tags": [
+        "Park",
+        "Garden",
+        "Villa",
+        "Heritage"
+      ],
+      "openingHours": "Daily 7 am–9 pm",
+      "eventNote": null
+    },
+    "alter-stadtfriedhof": {
+      "name": "Old Town Cemetery Park (Alter Stadtfriedhof)",
+      "shortDescription": "Enchanting park from 1821 with an avenue of yews, historic graves and a playground.",
+      "description": "Consecrated in 1821, the Alter Stadtfriedhof is now a public park with its own playground. Its defining features are the central avenue of cone-shaped yews, venerable old trees and family graves of artistic and historical value. The protected garden was gently restored in 2013.",
+      "tags": [
+        "Park",
+        "Playground",
+        "Family",
+        "History"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    },
+    "kappisee": {
+      "name": "Kappisee",
+      "shortDescription": "Small lake with an island, fire pits and shady spots – around 30 minutes’ walk from the centre.",
+      "description": "The Kappisee is a popular place to unwind by the water, especially in summer. The little island in the middle of the lake has benches, tables and fire pits; bring your own firewood, as none is provided. The Elektromuseum is nearby, and the lake can be reached on foot (about 30 minutes from the centre) or by bus nos. 1 and 4 to the Baden, Schellenacker stop.",
+      "tags": [
+        "Lake",
+        "Barbecue spot",
+        "Family",
+        "Summer"
+      ],
+      "openingHours": null,
+      "eventNote": null
+    }
+  },
+  "accommodations": {
+    "limmathof-baden-hotel-spa": {
+      "shortDescription": "Four-star hotel in two buildings on either side of the Limmat in the spa quarter, with the Novum Spa thermal bath."
+    },
+    "blume-baden": {
+      "shortDescription": "Historic boutique hotel with an atrium, 32 rooms, its own thermal water and a restaurant in the spa quarter."
+    },
+    "hotel-du-parc-baden": {
+      "shortDescription": "Four-star business and conference hotel with 107 rooms by the spa park, five minutes’ walk from the station."
+    },
+    "blue-city-hotel": {
+      "shortDescription": "Four-star boutique hotel with 29 rooms, Restaurant Lemon and a rooftop lounge, two minutes from the station."
+    },
+    "trafo-hotel": {
+      "shortDescription": "Central design and business hotel by the Trafo conference centre, a few minutes’ walk from the station; cyclist-friendly."
+    },
+    "business-hotel-linde": {
+      "shortDescription": "Family-run business hotel with 53 rooms, panoramic views, a restaurant and 24/7 self check-in."
+    },
+    "jugendherberge-baden": {
+      "shortDescription": "Youth hostel in a former stable right on the Limmat, with 83 beds, close to the Old Town."
+    },
+    "river-residence": {
+      "shortDescription": "Fully furnished apartments on the Limmat promenade in the spa quarter, for short and longer stays."
+    }
+  }
+}

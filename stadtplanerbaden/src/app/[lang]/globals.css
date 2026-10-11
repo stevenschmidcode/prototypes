@@ -1,0 +1,208 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * baden. – Design Tokens
+ * Alle Markenfarben sind hier zentral definiert. Komponenten verwenden
+ * ausschliesslich die semantischen Tokens (bg-background, text-primary, …)
+ * oder die Markenfarben (bg-forest, text-terracotta, …).
+ */
+
+@theme inline {
+  /* Markenfarben */
+  --color-paper: var(--brand-paper);
+  --color-forest: var(--brand-forest);
+  --color-forest-soft: var(--brand-forest-soft);
+  --color-sand: var(--brand-sand);
+  --color-sand-soft: var(--brand-sand-soft);
+  --color-terracotta: var(--brand-terracotta);
+  --color-terracotta-strong: var(--brand-terracotta-strong);
+  --color-ink: var(--brand-ink);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-fg: var(--warning-fg);
+
+  /* Semantische Tokens (shadcn/ui) */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Typografie */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Radien */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Bewegung */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-rise: rise 0.5s var(--ease-out-soft) both;
+  --animate-fade: fade 0.4s ease-out both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+:root {
+  color-scheme: light;
+
+  /* Markenpalette */
+  --brand-paper: #f8f7f3; /* Warmes Off-White */
+  --brand-forest: #303e34; /* Dunkles Waldgrün */
+  --brand-forest-soft: #e3e8e2;
+  --brand-sand: #e8e1d5; /* Sand / Beige */
+  --brand-sand-soft: #f1ede5;
+  --brand-terracotta: #b96d52; /* Gedämpftes Terracotta – Flächen & grosse Schrift */
+  --brand-terracotta-strong: #8c4a33; /* Terracotta für kleine Schrift (AA-Kontrast ≥ 5:1 auch auf Sand) */
+  --brand-ink: #222521; /* Anthrazit */
+
+  --warning-bg: #f6ead9;
+  --warning-fg: #7a4a12;
+
+  --background: var(--brand-paper);
+  --foreground: var(--brand-ink);
+  --card: #ffffff;
+  --card-foreground: var(--brand-ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--brand-ink);
+  --primary: var(--brand-forest);
+  --primary-foreground: var(--brand-paper);
+  --secondary: var(--brand-sand);
+  --secondary-foreground: var(--brand-ink);
+  --muted: var(--brand-sand-soft);
+  --muted-foreground: #5c6159;
+  --accent: var(--brand-sand-soft);
+  --accent-foreground: var(--brand-ink);
+  --destructive: #b3261e;
+  --border: #e2ddd2;
+  --input: #d9d3c6;
+  --ring: var(--brand-forest);
+  --radius: 0.875rem;
+
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  /* Fieldsets schrumpfen sonst nicht unter ihre Inhaltsbreite (Browser-Default min-inline-size: min-content) */
+  fieldset {
+    min-width: 0;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--brand-terracotta) 30%, transparent);
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Kleines redaktionelles Label – «KULTUR · 2 STD.» */
+  .eyebrow {
+    @apply font-mono text-[0.7rem] font-medium tracking-[0.14em] uppercase;
+  }
+  /* Grosse redaktionelle Headline */
+  .display {
+    @apply font-heading font-semibold tracking-[-0.035em] leading-[0.98];
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Website-Tour (Desktop) ─────────────────────────────────────────────── */
+@keyframes tour-countdown {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.tour-countdown {
+  animation-name: tour-countdown;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+/* Die Tour füllt auf dem Desktop genau einen Bildschirm – darunter wird nicht gescrollt */
+@media (min-width: 1024px) {
+  html:has([data-website-tour]) {
+    overflow: hidden;
+  }
+}
