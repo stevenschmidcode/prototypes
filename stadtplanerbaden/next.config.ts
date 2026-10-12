@@ -15,8 +15,8 @@ const csp = [
   `connect-src 'self'${isDev ? " ws:" : ""}`,
   "manifest-src 'self'",
   "worker-src 'self'",
-  // Nur die eigene Website-Tour darf die App einbetten (Telefon-Vorschau)
-  "frame-ancestors 'self'",
+  // Einbetten erlaubt: die eigene Website-Tour (Telefon-Vorschau) und officebaden.ch/prototypen
+  `frame-ancestors 'self' https://officebaden.ch https://www.officebaden.ch${isDev ? " http://localhost:3100" : ""}`,
   "frame-src 'self'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -26,7 +26,6 @@ const csp = [
 const securityHeaders = [
   { key: "Content-Security-Policy", value: csp },
   { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },

@@ -125,3 +125,18 @@ tests/               unit/, integration/, e2e/
 ## Bildnachweise
 
 Alle Fotos stammen von Wikimedia Commons (CC BY / CC BY-SA). Die vollständigen Angaben stehen in der App unter `/bildnachweise` und in `prisma/seed-data/catalog.json`.
+
+## Deployment (Vercel + Neon)
+
+Live-Demo unter `stadtplaner.officebaden.ch`, eingebettet auf officebaden.ch/prototypen/stadtplaner-baden.
+
+1. Vercel → *Add New Project* → Repo `stevenschmidcode/prototypes` → **Root Directory `stadtplanerbaden`**
+   (Framework Next.js, pnpm wird erkannt).
+2. Im Projekt → *Storage* → **Neon (Postgres)** anlegen und verbinden: setzt `DATABASE_URL` und
+   `DATABASE_URL_UNPOOLED` (Migrationen laufen über die direkte Verbindung, siehe `prisma.config.ts`).
+3. Umgebungsvariable `NEXT_PUBLIC_SITE_URL=https://stadtplaner.officebaden.ch`.
+4. Deploy: `vercel.json` führt beim Build `db:deploy` (Migrationen), `db:seed` (idempotent) und `build` aus.
+5. Domain `stadtplaner.officebaden.ch` im Projekt hinzufügen, CNAME beim DNS-Anbieter eintragen.
+
+Einbetten ist für `https://officebaden.ch` erlaubt (`frame-ancestors` in `next.config.ts`). Gleiche Website
+(officebaden.ch und Subdomain), daher funktionieren die Gast-Cookies auch im eingebetteten Rahmen.
