@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KSB Begleiter – Prototyp</title>
+<meta name="description" content="Konzept-Prototyp einer Patienten-App für den Aufenthalt am Kantonsspital Baden. Fiktive Daten, kein offizielles Produkt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#e9f0ee; --surface:#ffffff; --surface-2:#f4f8f7; --ink:#0f2524; --muted:#5d716f; --line:#e1e9e7;
+  --brand:#0a7468; --brand-2:#13a08f; --brand-ink:#ffffff; --brand-soft:#dff2ee;
+  --accent:#e8902a; --accent-soft:#fff1de; --danger:#c0412c; --danger-soft:#fde8e4; --ok:#1d8a4e; --ok-soft:#e1f5e8;
+  --int:#5b4bd6; --int-soft:#ecebff;
+  --shadow:0 1px 2px rgba(15,37,36,.06),0 8px 24px rgba(15,37,36,.06);
+  --frame:#0d1716;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#08100f; --surface:#121d1c; --surface-2:#182524; --ink:#e5efed; --muted:#93a8a5; --line:#233331;
+    --brand:#2fb5a2; --brand-2:#4fd0bc; --brand-ink:#04211d; --brand-soft:#123430;
+    --accent:#f2a54a; --accent-soft:#33260f; --danger:#f07a64; --danger-soft:#3a1a14; --ok:#4cc77f; --ok-soft:#12301f;
+    --int:#a79cff; --int-soft:#221f45;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    --frame:#000;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#08100f; --surface:#121d1c; --surface-2:#182524; --ink:#e5efed; --muted:#93a8a5; --line:#233331;
+  --brand:#2fb5a2; --brand-2:#4fd0bc; --brand-ink:#04211d; --brand-soft:#123430;
+  --accent:#f2a54a; --accent-soft:#33260f; --danger:#f07a64; --danger-soft:#3a1a14; --ok:#4cc77f; --ok-soft:#12301f;
+  --int:#a79cff; --int-soft:#221f45;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  --frame:#000;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--page); color:var(--ink); -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 600px at 85% -10%,color-mix(in srgb,var(--brand) 14%,transparent),transparent 60%),
+                   radial-gradient(900px 500px at -10% 110%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 60%);
+  background-attachment:fixed;
+}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+
+/* ---------- Layout ---------- */
+.stage{min-height:100%;display:grid;grid-template-columns:minmax(320px,440px) auto;gap:56px;align-items:start;justify-content:center;padding:32px}
+
+/* ---------- Concept panel ---------- */
+.concept{max-width:440px}
+.concept .eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.concept h1{font-size:40px;line-height:1.05;margin:10px 0 10px;letter-spacing:-.02em}
+.concept h1 span{color:var(--brand)}
+.concept .lead{color:var(--muted);font-size:15.5px;line-height:1.55;margin:0 0 22px}
+.concept h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+.journey{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.journey button{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 10px 11px;text-align:left;transition:.15s}
+.journey button small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.journey button b{font-size:13.5px}
+.journey button[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.journey button:hover{border-color:var(--brand)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px}
+.toggle-row p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.switch{width:46px;height:28px;border-radius:99px;background:var(--line);position:relative;transition:.2s;flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:.2s}
+.switch[aria-checked="true"]{background:var(--int)}
+.switch[aria-checked="true"]::after{left:21px}
+.benefits{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.benefits li{display:flex;gap:10px;font-size:13.5px;line-height:1.45;color:var(--muted)}
+.benefits li b{color:var(--ink)}
+.benefits .dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand);flex:none}
+.benefits .dot svg{width:16px;height:16px}
+.arch{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:8px;font-size:12.5px}
+.arch .row{display:grid;grid-template-columns:92px 1fr;gap:10px;align-items:center}
+.arch .node{background:var(--surface-2);border-radius:10px;padding:7px 9px;font-weight:700;font-size:12px}
+.arch .node.hub{background:var(--int-soft);color:var(--int);text-align:center}
+.arch .msg{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
+.arch .center{display:flex;align-items:center;gap:8px;justify-content:center;color:var(--muted);font-size:11px}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.note b{color:var(--ink)}
+
+/* ---------- Phone ---------- */
+.phone{position:sticky;top:24px;width:392px;height:min(844px,calc(100vh - 48px));min-height:640px;background:var(--surface-2);border-radius:52px;border:11px solid var(--frame);
+  box-shadow:0 30px 80px rgba(10,40,36,.25),0 0 0 1px rgba(255,255,255,.04) inset;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.statusbar{height:46px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 6px;font-size:14px;font-weight:700;position:relative;z-index:3}
+.statusbar .island{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:108px;height:30px;border-radius:20px;background:var(--frame)}
+.statusbar .sys{display:flex;gap:5px;align-items:center}
+.statusbar .sys svg{width:16px;height:16px}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:4px 18px 110px;scroll-behavior:smooth;scrollbar-width:none}
+.content::-webkit-scrollbar{display:none}
+
+.tabbar{position:absolute;left:10px;right:10px;bottom:10px;height:68px;border-radius:24px;background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--shadow);border:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:4}
+.tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10.5px;font-weight:700;color:var(--muted);position:relative}
+.tabbar button[aria-current="page"]{color:var(--brand)}
+.tabbar button[aria-current="page"]::before{content:"";position:absolute;top:7px;width:44px;height:30px;border-radius:12px;background:var(--brand-soft);z-index:-1}
+.tabbar .badge{position:absolute;top:8px;right:calc(50% - 20px);min-width:16px;height:16px;border-radius:9px;background:var(--accent);color:#fff;font-size:10px;display:grid;place-items:center;padding:0 4px}
+
+/* ---------- App components ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;margin:6px 0 16px}
+.top .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:15px;letter-spacing:-.01em}
+.logo{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800}
+.iconbtn{width:38px;height:38px;border-radius:12px;background:var(--surface);display:grid;place-items:center;box-shadow:var(--shadow);position:relative}
+.iconbtn .pip{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--surface)}
+h2.hello{font-size:26px;line-height:1.15;margin:0 0 4px;letter-spacing:-.02em}
+.sub{color:var(--muted);font-size:13.5px;margin:0}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
+.chip svg{width:14px;height:14px}
+.section-h{display:flex;justify-content:space-between;align-items:baseline;margin:22px 2px 10px}
+.section-h h4{margin:0;font-size:16px;letter-spacing:-.01em}
+.section-h button{font-size:13px;font-weight:700;color:var(--brand)}
+.card{background:var(--surface);border-radius:20px;padding:16px;box-shadow:var(--shadow);margin-bottom:10px;position:relative}
+.card.flat{box-shadow:none;border:1px solid var(--line)}
+.hero{background:linear-gradient(140deg,var(--brand) 0%,var(--brand-2) 100%);color:#fff;border-radius:24px;padding:18px;position:relative;overflow:hidden;box-shadow:0 12px 30px color-mix(in srgb,var(--brand) 35%,transparent)}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.1)}
+.hero .k{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.85}
+.hero .t{font-size:21px;font-weight:800;margin:6px 0 4px;letter-spacing:-.01em}
+.hero .m{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;opacity:.95}
+.hero .m span{display:inline-flex;align-items:center;gap:5px}
+.hero .m svg{width:15px;height:15px}
+.hero .pill{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);padding:5px 10px;border-radius:99px;font-size:12px;font-weight:800;z-index:1}
+.hero .bar{height:6px;border-radius:9px;background:rgba(255,255,255,.25);margin-top:14px;overflow:hidden}
+.hero .bar i{display:block;height:100%;background:#fff;border-radius:9px}
+.hero[style*="color:var(--ink)"]{color:var(--ink)}
+.alert{display:flex;gap:12px;border-radius:18px;padding:14px;margin:12px 0 10px;font-size:13.5px;line-height:1.45}
+.alert.warn{background:var(--accent-soft)}
+.alert.warn .ic{color:var(--accent)}
+.alert.danger{background:var(--danger-soft)}
+.alert.danger .ic{color:var(--danger)}
+.alert.info{background:var(--brand-soft)}
+.alert.info .ic{color:var(--brand)}
+.alert b{display:block;margin-bottom:2px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.qa{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:11.5px;font-weight:700;text-align:center;line-height:1.2}
+.qa .ico{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:var(--surface);box-shadow:var(--shadow);transition:transform .15s}
+.qa:hover .ico{transform:translateY(-2px)}
+.qa .ico svg{width:24px;height:24px}
+.c1{color:#0a7468}.c2{color:#d9762b}.c3{color:#5b4bd6}.c4{color:#c0412c}.c5{color:#1d6fb8}.c6{color:#a1478a}
+:root[data-theme="dark"] .c1,:root[data-theme="dark"] .c2,:root[data-theme="dark"] .c3,:root[data-theme="dark"] .c4,:root[data-theme="dark"] .c5,:root[data-theme="dark"] .c6{filter:brightness(1.5)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.c1,.c2,.c3,.c4,.c5,.c6){filter:brightness(1.5)}}
+
+.list{background:var(--surface);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:10px}
+.li{display:flex;align-items:center;gap:12px;padding:13px 14px;width:100%;text-align:left;border-bottom:1px solid var(--line)}
+.li:last-child{border-bottom:0}
+.li .tile{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--surface-2);flex:none;font-size:20px}
+.li .tx{flex:1;min-width:0}
+.li .tx b{display:block;font-size:14.5px;font-weight:700}
+.li .tx span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
+.li .chev{color:var(--muted);width:18px;height:18px}
+.status{font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.status.open{background:var(--ok-soft);color:var(--ok)}
+.status.closed{background:var(--surface-2);color:var(--muted)}
+.status.soon{background:var(--accent-soft);color:var(--accent)}
+
+/* timeline */
+.tl{position:relative;padding-left:4px}
+.ev{display:grid;grid-template-columns:48px 20px 1fr;gap:8px;align-items:start;padding:2px 0}
+.ev .time{font-size:13px;font-weight:800;padding-top:13px;text-align:right}
+.ev .rail{position:relative;height:100%;display:flex;justify-content:center}
+.ev .rail::before{content:"";position:absolute;top:0;bottom:-4px;width:2px;background:var(--line)}
+.ev:last-child .rail::before{bottom:auto;height:20px}
+.ev .rail i{position:relative;margin-top:15px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2.5px solid var(--brand);z-index:1}
+.ev.past .rail i{background:var(--brand);border-color:var(--brand)}
+.ev.past .time,.ev.past .box{opacity:.55}
+.ev.now .rail i{box-shadow:0 0 0 5px color-mix(in srgb,var(--brand) 25%,transparent)}
+.ev .box{background:var(--surface);border-radius:16px;padding:11px 13px;box-shadow:var(--shadow);margin-bottom:8px}
+.ev.now .box{outline:2px solid var(--brand)}
+.ev .box b{font-size:14.5px;display:block}
+.ev .box .meta{font-size:12.5px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;margin-top:3px}
+.ev .box .meta span{display:inline-flex;gap:4px;align-items:center}
+.ev .box .meta svg{width:13px;height:13px}
+.ev .prep{margin-top:8px;font-size:12.5px;background:var(--accent-soft);border-radius:10px;padding:7px 9px;display:flex;gap:6px;align-items:flex-start}
+.ev .prep svg{width:15px;height:15px;color:var(--accent);margin-top:1px}
+.dayhead{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:18px 0 8px 4px}
+
+/* segmented / day chips */
+.seg{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 4px}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:none;padding:9px 14px;border-radius:14px;background:var(--surface);border:1.5px solid var(--line);font-size:13px;font-weight:700;text-align:center;line-height:1.15}
+.seg button small{display:block;font-size:11px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.seg button[aria-pressed="true"] small{color:inherit;opacity:.7}
+
+/* meals */
+.meal-h{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 8px}
+.meal-h h4{margin:0;font-size:16px;display:flex;align-items:center;gap:8px}
+.meal-h .dl{font-size:12px;color:var(--muted);font-weight:600}
+.dish{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--surface);border-radius:18px;padding:11px;box-shadow:var(--shadow);margin-bottom:8px;border:2px solid transparent;transition:.15s}
+.dish:hover:not(:disabled){transform:translateY(-1px)}
+.dish .em{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:28px;flex:none;background:var(--surface-2)}
+.dish .tx{flex:1;min-width:0}
+.dish .tx b{font-size:14px;display:block;line-height:1.3}
+.dish .tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.tag{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:7px;background:var(--surface-2);color:var(--muted)}
+.tag.veg{background:var(--ok-soft);color:var(--ok)}
+.tag.light{background:var(--brand-soft);color:var(--brand)}
+.tag.al{background:var(--danger-soft);color:var(--danger)}
+.dish .radio{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.dish[aria-checked="true"]{border-color:var(--brand)}
+.dish[aria-checked="true"] .radio{background:var(--brand);border-color:var(--brand);color:#fff}
+.dish[aria-checked="true"] .radio svg{width:14px;height:14px;stroke-width:3}
+.dish:disabled{cursor:not-allowed}
+.dish.blocked{opacity:.6}
+.dish.blocked .em{filter:grayscale(1)}
+.lockbox{display:flex;gap:10px;align-items:center;background:var(--surface);border:1.5px dashed var(--line);border-radius:18px;padding:14px;font-size:13px;color:var(--muted);margin-bottom:8px}
+.lockbox svg{color:var(--muted)}
+.lockbox b{color:var(--ink);display:block}
+
+/* room service */
+.prod{display:flex;gap:12px;align-items:center;background:var(--surface);border-radius:18px;padding:10px 11px;box-shadow:var(--shadow);margin-bottom:8px}
+.prod .em{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:26px;background:var(--surface-2);flex:none}
+.prod .tx{flex:1;min-width:0}.prod .tx b{display:block;font-size:14px}.prod .tx span{font-size:12.5px;color:var(--muted)}
+.prod.blocked{opacity:.55}.prod.blocked .em{filter:grayscale(1)}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:32px;height:32px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.qty button:disabled{opacity:.35;cursor:not-allowed}
+.qty button svg{width:16px;height:16px;stroke-width:2.5}
+.qty b{min-width:14px;text-align:center;font-size:14px}
+.cartbar{position:sticky;bottom:84px;margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--surface);border-radius:18px;padding:10px 10px 10px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:2}
+.cartbar .tx{flex:1;font-size:13px}.cartbar .tx b{display:block;font-size:15px}
+.cartbar .btn{width:auto;height:42px;background:var(--brand-2);color:#04211d}
+.modeswitch{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:4px;margin-top:14px}
+.modeswitch button{height:38px;border-radius:11px;font-weight:800;font-size:13.5px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px}
+.modeswitch button svg{width:16px;height:16px}
+.modeswitch button[aria-pressed="true"]{background:var(--brand);color:#fff}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;border-radius:15px;padding:0 18px;font-weight:800;font-size:14.5px;background:var(--brand);color:#fff;width:100%;transition:.15s}
+.btn:hover{filter:brightness(1.05)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:var(--surface-2);color:var(--ink)}
+.btn.sm{height:36px;font-size:13px;width:auto;padding:0 14px;border-radius:12px}
+:root[data-theme="dark"] .btn:not(.ghost){color:var(--brand-ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn:not(.ghost){color:var(--brand-ink)}}
+
+/* progress ring */
+.ring{--p:0;width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--brand) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;flex:none}
+.ring span{width:46px;height:46px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-size:13px;font-weight:800}
+
+/* checklist */
+.ck{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.35}
+.ck:last-child{border-bottom:0}
+.ck .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);flex:none;display:grid;place-items:center;margin-top:-1px;transition:.15s}
+.ck .box svg{width:14px;height:14px;stroke-width:3;opacity:0}
+.ck[aria-checked="true"] .box{background:var(--brand);border-color:var(--brand);color:#fff}
+.ck[aria-checked="true"] .box svg{opacity:1}
+.ck[aria-checked="true"] .lbl{text-decoration:line-through;color:var(--muted)}
+.ck small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+/* sheet */
+.scrim{position:absolute;inset:0;background:rgba(5,20,18,.45);opacity:0;pointer-events:none;transition:.25s;z-index:10}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:92%;background:var(--surface-2);border-radius:28px 28px 0 0;transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.8,.2,1);z-index:11;display:flex;flex-direction:column}
+.sheet.open{transform:none}
+.scrim.open{opacity:1;pointer-events:auto}
+.sheet .grab{width:40px;height:5px;border-radius:9px;background:var(--line);margin:9px auto 0;flex:none}
+.sheet .sh-h{display:flex;align-items:center;justify-content:space-between;padding:10px 18px 6px;flex:none}
+.sheet .sh-h h3{margin:0;font-size:19px;letter-spacing:-.01em}
+.sheet .sh-b{overflow-y:auto;padding:4px 18px 26px;scrollbar-width:none}
+.sheet .sh-b::-webkit-scrollbar{display:none}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.slots button{height:40px;border-radius:12px;background:var(--surface);border:1.5px solid var(--line);font-weight:700;font-size:13px}
+.slots button:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.slots button[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:12px;margin-bottom:8px}
+.opt[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.opt .tx{flex:1}.opt b{display:block;font-size:14px}.opt span{font-size:12.5px;color:var(--muted)}
+.opt .em{font-size:22px;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:var(--surface-2)}
+.lbl-s{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:16px 2px 8px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:8px 12px;font-size:13.5px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-weight:700;text-align:right}
+.stars{display:flex;gap:6px;justify-content:center;margin:8px 0 4px}
+.stars button svg{width:36px;height:36px;color:var(--line);fill:var(--line)}
+.stars button[aria-pressed="true"] svg{color:var(--accent);fill:var(--accent)}
+textarea{width:100%;min-height:88px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;padding:12px;resize:vertical}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fact{background:var(--surface);border-radius:16px;padding:12px 10px;text-align:center;box-shadow:var(--shadow)}
+.fact b{display:block;font-size:22px;letter-spacing:-.02em;color:var(--brand)}
+.fact span{font-size:11px;color:var(--muted);font-weight:600;line-height:1.25;display:block;margin-top:2px}
+
+/* toast */
+.toast{position:absolute;left:18px;right:18px;bottom:92px;background:var(--ink);color:var(--surface);border-radius:16px;padding:12px 14px;font-size:13.5px;font-weight:600;display:flex;gap:10px;align-items:center;z-index:20;transform:translateY(20px);opacity:0;transition:.25s;pointer-events:none}
+.toast.show{transform:none;opacity:1}
+.toast svg{color:var(--brand-2)}
+
+/* interface annotations */
+.int{display:none;align-items:center;gap:5px;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:500;color:var(--int);background:var(--int-soft);border:1px dashed color-mix(in srgb,var(--int) 50%,transparent);padding:3px 7px;border-radius:7px;margin-top:8px;width:fit-content;max-width:100%;line-height:1.35}
+.int svg{width:12px;height:12px;flex:none}
+body.show-int .int{display:inline-flex}
+.hero .int{background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.45)}
+
+.fade{animation:fade .28s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.mob-only{display:none}
+/* ---------- Responsive: on small screens the app IS the page ---------- */
+@media (max-width:860px){
+  .stage{display:block;padding:0}
+  .phone{position:relative;top:0;width:100%;height:100dvh;min-height:0;border:0;border-radius:0;box-shadow:none}
+  .statusbar{display:none}
+  .content{padding:calc(env(safe-area-inset-top) + 10px) 16px 120px}
+  .tabbar{bottom:calc(env(safe-area-inset-bottom) + 10px)}
+  .mob-only{display:grid}
+  .concept{position:fixed;inset:0;z-index:50;background:var(--page);overflow-y:auto;padding:22px 16px 40px;max-width:none;transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .concept.open{transform:none}
+  .concept h1{font-size:32px}
+  .seg{margin:0 -16px;padding:2px 16px 4px}
+}
+.concept .close{display:none}
+@media (max-width:860px){.concept .close{display:grid;position:sticky;top:0;margin-left:auto}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ================= Concept panel ================= -->
+  <aside class="concept" id="concept" aria-label="Konzept">
+    <button class="iconbtn close" data-action="concept-close" aria-label="Schliessen"><svg class="i"><use href="#i-x"/></svg></button>
+    <span class="eyebrow"><svg class="i" style="width:16px;height:16px"><use href="#i-plug"/></svg> Konzept-Prototyp</span>
+    <h1>KSB <span>Begleiter</span></h1>
+    <p class="lead">Eine Patienten-App für den Aufenthalt selbst: Tagesablauf, Menüwahl, Coiffeur, Services und Eintritts-Checkliste an einem Ort. Gebaut als Bewerbungsbeitrag für die Stelle <b>ICT Business Analyst_in</b>.</p>
+
+    <h3>Patient Journey durchspielen</h3>
+    <div class="journey" id="journey"></div>
+
+    <h3>Business-Analyse-Sicht</h3>
+    <div class="toggle-row">
+      <div><b style="font-size:14px">Schnittstellen einblenden</b><p>Zeigt in der App, woher die Daten kommen (HL7 v2, FHIR, DICOM).</p></div>
+      <button class="switch" role="switch" aria-checked="false" id="intSwitch" data-action="toggle-int" aria-label="Schnittstellen einblenden"></button>
+    </div>
+
+    <h3>Idee</h3>
+    <p class="lead" style="font-size:14px;margin:0">Die bestehende KSB App deckt die <b>Administration</b> ab: Swiss-ID, Formulare, Rechnungen und Termine. Der Begleiter ergänzt sie um den <b>Aufenthalt</b>, also um alles, wofür heute Telefon, Papier-Menükarte und Aushang nötig sind.</p>
+
+    <h3>Nutzen</h3>
+    <ul class="benefits">
+      <li><span class="dot"><svg class="i"><use href="#i-heart"/></svg></span><span><b>Pflege entlasten:</b> Nicht dringende Anliegen kommen strukturiert und priorisiert in die Worklist statt über die Klingel.</span></li>
+      <li><span class="dot"><svg class="i"><use href="#i-utensils"/></svg></span><span><b>Küche:</b> Menüwahl digital, Allergien und Nüchternheit kommen direkt aus dem KIS. Das heisst weniger Fehler und weniger Food Waste.</span></li>
+      <li><span class="dot"><svg class="i"><use href="#i-calendar"/></svg></span><span><b>Patient_innen:</b> Sie sehen ihren Tagesablauf und wissen, was als Nächstes kommt. Das schafft Ruhe und spart Rückfragen.</span></li>
+      <li><span class="dot"><svg class="i"><use href="#i-scissors"/></svg></span><span><b>Partner im Haus:</b> Coiffeur, Shop und Café werden sichtbar und buchbar, was ihre Auslastung verbessert.</span></li>
+    </ul>
+
+    <h3>Integration (Zielbild)</h3>
+    <div class="arch">
+      <div class="row"><div class="node">KSB Begleiter</div><div class="msg">App · Login via Swiss-ID</div></div>
+      <div class="center"><svg class="i" style="width:14px;height:14px"><use href="#i-updown"/></svg> FHIR R4 REST</div>
+      <div class="node hub">Integrationsplattform</div>
+      <div class="center"><svg class="i" style="width:14px;height:14px"><use href="#i-updown"/></svg> HL7 v2 · FHIR · REST</div>
+      <div class="row"><div class="node">KIS</div><div class="msg">ADT^A01/A03 · Appointment · AllergyIntolerance</div></div>
+      <div class="row"><div class="node">Küche</div><div class="msg">NutritionOrder → Menüsystem</div></div>
+      <div class="row"><div class="node">RIS/PACS</div><div class="msg">DICOM MWL · Untersuchungsstatus</div></div>
+      <div class="row"><div class="node">Pflege</div><div class="msg">Task → Stations-Worklist</div></div>
+      <div class="row"><div class="node">Partner</div><div class="msg">REST · Coiffeur, Shop, SRK</div></div>
+    </div>
+
+    <p class="note"><b>Hinweis:</b> Nicht-offizieller Prototyp, nicht vom KSB beauftragt. Patientin, Termine und Menüs sind fiktiv. Services, Öffnungszeiten, Besuchszeiten und Checkliste stammen von kantonsspitalbaden.ch (Stand Okt. 2026).<br>Steven Schmid · mail@stevenschmid.ch</p>
+  </aside>
+
+  <!-- ================= Phone ================= -->
+  <div class="phone" id="phone">
+    <div class="statusbar"><span id="clock">10:42</span><span class="island"></span>
+      <span class="sys"><svg class="i"><use href="#i-wifi"/></svg><svg class="i" viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="3"/><path d="M22 11v2"/><rect x="4" y="9" width="11" height="6" rx="1.5" fill="currentColor" stroke="none"/></svg></span>
+    </div>
+    <main class="content" id="content"></main>
+    <nav class="tabbar" id="tabbar" aria-label="Hauptnavigation"></nav>
+    <div class="scrim" id="scrim" data-action="close-sheet"></div>
+    <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="grab"></div>
+      <div class="sh-h"><h3 id="sheetTitle"></h3><button class="iconbtn" data-action="close-sheet" aria-label="Schliessen"><svg class="i"><use href="#i-x"/></svg></button></div>
+      <div class="sh-b" id="sheetBody"></div>
+    </section>
+    <div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check-circle"/></svg><span></span></div>
+  </div>
+</div>
+
+<!-- ================= Icons ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><path d="M12 20h.01"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M11 6h10M11 12h10M11 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a6 6 0 0 1-12 0V8z"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2v-5l-2.5-5h-13L3 12v5h2"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/><path d="M9.5 17.5h5M3 12h18"/></symbol>
+    <symbol id="i-door" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+    <symbol id="i-updown" viewBox="0 0 24 24"><path d="M7 4v16M7 4 3 8M7 4l4 4M17 20V4M17 20l-4-4M17 20l4-4"/></symbol>
+    <symbol id="i-info-lg" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"/><path d="M12 11v5M12 8h.01"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  </defs>
+</svg>
+
+<script>
+(() => {
+/* =============================================================
+   Data — fictional patient, real KSB service information
+   ============================================================= */
+const BASE = new Date(2026, 9, 12); // Mo 12. Okt 2026 = Eintrittstag (day 0)
+const PHASES = {
+  vor:  { day: -3, time: '18:20', label: 'Vor Eintritt', step: '1' },
+  stay: { day: 0,  time: '10:42', label: 'Aufenthalt',   step: '2' },
+  aus:  { day: 4,  time: '08:15', label: 'Austritt',     step: '3' },
+};
+const PATIENT = { first: 'Anna', last: 'Muster', born: '14.03.1958', room: '512', ward: 'Station 5 Ost · Orthopädie', ins: 'Allgemein', allergies: ['Nüsse'] };
+
+const EVENTS = [
+  { day: 0, time: '07:30', dur: 20, title: 'Eintritt', where: 'Empfang Haupteingang', icon: '🏥', int: 'HL7 ADT^A01 · KIS' },
+  { day: 0, time: '09:00', dur: 40, title: 'Anästhesie-Gespräch', who: 'Dr. med. S. Brunner', where: 'Zimmer 512', icon: '💬' },
+  { day: 0, time: '11:00', dur: 15, title: 'Blutentnahme', where: 'im Zimmer', icon: '🩸', int: 'FHIR ServiceRequest · Labor' },
+  { day: 0, time: '14:00', dur: 30, title: 'Röntgen Becken & Hüfte', where: 'Radiologie, UG', icon: '🩻', prep: 'Sie werden um 13:45 vom Transportdienst abgeholt.', int: 'DICOM MWL · RIS-Status' },
+  { day: 0, time: '16:30', dur: 15, title: 'Visite', who: 'Dr. med. L. Keller, Orthopädie', where: 'Zimmer 512', icon: '🩺' },
+  { day: 1, time: '08:00', dur: 120, title: 'Operation: Hüftprothese rechts', where: 'OP-Trakt, 2. OG', icon: '🏥', prep: 'Ab 00:00 nüchtern: nichts essen. Klares Wasser bis 06:00 erlaubt.', int: 'FHIR Appointment · OP-Planung' },
+  { day: 1, time: '15:00', dur: 30, title: 'Erste Mobilisation', who: 'Physiotherapie', where: 'Zimmer 512', icon: '🚶' },
+  { day: 2, time: '10:00', dur: 30, title: 'Physiotherapie', where: 'Zimmer 512', icon: '🚶' },
+  { day: 3, time: '10:00', dur: 45, title: 'Physiotherapie Treppentraining', where: 'Fitnesscenter, Partnerhaus II', icon: '🏋️' },
+  { day: 4, time: '09:30', dur: 30, title: 'Austrittsgespräch', who: 'Dr. med. L. Keller', where: 'Zimmer 512', icon: '📋' },
+  { day: 4, time: '11:00', dur: 15, title: 'Austritt', where: 'Station 5 Ost', icon: '🏠', int: 'HL7 ADT^A03 · KIS' },
+  { day: 46, time: '09:15', dur: 20, title: 'Nachkontrolle 6 Wochen', who: 'Orthopädie Sprechstunde', where: 'Ambulatorium, EG', icon: '🩻' },
+];
+
+const MENU = {
+  fruehstueck: [
+    { id: 'f1', em: '🥣', name: 'Bircher-Müesli mit Beeren & Haselnüssen', tags: ['veg'], al: ['Laktose', 'Nüsse', 'Gluten'] },
+    { id: 'f2', em: '🥐', name: 'Zopf mit Butter & Konfitüre', tags: ['veg'], al: ['Gluten', 'Laktose', 'Ei'] },
+    { id: 'f3', em: '🧀', name: 'Vollkornbrot, Bergkäse & Joghurt', tags: ['veg'], al: ['Gluten', 'Laktose'] },
+    { id: 'f4', em: '🍎', name: 'Porridge mit Hafermilch & Apfel', tags: ['vegan', 'light'], al: ['Gluten'] },
+    { id: 'f5', em: '🍳', name: 'Rührei, Ruchbrot & Tomate', tags: ['veg'], al: ['Ei', 'Gluten'] },
+  ],
+  mittag: [
+    { id: 'm1', em: '🥘', name: 'Zürcher Geschnetzeltes mit Rösti', tags: [], al: ['Laktose'] },
+    { id: 'm2', em: '🎃', name: 'Kürbisrisotto mit Salbei & Parmesan', tags: ['veg'], al: ['Laktose'] },
+    { id: 'm3', em: '🍗', name: 'Pouletbrust, Basmatireis & Broccoli', tags: ['light'], al: [] },
+    { id: 'm4', em: '🍝', name: 'Penne mit Basilikum-Pesto & Pinienkernen', tags: ['veg'], al: ['Gluten', 'Laktose', 'Nüsse'] },
+    { id: 'm5', em: '🐟', name: 'Lachsfilet, Salzkartoffeln & Spinat', tags: ['light'], al: ['Fisch'] },
+    { id: 'm6', em: '🍛', name: 'Gemüsecurry mit Kichererbsen & Reis', tags: ['vegan'], al: [] },
+  ],
+  abend: [
+    { id: 'a1', em: '🍲', name: 'Bündner Gerstensuppe & Brot', tags: [], al: ['Gluten', 'Sellerie'] },
+    { id: 'a2', em: '🧀', name: 'Älplermagronen mit Apfelmus', tags: ['veg'], al: ['Gluten', 'Laktose'] },
+    { id: 'a3', em: '🥩', name: 'Kaltes Plättli: Käse & Trockenfleisch', tags: [], al: ['Laktose'] },
+    { id: 'a4', em: '🥗', name: 'Quinoa-Salat mit Feta & Baumnüssen', tags: ['veg'], al: ['Laktose', 'Nüsse'] },
+    { id: 'a5', em: '🥔', name: 'Kartoffelsuppe & Vollkornbrot', tags: ['veg', 'light'], al: ['Gluten', 'Sellerie'] },
+    { id: 'a6', em: '🍳', name: 'Kräuteromelette mit Blattsalat', tags: ['veg', 'light'], al: ['Ei'] },
+  ],
+};
+// Zimmerlieferung aus Café Blattgrün & Shop (Sortiment beispielhaft, Preise fiktiv)
+const SHOP = [
+  { id: 's1', em: '☕', name: 'Cappuccino', from: 'Café Blattgrün', price: 4.8, al: ['Laktose'] },
+  { id: 's2', em: '🥐', name: 'Buttergipfeli', from: 'Café Blattgrün', price: 2.2, al: ['Gluten', 'Laktose'] },
+  { id: 's3', em: '🥐', name: 'Nussgipfel', from: 'Café Blattgrün', price: 3.5, al: ['Gluten', 'Nüsse'] },
+  { id: 's4', em: '🍰', name: 'Rüeblitorte', from: 'Café Blattgrün', price: 5.5, al: ['Gluten', 'Ei', 'Nüsse'] },
+  { id: 's5', em: '🍓', name: 'Früchtebecher', from: 'Café Blattgrün', price: 6.2, al: [] },
+  { id: 's6', em: '🥪', name: 'Sandwich Hinterschinken', from: 'Café Blattgrün', price: 7.9, al: ['Gluten', 'Laktose'] },
+  { id: 's7', em: '💧', name: 'Mineralwasser 5 dl', from: 'Shop', price: 2.9, al: [] },
+  { id: 's8', em: '🍫', name: 'Schweizer Schokolade', from: 'Shop', price: 3.2, al: ['Laktose'] },
+  { id: 's9', em: '📰', name: 'Tageszeitung', from: 'Shop', price: 4.2, al: [] },
+  { id: 's10', em: '🧴', name: 'Lippenpflege', from: 'Shop', price: 5.9, al: [] },
+];
+const SLOTS = [
+  { key: 'fruehstueck', label: 'Frühstück', icon: '☕', serve: '07:30', off: 0, deadline: d => ({ day: d - 1, min: 18 * 60 }) },
+  { key: 'mittag',      label: 'Mittagessen', icon: '🍽️', serve: '11:45', off: 0, deadline: d => ({ day: d, min: 9 * 60 + 30 }) },
+  { key: 'abend',       label: 'Abendessen', icon: '🌙', serve: '17:30', off: 1, deadline: d => ({ day: d, min: 15 * 60 }) },
+];
+
+// opening hours: weekday (0=So) → [from,to] in hours
+const SERVICES = [
+  { id: 'coiffeur', em: '💇‍♀️', name: 'Coiffeur Teuta', where: '1. OG', desc: 'Damen & Herren, Perücken und Brustprothesen mit Beratung', hours: { 1: [9, 18], 2: [8, 18], 3: [8, 18], 4: [8, 18], 5: [8, 18], 6: [7.5, 15] }, action: 'Termin buchen', phone: '+41 56 470 07 81', int: 'REST · Buchungssystem Partner' },
+  { id: 'blattgruen', em: '☕', name: 'Café Blattgrün', where: 'Eingangsbereich', desc: 'Snacks, Sandwiches, Kaffee, Süsses und warmes Mittagsmenü', hours: { 0: [9, 18], 1: [8, 19], 2: [8, 19], 3: [8, 19], 4: [8, 19], 5: [8, 19], 6: [9, 18] } },
+  { id: 'orizzonte', em: '🇮🇹', name: 'Café Orizzonte', where: 'Partnerhaus 1', desc: 'Italienische Kaffeebar, offen für Patient_innen, Besuchende und Mitarbeitende', hours: { 1: [8, 17], 2: [8, 17], 3: [8, 17], 4: [8, 17], 5: [8, 17] } },
+  { id: 'shop', em: '🛍️', name: 'Shop', where: 'Eingangsbereich', desc: 'Getränke, Snacks, Kiosk, Zeitschriften, regionale Frischprodukte, Briefmarken', hours: { 0: [12, 18], 1: [10, 19], 2: [10, 19], 3: [10, 19], 4: [10, 19], 5: [10, 19], 6: [12, 18] } },
+  { id: 'fridge', em: '🧊', name: 'SmartFridge & Kaffee', where: 'Patientenlounge, 4.–6. OG', desc: 'Rund um die Uhr. Bezahlung mit Karte oder TWINT', hours: '24h' },
+  { id: 'apotheke', em: '💊', name: 'Apotheke Tag & Nacht', where: 'Areal KSB', desc: '08–20 Uhr, Notfalldienst 20–08 Uhr, 365 Tage', hours: '24h', phone: '+41 56 443 03 03' },
+  { id: 'wlan', em: '📶', name: 'Gratis-WLAN', where: '«KSB Public»', desc: 'Beim ersten Login per SMS registrieren', hours: '24h' },
+  { id: 'dolmetsch', em: '🌍', name: 'Dolmetscherdienst', where: 'vor Ort oder per Video', desc: 'Interkulturelle Dolmetschende in über 90 Sprachen, kostenlos', hours: '24h', action: 'Anfragen', int: 'FHIR Task → Disposition' },
+  { id: 'seelsorge', em: '🕊️', name: 'Seelsorge', where: 'ökumenisch', desc: 'Gespräch und Begleitung, unabhängig von der Konfession', hours: '24h', action: 'Besuch wünschen', int: 'FHIR Task → Seelsorge' },
+  { id: 'care', em: '🧭', name: 'Care Management', where: 'Austrittsplanung', desc: 'Reha, Pflegeheim, Spitex, Versicherungsfragen. Mo–Fr 08:00–16:30', hours: { 1: [8, 16.5], 2: [8, 16.5], 3: [8, 16.5], 4: [8, 16.5], 5: [8, 16.5] }, phone: '+41 56 486 19 25' },
+  { id: 'srk', em: '🚗', name: 'Fahrdienst SRK', where: 'Heimfahrt', desc: 'Mindestens 2 Arbeitstage im Voraus anmelden. Alternativen: TIXI, Taxi', hours: '24h', action: 'Fahrt anfragen', int: 'REST · SRK Aargau' },
+];
+
+const CHECKLIST = [
+  { group: 'Dokumente', items: [
+    ['Krankenkassen- oder Unfallversicherungskarte'], ['ID, Pass oder Ausländerausweis'],
+    ['Blutgruppen- und Impfausweis', 'falls vorhanden'], ['Kopie Patientenverfügung', 'falls vorhanden'], ['Röntgenbilder, Laborbefunde', 'falls vorhanden'] ] },
+  { group: 'Persönliches', items: [
+    ['Aktuelle Medikamente in Originalverpackung'], ['Brille, Hörgerät'], ['Toilettenartikel', 'Frottierwäsche wird gestellt'],
+    ['Pyjama oder Nachthemd, Unterwäsche'], ['Morgenmantel oder Trainer, Hausschuhe'],
+    ['Handy mit Ladekabel & Kopfhörer', 'In den Zimmern gibt es kein Festnetztelefon'], ['Tablet, E-Reader, Tagebuch'] ] },
+  { group: 'Zuhause vorbereiten', items: [
+    ['Post umleiten oder Briefkasten leeren lassen'], ['Pflanzen versorgen lassen'], ['Offene Rechnungen bezahlen'],
+    ['Hin- und Rückfahrt organisieren', 'Ohne Begleitung: Fahrdienst SRK'] ] },
+];
+
+const VISITS = [
+  ['Allgemeine Stationen', '13:00–20:00'], ['Halbprivat / Privat', '10:00–20:00'], ['Wochenbett', '13:30–15:30, 18:00–20:00'],
+  ['Intensivpflege', '11:00–19:30'], ['Intermediate Care', '12:00–19:30'], ['Kinderabteilung (Eltern)', 'jederzeit'] ];
+
+/* =============================================================
+   State (persisted per browser where possible)
+   ============================================================= */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('ksbb.' + k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('ksbb.' + k, JSON.stringify(v)); } catch {} },
+};
+const S = {
+  phase: store.get('phase', 'stay'),
+  tab: 'home',
+  mealDay: null,
+  diet: 'alle',
+  essenMode: 'menu',
+  cart: {},
+  orders: store.get('orders', null),
+  checks: store.get('checks', {}),
+  form: store.get('form', false),
+  bookings: store.get('bookings', []),
+  requests: store.get('requests', []),
+  showInt: store.get('int', false),
+  feedback: store.get('feedback', 0),
+};
+if (!S.orders) { S.orders = { '0-mittag': 'm2', '0-fruehstueck': 'f3' }; }
+const save = () => { store.set('phase', S.phase); store.set('orders', S.orders); store.set('checks', S.checks); store.set('form', S.form);
+  store.set('bookings', S.bookings); store.set('requests', S.requests); store.set('int', S.showInt); store.set('feedback', S.feedback); };
+
+/* =============================================================
+   Helpers
+   ============================================================= */
+const $ = s => document.querySelector(s);
+const ic = (n, cls = '') => `<svg class="i ${cls}"><use href="#i-${n}"/></svg>`;
+const intTag = t => t ? `<span class="int">${ic('plug')}${t}</span>` : '';
+const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+const fmtMin = m => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+const P = () => PHASES[S.phase];
+const nowMin = () => toMin(P().time);
+const dateOf = d => { const x = new Date(BASE); x.setDate(x.getDate() + d); return x; };
+const WD = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+const WDL = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+const MON = ['Jan', 'Feb', 'März', 'Apr', 'Mai', 'Juni', 'Juli', 'Aug', 'Sept', 'Okt', 'Nov', 'Dez'];
+const shortDate = d => { const x = dateOf(d); return `${WD[x.getDay()]} ${x.getDate()}. ${MON[x.getMonth()]}`; };
+const dayLabel = d => { const r = d - P().day; return r === 0 ? 'Heute' : r === 1 ? 'Morgen' : r === -1 ? 'Gestern' : shortDate(d); };
+const isBefore = (d, m) => d < P().day || (d === P().day && m <= nowMin());
+const allEvents = () => [...EVENTS, ...S.bookings].sort((a, b) => a.day - b.day || toMin(a.time) - toMin(b.time));
+const evState = e => { const s = toMin(e.time), n = nowMin();
+  if (e.day < P().day || (e.day === P().day && s + e.dur <= n)) return 'past';
+  if (e.day === P().day && s <= n) return 'now'; return 'next'; };
+const greet = () => { const h = nowMin() / 60; return h < 11 ? 'Guten Morgen' : h < 17 ? 'Guten Tag' : 'Guten Abend'; };
+
+function openState(svc) {
+  if (svc.hours === '24h') return { cls: 'open', txt: '24/7' };
+  const wd = dateOf(P().day).getDay(), h = nowMin() / 60, r = svc.hours[wd];
+  if (r && h >= r[0] && h < r[1]) {
+    const to = fmtMin(Math.round(r[1] * 60));
+    return r[1] - h < 1 ? { cls: 'soon', txt: 'bis ' + to } : { cls: 'open', txt: 'Offen bis ' + to };
+  }
+  if (r && h < r[0]) return { cls: 'closed', txt: 'Ab ' + fmtMin(Math.round(r[0] * 60)) };
+  return { cls: 'closed', txt: 'Geschlossen' };
+}
+
+function menuFor(day, slot) {
+  const pool = MENU[slot.key];
+  return [0, 1, 2].map(k => pool[(Math.max(day, 0) * 2 + k + slot.off) % pool.length]);
+}
+function mealLock(day, slot) {
+  if (day === 1 && slot.key !== 'abend') return { type: 'fast', title: slot.key === 'fruehstueck' ? 'Nüchtern vor der Operation' : 'Kostaufbau nach der Operation',
+    txt: slot.key === 'fruehstueck' ? 'OP um 08:00. Ab 00:00 bitte nichts mehr essen.' : 'Die Pflege stellt Ihre Mahlzeit nach der OP schrittweise zusammen.' };
+  if (day === 4 && slot.key !== 'fruehstueck') return { type: 'gone', title: 'Nach Ihrem Austritt', txt: 'Austritt um 11:00. Gute Heimreise!' };
+  const dl = slot.deadline(day);
+  if (isBefore(dl.day, dl.min)) return { type: 'deadline', dl };
+  return null;
+}
+const blocked = dish => dish.al.some(a => PATIENT.allergies.includes(a));
+const dlText = dl => `Bestellbar bis ${dl.day === P().day ? 'heute' : dayLabel(dl.day).replace(/^(Heute|Morgen|Gestern)$/, m => m.toLowerCase())} ${fmtMin(dl.min)}`;
+
+/* =============================================================
+   Views
+   ============================================================= */
+const TABS = [
+  { id: 'home', label: 'Übersicht', icon: 'home' },
+  { id: 'essen', label: 'Essen', icon: 'utensils' },
+  { id: 'termine', label: 'Termine', icon: 'calendar' },
+  { id: 'services', label: 'Services', icon: 'grid' },
+  { id: 'mehr', label: 'Ich & KSB', icon: 'user' },
+];
+
+function topBar() {
+  return `<div class="top">
+    <div class="brand"><span class="logo">KSB</span>Begleiter</div>
+    <div style="display:flex;gap:8px">
+      <button class="iconbtn mob-only" data-action="concept-open" aria-label="Über den Prototyp">${ic('info-lg')}</button>
+      <button class="iconbtn" data-action="theme" aria-label="Hell/Dunkel umschalten">${ic('sun')}</button>
+      <button class="iconbtn" data-action="notifs" aria-label="Mitteilungen">${ic('bell')}<span class="pip"></span></button>
+    </div></div>`;
+}
+
+function viewHome() {
+  const p = S.phase;
+  let h = topBar();
+  const dLabel = `${WDL[dateOf(P().day).getDay()]}, ${dateOf(P().day).getDate()}. ${MON[dateOf(P().day).getMonth()]}`;
+
+  if (p === 'vor') {
+    const total = CHECKLIST.reduce((n, g) => n + g.items.length, 0), done = Object.values(S.checks).filter(Boolean).length;
+    const pct = Math.round(done / total * 100);
+    h += `<p class="sub">${dLabel}</p><h2 class="hello">${greet()}, ${PATIENT.first}</h2>
+      <p class="sub">Wir bereiten Ihren Aufenthalt vor.</p>
+      <div class="hero fade" style="margin-top:16px">
+        <span class="pill">in 3 Tagen</span>
+        <div class="k">Ihr Eintritt</div>
+        <div class="t">Montag, 12. Okt · 07:30</div>
+        <div class="m"><span>${ic('pin')}Empfang Haupteingang</span><span>${ic('bed')}Station 5 Ost</span></div>
+        ${intTag('HL7 ADT^A05 Voranmeldung · KIS')}
+      </div>
+      <div class="section-h"><h4>Vorbereitung</h4></div>
+      <button class="card li" style="border:0" data-action="open-checklist">
+        <div class="ring" style="--p:${pct}"><span>${pct}%</span></div>
+        <div class="tx"><b>Checkliste: Was mitnehmen?</b><span>${done} von ${total} erledigt</span></div>${ic('chev', 'chev')}
+      </button>
+      <button class="card li" style="border:0" data-action="form">
+        <div class="tile">${S.form ? '✅' : '📝'}</div>
+        <div class="tx"><b>Patientenmeldeformular</b><span>${S.form ? 'Übermittelt. Vielen Dank!' : 'Online ausfüllen, spart Zeit beim Eintritt'}</span>${intTag('FHIR QuestionnaireResponse · Patientenadministration')}</div>
+        ${S.form ? '' : `<span class="status soon">offen</span>`}
+      </button>
+      <button class="card li" style="border:0" data-action="diet">
+        <div class="tile">🥗</div>
+        <div class="tx"><b>Ernährung & Allergien</b><span>Allergie «Nüsse» aus Ihrem Dossier übernommen</span>${intTag('FHIR AllergyIntolerance · KIS')}</div>${ic('chev', 'chev')}
+      </button>
+      <div class="section-h"><h4>Gut zu wissen</h4></div>
+      <div class="list">
+        <button class="li" data-action="svc" data-id="srk"><div class="tile">🚗</div><div class="tx"><b>Anreise organisieren</b><span>Ohne Begleitung? Fahrdienst SRK, 2 Arbeitstage im Voraus</span></div>${ic('chev', 'chev')}</button>
+        <button class="li" data-action="svc" data-id="dolmetsch"><div class="tile">🌍</div><div class="tx"><b>Dolmetscher_in gewünscht?</b><span>Über 90 Sprachen, kostenlos</span></div>${ic('chev', 'chev')}</button>
+        <button class="li" data-action="valuables"><div class="tile">🔐</div><div class="tx"><b>Wertsachen</b><span>Möglichst zu Hause lassen. Im Zimmer gibt es den ZippBag</span></div>${ic('chev', 'chev')}</button>
+        <button class="li" data-action="anreise"><div class="tile">🅿️</div><div class="tx"><b>Anreise & Parken</b><span>Im Ergel 1, 5404 Baden</span></div>${ic('chev', 'chev')}</button>
+      </div>`;
+    return h;
+  }
+
+  if (p === 'aus') {
+    h += `<p class="sub">${dLabel}</p><h2 class="hello">${greet()}, ${PATIENT.first}</h2>
+      <p class="sub">Heute geht es nach Hause. Gute Besserung!</p>
+      <div class="hero fade" style="margin-top:16px">
+        <span class="pill">heute</span>
+        <div class="k">Ihr Austritt</div>
+        <div class="t">11:00 · Station 5 Ost</div>
+        <div class="m"><span>${ic('clock')}Austrittsgespräch 09:30</span><span>${ic('user')}Dr. med. L. Keller</span></div>
+        ${intTag('HL7 ADT^A03 · KIS')}
+      </div>
+      <div class="section-h"><h4>Für zu Hause</h4></div>
+      <div class="list">
+        <div class="li"><div class="tile">📄</div><div class="tx"><b>Austrittsbericht</b><span>Wird nach dem Gespräch freigegeben und geht an Ihre Hausärztin</span>${intTag('FHIR DocumentReference · EPD/Hausarzt')}</div><span class="status closed">ab 10:00</span></div>
+        <button class="li" data-action="svc" data-id="apotheke"><div class="tile">💊</div><div class="tx"><b>Rezept einlösen</b><span>Apotheke Tag & Nacht, direkt beim KSB</span>${intTag('eRezept (CHMED) · Apotheke')}</div>${ic('chev', 'chev')}</button>
+        <button class="li" data-action="svc" data-id="srk"><div class="tile">🚗</div><div class="tx"><b>Heimfahrt</b><span>SRK-Fahrdienst, TIXI, Taxi oder Abholung</span></div>${ic('chev', 'chev')}</button>
+        <button class="li" data-action="tab" data-tab="termine"><div class="tile">🗓️</div><div class="tx"><b>Folgetermine</b><span>Nachkontrolle ${shortDate(46)}, 09:15</span></div>${ic('chev', 'chev')}</button>
+      </div>
+      <div class="alert info"><span class="ic">${ic('lock')}</span><div><b>ZippBag nicht vergessen</b>Ihre Wertsachen am Bett lassen sich nur mit Ihrem Patientenarmband öffnen.</div></div>
+      <button class="card li" style="border:0" data-action="feedback"><div class="tile">⭐</div><div class="tx"><b>Wie war Ihr Aufenthalt?</b><span>${S.feedback ? 'Danke für Ihr Feedback!' : '1 Minute. Hilft uns, besser zu werden'}</span>${intTag('FHIR QuestionnaireResponse · Qualitätsmanagement')}</div>${ic('chev', 'chev')}</button>`;
+    return h;
+  }
+
+  // stay
+  const evs = allEvents().filter(e => e.day === P().day);
+  const next = allEvents().find(e => evState(e) !== 'past');
+  const inMin = next ? (next.day - P().day) * 1440 + toMin(next.time) - nowMin() : 0;
+  const rel = inMin <= 0 ? 'jetzt' : inMin < 60 ? `in ${inMin} Min.` : inMin < 1440 ? `in ${Math.floor(inMin / 60)} Std. ${inMin % 60 ? (inMin % 60) + ' Min.' : ''}` : dayLabel(next.day);
+  const abend = S.orders[`0-abend`];
+  const abendDish = abend && MENU.abend.find(d => d.id === abend);
+  const openReq = S.requests.filter(r => !r.done).length;
+
+  h += `<p class="sub">${dLabel}</p><h2 class="hello">${greet()}, ${PATIENT.first}</h2>
+    <div class="chips"><span class="chip">${ic('bed')}Zimmer ${PATIENT.room}</span><span class="chip">${ic('pin')}Station 5 Ost</span><span class="chip">Tag 1</span></div>
+    ${intTag('HL7 ADT^A01 / FHIR Encounter · KIS')}
+    ${next ? `<div class="hero fade" style="margin-top:14px" data-action="tab" data-tab="termine" role="button">
+      <span class="pill">${rel}</span>
+      <div class="k">Als Nächstes · ${next.time}</div>
+      <div class="t">${next.icon} ${next.title}</div>
+      <div class="m"><span>${ic('pin')}${next.where}</span>${next.who ? `<span>${ic('user')}${next.who}</span>` : ''}</div>
+      ${intTag(next.int || 'FHIR Appointment · KIS')}
+    </div>` : ''}
+    <div class="alert warn"><span class="ic">${ic('alert')}</span><div><b>Morgen 08:00: Operation</b>Ab Mitternacht nüchtern. Ihre letzte Mahlzeit ist das Abendessen heute.${intTag('FHIR Procedure/Appointment · OP-Planung')}</div></div>
+
+    <div class="section-h"><h4>Schnellzugriff</h4></div>
+    <div class="grid4">
+      <button class="qa" data-action="tab" data-tab="essen"><span class="ico c2">${ic('utensils')}</span>Essen<br>wählen</button>
+      <button class="qa" data-action="svc" data-id="coiffeur"><span class="ico c6">${ic('scissors')}</span>Coiffeur<br>buchen</button>
+      <button class="qa" data-action="request"><span class="ico c4">${ic('msg')}</span>Anliegen<br>an Pflege</button>
+      <button class="qa" data-action="svc" data-id="wlan"><span class="ico c5">${ic('wifi')}</span>Gratis-<br>WLAN</button>
+    </div>
+
+    <div class="section-h"><h4>Heute</h4><button data-action="tab" data-tab="termine">Alle Termine</button></div>
+    <div class="tl">${evs.map(evRow).join('')}</div>
+
+    <div class="section-h"><h4>Ihre Mahlzeiten heute</h4></div>
+    <div class="list">
+      <div class="li"><div class="tile">🎃</div><div class="tx"><b>Mittag · Kürbisrisotto</b><span>Wird um 11:45 serviert</span></div><span class="status open">bestellt</span></div>
+      <button class="li" data-action="tab" data-tab="essen">
+        <div class="tile">${abendDish ? abendDish.em : '🌙'}</div>
+        <div class="tx"><b>Abend · ${abendDish ? abendDish.name : 'noch nicht gewählt'}</b><span>${abendDish ? 'Änderbar bis 15:00' : 'Bitte bis 15:00 wählen'}</span>${intTag('FHIR NutritionOrder → Menüsystem')}</div>
+        ${abendDish ? `<span class="status open">bestellt</span>` : `<span class="status soon">offen</span>`}
+      </button>
+    </div>
+    ${openReq ? `<div class="alert info"><span class="ic">${ic('msg')}</span><div><b>${openReq} Anliegen an die Pflege übermittelt</b>${S.requests.filter(r => !r.done).map(r => r.label).join(', ')}. Wir melden uns.</div></div>` : ''}
+    <div class="card flat" style="display:flex;gap:12px;align-items:center">
+      <div class="tile" style="width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--brand-soft);font-size:20px">👋</div>
+      <div style="flex:1"><b style="font-size:14px">Besuchszeit heute</b><div class="sub" style="font-size:12.5px">13:00–20:00 · Allgemeine Station</div></div>
+      <button class="btn sm ghost" data-action="visits">Details</button>
+    </div>`;
+  return h;
+}
+
+function evRow(e) {
+  const st = evState(e);
+  return `<div class="ev ${st}">
+    <div class="time">${e.time}</div>
+    <div class="rail"><i></i></div>
+    <div class="box"><b>${e.icon} ${e.title}</b>
+      <div class="meta"><span>${ic('pin')}${e.where}</span>${e.who ? `<span>${ic('user')}${e.who}</span>` : ''}${st === 'now' ? `<span style="color:var(--brand);font-weight:800">läuft gerade</span>` : ''}</div>
+      ${e.prep && st !== 'past' ? `<div class="prep">${ic('info')}<span>${e.prep}</span></div>` : ''}
+      ${intTag(e.int)}
+    </div></div>`;
+}
+
+function viewTermine() {
+  let h = topBar() + `<h2 class="hello">Termine</h2><p class="sub">Untersuchungen, Therapien und Gespräche</p>
+    ${intTag('FHIR Appointment ($everything Encounter) · KIS')}`;
+  const evs = allEvents();
+  const days = [...new Set(evs.map(e => e.day))];
+  const past = days.filter(d => d < P().day), cur = days.filter(d => d >= P().day);
+  cur.forEach(d => { h += `<div class="dayhead">${dayLabel(d)}${dayLabel(d) !== shortDate(d) ? ' · ' + shortDate(d) : ''}</div><div class="tl">${evs.filter(e => e.day === d).map(evRow).join('')}</div>`; });
+  if (past.length) h += `<div class="dayhead">Vergangen</div><div class="tl">${evs.filter(e => e.day < P().day).map(evRow).join('')}</div>`;
+  h += `<div class="alert info" style="margin-top:16px"><span class="ic">${ic('info')}</span><div>Zeiten können sich kurzfristig ändern. Bei einer Verschiebung werden Sie hier und per Mitteilung informiert.</div></div>`;
+  return h;
+}
+
+function viewEssen() {
+  const first = Math.max(P().day, 0);
+  const days = []; for (let d = first; d <= 4; d++) days.push(d);
+  if (S.mealDay === null || !days.includes(S.mealDay)) S.mealDay = first;
+  const d = S.mealDay;
+  let h = topBar() + `<h2 class="hello">Essen & Trinken</h2><p class="sub">Frisch gekocht in der KSB-Küche oder direkt aus dem Café</p>
+    <div class="modeswitch"><button aria-pressed="${S.essenMode === 'menu'}" data-action="essen-mode" data-m="menu">${ic('utensils')}Menüplan</button><button aria-pressed="${S.essenMode === 'shop'}" data-action="essen-mode" data-m="shop">${ic('bag')}Aufs Zimmer</button></div>`;
+  if (S.essenMode === 'shop') return h + viewShop();
+  if (S.phase === 'vor') h += `<div class="alert info"><span class="ic">${ic('info')}</span><div><b>Schon vor dem Eintritt wählen</b>Ihr erstes Frühstück und Mittagessen können Sie bereits jetzt bestellen.</div></div>`;
+  h += `<div class="seg" style="margin-top:14px">${days.map(x => `<button aria-pressed="${x === d}" data-action="mealday" data-day="${x}">${dayLabel(x) === shortDate(x) ? WDL[dateOf(x).getDay()] : dayLabel(x)}<small>${shortDate(x)}</small></button>`).join('')}</div>
+    <div class="alert danger" style="margin-top:12px"><span class="ic">${ic('alert')}</span><div><b>Allergie: Nüsse</b>Gerichte mit Nüssen sind für Sie gesperrt.${intTag('FHIR AllergyIntolerance · KIS')}</div></div>
+    <div class="seg">${[['alle', 'Alle'], ['veg', 'Vegetarisch'], ['light', 'Leichte Kost']].map(([k, l]) => `<button aria-pressed="${S.diet === k}" data-action="diet-filter" data-k="${k}">${l}</button>`).join('')}</div>`;
+
+  SLOTS.forEach(slot => {
+    const lock = mealLock(d, slot), key = `${d}-${slot.key}`, chosen = S.orders[key];
+    if (lock && lock.type !== 'deadline') {
+      h += `<div class="meal-h"><h4>${slot.icon} ${slot.label}</h4></div>
+        <div class="lockbox">${ic(lock.type === 'fast' ? 'lock' : 'door')}<div><b>${lock.title}</b>${lock.txt}${lock.type === 'fast' ? intTag('FHIR Procedure · OP-Planung → NPO-Flag') : ''}</div></div>`;
+      return;
+    }
+    const dl = slot.deadline(d), closed = !!lock;
+    h += `<div class="meal-h"><h4>${slot.icon} ${slot.label}</h4><span class="dl">${closed ? (chosen ? 'Bestellt · ' + slot.serve : 'Bestellschluss vorbei') : dlText(dl)}</span></div>`;
+    let dishes = menuFor(d, slot);
+    if (S.diet !== 'alle') dishes = dishes.filter(x => x.tags.includes(S.diet) || (S.diet === 'veg' && x.tags.includes('vegan')) || x.id === chosen);
+    if (closed) dishes = dishes.filter(x => x.id === chosen);
+    if (!dishes.length) h += `<div class="lockbox">${ic('info')}<div>${closed ? 'Keine Bestellung. Sie erhalten das Tagesmenü.' : 'Kein passendes Gericht in diesem Filter.'}</div></div>`;
+    dishes.forEach(x => {
+      const b = blocked(x), sel = chosen === x.id;
+      h += `<button class="dish ${b ? 'blocked' : ''}" role="radio" aria-checked="${sel}" ${b || closed ? 'disabled' : ''} data-action="order" data-key="${key}" data-id="${x.id}" data-label="${slot.label}">
+        <span class="em">${x.em}</span>
+        <span class="tx"><b>${x.name}</b><span class="tags">
+          ${x.tags.includes('vegan') ? '<span class="tag veg">vegan</span>' : x.tags.includes('veg') ? '<span class="tag veg">vegetarisch</span>' : ''}
+          ${x.tags.includes('light') ? '<span class="tag light">leicht</span>' : ''}
+          ${x.al.map(a => `<span class="tag ${PATIENT.allergies.includes(a) ? 'al' : ''}">${a}</span>`).join('')}
+        </span>${b ? `<span style="font-size:12px;color:var(--danger);font-weight:700;display:block;margin-top:4px">Gesperrt wegen Allergie</span>` : ''}</span>
+        <span class="radio">${sel ? ic('check') : ''}</span></button>`;
+    });
+  });
+  h += `<div class="card flat" style="margin-top:16px;font-size:13px;color:var(--muted)">${intTag('FHIR NutritionOrder → Menüsystem Küche')}<div style="margin-top:6px">Sie brauchen eine spezielle Kostform, etwa bei Diabetes? Die <b style="color:var(--ink)">Ernährungsberatung</b> erreichen Sie unter +41 56 486 23 30.</div></div>`;
+  return h;
+}
+
+function viewShop() {
+  const cafe = openState(SERVICES.find(s => s.id === 'blattgruen')), shop = openState(SERVICES.find(s => s.id === 'shop'));
+  const canDeliver = S.phase === 'stay';
+  let h = `<div class="alert info" style="margin-top:12px"><span class="ic">${ic('bag')}</span><div><b>Lieferung in Zimmer ${PATIENT.room}</b>${canDeliver ? 'In ca. 20 Min., zwischen den Mahlzeiten. Bezahlung mit TWINT, Karte oder über die Zimmerrechnung.' : 'Während Ihres Aufenthalts verfügbar.'}${intTag('REST · Kassensystem Gastronomie')}</div></div>`;
+  if (S.phase === 'stay') h += `<div class="alert warn"><span class="ic">${ic('alert')}</span><div><b>Ab Mitternacht nüchtern</b>Wegen der OP morgen nehmen wir Bestellungen nur bis 23:00 an.</div></div>`;
+  [['Café Blattgrün', cafe], ['Shop', shop]].forEach(([from, o]) => {
+    h += `<div class="meal-h"><h4>${from === 'Shop' ? '🛍️' : '☕'} ${from}</h4><span class="status ${o.cls}">${o.txt}</span></div>`;
+    SHOP.filter(p => p.from === from).forEach(p => {
+      const b = blocked(p), q = S.cart[p.id] || 0, off = b || !canDeliver || o.cls === 'closed';
+      h += `<div class="prod ${b ? 'blocked' : ''}"><span class="em">${p.em}</span><span class="tx"><b>${p.name}</b><span>CHF ${p.price.toFixed(2)}</span>
+        ${b ? `<span style="display:block;font-size:12px;color:var(--danger);font-weight:700">Enthält Nüsse: gesperrt</span>` : ''}</span>
+        <span class="qty">${q ? `<button data-action="cart" data-id="${p.id}" data-d="-1" aria-label="weniger">${ic('minus')}</button><b>${q}</b>` : ''}<button data-action="cart" data-id="${p.id}" data-d="1" ${off ? 'disabled' : ''} aria-label="mehr">${ic('plus')}</button></span></div>`;
+    });
+  });
+  const n = Object.values(S.cart).reduce((a, b) => a + b, 0);
+  const tot = Object.entries(S.cart).reduce((a, [id, q]) => a + SHOP.find(p => p.id === id).price * q, 0);
+  if (n) h += `<div class="cartbar"><div class="tx">${n} Artikel<b>CHF ${tot.toFixed(2)}</b></div><button class="btn sm" data-action="checkout">Bestellen</button></div>`;
+  h += `<p class="sub" style="font-size:11.5px;margin:12px 2px">Sortiment und Preise sind Beispiele.</p>`;
+  return h;
+}
+
+function viewServices() {
+  let h = topBar() + `<h2 class="hello">Services</h2><p class="sub">Alles, was Ihren Aufenthalt angenehmer macht</p>`;
+  const groups = [['Buchen & anfragen', ['coiffeur', 'dolmetsch', 'seelsorge', 'srk']], ['Essen & Einkaufen', ['blattgruen', 'orizzonte', 'shop', 'fridge']], ['Weitere Angebote', ['apotheke', 'wlan', 'care']]];
+  groups.forEach(([g, ids]) => {
+    h += `<div class="section-h"><h4>${g}</h4></div><div class="list">`;
+    ids.forEach(id => { const s = SERVICES.find(x => x.id === id), o = openState(s);
+      h += `<button class="li" data-action="svc" data-id="${id}"><div class="tile">${s.em}</div><div class="tx"><b>${s.name}</b><span>${s.where}</span></div><span class="status ${o.cls}">${o.txt}</span></button>`; });
+    h += `</div>`;
+  });
+  h += `<button class="card li" style="border:0;margin-top:6px" data-action="request"><div class="tile">💬</div><div class="tx"><b>Anliegen an die Pflege</b><span>Nicht dringend? Hier melden statt klingeln</span></div>${ic('chev', 'chev')}</button>`;
+  return h;
+}
+
+function viewMehr() {
+  let h = topBar() + `<div class="card" style="display:flex;gap:14px;align-items:center;margin-top:4px">
+      <div class="logo" style="width:56px;height:56px;border-radius:18px;font-size:19px">AM</div>
+      <div style="flex:1"><b style="font-size:17px">${PATIENT.first} ${PATIENT.last}</b><div class="sub" style="font-size:12.5px">geb. ${PATIENT.born} · ${PATIENT.ins} versichert</div>
+      <div class="sub" style="font-size:12.5px">Zimmer ${PATIENT.room} · ${PATIENT.ward}</div>${intTag('FHIR Patient · Login Swiss-ID')}</div>
+    </div>
+    <div class="list">
+      <button class="li" data-action="open-checklist"><div class="tile">🧳</div><div class="tx"><b>Checkliste Eintritt</b><span>Was mitnehmen, was zu Hause regeln</span></div>${ic('chev', 'chev')}</button>
+      <button class="li" data-action="diet"><div class="tile">🥗</div><div class="tx"><b>Ernährung & Allergien</b><span>Nüsse</span></div>${ic('chev', 'chev')}</button>
+      <button class="li" data-action="upgrade"><div class="tile">✨</div><div class="tx"><b>Komfort-Upgrade</b><span>Mehr Hotellerie-Service im Zimmer buchen</span></div>${ic('chev', 'chev')}</button>
+      <button class="li" data-action="lang"><div class="tile">🗣️</div><div class="tx"><b>Sprache</b><span>Deutsch</span></div>${ic('chev', 'chev')}</button>
+    </div>
+    <div class="section-h"><h4>Das KSB</h4></div>
+    <div class="facts"><div class="fact"><b>4.3/5</b><span>Bewertung durch Patient_innen</span></div><div class="fact"><b>96%</b><span>würden das KSB empfehlen</span></div><div class="fact"><b>90+</b><span>Sprachen im Dolmetscherdienst</span></div></div>
+    <div class="list" style="margin-top:10px">
+      <button class="li" data-action="visits"><div class="tile">👋</div><div class="tx"><b>Besuchszeiten</b><span>Je nach Station</span></div>${ic('chev', 'chev')}</button>
+      <button class="li" data-action="anreise"><div class="tile">🅿️</div><div class="tx"><b>Anreise & Parken</b><span>Im Ergel 1, 5404 Baden</span></div>${ic('chev', 'chev')}</button>
+      <button class="li" data-action="rights"><div class="tile">⚖️</div><div class="tx"><b>Patientenrechte & Hausordnung</b><span>AGB, General Consent, Hausordnung</span></div>${ic('chev', 'chev')}</button>
+      <button class="li" data-action="feedback"><div class="tile">⭐</div><div class="tx"><b>Feedback zum Aufenthalt</b><span>${S.feedback ? `Danke! Ihre Bewertung: ${S.feedback}/5` : 'Lob, Kritik, Anregungen'}</span></div>${ic('chev', 'chev')}</button>
+      <a class="li" href="tel:+41564862111" style="color:inherit;text-decoration:none"><div class="tile">📞</div><div class="tx"><b>Zentrale</b><span>+41 56 486 21 11</span></div>${ic('chev', 'chev')}</a>
+    </div>
+    <button class="btn ghost" style="margin-top:8px" data-action="reset">Demo zurücksetzen</button>
+    <p class="sub" style="font-size:11.5px;text-align:center;margin-top:12px">Prototyp · fiktive Patientendaten · kein offizielles KSB-Produkt</p>`;
+  return h;
+}
+
+/* =============================================================
+   Sheets
+   ============================================================= */
+function openSheet(title, body) {
+  $('#sheetTitle').textContent = title; $('#sheetBody').innerHTML = body; $('#sheetBody').scrollTop = 0;
+  $('#sheet').classList.add('open'); $('#scrim').classList.add('open');
+}
+function closeSheet() { $('#sheet').classList.remove('open'); $('#scrim').classList.remove('open'); }
+
+function sheetChecklist() {
+  let b = `<p class="sub" style="margin-bottom:6px">Gemäss Merkblatt des KSB. Ihr Fortschritt wird gespeichert.</p>`;
+  CHECKLIST.forEach((g, gi) => {
+    b += `<div class="lbl-s">${g.group}</div><div class="list">`;
+    g.items.forEach(([t, s], ii) => { const k = gi + '-' + ii;
+      b += `<button class="ck" role="checkbox" aria-checked="${!!S.checks[k]}" data-action="check" data-k="${k}"><span class="box">${ic('check')}</span><span><span class="lbl">${t}</span>${s ? `<small>${s}</small>` : ''}</span></button>`; });
+    b += `</div>`;
+  });
+  b += `<div class="alert warn"><span class="ic">${ic('alert')}</span><div><b>Keine Wertsachen</b>Lassen Sie Schmuck und grössere Geldbeträge zu Hause. Für Kleines gibt es den ZippBag am Bett.</div></div>`;
+  openSheet('Was mitnehmen?', b);
+}
+
+let booking = {};
+function sheetCoiffeur() {
+  const svc = SERVICES.find(s => s.id === 'coiffeur');
+  const opts = [['wash', '💆‍♀️', 'Waschen & Föhnen', '30 Min.'], ['cut', '✂️', 'Haarschnitt', '45 Min.'], ['beard', '🧔', 'Bartpflege', '20 Min.'], ['wig', '🤍', 'Beratung Perücke / Brustprothese', '60 Min. · diskret']];
+  const days = []; for (let d = Math.max(P().day, 0); days.length < 4 && d <= 4; d++) { const wd = dateOf(d).getDay(); if (svc.hours[wd] && d !== 1) days.push(d); }
+  booking = { svc: booking.svc || 'wash', day: days.includes(booking.day) ? booking.day : days[0], slot: null };
+  const render = () => {
+    const r = svc.hours[dateOf(booking.day).getDay()];
+    const slots = []; for (let m = r[0] * 60; m + 30 <= r[1] * 60; m += 30) slots.push(m);
+    let b = `<div class="card flat" style="display:flex;gap:12px;align-items:center"><div style="font-size:30px">💇‍♀️</div><div><b>Coiffeur Teuta</b><div class="sub" style="font-size:12.5px">1. OG · ${svc.desc}</div>${intTag(svc.int)}</div></div>
+      <div class="lbl-s">Leistung</div>${opts.map(([k, e, t, s]) => `<button class="opt" aria-pressed="${booking.svc === k}" data-bk="svc" data-v="${k}"><span class="em">${e}</span><span class="tx"><b>${t}</b><span>${s}</span></span></button>`).join('')}
+      <div class="lbl-s">Tag</div><div class="seg">${days.map(d => `<button aria-pressed="${booking.day === d}" data-bk="day" data-v="${d}">${dayLabel(d) === shortDate(d) ? WDL[dateOf(d).getDay()] : dayLabel(d)}<small>${shortDate(d)}</small></button>`).join('')}</div>
+      <div class="lbl-s">Uhrzeit</div><div class="slots">${slots.map(m => {
+        const past = isBefore(booking.day, m), taken = ((m / 30 + booking.day * 3) % 5 === 0) || ((m / 30 + booking.day) % 7 === 2);
+        const clash = allEvents().some(e => e.day === booking.day && Math.abs(toMin(e.time) - m) < 60 && e.title !== 'Coiffeur');
+        return `<button ${past || taken || clash ? 'disabled' : ''} aria-pressed="${booking.slot === m}" data-bk="slot" data-v="${m}" title="${clash ? 'Kollidiert mit einem Termin' : ''}">${fmtMin(m)}</button>`; }).join('')}</div>
+      <p class="sub" style="font-size:12px;margin:8px 2px 0">Zeiten, die mit Ihren Untersuchungen kollidieren, sind automatisch ausgeblendet.</p>
+      <div class="alert info"><span class="ic">${ic('info')}</span><div>Brauchen Sie Begleitung auf dem Weg? Wir informieren die Pflege automatisch.</div></div>
+      <button class="btn" ${booking.slot === null ? 'disabled' : ''} data-action="book-confirm">${booking.slot === null ? 'Uhrzeit wählen' : `Buchen · ${dayLabel(booking.day)} ${fmtMin(booking.slot)}`}</button>`;
+    $('#sheetBody').innerHTML = b;
+  };
+  openSheet('Coiffeur buchen', ''); render();
+  sheetCoiffeur.render = render;
+}
+
+let req = new Set();
+function sheetRequest() {
+  req = new Set();
+  const opts = [['💧', 'Wasser / Tee'], ['🛏️', 'Zusätzliche Decke'], ['🚶', 'Hilfe beim Aufstehen'], ['🤕', 'Schmerzen melden'], ['🌡️', 'Mir ist kalt / warm'], ['❓', 'Frage an Ärzt_in']];
+  const render = () => {
+    $('#sheetBody').innerHTML = `<div class="alert danger"><span class="ic">${ic('alert')}</span><div><b>Notfall?</b>Bitte drücken Sie die Patientenruf-Taste an Ihrem Bett.</div></div>
+      <div class="lbl-s">Worum geht es?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${opts.map(([e, t]) => `<button class="opt" style="margin:0;flex-direction:column;align-items:flex-start;gap:6px" aria-pressed="${req.has(t)}" data-rq="${t}"><span style="font-size:22px">${e}</span><b style="font-size:13px">${t}</b></button>`).join('')}</div>
+      <div class="lbl-s">Bemerkung (optional)</div><textarea id="rqNote" placeholder="z. B. lieber Pfefferminztee"></textarea>
+      ${intTag('FHIR Task (priority: routine) → Worklist Station 5 Ost')}
+      <button class="btn" style="margin-top:12px" ${req.size ? '' : 'disabled'} data-action="req-send">An Pflege senden</button>`;
+  };
+  openSheet('Anliegen an die Pflege', ''); render();
+  sheetRequest.render = render;
+}
+
+function sheetService(id) {
+  if (id === 'coiffeur') return sheetCoiffeur();
+  const s = SERVICES.find(x => x.id === id), o = openState(s);
+  let hours = '';
+  if (s.hours !== '24h') {
+    hours = `<div class="lbl-s">Öffnungszeiten</div><div class="card flat"><dl class="kv">${[1, 2, 3, 4, 5, 6, 0].map(w => `<dt>${WDL[w]}</dt><dd>${s.hours[w] ? fmtMin(s.hours[w][0] * 60) + '–' + fmtMin(Math.round(s.hours[w][1] * 60)) : '–'}</dd>`).join('')}</dl></div>`;
+  }
+  let extra = '';
+  if (id === 'wlan') extra = `<div class="card flat" style="text-align:center"><div class="sub">Netzwerk</div><div class="mono" style="font-size:22px;margin:6px 0">KSB Public</div><div class="sub" style="font-size:12.5px">Beim ersten Verbinden per SMS registrieren. Nur auf dem Spitalareal verfügbar.</div></div>`;
+  if (id === 'dolmetsch') extra = `<div class="lbl-s">Sprache</div><div class="seg">${['Albanisch', 'Arabisch', 'Italienisch', 'Portugiesisch', 'Tamil', 'Tigrinya', 'Türkisch', 'Ukrainisch'].map((l, i) => `<button aria-pressed="${i === 0}" data-pick>${l}</button>`).join('')}</div>`;
+  openSheet(s.name, `<div class="card flat" style="display:flex;gap:12px;align-items:center"><div style="font-size:30px">${s.em}</div><div style="flex:1"><b>${s.name}</b><div class="sub" style="font-size:12.5px">${s.where}</div></div><span class="status ${o.cls}">${o.txt}</span></div>
+    <p style="font-size:14px;line-height:1.5;margin:12px 2px">${s.desc}</p>${extra}${hours}${intTag(s.int)}
+    ${s.action ? `<button class="btn" style="margin-top:14px" data-action="svc-do" data-id="${id}">${s.action}</button>` : ''}
+    ${s.phone ? `<a class="btn ghost" style="margin-top:8px;text-decoration:none" href="tel:${s.phone.replace(/\s/g, '')}">${ic('phone')}${s.phone}</a>` : ''}`);
+}
+
+function sheetVisits() {
+  openSheet('Besuchszeiten', `<div class="card flat"><dl class="kv">${VISITS.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl></div>
+    <div class="alert info"><span class="ic">${ic('info')}</span><div>Die Pflege geht auch während der Besuchszeit weiter. Bitte warten Sie kurz vor dem Zimmer, falls nötig. Auf der Intensivstation brauchen die Patient_innen viel Ruhe.</div></div>
+    <button class="btn ghost" data-action="share-visit">${ic('msg')}Besuchsinfo an Angehörige teilen</button>`);
+}
+
+function sheetFeedback() {
+  const render = () => { $('#sheetBody').innerHTML = `<p class="sub" style="text-align:center;margin-top:6px">Wie zufrieden waren Sie insgesamt?</p>
+    <div class="stars">${[1, 2, 3, 4, 5].map(n => `<button aria-label="${n} Sterne" aria-pressed="${n <= S.feedback}" data-star="${n}"><svg class="i"><use href="#i-star"/></svg></button>`).join('')}</div>
+    <div class="lbl-s">Was hat Ihnen gefallen? Was können wir besser machen?</div><textarea placeholder="Ihr Feedback (optional)"></textarea>
+    ${intTag('FHIR QuestionnaireResponse · Qualitätsmanagement')}
+    <button class="btn" style="margin-top:12px" ${S.feedback ? '' : 'disabled'} data-action="fb-send">Absenden</button>`; };
+  openSheet('Feedback zum Aufenthalt', ''); render(); sheetFeedback.render = render;
+}
+
+function sheetInfo(title, html) { openSheet(title, html); }
+
+/* =============================================================
+   Render & events
+   ============================================================= */
+function render() {
+  const v = { home: viewHome, essen: viewEssen, termine: viewTermine, services: viewServices, mehr: viewMehr }[S.tab]();
+  const c = $('#content'); c.innerHTML = `<div class="fade">${v}</div>`;
+  $('#tabbar').innerHTML = TABS.map(t => {
+    let badge = '';
+    if (t.id === 'essen' && S.phase === 'stay' && !S.orders['0-abend']) badge = '<span class="badge">1</span>';
+    return `<button data-action="tab" data-tab="${t.id}" ${S.tab === t.id ? 'aria-current="page"' : ''}>${ic(t.icon)}${t.label}${badge}</button>`; }).join('');
+  $('#clock').textContent = P().time;
+  $('#journey').innerHTML = Object.entries(PHASES).map(([k, p]) => `<button aria-pressed="${S.phase === k}" data-action="phase" data-phase="${k}"><small>Schritt ${p.step} · ${shortDate(p.day)}</small><b>${p.label}</b></button>`).join('');
+  document.body.classList.toggle('show-int', S.showInt);
+  $('#intSwitch').setAttribute('aria-checked', S.showInt);
+  save();
+}
+function go(tab) { S.tab = tab; render(); $('#content').scrollTop = 0; }
+
+let toastT;
+function toast(msg) { const t = $('#toast'); t.querySelector('span').textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2600); }
+
+document.addEventListener('click', e => {
+  // sub-controls inside sheets
+  const bk = e.target.closest('[data-bk]');
+  if (bk) { const k = bk.dataset.bk, v = bk.dataset.v; booking[k] = k === 'svc' ? v : Number(v); if (k !== 'slot') booking.slot = null; sheetCoiffeur.render(); return; }
+  const rq = e.target.closest('[data-rq]');
+  if (rq) { const t = rq.dataset.rq; req.has(t) ? req.delete(t) : req.add(t); const note = $('#rqNote')?.value; sheetRequest.render(); if (note) $('#rqNote').value = note; return; }
+  const st = e.target.closest('[data-star]');
+  if (st) { S.feedback = Number(st.dataset.star); const ta = $('#sheetBody textarea')?.value; sheetFeedback.render(); if (ta) $('#sheetBody textarea').value = ta; return; }
+  const pp = e.target.closest('[data-pick-pay],[data-pick-lang]');
+  if (pp) { pp.parentElement.querySelectorAll('[data-pick-pay],[data-pick-lang]').forEach(b => b.setAttribute('aria-pressed', b === pp)); return; }
+  const pk = e.target.closest('[data-pick]');
+  if (pk) { pk.parentElement.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === pk)); return; }
+
+  const el = e.target.closest('[data-action]'); if (!el) return;
+  const a = el.dataset.action;
+  switch (a) {
+    case 'tab': go(el.dataset.tab); break;
+    case 'phase': S.phase = el.dataset.phase; S.mealDay = null; closeSheet(); go('home'); $('#concept').classList.remove('open'); break;
+    case 'toggle-int': S.showInt = !S.showInt; render(); break;
+    case 'concept-open': $('#concept').classList.add('open'); break;
+    case 'concept-close': $('#concept').classList.remove('open'); break;
+    case 'theme': {
+      const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+      r.dataset.theme = dark ? 'light' : 'dark'; store.set('theme', r.dataset.theme); break; }
+    case 'mealday': S.mealDay = Number(el.dataset.day); render(); break;
+    case 'essen-mode': S.essenMode = el.dataset.m; render(); break;
+    case 'cart': { const id = el.dataset.id; S.cart[id] = Math.max(0, (S.cart[id] || 0) + Number(el.dataset.d)); if (!S.cart[id]) delete S.cart[id];
+      const top = $('#content').scrollTop; render(); $('#content').scrollTop = top; break; }
+    case 'checkout': {
+      const items = Object.entries(S.cart).map(([id, q]) => `${q}× ${SHOP.find(p => p.id === id).name}`);
+      const tot = Object.entries(S.cart).reduce((a, [id, q]) => a + SHOP.find(p => p.id === id).price * q, 0);
+      sheetInfo('Bestellung prüfen', `<div class="list">${items.map(t => `<div class="li"><div class="tx"><b>${t}</b></div></div>`).join('')}<div class="li"><div class="tx"><b>Total</b></div><b>CHF ${tot.toFixed(2)}</b></div></div>
+        <div class="lbl-s">Bezahlung</div>${[['📱', 'TWINT'], ['💳', 'Kredit-/Debitkarte'], ['🧾', 'Auf Zimmerrechnung']].map(([e, t], i) => `<button class="opt" aria-pressed="${i === 0}" data-pick-pay><span class="em">${e}</span><span class="tx"><b>${t}</b></span></button>`).join('')}
+        <div class="lbl-s">Lieferung</div><div class="card flat" style="font-size:13.5px">Zimmer ${PATIENT.room} · ca. 20 Min.<br><span class="sub">Ist eine Untersuchung geplant, liefern wir danach.</span></div>
+        <button class="btn" style="margin-top:12px" data-action="pay">Kostenpflichtig bestellen · CHF ${tot.toFixed(2)}</button>`); break; }
+    case 'pay': S.cart = {}; closeSheet(); render(); toast('Bestellt! Lieferung in ca. 20 Min. in Zimmer 512'); break;
+    case 'diet-filter': S.diet = el.dataset.k; render(); break;
+    case 'order': {
+      const { key, id, label } = el.dataset;
+      S.orders[key] = id; const dish = Object.values(MENU).flat().find(x => x.id === id);
+      const top = $('#content').scrollTop; render(); $('#content').scrollTop = top;
+      toast(`${label}: ${dish.name}`); break; }
+    case 'open-checklist': sheetChecklist(); break;
+    case 'check': { const k = el.dataset.k; S.checks[k] = !S.checks[k]; el.setAttribute('aria-checked', S.checks[k]); save(); if (S.tab === 'home') { const sc = $('#sheetBody').scrollTop; render(); $('#sheetBody').scrollTop = sc; } break; }
+    case 'form': if (!S.form) { S.form = true; render(); toast('Patientenmeldeformular übermittelt'); } break;
+    case 'svc': sheetService(el.dataset.id); break;
+    case 'svc-do': {
+      const s = SERVICES.find(x => x.id === el.dataset.id); closeSheet();
+      toast({ dolmetsch: 'Anfrage an den Dolmetscherdienst gesendet', seelsorge: 'Die Seelsorge meldet sich bei Ihnen', srk: 'Fahrtanfrage an SRK Aargau übermittelt' }[s.id] || 'Gesendet'); break; }
+    case 'book-confirm': {
+      const names = { wash: 'Waschen & Föhnen', cut: 'Haarschnitt', beard: 'Bartpflege', wig: 'Beratung Perücke' };
+      S.bookings = S.bookings.filter(b => b.title !== 'Coiffeur');
+      S.bookings.push({ day: booking.day, time: fmtMin(booking.slot), dur: 30, title: 'Coiffeur', who: names[booking.svc], where: 'Coiffeur Teuta, 1. OG', icon: '💇‍♀️', int: 'REST · Buchungssystem Partner' });
+      closeSheet(); render(); toast(`Coiffeur gebucht: ${dayLabel(booking.day)}, ${fmtMin(booking.slot)}`); break; }
+    case 'request': sheetRequest(); break;
+    case 'req-send': S.requests.push({ label: [...req].join(', '), done: false }); closeSheet(); render(); toast('An die Pflege von Station 5 Ost übermittelt'); break;
+    case 'visits': sheetVisits(); break;
+    case 'share-visit': closeSheet(); toast('Link zur Besuchsinfo kopiert'); try { navigator.clipboard.writeText('Besuch bei Anna Muster, Zimmer 512, Station 5 Ost. Besuchszeit 13:00–20:00. Kantonsspital Baden, Im Ergel 1, 5404 Baden'); } catch {} break;
+    case 'feedback': sheetFeedback(); break;
+    case 'fb-send': closeSheet(); render(); toast('Danke für Ihr Feedback!'); break;
+    case 'close-sheet': closeSheet(); break;
+    case 'notifs': sheetInfo('Mitteilungen', `<div class="list">
+        ${S.phase === 'stay' ? `<div class="li"><div class="tile">🩻</div><div class="tx"><b>Röntgen um 14:00</b><span>Der Transportdienst holt Sie um 13:45 ab.</span></div></div>
+        <div class="li"><div class="tile">🌙</div><div class="tx"><b>Abendessen wählen</b><span>Heute bis 15:00 bestellen</span></div></div>` : ''}
+        ${S.phase === 'vor' ? `<div class="li"><div class="tile">📝</div><div class="tx"><b>Formular offen</b><span>Patientenmeldeformular vor Eintritt ausfüllen</span></div></div>` : ''}
+        ${S.phase === 'aus' ? `<div class="li"><div class="tile">📄</div><div class="tx"><b>Austrittsbericht folgt</b><span>Nach dem Gespräch um 09:30 verfügbar</span></div></div>` : ''}
+        <div class="li"><div class="tile">🍂</div><div class="tx"><b>Café Blattgrün</b><span>Neu: Kürbissuppe im Herbstmenü</span></div></div></div>
+        ${intTag('Push via FHIR Subscription')}`); break;
+    case 'diet': sheetInfo('Ernährung & Allergien', `<div class="alert danger"><span class="ic">${ic('alert')}</span><div><b>Allergie: Nüsse</b>Aus Ihrem Patientendossier. Änderungen nimmt die Pflege oder Ärzteschaft vor.${intTag('FHIR AllergyIntolerance · KIS (read-only)')}</div></div>
+        <div class="lbl-s">Vorlieben</div>${[['🥦', 'Vegetarisch'], ['🥛', 'Laktosearm'], ['🐖', 'Kein Schweinefleisch'], ['🍰', 'Kleine Portionen']].map(([e, t], i) => `<button class="opt" aria-pressed="${i === 3}" data-pick-self onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed')!=='true')"><span class="em">${e}</span><span class="tx"><b>${t}</b></span></button>`).join('')}
+        <p class="sub" style="font-size:12.5px">Für Kostformen wie Diabetes- oder Schonkost wenden Sie sich an die Ernährungsberatung: +41 56 486 23 30.</p>`); break;
+    case 'valuables': sheetInfo('Wertsachen', `<p style="font-size:14px;line-height:1.55">Bitte bringen Sie keine Wertsachen, keinen Schmuck und keine grösseren Geldbeträge mit. Das KSB haftet nicht bei Diebstahl oder Beschädigung.</p><div class="alert info"><span class="ic">${ic('lock')}</span><div><b>ZippBag</b>Kleine Wertsachen kommen in den ZippBag am Bett. Er lässt sich nur mit Ihrem Patientenarmband öffnen.</div></div>`); break;
+    case 'anreise': sheetInfo('Anreise & Parken', `<div class="card flat"><b>Kantonsspital Baden</b><div class="sub">Im Ergel 1, 5404 Baden</div></div><p style="font-size:14px;line-height:1.55">Parkplätze sind gebührenpflichtig. Ohne Begleitung empfehlen wir den Fahrdienst des SRK, TIXI oder ein Taxi.</p><a class="btn" style="text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kantonsspital+Baden+Im+Ergel+1">${ic('pin')}Route planen</a>`); break;
+    case 'upgrade': sheetInfo('Komfort-Upgrade', `<p style="font-size:14px;line-height:1.55">Als allgemein oder halbprivat versicherte Person können Sie ein Upgrade buchen, mit mehr Service durch die Hotellerie und im Zimmer.</p><div class="list">${[['🛏️', 'Zimmerupgrade', 'nach Verfügbarkeit'], ['🍷', 'Erweiterte Menüauswahl', 'à la carte'], ['📰', 'Tageszeitung aufs Zimmer', 'täglich']].map(([e, t, s]) => `<div class="li"><div class="tile">${e}</div><div class="tx"><b>${t}</b><span>${s}</span></div></div>`).join('')}</div><button class="btn" data-action="close-sheet">Anfrage an Hotellerie</button><p class="sub" style="font-size:11.5px;margin-top:8px">Preise gemäss Taxordnung 2026.</p>`); break;
+    case 'lang': sheetInfo('Sprache', `${['Deutsch', 'Français', 'Italiano', 'English', 'Shqip', 'Türkçe'].map((l, i) => `<button class="opt" aria-pressed="${i === 0}" data-pick-lang><span class="tx"><b>${l}</b></span></button>`).join('')}<p class="sub" style="font-size:12.5px">Im Prototyp ist nur Deutsch umgesetzt.</p>`); break;
+    case 'rights': sheetInfo('Patientenrechte', `<div class="list">${['Patientenrechte', 'AGB für Patient_innen', 'General Consent', 'Hausordnung', 'Parkreglement', 'Taxordnung 2026'].map(t => `<div class="li"><div class="tile">📄</div><div class="tx"><b>${t}</b><span>PDF</span></div>${ic('chev', 'chev')}</div>`).join('')}</div>`); break;
+    case 'reset': try { Object.keys(localStorage).filter(k => k.startsWith('ksbb.')).forEach(k => localStorage.removeItem(k)); } catch {} location.reload(); break;
+  }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSheet(); $('#concept').classList.remove('open'); } });
+
+const th = store.get('theme', null); if (th) document.documentElement.dataset.theme = th;
+render();
+})();
+</script>
+</body>
+</html>
