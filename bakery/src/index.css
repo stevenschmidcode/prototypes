@@ -1,0 +1,345 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Bricolage Grotesque Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Caveat Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('../node_modules/@fontsource-variable/caveat/files/caveat-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+/* Design tokens, taken from the public bakerybakery.ch stylesheet */
+@theme {
+  --color-blue: #0025ff;
+  --color-blue-deep: #001bc0;
+  --color-pink: #ffc1e1;
+  --color-pink-hot: #ff8fc8;
+  --color-cream: #f8f6f1;
+  --color-ink: #0b0b2b;
+  --color-red: #ed1c24;
+
+  --font-display: 'Bricolage Grotesque Variable', 'Arial Black', system-ui, sans-serif;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+  --font-hand: 'Caveat Variable', 'Comic Sans MS', cursive;
+
+  --radius-blob: 2rem;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.88;
+    text-transform: uppercase;
+    font-optical-sizing: auto;
+  }
+  .hand {
+    font-family: var(--font-hand);
+    font-weight: 600;
+  }
+  /* Chunky, sticker-like button */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    border: 2.5px solid var(--color-blue);
+    padding: 0.85rem 1.4rem;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      background 0.15s;
+    box-shadow: 0 4px 0 var(--color-blue);
+  }
+  .btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 var(--color-blue);
+  }
+  .btn-blue {
+    background: var(--color-blue);
+    color: white;
+    box-shadow: 0 4px 0 var(--color-ink);
+    border-color: var(--color-blue);
+  }
+  .btn-blue:active {
+    box-shadow: 0 1px 0 var(--color-ink);
+  }
+  .btn-pink {
+    background: var(--color-pink);
+    color: var(--color-blue);
+  }
+  .btn-white {
+    background: white;
+    color: var(--color-blue);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .card {
+    border: 2.5px solid var(--color-blue);
+    border-radius: var(--radius-blob);
+    background: white;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 2px solid var(--color-blue);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-blue);
+    background: white;
+  }
+  .demo-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    background: repeating-linear-gradient(-45deg, #fff2a8 0 6px, #ffe866 6px 12px);
+    border: 1.5px solid var(--color-ink);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+/* ---------- Buddy animations ---------- */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+@keyframes dance {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(0);
+  }
+  50% {
+    transform: translateY(0) rotate(4deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(0);
+  }
+}
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(-14deg);
+  }
+}
+@keyframes jump {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  20% {
+    transform: translateY(4px) scale(1.06, 0.92);
+  }
+  45% {
+    transform: translateY(-26px) scale(0.96, 1.05);
+  }
+  70% {
+    transform: translateY(0) scale(1.04, 0.96);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+@keyframes steam {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(0.6) rotate(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.15) rotate(20deg);
+    opacity: 1;
+  }
+}
+@keyframes pop-in {
+  0% {
+    transform: scale(0.6) rotate(-6deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05) rotate(1deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes float-up {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-60px);
+    opacity: 0;
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.buddy-bob {
+  animation: bob 3.2s ease-in-out infinite;
+  transform-origin: 100px 210px;
+  transform-box: view-box;
+}
+.buddy-dance {
+  animation: dance 1.6s ease-in-out infinite;
+  transform-origin: 100px 210px;
+  transform-box: view-box;
+}
+.buddy-blink {
+  animation: blink 4.5s infinite;
+}
+.buddy-wave {
+  animation: wave 1.1s ease-in-out infinite;
+}
+.buddy-jump {
+  animation: jump 0.7s cubic-bezier(0.3, 0.7, 0.4, 1) 2;
+  transform-origin: 100px 210px;
+  transform-box: view-box;
+}
+.buddy-steam {
+  animation: steam 2s ease-in-out infinite;
+}
+.buddy-twinkle {
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+.pop-in {
+  animation: pop-in 0.45s cubic-bezier(0.3, 0.7, 0.4, 1.2) both;
+}
+.slide-up {
+  animation: slide-up 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.fade-in {
+  animation: fade-in 0.25s ease both;
+}
+.float-up {
+  animation: float-up 1.4s ease-out forwards;
+}
+.spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+.marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
