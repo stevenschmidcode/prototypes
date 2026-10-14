@@ -27,7 +27,10 @@ function ClubApp() {
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden bg-cream">
       {!state.onboarded ? (
-        <Onboarding />
+        // Onboarding scrollt, wenn das Fenster niedriger ist als der Inhalt (kleine Handys, Zoom, Einbettung)
+        <div className="no-scrollbar relative min-h-0 flex-1 overflow-y-auto overscroll-contain">
+          <Onboarding />
+        </div>
       ) : (
         <>
           <main ref={scroller} className="no-scrollbar relative flex-1 overflow-y-auto overscroll-contain">

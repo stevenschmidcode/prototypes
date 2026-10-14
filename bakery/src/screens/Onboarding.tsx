@@ -36,7 +36,7 @@ export function Onboarding() {
   // ---------- 1: HEY YOU ----------
   if (step === 0)
     return (
-      <div className="relative flex h-full flex-col overflow-hidden bg-blue text-white">
+      <div className="relative flex h-full min-h-min flex-col overflow-hidden bg-blue text-white">
         <div className="pointer-events-none absolute inset-x-0 top-6 overflow-hidden whitespace-nowrap opacity-20" aria-hidden>
           <div className="marquee display inline-block text-6xl text-pink">
             croissant · coffee · crumbs · cinnamon · croissant · coffee · crumbs · cinnamon ·&nbsp;
@@ -69,7 +69,7 @@ export function Onboarding() {
   // ---------- 2: Choose buddy ----------
   if (step === 1)
     return (
-      <div className="flex h-full flex-col bg-cream">
+      <div className="flex h-full min-h-min flex-col bg-cream">
         <div className="flex items-center justify-between px-5 pt-5">
           {back}
           {dots}
@@ -202,7 +202,7 @@ export function Onboarding() {
   // ---------- 4: Welcome ----------
   const name = buddyName || SPECIES_INFO[species].names[0]
   return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-cream">
+    <div className="relative flex h-full min-h-min flex-col overflow-hidden bg-cream">
       <div className="px-5 pt-5">{dots}</div>
       <div className="relative mt-4 grid min-h-0 flex-1 place-items-center">
         <svg viewBox="0 0 300 300" className="spin-slow absolute h-[20rem] w-[20rem]" aria-hidden>
