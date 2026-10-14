@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, Shuffle } from 'lucide-react'
 import { useState } from 'react'
 import { Buddy, SPECIES_INFO } from '../buddy/Buddy'
-import { Blob, Squiggle } from '../components/ui'
+import { Blob, ConceptNote, Squiggle } from '../components/ui'
 import { makeMemberNo } from '../state/engine'
 import { useClub } from '../state/store'
 import type { Species } from '../state/types'
@@ -36,32 +36,33 @@ export function Onboarding() {
   // ---------- 1: HEY YOU ----------
   if (step === 0)
     return (
-      <div className="relative flex h-full min-h-min flex-col overflow-hidden bg-blue text-white">
-        <div className="pointer-events-none absolute inset-x-0 top-6 overflow-hidden whitespace-nowrap opacity-20" aria-hidden>
-          <div className="marquee display inline-block text-6xl text-pink">
+      <div className="relative flex h-full min-h-min flex-col overflow-hidden bg-blue pt-[env(safe-area-inset-top)] text-white">
+        <div className="pointer-events-none absolute inset-x-0 top-[calc(env(safe-area-inset-top)+1rem)] overflow-hidden whitespace-nowrap opacity-20" aria-hidden>
+          <div className="marquee display inline-block text-[clamp(2.75rem,14cqw,3.75rem)] text-pink">
             croissant · coffee · crumbs · cinnamon · croissant · coffee · crumbs · cinnamon ·&nbsp;
           </div>
         </div>
-        <div className="relative px-6 pt-24">
-          <h1 className="display pop-in text-[6.4rem] leading-[0.8] text-white">
+        <div className="relative px-6 pt-[clamp(4.25rem,12cqh,6rem)]">
+          <h1 className="display pop-in text-[clamp(4.25rem,27cqw,6.4rem)] leading-[0.8] text-white">
             Hey
             <br />
             <span className="text-pink">you!</span>
           </h1>
-          <p className="mt-5 max-w-[16rem] text-xl font-semibold leading-snug">Good things are baking. Ready to join?</p>
+          <p className="mt-[clamp(0.75rem,2.5cqh,1.25rem)] max-w-[16rem] text-[clamp(1.05rem,5cqw,1.25rem)] leading-snug font-semibold">Good things are baking. Ready to join?</p>
         </div>
-        <div className="relative flex min-h-0 flex-1 items-center justify-end pr-6">
-          <div className="relative grid place-items-center">
-            <Blob className="absolute h-60 w-60" fill="#FFC1E1" />
-            <Buddy species="croissant" mood="happy" size={180} title="A croissant waving hello" />
-            <p className="hand absolute top-6 -left-28 rotate-[-8deg] text-2xl text-white">psst… hi!</p>
+        {/* The buddy takes whatever height is left, never more */}
+        <div className="relative flex min-h-[9.5rem] flex-1 items-center justify-end py-3 pr-[clamp(1rem,6cqw,1.5rem)]">
+          <div className="relative grid w-[clamp(7.5rem,min(40cqw,24cqh),11.25rem)] place-items-center">
+            <Blob className="absolute -inset-[18%] h-[136%] w-[136%]" fill="#FFC1E1" />
+            <Buddy species="croissant" mood="happy" size={180} bounceKey={1} className="h-auto w-full" title="A croissant waving hello" />
+            <p className="hand absolute top-[8%] right-[calc(100%+0.5rem)] rotate-[-8deg] text-[clamp(1.25rem,6cqw,1.5rem)] whitespace-nowrap text-white">psst… hi!</p>
           </div>
         </div>
-        <div className="relative z-10 px-6 pt-2 pb-8">
+        <div className="relative z-10 px-6 pt-2 pb-[max(env(safe-area-inset-bottom),1.5rem)]">
           <button className="btn btn-pink w-full text-lg" onClick={() => setStep(1)}>
             Let’s bake! <ArrowRight size={20} strokeWidth={2.6} />
           </button>
-          <p className="mt-3 text-center text-xs text-white/70">No login. No real data. Just a demo with crumbs.</p>
+          <ConceptNote tone="dark" className="mt-2" />
         </div>
       </div>
     )
@@ -69,23 +70,23 @@ export function Onboarding() {
   // ---------- 2: Choose buddy ----------
   if (step === 1)
     return (
-      <div className="flex h-full min-h-min flex-col bg-cream">
+      <div className="flex h-full min-h-min flex-col bg-cream pt-[env(safe-area-inset-top)]">
         <div className="flex items-center justify-between px-5 pt-5">
           {back}
           {dots}
           <span className="w-10" />
         </div>
-        <div className="px-6 pt-4">
+        <div className="px-6 pt-[clamp(0.5rem,2cqh,1rem)]">
           <p className="hand text-2xl text-blue">step two</p>
-          <h1 className="display text-[3rem] text-blue">
+          <h1 className="display text-[clamp(2.4rem,12cqw,3rem)] text-blue">
             Choose your
             <br />
             buddy
           </h1>
         </div>
-        <div className="relative mx-6 mt-2 grid h-[15.5rem] place-items-center">
-          <Blob className="absolute inset-0 m-auto h-60 w-60" />
-          <Buddy key={species} species={species} mood="happy" size={180} bounceKey={1} title={SPECIES_INFO[species].label} />
+        <div className="relative mx-6 mt-2 grid h-[clamp(9rem,30cqh,15.5rem)] place-items-center">
+          <Blob className="absolute inset-0 m-auto h-full w-auto" />
+          <Buddy key={species} species={species} mood="happy" size={180} bounceKey={1} className="h-[80%] w-auto" title={SPECIES_INFO[species].label} />
         </div>
         <p className="px-6 text-center">
           <span className="display text-2xl text-blue">{SPECIES_INFO[species].label}</span>
@@ -109,7 +110,7 @@ export function Onboarding() {
             </button>
           ))}
         </div>
-        <div className="mt-auto px-6 pb-8 pt-4">
+        <div className="mt-auto px-6 pt-4 pb-[max(env(safe-area-inset-bottom),1.5rem)]">
           <button className="btn btn-blue w-full text-lg" onClick={() => setStep(2)}>
             That’s the one <ArrowRight size={20} strokeWidth={2.6} />
           </button>
@@ -121,22 +122,22 @@ export function Onboarding() {
   if (step === 2) {
     const ideas = SPECIES_INFO[species].names
     return (
-      <div className="flex h-full flex-col overflow-y-auto no-scrollbar bg-pink">
+      <div className="flex h-full min-h-min flex-col bg-pink pt-[env(safe-area-inset-top)]">
         <div className="flex items-center justify-between px-5 pt-5">
           {back}
           {dots}
           <span className="w-10" />
         </div>
-        <div className="px-6 pt-4">
+        <div className="px-6 pt-[clamp(0.5rem,2cqh,1rem)]">
           <p className="hand text-2xl text-blue">step three</p>
-          <h1 className="display text-[3rem] text-blue">
+          <h1 className="display text-[clamp(2.4rem,12cqw,3rem)] text-blue">
             Name your
             <br />
             buddy
           </h1>
         </div>
         <div className="mt-2 flex justify-center">
-          <Buddy species={species} mood={buddyName ? 'excited' : 'idle'} size={130} title={buddyName || 'Your buddy'} />
+          <Buddy species={species} mood={buddyName ? 'excited' : 'idle'} size={130} className="h-auto w-[clamp(6rem,18cqh,8.125rem)]" title={buddyName || 'Your buddy'} />
         </div>
         <form
           className="px-6"
@@ -189,7 +190,7 @@ export function Onboarding() {
             autoComplete="off"
             className="mt-1 w-full rounded-2xl border-[2.5px] border-blue bg-white px-4 py-3 font-semibold text-blue placeholder:text-blue/35 outline-none focus:shadow-[0_4px_0_#0025FF]"
           />
-          <div className="pt-6 pb-8">
+          <div className="pt-6 pb-[max(env(safe-area-inset-bottom),1.5rem)]">
             <button type="submit" className="btn btn-blue w-full text-lg">
               Nice to meet you <ArrowRight size={20} strokeWidth={2.6} />
             </button>
@@ -202,25 +203,25 @@ export function Onboarding() {
   // ---------- 4: Welcome ----------
   const name = buddyName || SPECIES_INFO[species].names[0]
   return (
-    <div className="relative flex h-full min-h-min flex-col overflow-hidden bg-cream">
+    <div className="relative flex h-full min-h-min flex-col overflow-hidden bg-cream pt-[env(safe-area-inset-top)]">
       <div className="px-5 pt-5">{dots}</div>
-      <div className="relative mt-4 grid min-h-0 flex-1 place-items-center">
-        <svg viewBox="0 0 300 300" className="spin-slow absolute h-[20rem] w-[20rem]" aria-hidden>
+      <div className="relative mt-4 grid min-h-[10rem] flex-1 place-items-center">
+        <svg viewBox="0 0 300 300" className="spin-slow absolute h-[clamp(13rem,40cqh,20rem)] w-[clamp(13rem,40cqh,20rem)]" aria-hidden>
           {Array.from({ length: 12 }, (_, i) => (
             <path key={i} d="M150 150 L128 0 L172 0 Z" fill="#FFC1E1" transform={`rotate(${i * 30} 150 150)`} />
           ))}
           <circle cx={150} cy={150} r={88} fill="#F8F6F1" />
         </svg>
-        <Buddy species={species} mood="excited" size={200} bounceKey={2} title={name} />
+        <Buddy species={species} mood="excited" size={200} bounceKey={2} className="h-auto w-[clamp(8rem,26cqh,12.5rem)]" title={name} />
       </div>
       <div className="relative px-6 text-center">
         <p className="hand text-2xl text-blue">{name} says:</p>
-        <h1 className="display mt-1 text-[2.7rem] text-blue">
+        <h1 className="display mt-1 text-[clamp(2.1rem,11cqw,2.7rem)] text-balance text-blue">
           You’re officially part of the dough!
         </h1>
         <Squiggle className="mx-auto mt-2 h-3 w-40" color="#FF8FC8" />
       </div>
-      <div className="px-6 pt-6 pb-8">
+      <div className="px-6 pt-6 pb-[max(env(safe-area-inset-bottom),1.5rem)]">
         <button className="btn btn-blue w-full text-lg" onClick={finish}>
           Enter Bakery Club <ArrowRight size={20} strokeWidth={2.6} />
         </button>

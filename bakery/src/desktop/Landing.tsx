@@ -1,4 +1,4 @@
-import { Heart, Store, Users } from 'lucide-react'
+import { Heart, Info, Store, Users } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Buddy } from '../buddy/Buddy'
 import { Squiggle } from '../components/ui'
@@ -43,7 +43,7 @@ export function Landing({ app }: { app: ReactNode }) {
       {/* Hero: concept left, live app right */}
       <main className="mx-auto grid max-w-[1320px] grid-cols-[1fr_auto] items-start gap-14 px-10 pt-8 pb-20">
         <section className="relative pt-6">
-          <p className="chip">Independent concept · Digital Products · CX · Innovation</p>
+          <p className="chip">Concept study · Digital Products · CX · Innovation</p>
           <h1 className="display mt-6 text-[clamp(4.5rem,8.4vw,8.6rem)] text-blue">
             A little
             <br />
@@ -61,12 +61,18 @@ export function Landing({ app }: { app: ReactNode }) {
             A visit shouldn’t just end at the till. With <strong className="text-blue">Bakery Club</strong> every visit becomes a small chapter of a personal bakery story: a digital pass, a
             transparent treat tracker, gentle side quests, and a little <strong className="text-blue">Bakery Buddy</strong> that grows with you, whether you spend a lot or not.
           </p>
+          <p className="mt-5 flex max-w-xl items-start gap-3 rounded-2xl border-2 border-dashed border-blue/50 bg-white/60 px-4 py-3 text-sm leading-snug text-ink/80">
+            <Info size={18} strokeWidth={2.5} className="mt-0.5 shrink-0 text-blue" aria-hidden />
+            <span>
+              <strong className="text-blue">Independent concept · Not affiliated with Bakery Bakery.</strong> This is an independent portfolio concept. Rewards, purchases and customer data are simulated.
+            </span>
+          </p>
 
-          <div className="mt-10 grid max-w-2xl grid-cols-3 gap-4">
+          <div className="mt-10 grid max-w-2xl grid-cols-1 gap-4 xl:grid-cols-3">
             {BENEFITS.map(({ Icon, title, text, tone }, i) => (
-              <div key={title} className={`rounded-[1.8rem] border-[2.5px] border-blue p-5 shadow-[0_5px_0_#0025FF] ${tone} ${i === 1 ? 'translate-y-4' : ''}`}>
+              <div key={title} className={`rounded-[1.8rem] border-[2.5px] border-blue p-5 shadow-[0_5px_0_#0025FF] ${tone} ${i === 1 ? 'xl:translate-y-4' : ''}`}>
                 <Icon size={26} strokeWidth={2.3} className={tone.includes('blue') ? 'text-pink' : 'text-blue'} />
-                <p className="display mt-4 text-[1.35rem] leading-[0.95]">{title}</p>
+                <p className="display mt-4 text-[1.35rem] leading-[0.95] hyphens-auto">{title}</p>
                 <p className={`mt-2 text-sm leading-snug ${tone.includes('blue') ? 'text-white/85' : 'text-ink/75'}`}>{text}</p>
               </div>
             ))}
@@ -98,7 +104,7 @@ export function Landing({ app }: { app: ReactNode }) {
 
         <aside className="sticky top-6" aria-label="Interactive prototype">
           <PhoneFrame>{app}</PhoneFrame>
-          <p className="mt-6 text-center text-xs text-ink/60">
+          <p className="mt-6 text-center text-xs text-ink/75">
             Try: onboarding → Pass → <em>Simulate a purchase</em>. Flask icon = demo controls.
           </p>
         </aside>

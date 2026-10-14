@@ -25,7 +25,8 @@ function ClubApp() {
 
   const Current = SCREENS[screen]
   return (
-    <div className="relative flex h-full w-full flex-col overflow-hidden bg-cream">
+    // Container query root: cqw/cqh in the screens refer to the phone, not the browser window
+    <div className="relative flex h-full w-full flex-col overflow-hidden bg-cream" style={{ containerType: 'size' }}>
       {!state.onboarded ? (
         // Onboarding scrollt, wenn das Fenster niedriger ist als der Inhalt (kleine Handys, Zoom, Einbettung)
         <div className="no-scrollbar relative min-h-0 flex-1 overflow-y-auto overscroll-contain">

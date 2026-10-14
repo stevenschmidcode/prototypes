@@ -1,5 +1,5 @@
-import { FlaskConical, X } from 'lucide-react'
-import { useEffect, useRef, type ReactNode } from 'react'
+import { FlaskConical, Info, X } from 'lucide-react'
+import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from 'react'
 
 export function DemoTag({ children = 'Demo' }: { children?: ReactNode }) {
   return (
@@ -48,7 +48,68 @@ export function Stamp({ size = 56, fill = '#FFC1E1', children, className = '' }:
   )
 }
 
-/** Bottom sheet inside the phone. Traps nothing fancy, but closes on Escape and backdrop click. */
+const FOCUSABLE = 'button:not([disabled]),a[href],input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])'
+
+/**
+ * Modal focus handling: focus moves into the dialog, Tab stays inside, Escape closes,
+ * and focus returns to whatever opened it. onClose may change on every render.
+ */
+export function useModalFocus(ref: RefObject<HTMLElement | null>, open: boolean, onClose?: () => void) {
+  const close = useRef(onClose)
+  close.current = onClose
+  useEffect(() => {
+    if (!open) return
+    const opener = document.activeElement as HTMLElement | null
+    const el = ref.current
+    if (el && !el.contains(document.activeElement)) (el.querySelector<HTMLElement>('[autofocus]') ?? el).focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && close.current) close.current()
+      if (e.key !== 'Tab' || !el) return
+      const items = [...el.querySelectorAll<HTMLElement>(FOCUSABLE)].filter((x) => x.getClientRects().length)
+      if (!items.length) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (e.shiftKey && (document.activeElement === first || document.activeElement === el)) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      if (opener?.isConnected) opener.focus({ preventScroll: true })
+    }
+  }, [open, ref])
+}
+
+/** Small, honest line: this is a concept, not the real thing. Tap for the full sentence. */
+export function ConceptNote({ tone = 'light', className = '' }: { tone?: 'light' | 'dark'; className?: string }) {
+  const [open, setOpen] = useState(false)
+  const id = useId()
+  const dark = tone === 'dark'
+  return (
+    <div className={`text-center ${className}`}>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen(!open)}
+        className={`max-w-full rounded-full px-2 py-1 text-[0.7rem] leading-snug font-bold text-balance ${dark ? 'text-white/85' : 'text-ink/75'}`}
+      >
+        <Info size={13} strokeWidth={2.5} className="mr-1 inline-block align-[-2px]" aria-hidden />
+        Independent concept · Not affiliated with Bakery Bakery
+      </button>
+      <p id={id} hidden={!open} className={`fade-in mx-auto mt-1 max-w-[20rem] text-xs leading-snug ${dark ? 'text-white/85' : 'text-ink/75'}`}>
+        This is an independent portfolio concept. Rewards, purchases and customer data are simulated.
+      </p>
+    </div>
+  )
+}
+
+/** Bottom sheet inside the phone: focus stays inside, Escape and backdrop close it. */
 export function Sheet({
   open,
   onClose,
@@ -65,18 +126,12 @@ export function Sheet({
   labelledBy?: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
-    window.addEventListener('keydown', onKey)
-    ref.current?.focus()
-    return () => window.removeEventListener('keydown', onKey)
-  }, [open, onClose])
+  useModalFocus(ref, open, onClose)
   if (!open) return null
   const bg = tone === 'pink' ? 'bg-pink' : tone === 'blue' ? 'bg-blue text-white' : 'bg-cream'
   return (
     <div className="absolute inset-0 z-40 flex flex-col justify-end">
-      <button aria-label="Close" className="fade-in absolute inset-0 bg-ink/40" onClick={onClose} />
+      <button aria-label="Close" tabIndex={-1} className="fade-in absolute inset-0 bg-ink/40" onClick={onClose} />
       <div
         ref={ref}
         role="dialog"

@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
   apply,
+  clearSaved,
+  load,
+  save,
   availableRewards,
   chapterOf,
   initialState,
@@ -106,5 +109,42 @@ describe('loyalty engine', () => {
   it('boostBuddy advances exactly one chapter', () => {
     const s = run([{ type: 'boostBuddy' }])
     expect(chapterOf(s)).toBe(2)
+  })
+})
+
+describe('loyalty engine: edge cases (1.1)', () => {
+  it('rejects zero and negative amounts', () => {
+    const s0 = run([buy('coffee')])
+    expect(apply(s0, topup(0)).state).toBe(s0)
+    expect(apply(s0, topup(-5000)).state).toBe(s0)
+    expect(totalCollected(s0)).toBe(550)
+  })
+
+  it('carries the surplus over several rewards in a row', () => {
+    // 3 × 140 = 420 -> two rewards, 120 towards the third
+    const s = run([topup(14000), topup(14000), topup(14000)])
+    expect(s.rewards).toHaveLength(2)
+    expect(progressTowardsNext(s)).toBe(12000)
+    expect(remainingToNext(s)).toBe(3000)
+  })
+
+  it('keeps earned rewards when some are redeemed and more are earned', () => {
+    let s = run([topup(15000)])
+    s = run([{ type: 'redeem', rewardId: s.rewards[0].id }, topup(30000)], s)
+    expect(s.rewards).toHaveLength(3)
+    expect(redeemedRewards(s)).toHaveLength(1)
+    expect(availableRewards(s)).toHaveLength(2)
+  })
+
+  it('survives a save/load round trip and a reset', () => {
+    const store = new Map<string, string>()
+    const ls = { getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v), removeItem: (k: string) => void store.delete(k) }
+    ;(globalThis as { localStorage?: unknown }).localStorage = ls
+    const s = run([buy('combo'), topup(15000)])
+    save(s)
+    expect(load()).toEqual(s)
+    clearSaved()
+    expect(load()).toEqual(initialState())
+    delete (globalThis as { localStorage?: unknown }).localStorage
   })
 })

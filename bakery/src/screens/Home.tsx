@@ -1,8 +1,8 @@
-import { BookOpen, ChevronRight, FlaskConical, Gift, Info, MapPin, QrCode, Smile, Sparkles } from 'lucide-react'
+import { BookOpen, ChevronRight, FlaskConical, Gift, Info, MapPin, QrCode, RotateCcw, Smile, Sparkles } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Buddy, type Mood } from '../buddy/Buddy'
 import { DoughTrail } from '../components/DoughTrail'
-import { Blob } from '../components/ui'
+import { Blob, ConceptNote } from '../components/ui'
 import { CHAPTERS, REWARD_THRESHOLD } from '../data/catalog'
 import { STORES } from '../data/stores'
 import {
@@ -13,7 +13,7 @@ import {
   purchaseCount,
   remainingToNext,
 } from '../state/engine'
-import { useClub } from '../state/store'
+import { useClub, type ReactionKind } from '../state/store'
 
 const IDLE_QUIPS = ['You’re on a roll!', 'Life’s better with crumbs.', 'Another day, another croissant.', 'That’s how we dough it.', 'Good things take thyme.']
 const POKE_QUIPS = ['Hehe, that tickles!', 'Careful, I’m flaky.', 'Got any crumbs?', 'Boop!', 'I knead a nap.']
@@ -29,11 +29,20 @@ function useRecent(ts: number, ms = 6000) {
   return ts > 0 && now - ts < ms
 }
 
+const REACTIONS: Record<ReactionKind, { line: string; mood: Mood }> = {
+  yum: { line: 'YUM! Good choice.', mood: 'yum' },
+  firstYum: { line: 'You’re officially on a roll!', mood: 'excited' },
+  reward: { line: 'YOU DID IT!', mood: 'excited' },
+  accessory: { line: 'Looking pretty fresh!', mood: 'happy' },
+}
+const SECRET = 'Psst… you’re my favourite human.'
+
 export function Home() {
-  const { state, go, lastYumAt, setDemoOpen, setAboutOpen } = useClub()
-  const [poke, setPoke] = useState(0)
-  const justAte = useRecent(lastYumAt)
-  const poked = useRecent(poke, 2500)
+  const { state, go, reaction, setDemoOpen, setAboutOpen } = useClub()
+  // Taps on the buddy: count quick taps in a row, the fifth one gets a secret
+  const [poke, setPoke] = useState({ at: 0, n: 0 })
+  const poked = useRecent(poke.at, 2600)
+  const reacting = useRecent(reaction?.shownAt ?? 0, 6000)
 
   const progress = progressTowardsNext(state)
   const remaining = remainingToNext(state)
@@ -44,17 +53,16 @@ export function Home() {
   let mood: Mood = 'idle'
   let line: string
   if (poked) {
-    mood = 'happy'
-    line = POKE_QUIPS[poke % POKE_QUIPS.length]
-  } else if (justAte) {
-    mood = 'yum'
-    line = 'That was delicious!'
+    mood = poke.n >= 5 ? 'excited' : 'happy'
+    line = poke.n >= 5 ? SECRET : POKE_QUIPS[(poke.n - 1) % POKE_QUIPS.length]
+  } else if (reacting && reaction) {
+    ;({ line, mood } = REACTIONS[reaction.kind])
   } else if (treats > 0) {
     mood = 'excited'
     line = 'You earned something tasty!'
   } else if (progress > 0 && remaining <= 3000) {
     mood = 'happy'
-    line = 'Almost treat time!'
+    line = 'Almost coffee time!'
   } else if (state.transactions.length === 0) {
     line = 'Fresh out of the oven!'
   } else {
@@ -80,32 +88,38 @@ export function Home() {
           </button>
         </div>
       </header>
+      <ConceptNote className="mt-2 px-5" />
 
       {/* Buddy stage */}
       <section aria-label="Your buddy" className="relative mt-1 px-5">
-        <div className="relative grid place-items-center pt-14">
-          <Blob className="absolute top-14 h-52 w-64" />
-          <div aria-live="polite" className="pop-in absolute top-0 left-1/2 z-10 -translate-x-1/2" key={line}>
-            <div className="relative rounded-[1.4rem] border-[2.5px] border-blue bg-white px-4 py-2 text-center font-bold whitespace-nowrap text-blue shadow-[0_3px_0_#0025FF]">
+        <div className="relative grid place-items-center pt-16">
+          <Blob className="absolute top-16 h-52 w-64" />
+          <div aria-live="polite" className="absolute top-1 left-1/2 z-10 w-max max-w-[min(18rem,100%)] -translate-x-1/2">
+            <div key={line} className="pop-in relative rounded-[1.4rem] border-[2.5px] border-blue bg-white px-4 py-2 text-center leading-tight font-bold text-balance text-blue shadow-[0_3px_0_#0025FF]">
               {line}
-              <span className="absolute -bottom-[9px] left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-r-[2.5px] border-b-[2.5px] border-blue bg-white" />
+              <span className="absolute -bottom-[9px] left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-r-[2.5px] border-b-[2.5px] border-blue bg-white" aria-hidden />
             </div>
           </div>
-          <button onClick={() => setPoke(Date.now())} aria-label={`Say hi to ${state.buddy.name}`} className="relative rounded-full">
+          <button
+            onClick={() => setPoke((p) => ({ at: Date.now(), n: Date.now() - p.at < 1600 && p.n < 5 ? p.n + 1 : 1 }))}
+            aria-label={`Say hi to ${state.buddy.name}`}
+            className="relative rounded-full"
+          >
             <Buddy
               species={state.buddy.species}
               chapter={chapter}
               equipped={state.equipped}
               mood={mood}
               size={190}
-              bounceKey={justAte ? lastYumAt : poked ? poke : undefined}
+              className="h-auto w-[clamp(9.5rem,48cqw,11.9rem)]"
+              bounceKey={poked ? poke.at : reacting ? reaction?.shownAt : undefined}
               title={state.buddy.name}
             />
           </button>
         </div>
-        <div className="relative z-10 mt-2 flex items-center justify-center gap-2">
+        <div className="relative z-10 mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
           <span className="display text-xl text-blue normal-case">{state.buddy.name}</span>
-          <button onClick={() => go('buddy')} className="chip">
+          <button onClick={() => go('buddy')} className="chip whitespace-nowrap">
             Ch. {chapter} · {CHAPTERS[chapter].title}
           </button>
         </div>
@@ -123,8 +137,9 @@ export function Home() {
             </button>
           )}
         </div>
-        <p className="display mt-1 text-[2.4rem] text-blue">
-          {formatChf(progress)} <span className="text-pink-hot">/</span> <span className="text-blue/40">{formatChf(REWARD_THRESHOLD)}</span>
+        <p className="display mt-1 text-[clamp(1.5rem,8.2cqw,2.4rem)] whitespace-nowrap text-blue">
+          {formatChf(progress)} <span className="text-pink-hot" aria-hidden>/</span>
+          <span className="sr-only">of</span> <span className="text-blue/60">{formatChf(REWARD_THRESHOLD)}</span>
         </p>
         <DoughTrail progress={progress} />
         <p className="text-center text-sm font-semibold text-ink/80">
@@ -150,6 +165,33 @@ export function Home() {
         <RowLink onClick={() => go('story')} Icon={BookOpen} title="My Bakery Story" sub={`${state.story.length} little moment${state.story.length === 1 ? '' : 's'} so far`} />
         <RowLink onClick={() => go('map')} Icon={MapPin} title="Bakery Map" sub={`${state.discoveredStores.length} of ${STORES.length} bakeries discovered`} />
       </section>
+
+      <RestartDemo />
+    </div>
+  )
+}
+
+/** Discreet way back to the very beginning, e.g. before showing the demo to the next person. */
+function RestartDemo() {
+  const { reset } = useClub()
+  const [ask, setAsk] = useState(false)
+  return (
+    <div className="mt-8 px-5 text-center">
+      {ask ? (
+        <div className="flex flex-wrap items-center justify-center gap-2 text-sm" role="group" aria-label="Restart demo">
+          <span className="w-full font-semibold text-ink/75">Start over? This clears all demo data.</span>
+          <button autoFocus className="btn btn-blue !px-4 !py-2 text-sm" onClick={reset}>
+            Yes, restart
+          </button>
+          <button className="btn btn-white !px-4 !py-2 text-sm" onClick={() => setAsk(false)}>
+            Cancel
+          </button>
+        </div>
+      ) : (
+        <button onClick={() => setAsk(true)} className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold text-ink/65 underline-offset-4 hover:underline">
+          <RotateCcw size={13} strokeWidth={2.5} aria-hidden /> Restart demo
+        </button>
+      )}
     </div>
   )
 }

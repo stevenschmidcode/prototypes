@@ -1,5 +1,5 @@
 import { Coffee, FlaskConical, Gift, Plus, RotateCcw, ShoppingBag, Sparkles, Wand2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Buddy } from '../buddy/Buddy'
 import { ACCESSORIES, CHALLENGES, CHAPTERS, DEMO_PRODUCTS, REWARD_THRESHOLD } from '../data/catalog'
 import {
@@ -13,43 +13,91 @@ import {
   totalCollected,
 } from '../state/engine'
 import { useClub } from '../state/store'
-import { Blob, DemoTag, Sheet } from './ui'
+import { Blob, DemoTag, Sheet, useModalFocus } from './ui'
 import { BehindTheDough, Disclaimer } from '../desktop/BehindTheDough'
 
+/** Select → confirm → the till "books" it → back home, where the progress and the buddy react. */
 export function PurchaseSheet() {
-  const { purchaseOpen, setPurchaseOpen, dispatch } = useClub()
+  const { purchaseOpen, setPurchaseOpen, dispatch, go } = useClub()
+  // The transaction id is fixed when an item is picked, so a double tap on "confirm" can never credit twice
+  const [pick, setPick] = useState<{ productId: string; txId: string } | null>(null)
+  const close = () => {
+    setPurchaseOpen(false)
+    setPick(null)
+  }
+  const product = DEMO_PRODUCTS.find((p) => p.id === pick?.productId)
   return (
     <Sheet
       open={purchaseOpen}
-      onClose={() => setPurchaseOpen(false)}
+      onClose={close}
       labelledBy="buy-h"
       title={
         <>
           <DemoTag>Demo purchase</DemoTag>
-          <h2 className="display mt-2 text-[2.1rem] text-blue">What’s on the tray?</h2>
+          <h2 className="display mt-2 text-[clamp(1.75rem,8cqw,2.1rem)] text-blue">What’s on the tray?</h2>
         </>
       }
     >
-      <p className="-mt-2 mb-4 text-sm text-ink/70">Tap an item to simulate a confirmed purchase at the till. Prices are made up for this demo.</p>
-      <div className="grid grid-cols-2 gap-3">
-        {DEMO_PRODUCTS.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => {
-              dispatch({ type: 'purchase', txId: makeTxId(), productId: p.id })
-              setPurchaseOpen(false)
-            }}
-            className="flex flex-col items-start rounded-[1.4rem] border-[2.5px] border-blue bg-white p-4 text-left shadow-[0_4px_0_#0025FF] transition active:translate-y-[3px] active:shadow-[0_1px_0_#0025FF]"
-          >
-            <span className="text-3xl" aria-hidden>
-              {p.emoji}
-            </span>
-            <span className="mt-2 font-extrabold text-blue">{p.label}</span>
-            <span className="text-sm font-semibold text-ink/70">{formatChfExact(p.price)}</span>
-          </button>
-        ))}
+      <p className="-mt-2 mb-4 text-sm text-ink/75">Pick an item, then confirm it like the till would. Prices are made up for this demo.</p>
+      <div role="radiogroup" aria-label="Demo products" className="grid grid-cols-2 gap-3">
+        {DEMO_PRODUCTS.map((p) => {
+          const on = pick?.productId === p.id
+          return (
+            <button
+              key={p.id}
+              role="radio"
+              aria-checked={on}
+              onClick={() => setPick(on ? pick : { productId: p.id, txId: makeTxId() })}
+              className={`flex flex-col items-start rounded-[1.4rem] border-[2.5px] border-blue p-4 text-left transition ${on ? 'translate-y-[3px] bg-pink shadow-[0_1px_0_#0025FF]' : 'bg-white shadow-[0_4px_0_#0025FF]'}`}
+            >
+              <span className="text-3xl" aria-hidden>
+                {p.emoji}
+              </span>
+              <span className="mt-2 font-extrabold text-blue">{p.label}</span>
+              <span className="text-sm font-semibold text-ink/75">{formatChfExact(p.price)}</span>
+            </button>
+          )
+        })}
       </div>
+      <button
+        className="btn btn-blue mt-5 w-full"
+        disabled={!pick}
+        onClick={() => {
+          if (!pick) return
+          dispatch({ type: 'purchase', txId: pick.txId, productId: pick.productId })
+          close()
+          go('home')
+        }}
+      >
+        {product ? `Confirm ${formatChfExact(product.price)}` : 'Pick something tasty'}
+      </button>
     </Sheet>
+  )
+}
+
+/** Croissants and crumbs raining down once, for the very first treat. CSS only; hidden with reduced motion. */
+function CrumbConfetti() {
+  const bits = Array.from({ length: 22 }, (_, i) => i)
+  return (
+    <div className="confetti pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      {bits.map((i) => {
+        const croissant = i % 4 === 0
+        const style = {
+          left: `${(i * 37) % 100}%`,
+          animationDelay: `${(i % 7) * 0.12}s`,
+          animationDuration: `${1.8 + (i % 5) * 0.25}s`,
+          ['--drift' as string]: `${((i * 13) % 60) - 30}px`,
+          ['--spin' as string]: `${((i * 47) % 300) + 120}deg`,
+        }
+        return croissant ? (
+          <svg key={i} viewBox="0 0 40 26" className="confetti-bit absolute -top-8 h-6 w-9" style={style}>
+            <path d="M3 22 C1 10 11 3 20 3 C29 3 39 10 37 22 C34 25 31 24 29 21 C24 24 16 24 11 21 C9 24 6 25 3 22 Z" fill="#FFC1E1" stroke="#0B0B2B" strokeWidth={2.2} strokeLinejoin="round" />
+          </svg>
+        ) : (
+          <span key={i} className={`confetti-bit absolute -top-4 rounded-full ${i % 3 ? 'h-2.5 w-2.5 bg-pink' : 'h-2 w-3 bg-[#F3C98B]'}`} style={style} />
+        )
+      })}
+    </div>
   )
 }
 
@@ -57,6 +105,9 @@ export function PurchaseSheet() {
 export function Celebrations() {
   const { effects, shiftEffect, state, go } = useClub()
   const fx = effects[0]
+  const big = useRef<HTMLDivElement>(null)
+  const isBig = fx?.type === 'reward' || fx?.type === 'chapter'
+  useModalFocus(big, isBig, shiftEffect)
 
   useEffect(() => {
     if (!fx || fx.type === 'reward' || fx.type === 'chapter') return
@@ -119,31 +170,55 @@ export function Celebrations() {
 
   // Full-screen moments
   const isReward = fx.type === 'reward'
+  const firstReward = isReward && state.rewards[0]?.id === fx.rewardId
+  const stage = (extra: typeof state.equipped = []) => (
+    <div className="relative mt-2 grid place-items-center">
+      <Blob className="absolute h-[clamp(9rem,30cqh,13rem)] w-[clamp(10rem,33cqh,14rem)]" />
+      <Buddy
+        species={state.buddy.species}
+        chapter={chapter}
+        equipped={[...new Set([...state.equipped, ...extra])]}
+        mood="excited"
+        size={180}
+        bounceKey={1}
+        className="h-auto w-[clamp(8.5rem,26cqh,11.25rem)]"
+      />
+    </div>
+  )
   return (
-    <div className="absolute inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-blue px-6 text-center text-white fade-in" role="dialog" aria-modal="true" aria-labelledby="celebrate-h">
+    <div
+      ref={big}
+      tabIndex={-1}
+      className="no-scrollbar absolute inset-0 z-50 flex flex-col items-center overflow-x-hidden overflow-y-auto bg-blue px-6 text-center text-white outline-none fade-in"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="celebrate-h"
+    >
       <svg viewBox="0 0 300 300" className="spin-slow absolute top-1/2 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-[60%] opacity-30" aria-hidden>
         {Array.from({ length: 18 }, (_, i) => (
           <path key={i} d="M150 150 L144 0 L156 0 Z" fill={i % 2 ? '#FFC1E1' : 'transparent'} transform={`rotate(${i * 20} 150 150)`} />
         ))}
       </svg>
-      <div className="relative">
+      {firstReward && <CrumbConfetti />}
+      <div className="relative my-auto w-full max-w-sm py-8">
         {isReward ? (
           <>
-            <h2 id="celebrate-h" className="display pop-in text-[3.6rem] text-pink">
+            <DemoTag>Demo reward</DemoTag>
+            <h2 id="celebrate-h" className="display pop-in mt-3 text-[clamp(2.6rem,14cqw,3.6rem)] text-pink">
               You earned
               <br />a treat!
             </h2>
-            <div className="relative mt-2 grid place-items-center"><Blob className="absolute h-52 w-56" />{buddy('excited', 180, ['cup'])}</div>
+            {stage(['cup'])}
             <p className="hand text-3xl">Coffee’s on us. Well, in this demo.</p>
-            <p className="mt-1 text-sm text-white/75">Every {formatChf(REWARD_THRESHOLD)} = one free coffee (concept assumption).</p>
+            <p className="mt-1 text-sm text-white/85">Every {formatChf(REWARD_THRESHOLD)} = one free coffee (concept assumption).</p>
           </>
         ) : (
           <>
             <p className="hand text-3xl text-pink">a new chapter begins…</p>
-            <h2 id="celebrate-h" className="display pop-in mt-1 text-[3.4rem]">
+            <h2 id="celebrate-h" className="display pop-in mt-1 text-[clamp(2.5rem,13cqw,3.4rem)]">
               {CHAPTERS[fx.chapter].title}
             </h2>
-            <div className="relative mt-2 grid place-items-center"><Blob className="absolute h-52 w-56" />{buddy('excited', 180)}</div>
+            {stage()}
             <p className="text-lg font-semibold">{CHAPTERS[fx.chapter].line}</p>
           </>
         )}

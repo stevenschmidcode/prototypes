@@ -343,3 +343,26 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* First treat: croissants and crumbs fall once */
+@keyframes crumb-fall {
+  0% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--drift, 0), 900px) rotate(var(--spin, 180deg));
+    opacity: 0;
+  }
+}
+.confetti-bit {
+  animation: crumb-fall 2s cubic-bezier(0.3, 0.1, 0.6, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .confetti {
+    display: none;
+  }
+}
