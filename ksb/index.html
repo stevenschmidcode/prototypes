@@ -316,10 +316,364 @@ body.show-int .int{display:inline-flex}
 }
 .concept .close{display:none}
 @media (max-width:860px){.concept .close{display:grid;position:sticky;top:0;margin-left:auto}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* =================================================================
+   Case study shell: header, views
+   ================================================================= */
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
+.view[hidden]{display:none!important}
+.cs-head{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:16px;height:60px;padding:0 24px;
+  background:color-mix(in srgb,var(--page) 84%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.cs-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.cs-brand small{display:block;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0}
+.cs-brand .t{line-height:1.15}
+.cs-nav{display:flex;gap:2px;align-items:center;overflow-x:auto;scrollbar-width:none;flex:1;justify-content:center}
+.cs-nav::-webkit-scrollbar{display:none}
+.cs-nav a{display:flex;align-items:center;gap:6px;padding:8px 11px;border-radius:10px;font-size:13.5px;font-weight:700;color:var(--muted);text-decoration:none;white-space:nowrap;transition:background .15s,color .15s}
+.cs-nav a:hover{color:var(--ink);background:var(--surface)}
+.cs-nav a[aria-current="page"]{background:var(--brand-soft);color:var(--brand)}
+.cs-nav a .n{font-family:"JetBrains Mono",monospace;font-size:10.5px;opacity:.65}
+.cs-nav a svg{width:16px;height:16px}
+.cs-nav .sep{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 6px 0 14px;border-left:1px solid var(--line);margin-left:8px;white-space:nowrap;font-weight:700}
+.stage{min-height:calc(100vh - 60px)}
+.phone{top:84px;height:min(844px,calc(100vh - 108px))}
+.concept .cta{display:grid;gap:6px}
+.concept .cta a{display:grid;grid-template-columns:30px 1fr 18px;gap:10px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+.concept .cta a:hover{border-color:var(--brand)}
+.concept .cta .n{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--brand)}
+.concept .cta b{font-size:13.5px;display:block}
+.concept .cta span span{font-size:12px;color:var(--muted)}
+.concept .cta svg{width:16px;height:16px;color:var(--muted)}
+@media (max-width:860px){
+  .cs-head{height:52px;padding:0 10px 0 12px;gap:8px}
+  .cs-brand .t{display:none}
+  .cs-nav{justify-content:flex-start}
+  .cs-nav .sep{display:none}
+  .cs-nav a{padding:7px 9px;font-size:13px}
+  .cs-nav a .n{display:none}
+  .stage{min-height:0}
+  .phone{top:0;height:calc(100dvh - 52px)}
+  .content{padding-top:10px}
+}
+
+/* =================================================================
+   Business analysis workspace
+   ================================================================= */
+.ba{max-width:1180px;margin:0 auto;padding:30px 32px 64px}
+.ba h1{font-size:clamp(26px,3.4vw,38px);line-height:1.08;letter-spacing:-.025em;margin:10px 0 12px;max-width:820px}
+.ba h2{font-size:21px;letter-spacing:-.015em;margin:0 0 4px}
+.ba h3{font-size:18px;letter-spacing:-.01em;margin:4px 0 8px}
+.ba p{line-height:1.55}
+.ba-eyebrow{display:flex;gap:10px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.ba-eyebrow .mono{color:var(--muted);letter-spacing:0}
+.ba-lead{color:var(--muted);font-size:16px;max-width:760px;margin:0}
+.ba-comps{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.ba-comps span{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px;border:1px solid var(--line);background:var(--surface)}
+.ba-comps svg{width:13px;height:13px;color:var(--brand);stroke-width:3}
+.ba-sec{margin-top:40px}
+.ba-sec-h{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.ba-sec-h p{margin:0;color:var(--muted);font-size:14px;max-width:640px}
+.ba-label{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 7px}
+.ba-label:first-child{margin-top:0}
+.ba-panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+.ba-grid2{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);gap:18px;align-items:start}
+.ba-grid2.even{grid-template-columns:1fr 1fr}
+.ba-note-bar{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--muted);border:1px dashed color-mix(in srgb,var(--accent) 55%,var(--line));background:color-mix(in srgb,var(--accent-soft) 55%,transparent);border-radius:14px;padding:10px 14px;margin:18px 0}
+.ba-note-bar svg{color:var(--accent);margin-top:1px;width:17px;height:17px}
+.ba-note-bar b{color:var(--ink)}
+.ba-assume{display:inline-flex;align-items:center;gap:5px;font-family:"JetBrains Mono",monospace;font-size:10.5px;padding:2px 7px;border-radius:7px;border:1px dashed var(--accent);color:var(--accent);background:var(--accent-soft);white-space:nowrap}
+.ba-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:18px 0 12px}
+.ba-seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:3px;gap:2px;flex-wrap:wrap}
+.ba-seg button{padding:8px 13px;border-radius:10px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+.ba-seg button[aria-pressed="true"]{background:var(--brand);color:#fff}
+:root[data-theme="dark"] .ba-seg button[aria-pressed="true"]{color:var(--brand-ink)}
+.ba-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ba-chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;white-space:nowrap;transition:border-color .15s,background .15s}
+.ba-chip:hover{border-color:var(--brand)}
+.ba-chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.ba-chip.xs{font-size:11.5px;padding:4px 9px}
+.ba-chip.mono{font-family:"JetBrains Mono",monospace;font-weight:500}
+.ba-chip svg{width:13px;height:13px}
+.ba-dot{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block}
+.ba-list{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.ba-list li{display:flex;gap:9px;font-size:13.5px;line-height:1.45}
+.ba-list li svg{width:15px;height:15px;margin-top:2px;color:var(--brand);flex:none}
+.ba-list.warn li svg{color:var(--accent)}
+.ba-list.q li svg{color:var(--int)}
+.ba-callout{border-left:3px solid var(--brand);background:var(--brand-soft);border-radius:0 12px 12px 0;padding:10px 13px;font-size:13.5px;line-height:1.5;margin:12px 0}
+.ba-callout.warn{border-color:var(--accent);background:var(--accent-soft)}
+.ba-callout.int{border-color:var(--int);background:var(--int-soft)}
+.ba-callout b{display:block;font-size:11px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;color:var(--muted)}
+.ba-hint{display:none;font-size:12px;color:var(--muted);text-align:center;margin:6px 0 0}
+.ba-x{display:none}
+
+/* method strip */
+.ba-method{display:flex;align-items:center;gap:0;margin-top:24px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.ba-method::-webkit-scrollbar{display:none}
+.mstep{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;font-size:13px;font-weight:700;color:var(--muted);border:1px solid transparent;white-space:nowrap;position:relative}
+.mstep .mono{font-size:11px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line)}
+.mstep:hover{color:var(--ink)}
+.mstep.here{color:var(--ink);border-color:var(--line);background:var(--surface)}
+.mstep.here .mono{background:var(--brand);border-color:var(--brand);color:#fff}
+.mstep[aria-expanded="true"]{border-color:var(--brand)}
+.mline{flex:1;min-width:14px;height:1.5px;background:var(--line)}
+.mdetail{display:grid;grid-template-columns:1.2fr 1fr;gap:12px 24px;margin-top:10px}
+.mdetail p{margin:0 0 8px;font-size:14px}
+.mdetail .ba-foot{grid-column:1/-1;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin:0}
+
+/* process diagram */
+.pd-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.pd-metric{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.pd-metric .v{display:flex;align-items:baseline;gap:8px;font-size:24px;font-weight:800;letter-spacing:-.02em}
+.pd-metric .v small{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0}
+.pd-metric .k{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+.pd-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.pd,.ad{position:relative;display:grid}
+.pd{grid-template-columns:124px repeat(var(--cols),minmax(134px,1fr));min-width:calc(124px + var(--cols) * 138px)}
+.lane-bg{grid-column:1/-1;border-bottom:1px solid var(--line)}
+.lane-bg.alt{background:var(--surface-2)}
+.lane-bg.last{border-bottom:0}
+.lane-lab{grid-column:1;position:sticky;left:0;z-index:3;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:0 14px;font-weight:800;font-size:12.5px;border-right:1px solid var(--line);background:var(--surface)}
+.lane-lab.alt{background:var(--surface-2)}
+.lane-lab small{font-weight:600;color:var(--muted);font-size:11px}
+.pd-node,.ad-node{z-index:2;align-self:center;justify-self:center;width:calc(100% - 26px);max-width:182px;margin:14px 0;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 11px;box-shadow:var(--shadow);font-size:12.5px;position:relative;transition:border-color .15s,box-shadow .15s,opacity .15s}
+.pd-node:hover,.ad-node:hover{border-color:var(--brand)}
+.pd-node .no{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--muted)}
+.pd-node b,.ad-node b{display:block;font-size:13px;line-height:1.3;margin:2px 0 6px}
+.pd-node[aria-pressed="true"],.ad-node[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 28%,transparent)}
+.pd-node.mb{border-color:color-mix(in srgb,var(--accent) 70%,var(--line))}
+.pd-node.start::before,.pd-node.end::before{content:"Start";position:absolute;top:-9px;left:10px;font-family:"JetBrains Mono",monospace;font-size:9.5px;padding:1px 6px;border-radius:6px;background:var(--ink);color:var(--surface)}
+.pd-node.end::before{content:"Ende"}
+.flags{display:flex;flex-wrap:wrap;gap:4px}
+.fl{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+.fl svg{width:11px;height:11px}
+.fl.mb{background:var(--accent-soft);color:var(--accent)}
+.fl.auto{background:var(--brand-soft);color:var(--brand)}
+.fl.q{background:var(--int-soft);color:var(--int)}
+.fl.ev{background:var(--danger-soft);color:var(--danger)}
+svg.edges{position:absolute;left:0;top:0;z-index:1;pointer-events:none;overflow:visible}
+svg.edges path{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-linejoin:round;opacity:.75}
+svg.edges path.mb{stroke:var(--accent);stroke-dasharray:5 4;opacity:1}
+svg.edges path.dash{stroke-dasharray:3 4}
+svg.edges path.hl{stroke:var(--brand);stroke-width:2.5;opacity:1}
+svg.edges path.dim{opacity:.18}
+.edge-lbls{position:absolute;inset:0;z-index:2;pointer-events:none}
+.edge-lbl{position:absolute;transform:translate(-50%,-50%);font-family:"JetBrains Mono",monospace;font-size:10px;background:var(--surface);padding:1px 6px;border-radius:6px;border:1px solid var(--line);white-space:nowrap;color:var(--muted)}
+.edge-lbl.mb{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 60%,transparent)}
+.edge-lbl.hl{color:var(--brand);border-color:var(--brand)}
+.edge-lbl.dim{opacity:.25}
+.ba-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted)}
+.ba-legend span{display:inline-flex;align-items:center;gap:5px}
+.ba-legend i{display:inline-block;width:22px;height:0;border-top:2px dashed var(--accent)}
+.pd-stepnav{display:flex;gap:8px;margin-top:16px}
+.pd-stepnav .btn{height:40px;font-size:13px}
+.an-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.an-cell{border:1px solid var(--line);border-radius:14px;padding:12px 13px;font-size:13px;line-height:1.5;background:var(--surface)}
+.an-cell .ba-label{margin:0 0 5px}
+.an-cell a{color:var(--brand);font-weight:700;text-decoration:none}
+
+/* requirements */
+.moscow{display:flex;gap:3px;height:46px;border-radius:13px;overflow:hidden;margin-bottom:10px}
+.moscow button{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;font-weight:800;min-width:76px;transition:filter .15s,opacity .15s}
+.moscow button span{font-family:"JetBrains Mono",monospace;font-weight:500;opacity:.8}
+.moscow button[aria-pressed="false"]{opacity:.35}
+.p-M{background:var(--brand);color:#fff}
+.p-S{background:color-mix(in srgb,var(--brand) 55%,var(--surface));color:var(--ink)}
+.p-C{background:color-mix(in srgb,var(--brand) 22%,var(--surface));color:var(--ink)}
+.p-W{background:var(--surface-2);color:var(--muted);border:1px dashed var(--line)}
+:root[data-theme="dark"] .p-M{color:var(--brand-ink)}
+.prio{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;font-size:12px;font-weight:800;flex:none}
+.rq-group{margin-bottom:14px}
+.rq-group h4{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:0 0 6px;color:var(--muted);font-weight:700}
+.rq-row{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:12px;align-items:center;width:100%;text-align:left;padding:11px 13px;border-radius:13px;border:1px solid var(--line);background:var(--surface);margin-bottom:6px;transition:border-color .15s}
+.rq-row:hover{border-color:var(--brand)}
+.rq-row[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 22%,transparent)}
+.rq-row .id{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted)}
+.rq-row b{font-size:14px;display:block}
+.rq-row small{display:block;font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.st::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--line)}
+.st.prototyp::before{background:var(--brand)}
+.st.bereit::before{background:var(--ok)}
+.st.klaerung::before{background:var(--accent)}
+.st.entwurf::before{background:var(--muted)}
+.rq-text{font-size:15px;line-height:1.55;margin:6px 0 4px;padding:12px 14px;border-radius:13px;background:var(--surface-2)}
+.rq-text em{font-style:normal;color:var(--brand);font-weight:700}
+.release{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.release .col{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--surface)}
+.release .col.w{border-style:dashed;background:transparent}
+.release h4{margin:0;font-size:14.5px}
+.release p{margin:2px 0 10px;font-size:12px;color:var(--muted)}
+.release .ba-chips{gap:5px}
+
+/* stakeholder matrix */
+.sm-wrap{display:grid;grid-template-columns:22px 1fr;grid-template-rows:1fr 22px;gap:6px}
+.sm-y{writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font-size:11.5px;font-weight:700;color:var(--muted)}
+.sm-x{grid-column:2;text-align:center;font-size:11.5px;font-weight:700;color:var(--muted)}
+.sm{position:relative;aspect-ratio:1.15/1;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface)}
+.sm .q{position:absolute;width:50%;height:50%;padding:10px 12px;font-size:11px;font-family:"JetBrains Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.sm .q1{right:0;top:0;background:var(--brand-soft);text-align:right}
+.sm .q2{left:0;top:0;border-right:1px dashed var(--line)}
+.sm .q3{left:0;bottom:0;border-right:1px dashed var(--line);border-top:1px dashed var(--line);display:flex;align-items:flex-end}
+.sm .q4{right:0;bottom:0;border-top:1px dashed var(--line);text-align:right;display:flex;align-items:flex-end;justify-content:flex-end}
+.sm-dot{position:absolute;transform:translate(-9px,50%);display:flex;white-space:nowrap;align-items:center;gap:6px;font-size:12px;font-weight:700;z-index:2;padding:2px 6px 2px 2px;border-radius:99px;transition:opacity .15s}
+.sm-dot i{width:14px;height:14px;border-radius:50%;background:var(--brand);border:2.5px solid var(--surface);box-shadow:0 0 0 1.5px var(--brand);flex:none}
+.sm-dot[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.sm-dot[aria-pressed="true"] i{background:var(--accent);box-shadow:0 0 0 1.5px var(--accent)}
+.sm-dot.left{flex-direction:row-reverse;transform:translate(calc(-100% + 9px),50%);padding:2px 2px 2px 6px}
+.sh-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sh-grid .an-cell{padding:10px 12px}
+
+/* architecture */
+.ad{grid-template-columns:118px repeat(5,minmax(146px,1fr));min-width:calc(118px + 5 * 152px)}
+.ad-node.ctx{border-style:dashed;box-shadow:none;background:transparent;opacity:.85}
+.ad-node .sub{display:block;font-size:11.5px;color:var(--muted);margin:-3px 0 6px}
+.ad-node.dim{opacity:.35}
+.ad-node.hl{border-color:var(--brand)}
+.flow-steps{counter-reset:f;list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}
+.flow-steps li{display:flex;gap:10px;font-size:13.5px;align-items:flex-start}
+.flow-steps li .mono{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:var(--brand-soft);color:var(--brand)}
+.std-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.std{display:flex;flex-direction:column;gap:4px}
+.std h3{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.std .yes li svg{color:var(--ok)}
+.std .no li svg{color:var(--danger)}
+.std .btn{margin-top:auto}
+.sec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sec-tile{border:1px solid var(--line);border-radius:14px;padding:13px;background:var(--surface);font-size:13px;line-height:1.5}
+.sec-tile b{display:flex;align-items:center;gap:7px;font-size:13.5px;margin-bottom:4px}
+.sec-tile b svg{width:16px;height:16px;color:var(--brand)}
+.dm{width:100%;border-collapse:collapse;font-size:13px}
+.dm th,.dm td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:center}
+.dm th:first-child,.dm td:first-child{text-align:left}
+.dm thead th{font-size:11.5px;color:var(--muted);font-weight:700}
+.dm td small{display:block;font-size:11px;color:var(--muted)}
+.dm .y{color:var(--brand);font-weight:800}
+.dm .p{color:var(--accent);font-weight:800}
+.dm .n{color:var(--muted)}
+.dm-scroll{overflow-x:auto}
+
+/* impact */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi h3{font-size:15px;display:flex;align-items:center;gap:8px}
+.kpi h3 svg{width:17px;height:17px;color:var(--brand)}
+.kpi-item{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:13px;line-height:1.45}
+.kpi-item b{display:flex;justify-content:space-between;gap:8px;font-size:13.5px}
+.kpi-item .dir{font-family:"JetBrains Mono",monospace;color:var(--brand)}
+.kpi-item div{color:var(--muted);font-size:12.5px;margin-top:3px}
+.calc{display:grid;grid-template-columns:minmax(280px,.9fr) 1.1fr;gap:18px;align-items:start}
+.cin{display:grid;gap:14px}
+.cin label{display:grid;grid-template-columns:1fr 96px;gap:4px 10px;align-items:center;font-size:13px;font-weight:700}
+.cin input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--brand)}
+.cin .num{display:flex;align-items:center;gap:4px;justify-self:end}
+.cin input[type=number]{width:72px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font:inherit;font-size:13px;font-weight:700;text-align:right;padding:0 8px}
+.cin .u{font-size:11.5px;color:var(--muted);font-weight:600;min-width:26px}
+.cin details{border-top:1px solid var(--line);padding-top:12px}
+.cin summary{cursor:pointer;font-size:13px;font-weight:800;color:var(--brand)}
+.cin details[open] summary{margin-bottom:12px}
+.hero-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.hn{background:var(--surface-2);border-radius:14px;padding:12px 14px}
+.hn .v{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hn .v small{font-size:13px;color:var(--muted);font-weight:700}
+.hn .k{font-size:12px;color:var(--muted);font-weight:600}
+.formula{font-family:"JetBrains Mono",monospace;font-size:12px;line-height:1.75;background:var(--surface-2);border-radius:13px;padding:12px 14px;margin:12px 0;overflow-x:auto;white-space:nowrap}
+.formula .c{color:var(--muted)}
+.formula b{color:var(--brand);font-weight:500}
+.bars{display:grid;gap:8px;margin:6px 0 4px}
+.bar-row{display:grid;grid-template-columns:96px 1fr 84px;gap:10px;align-items:center;font-size:12.5px;font-weight:700}
+.bar-row .track{height:22px;border-radius:0 6px 6px 0;background:transparent;position:relative}
+.bar-row .fill{height:100%;border-radius:0 4px 4px 0;transition:width .25s}
+.bar-row .v{text-align:right;font-variant-numeric:tabular-nums}
+.chart-box{position:relative}
+.chart-box svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-box .grid line{stroke:var(--line);stroke-width:1}
+.chart-box text{font-family:"Plus Jakarta Sans",sans-serif;font-size:11px;fill:var(--muted)}
+.chart-box .lbl{fill:var(--ink);font-weight:700}
+.ba-tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--surface);font-size:12px;font-weight:600;padding:6px 9px;border-radius:9px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .1s;z-index:5}
+.ba-tip.show{opacity:1}
+.warnline{font-size:12.5px;color:var(--accent);font-weight:700;margin:8px 0 0}
+.rm-wrap{display:grid;grid-template-columns:22px 1fr;grid-template-rows:auto 22px;gap:6px}
+.rm{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,92px);gap:4px}
+.rm .cell{border-radius:10px;padding:7px;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start;position:relative}
+.rm .cell.lo{background:var(--ok-soft)}
+.rm .cell.mid{background:var(--accent-soft)}
+.rm .cell.hi{background:var(--danger-soft)}
+.ax{font-size:10.5px;color:var(--muted);text-align:center;font-weight:700}
+.rm-xl{grid-column:2;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;align-items:center}
+.risk-chip{font-family:"JetBrains Mono",monospace;font-size:11.5px;font-weight:500;padding:4px 8px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+.risk-chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.lvl{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;padding:3px 8px;border-radius:7px}
+.lvl.lo{background:var(--ok-soft);color:var(--ok)}
+.lvl.mid{background:var(--accent-soft);color:var(--accent)}
+.lvl.hi{background:var(--danger-soft);color:var(--danger)}
+.oq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.oq{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+.oq:first-of-type{border-top:0;padding-top:0;margin-top:6px}
+.oq b{display:block;font-size:13.5px;line-height:1.4}
+.oq div{font-size:12.5px;color:var(--muted);margin:3px 0 6px}
+
+/* about + pager */
+.ba-about{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start;margin-top:48px;padding:24px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(140deg,color-mix(in srgb,var(--brand) 9%,var(--surface)),var(--surface))}
+.ba-about p{margin:0 0 10px;font-size:14px;color:var(--muted)}
+.ba-about .who b{display:block;font-size:17px}
+.ba-about .who span{display:block;font-size:13px;color:var(--muted);margin:3px 0 12px}
+.ba-pager{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.ba-pager a{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;text-decoration:none;color:var(--ink);background:var(--surface);transition:border-color .15s}
+.ba-pager a:hover{border-color:var(--brand)}
+.ba-pager a small{font-size:12px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px}
+.ba-pager a small svg{width:14px;height:14px}
+.ba-pager a b{font-size:15px}
+.ba-pager a.next{text-align:right;align-items:flex-end}
+.ba-scrim{position:fixed;inset:0;background:rgba(3,12,11,.5);z-index:59;opacity:0;pointer-events:none;transition:opacity .2s}
+.ba-scrim.open{opacity:1;pointer-events:auto}
+.ba-detail{position:sticky;top:78px}
+
+@media (max-width:1080px){
+  .sec-grid,.kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .std-grid,.oq-grid{grid-template-columns:1fr}
+  .release{grid-template-columns:repeat(2,1fr)}
+  .calc{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .ba{padding:22px 16px 48px}
+  .ba-grid2,.ba-grid2.even,.ba-about,.mdetail{grid-template-columns:1fr}
+  .pd-metrics{grid-template-columns:repeat(2,1fr)}
+  .an-grid,.sh-grid{grid-template-columns:1fr}
+  .ba-hint{display:block}
+  .ba-detail{position:fixed;left:0;right:0;bottom:0;top:auto;max-height:84vh;overflow-y:auto;z-index:60;border-radius:22px 22px 0 0;transform:translateY(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);padding-bottom:calc(env(safe-area-inset-bottom) + 18px);box-shadow:0 -10px 40px rgba(0,0,0,.3)}
+  .ba-detail.open{transform:none}
+  .ba-x{display:grid;position:sticky;top:0;margin:-6px -6px 4px auto;z-index:2}
+  .sec-grid,.kpi-grid,.release{grid-template-columns:1fr}
+  .hero-nums{grid-template-columns:1fr 1fr}
+  .hn .v{font-size:22px}
+  .rq-row{grid-template-columns:62px minmax(0,1fr)}
+  .rq-row .st{display:none}
+  .sm{aspect-ratio:1/1.05}
+  .sm-dot{font-size:11px}
+  .rm{grid-template-rows:repeat(3,76px)}
+  .ba-pager b{font-size:14px}
+}
 </style>
 </head>
 <body>
+<!-- ================= Case study header ================= -->
+<header class="cs-head">
+  <a class="cs-brand" href="#erlebnis"><span class="logo">KSB</span><span class="t">Begleiter<small>Konzeptstudie · Steven Schmid</small></span></a>
+  <nav class="cs-nav" id="csNav" aria-label="Fallstudie">
+    <a href="#erlebnis" data-route="erlebnis"><svg class="i"><use href="#i-smartphone"/></svg>Erlebnis</a>
+    <span class="sep">Business-Analyse</span>
+    <a href="#prozess" data-route="prozess"><span class="n">02</span>Prozess</a>
+    <a href="#anforderungen" data-route="anforderungen"><span class="n">03</span>Anforderungen</a>
+    <a href="#stakeholder" data-route="stakeholder"><span class="n">04</span>Stakeholder</a>
+    <a href="#architektur" data-route="architektur"><span class="n">05</span>Architektur</a>
+    <a href="#wirkung" data-route="wirkung"><span class="n">06</span>Wirkung</a>
+  </nav>
+  <button class="iconbtn" data-action="theme" aria-label="Hell/Dunkel umschalten"><svg class="i"><use href="#i-sun"/></svg></button>
+</header>
+
+<!-- ================= Perspective A: patient experience ================= -->
+<section class="view" id="view-erlebnis" aria-label="Erlebnis">
 <div class="stage">
 
   <!-- ================= Concept panel ================= -->
@@ -327,7 +681,7 @@ body.show-int .int{display:inline-flex}
     <button class="iconbtn close" data-action="concept-close" aria-label="Schliessen"><svg class="i"><use href="#i-x"/></svg></button>
     <span class="eyebrow"><svg class="i" style="width:16px;height:16px"><use href="#i-plug"/></svg> Konzept-Prototyp</span>
     <h1>KSB <span>Begleiter</span></h1>
-    <p class="lead">Eine Patienten-App für den Aufenthalt selbst: Tagesablauf, Menüwahl, Coiffeur, Services und Eintritts-Checkliste an einem Ort. Gebaut als Bewerbungsbeitrag für die Stelle <b>ICT Business Analyst_in</b>.</p>
+    <p class="lead">Eine Patienten-App für den Aufenthalt selbst: Tagesablauf, Menüwahl, Coiffeur, Services und Eintritts-Checkliste an einem Ort. Dazu eine <b>Business-Analyse-Fallstudie</b>, die zeigt, wie eine solche Lösung methodisch entsteht.</p>
 
     <h3>Patient Journey durchspielen</h3>
     <div class="journey" id="journey"></div>
@@ -349,20 +703,16 @@ body.show-int .int{display:inline-flex}
       <li><span class="dot"><svg class="i"><use href="#i-scissors"/></svg></span><span><b>Partner im Haus:</b> Coiffeur, Shop und Café werden sichtbar und buchbar, was ihre Auslastung verbessert.</span></li>
     </ul>
 
-    <h3>Integration (Zielbild)</h3>
-    <div class="arch">
-      <div class="row"><div class="node">KSB Begleiter</div><div class="msg">App · Login via Swiss-ID</div></div>
-      <div class="center"><svg class="i" style="width:14px;height:14px"><use href="#i-updown"/></svg> FHIR R4 REST</div>
-      <div class="node hub">Integrationsplattform</div>
-      <div class="center"><svg class="i" style="width:14px;height:14px"><use href="#i-updown"/></svg> HL7 v2 · FHIR · REST</div>
-      <div class="row"><div class="node">KIS</div><div class="msg">ADT^A01/A03 · Appointment · AllergyIntolerance</div></div>
-      <div class="row"><div class="node">Küche</div><div class="msg">NutritionOrder → Menüsystem</div></div>
-      <div class="row"><div class="node">RIS/PACS</div><div class="msg">DICOM MWL · Untersuchungsstatus</div></div>
-      <div class="row"><div class="node">Pflege</div><div class="msg">Task → Stations-Worklist</div></div>
-      <div class="row"><div class="node">Partner</div><div class="msg">REST · Coiffeur, Shop, SRK</div></div>
+    <h3>Fallstudie: Wie entsteht diese Lösung?</h3>
+    <div class="cta">
+      <a href="#prozess"><span class="n">02</span><span><b>Prozessanalyse</b><span>IST → SOLL der Menübestellung</span></span><svg class="i"><use href="#i-arrow-r"/></svg></a>
+      <a href="#anforderungen"><span class="n">03</span><span><b>Anforderungen</b><span>Backlog, MoSCoW, Release-Schnitt</span></span><svg class="i"><use href="#i-arrow-r"/></svg></a>
+      <a href="#stakeholder"><span class="n">04</span><span><b>Stakeholder</b><span>Einfluss, Betroffenheit, Bedenken</span></span><svg class="i"><use href="#i-arrow-r"/></svg></a>
+      <a href="#architektur"><span class="n">05</span><span><b>Architektur</b><span>HL7 v2, FHIR, DICOM, Sicherheit</span></span><svg class="i"><use href="#i-arrow-r"/></svg></a>
+      <a href="#wirkung"><span class="n">06</span><span><b>Wirkung</b><span>Szenario-Rechner, Risiken, offene Fragen</span></span><svg class="i"><use href="#i-arrow-r"/></svg></a>
     </div>
 
-    <p class="note"><b>Hinweis:</b> Nicht-offizieller Prototyp, nicht vom KSB beauftragt. Patientin, Termine und Menüs sind fiktiv. Services, Öffnungszeiten, Besuchszeiten und Checkliste stammen von kantonsspitalbaden.ch (Stand Okt. 2026).<br>Steven Schmid · mail@stevenschmid.ch</p>
+    <p class="note"><b>Unabhängige Konzeptstudie</b> als persönlicher Bewerbungsbeitrag, ohne Auftrag des KSB und ohne Zugriff auf interne Systeme oder Daten. Patientin, Termine und Menüs sind fiktiv. Services, Öffnungszeiten, Besuchszeiten und Checkliste stammen von kantonsspitalbaden.ch (Stand Okt. 2026).<br>Steven Schmid · <a href="https://stevenschmid.ch" target="_blank" rel="noopener" style="color:var(--brand)">stevenschmid.ch</a></p>
   </aside>
 
   <!-- ================= Phone ================= -->
@@ -381,6 +731,11 @@ body.show-int .int{display:inline-flex}
     <div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check-circle"/></svg><span></span></div>
   </div>
 </div>
+</section>
+
+<!-- ================= Perspective B: business analysis ================= -->
+<main class="view" id="view-ba" hidden></main>
+<div class="ba-scrim" id="baScrim"></div>
 
 <!-- ================= Icons ================= -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -418,15 +773,32 @@ body.show-int .int{display:inline-flex}
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
     <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-smartphone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol>
+    <symbol id="i-arrow-l" viewBox="0 0 24 24"><path d="M19 12H5M11 19l-7-7 7-7"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M2 21a7 7 0 0 1 14 0M16 3.13a4 4 0 0 1 0 7.75M22 21a7 7 0 0 0-4-6.3"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61A13.53 13.53 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61M2 2l20 20"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M3 21v-5h5"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
   </defs>
 </svg>
 
 <script>
-(() => {
-/* =============================================================
-   Data — fictional patient, real KSB service information
-   ============================================================= */
+/* =================================================================
+   DATA — every piece of demo content lives in this block.
+   · Patient app: fictional patient; service info from kantonsspitalbaden.ch
+   · Case study (CASE): illustrative assumptions, no internal KSB information
+   ================================================================= */
+
+/* ---------- Patient app ---------- */
 const BASE = new Date(2026, 9, 12); // Mo 12. Okt 2026 = Eintrittstag (day 0)
 const PHASES = {
   vor:  { day: -3, time: '18:20', label: 'Vor Eintritt', step: '1' },
@@ -526,6 +898,503 @@ const VISITS = [
   ['Allgemeine Stationen', '13:00–20:00'], ['Halbprivat / Privat', '10:00–20:00'], ['Wochenbett', '13:30–15:30, 18:00–20:00'],
   ['Intensivpflege', '11:00–19:30'], ['Intermediate Care', '12:00–19:30'], ['Kinderabteilung (Eltern)', 'jederzeit'] ];
 
+/* ---------- Case study: business analysis (illustrative) ---------- */
+const CASE = {
+  about: {
+    text: [
+      'Diese unabhängige Konzeptstudie entstand als persönlicher Bewerbungsbeitrag für die Position ICT Business Analyst am Kantonsspital Baden.',
+      'Sie zeigt beispielhaft, wie sich eine digitale Produktidee aus Patientensicht mit Prozessanalyse, Requirements Engineering, Stakeholder-Management und technischer Konzeption verbinden lässt.',
+      'Alle dargestellten Prozesse, Systemlandschaften und Kennzahlen sind illustrativ und basieren nicht auf internen Informationen des KSB.',
+    ],
+    name: 'Steven Schmid',
+    roles: 'Softwareentwicklung · Product Ownership · Business Analyse · Digitale Produktkonzeption',
+    links: [['stevenschmid.ch', 'https://stevenschmid.ch'], ['officebaden.ch', 'https://officebaden.ch']],
+  },
+
+  pages: [
+    { id: 'erlebnis', n: '01', label: 'Erlebnis', phase: 'validieren' },
+    { id: 'prozess', n: '02', label: 'Prozessanalyse', phase: 'analysieren',
+      title: 'IST → SOLL: Menübestellung während des Aufenthalts',
+      lead: 'Der Use Case verbindet Patient_innen, Pflege, Küche, medizinische Vorgaben und IT-Systeme. An ihm lassen sich Medienbrüche gut sichtbar machen und daraus Anforderungen ableiten.',
+      comps: ['Prozessanalyse & -optimierung', 'Klinische & administrative Abläufe'] },
+    { id: 'anforderungen', n: '03', label: 'Anforderungen', phase: 'analysieren',
+      title: 'Vom Prozess zum priorisierten Backlog',
+      lead: 'Zwölf exemplarische Anforderungen, abgeleitet aus der Prozessanalyse, nach MoSCoW priorisiert und in ein MVP und weitere Inkremente geschnitten.',
+      comps: ['Requirements Engineering', 'Priorisierung & Entscheidungsfindung', 'Agile, iterative Entwicklung'] },
+    { id: 'stakeholder', n: '04', label: 'Stakeholder', phase: 'verstehen',
+      title: 'Wer ist betroffen, und wer entscheidet mit?',
+      lead: 'Acht Anspruchsgruppen mit unterschiedlichen Bedürfnissen und Bedenken. Ein Klick zeigt, welche Anforderungen und Prozessschritte eine Gruppe betreffen.',
+      comps: ['Stakeholder-Management', 'Adressatengerechte Kommunikation'] },
+    { id: 'architektur', n: '05', label: 'Architektur', phase: 'konzipieren',
+      title: 'Systemlandschaft, Schnittstellen und Sicherheit',
+      lead: 'Ein vereinfachtes Zielbild: wie der KSB Begleiter an KIS, Küchensystem und Partner angebunden werden könnte, und welche Standards wofür passen.',
+      comps: ['ICT-Architektur & Schnittstellen', 'HL7 v2 · FHIR · DICOM', 'Datenschutz & Informationssicherheit'] },
+    { id: 'wirkung', n: '06', label: 'Wirkung', phase: 'messen',
+      title: 'Nutzen messbar machen und Risiken offenlegen',
+      lead: 'Ein Messplan statt erfundener Zahlen: ein Szenario-Rechner mit veränderbaren Annahmen, eine Risikomatrix und die Fragen, die vor einer Umsetzung zu klären sind.',
+      comps: ['Messbare Nutzenorientierung', 'Risikomanagement', 'Entscheidungsgrundlagen'] },
+  ],
+
+  method: [
+    { id: 'verstehen', label: 'Verstehen', module: 'stakeholder',
+      text: 'Den Kontext aus Sicht der Beteiligten verstehen, bevor über Lösungen gesprochen wird.',
+      acts: ['Stakeholder-Interviews', 'Beobachtung (Shadowing) auf Station und in der Küche', 'Prozessaufnahme vor Ort', 'Sichtung vorhandener Dokumente und Systeme'],
+      out: ['Stakeholder-Landkarte', 'Interviewleitfaden', 'Glossar'] },
+    { id: 'analysieren', label: 'Analysieren', module: 'prozess',
+      text: 'Den IST-Zustand modellieren, Schwachstellen benennen und daraus Anforderungen ableiten.',
+      acts: ['IST-Prozess modellieren (BPMN-nah)', 'Medienbrüche und Problemhypothesen', 'Anforderungen als User Stories mit Akzeptanzkriterien'],
+      out: ['IST-Prozessmodell', 'Problemhypothesen', 'Backlog'] },
+    { id: 'konzipieren', label: 'Konzipieren', module: 'architektur',
+      text: 'Lösungsvarianten entwickeln und fachlich wie technisch einordnen.',
+      acts: ['SOLL-Prozess', 'Lösungsvarianten: erweitern, kaufen oder entwickeln', 'Architektur, Schnittstellen und Datenschutz'],
+      out: ['SOLL-Prozess', 'Fachkonzept', 'Architektur-Skizze'] },
+    { id: 'validieren', label: 'Validieren', module: 'erlebnis',
+      text: 'Früh und günstig prüfen, ob die Lösung verstanden wird und machbar ist.',
+      acts: ['Klickbarer Prototyp', 'Usability-Tests mit Patient_innen und Pflege', 'Machbarkeit mit ICT und Lieferanten klären'],
+      out: ['Prototyp', 'Testprotokolle', 'Entscheidungsvorlage'] },
+    { id: 'umsetzen', label: 'Umsetzen', module: 'anforderungen', anchor: 'release',
+      text: 'Iterativ liefern: zuerst das, was den grössten Nutzen bei vertretbarem Risiko bringt.',
+      acts: ['Priorisierung nach MoSCoW', 'MVP auf einer Pilotstation', 'Testfälle aus Akzeptanzkriterien', 'Schulung und Einführung'],
+      out: ['Release-Plan', 'Testkonzept', 'Einführungsplan'] },
+    { id: 'messen', label: 'Messen', module: 'wirkung',
+      text: 'Wirkung an vorher definierten Kennzahlen überprüfen und nachsteuern.',
+      acts: ['Baseline vor Einführung erheben', 'KPIs nach Pilot auswerten', 'Kontinuierliche Verbesserung'],
+      out: ['Messplan', 'Evaluationsbericht'] },
+  ],
+
+  stakeholders: [
+    { id: 'patient', name: 'Patient_innen', x: .9, y: .36,
+      need: 'Einfach und rechtzeitig wählen, was schmeckt und verträglich ist. Wissen, was als Nächstes passiert.',
+      challenge: 'Krankheit, Schmerzen, Sedierung, Sprache, Sehvermögen und wenig digitale Routine.',
+      expect: 'Verlässliche Bestellung und verständliche Gründe, wenn etwas nicht möglich ist.',
+      concern: '«Was passiert mit meinen Daten?» und «Muss ich jetzt alles selbst machen?»',
+      contrib: 'Usability-Tests mit dem Prototyp, Kurzinterviews, Auswertung der Patientenbefragung.',
+      question: 'Wie bleibt die Bestellung für alle möglich, auch für Menschen, die keine App nutzen können oder wollen?' },
+    { id: 'pflege', name: 'Pflege', x: .84, y: .74,
+      need: 'Weniger administrative Unterbrechungen und klare Informationen.',
+      challenge: 'Zusätzliche digitale Systeme könnten neue Arbeitsschritte erzeugen.',
+      expect: 'Übersicht über offene und kritische Bestellungen der Station; stellvertretende Erfassung in wenigen Sekunden.',
+      concern: 'Doppelerfassung, zu viele Hinweise, Verantwortung bei Fehlbestellungen.',
+      contrib: 'Shadowing auf Station, Prozessaufnahme, Review der Ausnahmeprozesse.',
+      question: 'Wie stellen wir sicher, dass die Digitalisierung tatsächlich entlastet, statt Doppelarbeit zu schaffen?' },
+    { id: 'aerzte', name: 'Ärzteschaft', x: .34, y: .68,
+      need: 'Medizinische Verordnungen wie Kostform und Nüchternheit werden zuverlässig umgesetzt.',
+      challenge: 'Hohe Auslastung, wenig Zeit für Projektarbeit.',
+      expect: 'Keine zusätzliche Dokumentation: Die Verordnung wird einmal im KIS erfasst.',
+      concern: 'Patientensicherheit, wenn Regeln automatisch angewendet werden.',
+      contrib: 'Fachliche Freigabe der Regeln; Festlegung, welche Vorgaben bindend sind.',
+      question: 'Welche Vorgaben dürfen automatisch angewendet werden, und welche brauchen immer eine fachliche Prüfung?' },
+    { id: 'ernaehrung', name: 'Ernährungsberatung', x: .58, y: .62,
+      need: 'Kostformen werden korrekt und einheitlich abgebildet.',
+      challenge: 'Komplexe Diäten passen nicht in einfache Filter.',
+      expect: 'Strukturierte Kostform-Codes und Einsicht in Ausnahmen.',
+      concern: 'Vereinfachung führt zu fachlich falschen Angeboten.',
+      contrib: 'Kostform-Katalog, Zuordnung Diät ↔ Menükomponenten, Testfälle.',
+      question: 'Wie lässt sich der Kostform-Katalog so strukturieren, dass Regeln eindeutig prüfbar sind?' },
+    { id: 'kueche', name: 'Küche & Hotellerie', x: .9, y: .53,
+      need: 'Vollständige, strukturierte Bestellungen rechtzeitig vor Produktionsstart.',
+      challenge: 'Kurzfristige Änderungen, Bestellschluss, Software des Lieferanten.',
+      expect: 'Weniger Nachfragen, kein Abtippen, verlässliche Mengenplanung.',
+      concern: 'Neue Fehlerquellen bei einem Schnittstellenausfall; Abhängigkeit vom Lieferanten.',
+      contrib: 'Produktionsablauf, Bestellschlusszeiten, Anforderungen an das Datenformat.',
+      question: 'Welche Informationen braucht die Küche wirklich, und welche nicht (Datenminimierung)?' },
+    { id: 'ict', name: 'ICT & Applikationsmanagement', short: 'ICT', x: .55, y: .88,
+      need: 'Eine wartbare Lösung, die in die bestehende Systemlandschaft passt.',
+      challenge: 'Bestehende Schnittstellen, Release-Zyklen der Lieferanten, Betrieb rund um die Uhr.',
+      expect: 'Klare Schnittstellenspezifikationen, Monitoring, geklärte Systemführerschaft.',
+      concern: 'Schatten-IT, zusätzliche Betriebslast, Sicherheitslücken.',
+      contrib: 'IST-Systemlandschaft, Schnittstellenkatalog, Machbarkeit und Aufwand.',
+      question: 'Welche vorhandenen Schnittstellen und Plattformen lassen sich wiederverwenden?' },
+    { id: 'dsis', name: 'Datenschutz & Informationssicherheit', short: 'Datenschutz', x: .24, y: .78,
+      need: 'Rechtskonforme Bearbeitung von Gesundheitsdaten.',
+      challenge: 'Neue Datenflüsse zu Systemen ausserhalb des KIS und zu externen Partnern.',
+      expect: 'Datenminimierung, Rollenkonzept, Protokollierung und eine Datenschutz-Folgenabschätzung, wo nötig.',
+      concern: 'Gesundheitsdaten auf privaten Geräten; Weitergabe an Partner.',
+      contrib: 'Schutzbedarfsanalyse, Datenschutz-Folgenabschätzung, Klärung des anwendbaren Rechts (DSG bzw. kantonal), Freigabe.',
+      question: 'Welche Daten dürfen in welchem System und auf welchem Gerät verarbeitet werden?' },
+    { id: 'mgmt', name: 'Spitalmanagement', short: 'Management', x: .16, y: .88,
+      need: 'Messbarer Nutzen für Patientenzufriedenheit, Effizienz und Qualität.',
+      challenge: 'Viele Digitalisierungsvorhaben konkurrieren um begrenzte Budgets.',
+      expect: 'Business Case, klare Roadmap, transparente Risiken.',
+      concern: 'Kosten ohne nachweisbaren Nutzen; das Projekt bindet knappe Ressourcen.',
+      contrib: 'Zielsetzung, Priorisierung im Portfolio, Budgetfreigabe.',
+      question: 'An welchen Kennzahlen messen wir, ob sich die Lösung lohnt?' },
+  ],
+
+  lanes: [
+    { id: 'pat', label: 'Patient_in' },
+    { id: 'hot', label: 'Pflege / Hotellerie' },
+    { id: 'kue', label: 'Küche' },
+    { id: 'it',  label: 'IT-Systeme' },
+  ],
+  process: {
+    ist: {
+      cols: 7,
+      nodes: [
+        { id: 'i1', lane: 'hot', col: 1, start: true, manual: true, title: 'Menükarte verteilen',
+          desc: 'Am Vortag erhalten Patient_innen eine Menükarte auf Papier.',
+          pains: ['Karten müssen pro Zimmer verteilt und wieder eingesammelt werden', 'Neueintritte nach der Verteilung erhalten keine Karte'],
+          questions: ['Wer verteilt die Karten heute: Pflege oder Hotellerie?'], st: ['kueche', 'pflege'], req: ['REQ-001'] },
+        { id: 'i2', lane: 'pat', col: 2, title: 'Menü ankreuzen',
+          desc: 'Patient_innen kreuzen ihre Wahl auf der Karte an.',
+          pains: ['Unklar, welche Gerichte zur verordneten Kostform passen', 'Handschrift und Korrekturen sind schwer lesbar', 'Sprachliche Hürden'],
+          st: ['patient'], req: ['REQ-001', 'REQ-010'] },
+        { id: 'i3', lane: 'hot', col: 3, manual: true, mb: 'Papier → Menüsystem: Die Auswahl wird abgetippt.', title: 'Karten einsammeln & erfassen',
+          desc: 'Die ausgefüllten Karten werden eingesammelt und im Menüsystem erfasst.',
+          pains: ['Doppelte Erfassung und Tippfehler', 'Zeitdruck vor dem Bestellschluss'],
+          questions: ['Wie viele Karten pro Tag werden nachträglich korrigiert?'], st: ['kueche', 'pflege'], req: ['REQ-003', 'REQ-006'] },
+        { id: 'i4', lane: 'hot', col: 4, manual: true, mb: 'KIS → Menüsystem: Diätvorgaben werden nachgeschaut und übertragen.', title: 'Diätvorgaben abgleichen',
+          desc: 'Kostform und Allergien werden mit der Auswahl abgeglichen.',
+          pains: ['Abgleich hängt von der Aufmerksamkeit Einzelner ab', 'Allergien sind teilweise nur als Freitext erfasst'],
+          questions: ['Wo ist die Kostform heute verbindlich dokumentiert?', 'Wer ist für den Abgleich verantwortlich?'], st: ['pflege', 'ernaehrung', 'aerzte'], req: ['REQ-002', 'REQ-009'] },
+        { id: 'i5', lane: 'it', col: 5, title: 'Produktionsliste erstellen',
+          desc: 'Das Menüsystem erzeugt aus den erfassten Bestellungen Produktions- und Tablettlisten.',
+          pains: ['Qualität hängt von der manuellen Erfassung ab'], st: ['kueche', 'ict'], req: ['REQ-003'] },
+        { id: 'i6', lane: 'hot', col: 5, manual: true, event: 'Nüchternheit, Verlegung, Austritt oder Eintritt nach Bestellschluss',
+          mb: 'Telefon → Küche: Änderungen werden mündlich weitergegeben.', title: 'Änderungen telefonisch melden',
+          desc: 'Kurzfristige Änderungen meldet die Station telefonisch an die Küche.',
+          pains: ['Informationen gehen verloren', 'Keine Nachvollziehbarkeit, wer was gemeldet hat'],
+          questions: ['Wie häufig sind kurzfristige Änderungen pro Tag?'], st: ['pflege', 'kueche'], req: ['REQ-005'] },
+        { id: 'i7', lane: 'kue', col: 6, manual: true, title: 'Produzieren & korrigieren',
+          desc: 'Die Küche produziert und korrigiert Tabletts nach Anrufen manuell.',
+          pains: ['Korrekturen kurz vor der Ausgabe', 'Food Waste bei Austritten und Nüchternheit'], st: ['kueche'], req: ['REQ-011'] },
+        { id: 'i8', lane: 'pat', col: 7, end: true, title: 'Mahlzeit erhalten',
+          desc: 'Das Tablett wird ans Bett gebracht.',
+          pains: ['Ein falsches oder fehlendes Menü fällt erst am Bett auf'], st: ['patient', 'pflege'], req: ['REQ-004'] },
+      ],
+      edges: [
+        { from: 'i1', to: 'i2', label: 'Papierkarte' }, { from: 'i2', to: 'i3', label: 'Papier', mb: true },
+        { from: 'i3', to: 'i4' }, { from: 'i4', to: 'i5', label: 'manuelle Eingabe', mb: true },
+        { from: 'i6', to: 'i7', label: 'Telefon', mb: true }, { from: 'i5', to: 'i7', label: 'Liste' },
+        { from: 'i7', to: 'i8', label: 'Tablett' },
+      ],
+    },
+    soll: {
+      cols: 6,
+      nodes: [
+        { id: 's1', lane: 'pat', col: 1, start: true, title: 'Menüwahl öffnen',
+          desc: 'Patient_innen öffnen die Menüwahl im KSB Begleiter. Wer keine App nutzt, bestellt über die Pflege (stellvertretende Erfassung).',
+          gains: ['Kein Papier, Bestellung jederzeit bis zum Bestellschluss', 'Analoge Bestellung bleibt möglich'], st: ['patient'], req: ['REQ-001', 'REQ-006', 'REQ-010', 'REQ-012'] },
+        { id: 's2', lane: 'it', col: 2, auto: true, std: 'FHIR NutritionOrder · AllergyIntolerance', title: 'Geeignete Menüs ermitteln',
+          desc: 'Das Backend liest freigegebene Kostform, strukturierte Allergien und den Nüchtern-Status aus dem KIS und filtert das Angebot.',
+          gains: ['Nur passende Menüs sichtbar, gesperrte mit Begründung'],
+          assume: 'Kostform und Allergien liegen im KIS strukturiert und freigegeben vor.',
+          questions: ['Sind Allergien kodiert erfasst oder teilweise als Freitext?'], st: ['ict', 'ernaehrung', 'aerzte'], req: ['REQ-002', 'REQ-008', 'REQ-009'] },
+        { id: 's3', lane: 'pat', col: 3, title: 'Auswahl bestätigen',
+          desc: 'Patient_innen wählen aus dem passenden Angebot und bestätigen. Bis zum Bestellschluss sind Änderungen möglich.',
+          gains: ['Selbstbestimmte Wahl', 'Sofortige Bestätigung'], st: ['patient'], req: ['REQ-001'] },
+        { id: 's4', lane: 'it', col: 4, auto: true, std: 'FHIR / HL7 v2 über Integrationsplattform', title: 'Prüfen & übermitteln',
+          desc: 'Regeln prüfen die Bestellung. Eindeutige Fälle gehen automatisch an das Menüsystem, die App zeigt den Übermittlungsstatus.',
+          gains: ['Kein Abtippen', 'Quittierung und Fehlerstatus'], st: ['ict', 'kueche'], req: ['REQ-003', 'REQ-007', 'REQ-008'] },
+        { id: 's5', lane: 'hot', col: 4, manual: true, title: 'Ausnahme prüfen',
+          desc: 'Nicht eindeutig beurteilbare Kombinationen, fehlende Daten und stellvertretende Bestellungen erscheinen in der Stationsansicht zur fachlichen Prüfung.',
+          gains: ['Manuelle Prüfung nur dort, wo sie nötig ist'],
+          questions: ['Wer gibt Ausnahmen frei: Pflege, Ernährungsberatung oder Ärzteschaft?'], st: ['pflege', 'ernaehrung'], req: ['REQ-002', 'REQ-006'] },
+        { id: 's6', lane: 'it', col: 5, auto: true, event: 'Verlegung, Austritt, OP-Termin', std: 'HL7 v2 ADT · SIU', title: 'Ereignisse verarbeiten',
+          desc: 'Verlegung, Austritt oder Nüchternheit passen offene Bestellungen automatisch an oder melden sie zur Prüfung.',
+          gains: ['Keine Telefonate an die Küche', 'Nachvollziehbare Änderungen'],
+          assume: 'KIS und OP-Planung senden Ereignisse zeitnah.', st: ['ict', 'pflege', 'kueche'], req: ['REQ-005'] },
+        { id: 's7', lane: 'kue', col: 5, title: 'Produktion planen',
+          desc: 'Die Küche erhält strukturierte Bestellungen inkl. Kostform-Code und Änderungen in Echtzeit.',
+          gains: ['Verlässliche Mengenplanung', 'Weniger Korrekturen kurz vor der Ausgabe'], st: ['kueche'], req: ['REQ-003', 'REQ-011'] },
+        { id: 's8', lane: 'pat', col: 6, end: true, title: 'Mahlzeit erhalten & bewerten',
+          desc: 'Das Tablett kommt ans Bett. Auf Wunsch bewerten Patient_innen die Mahlzeit.',
+          gains: ['Rückmeldung an die Küche'], st: ['patient', 'kueche'], req: ['REQ-004'] },
+      ],
+      edges: [
+        { from: 's1', to: 's2', label: 'App' }, { from: 's2', to: 's3', label: 'gefiltert' },
+        { from: 's3', to: 's4', label: 'Bestellung' }, { from: 's4', to: 's5', label: 'nicht eindeutig' },
+        { from: 's4', to: 's7', label: 'Schnittstelle' }, { from: 's5', to: 's7', label: 'freigegeben' },
+        { from: 's6', to: 's7', label: 'Änderung' }, { from: 's7', to: 's8', label: 'Tablett' },
+      ],
+    },
+    analysis: [
+      ['Problemhypothese', 'Mehrfache manuelle Übertragung (Papier → System, KIS → Menüsystem, Telefon → Küche) verursacht Aufwand und Fehlerrisiken, besonders bei kurzfristigen Änderungen.'],
+      ['Optimierungspotenzial', 'Einmal strukturiert erfassen, Regeln automatisch anwenden, Änderungen ereignisbasiert weitergeben. Manuell geprüft wird nur noch, was nicht eindeutig ist.'],
+      ['Betroffene Stakeholder', null],
+      ['Technische Abhängigkeiten', 'Strukturierte Kostform und Allergien im KIS · Schnittstelle des Küchensystems · Integrationsplattform · Identitätsnachweis für Patient_innen.'],
+      ['Risiken', 'Patientensicherheit bei fehlerhaften Regeln · Akzeptanz bei Patient_innen und Pflege · Ausfall der Schnittstelle.', 'wirkung'],
+      ['Erwarteter Nutzen', 'Weniger Abtippen und Telefonate, weniger Fehlbestellungen, mehr Selbstbestimmung für Patient_innen, bessere Mengenplanung.', 'wirkung'],
+    ],
+  },
+
+  statuses: { prototyp: 'Im Prototyp gezeigt', bereit: 'Bereit', klaerung: 'In Klärung', entwurf: 'Entwurf' },
+  prios: { M: 'Must have', S: 'Should have', C: 'Could have', W: 'Won’t have (jetzt)' },
+  requirements: [
+    { id: 'REQ-001', title: 'Digitale Menüauswahl', prio: 'M', status: 'prototyp', type: 'Funktional',
+      st: ['patient', 'kueche'], steps: ['i1', 'i2', 's1', 's3'], deps: ['REQ-002', 'REQ-003'],
+      story: ['Patient_in', 'mein Menü digital auswählen können', 'ich meine Bestellung selbstständig und rechtzeitig aufgeben kann'],
+      spec: 'Das System muss Patient_innen die für sie verfügbaren Menüs je Mahlzeit anzeigen und eine Auswahl bis zum konfigurierten Bestellschluss entgegennehmen, ändern und bestätigen.',
+      ac: ['Verfügbare Menüs werden angezeigt.', 'Die Auswahl kann bis zum definierten Bestellschluss geändert werden.', 'Die Bestellung wird bestätigt.', 'Bei fehlgeschlagener Übermittlung erscheint ein verständlicher Status.'],
+      demo: { phase: 'stay', tab: 'essen', label: 'Menüwahl im Prototyp ansehen' } },
+    { id: 'REQ-002', title: 'Medizinische Ernährungsvorgaben berücksichtigen', prio: 'M', status: 'klaerung', type: 'Funktional',
+      st: ['aerzte', 'ernaehrung', 'pflege'], steps: ['i4', 's2', 's5'], deps: ['REQ-008'],
+      story: ['zuständige Fachperson', 'dass relevante Ernährungsvorgaben berücksichtigt werden', 'ungeeignete Bestellungen verhindert oder zur Prüfung weitergeleitet werden'],
+      spec: 'Das System muss bei der Menüauswahl ausschliesslich freigegebene, strukturierte Diät- und Allergieinformationen aus dem führenden System berücksichtigen und nicht eindeutig beurteilbare Fälle zur fachlichen Prüfung weiterleiten.',
+      ac: ['Freigegebene Diätvorgaben werden berücksichtigt.', 'Nicht eindeutig beurteilbare Kombinationen werden nicht automatisch freigegeben.', 'Bei fehlenden Daten greift ein definierter Ausnahmeprozess.', 'Allergieinformationen werden nicht allein anhand von Freitext oder ungeprüften Angaben bewertet.'],
+      demo: { phase: 'stay', tab: 'essen', label: 'Allergie-Sperre im Prototyp ansehen' } },
+    { id: 'REQ-003', title: 'Übermittlung an das Küchensystem', prio: 'M', status: 'klaerung', type: 'Funktional / Schnittstelle',
+      st: ['kueche', 'ict'], steps: ['i3', 'i5', 's4', 's7'], deps: ['REQ-007'],
+      story: ['Küchenmitarbeitende_r', 'Bestellungen strukturiert erhalten', 'ich sie zuverlässig weiterverarbeiten kann'],
+      spec: 'Die Lösung muss jede bestätigte Bestellung über die Integrationsplattform in einem mit dem Lieferanten vereinbarten Format an das Menü- und Küchensystem übermitteln und den Empfang quittieren lassen.',
+      ac: ['Bestellungen enthalten Bestell-ID, Station/Zimmer, Mahlzeit, Menü und Kostform-Code.', 'Das Küchensystem quittiert jede Bestellung; der Status ist in der App sichtbar.', 'Eine wiederholte Übermittlung erzeugt keine Doppelbestellung.', 'Fehler werden protokolliert und dem Betrieb gemeldet.'] },
+    { id: 'REQ-004', title: 'Menübewertung', prio: 'C', status: 'entwurf', type: 'Funktional',
+      st: ['patient', 'kueche'], steps: ['i8', 's8'], deps: ['REQ-001'],
+      story: ['Patient_in', 'mein Essen bewerten können', 'die Küche Rückmeldungen erhält'],
+      spec: 'Das System soll Patient_innen nach der Ausgabe eine freiwillige Bewertung je Mahlzeit ermöglichen und diese der Küche aggregiert bereitstellen.',
+      ac: ['Bewertung mit 1–5 Sternen, optional mit Kommentar.', 'Bewertung erst nach der Ausgabezeit möglich.', 'Die Küche sieht Auswertungen nur aggregiert, ohne Personenbezug.'] },
+    { id: 'REQ-005', title: 'Anpassung bei Nüchternheit, Verlegung und Austritt', prio: 'S', status: 'klaerung', type: 'Funktional / Ereignis',
+      st: ['pflege', 'kueche', 'aerzte'], steps: ['i6', 's6'], deps: ['REQ-003'],
+      story: ['Pflegefachperson', 'dass Bestellungen bei Nüchternheit, Verlegung oder Austritt automatisch angepasst werden', 'ich die Küche nicht telefonisch informieren muss'],
+      spec: 'Das System soll klinische Ereignisse (Verlegung, Austritt, OP-Termin) aus den führenden Systemen empfangen und betroffene Bestellungen anpassen, stornieren oder zur Prüfung melden.',
+      ac: ['Ein Nüchtern-Status sperrt betroffene Mahlzeiten und zeigt den Grund an.', 'Bei einer Verlegung wird die Lieferadresse (Station/Zimmer) aktualisiert.', 'Bei einem Austritt werden offene Bestellungen storniert.', 'Nicht automatisch lösbare Fälle erscheinen in der Stationsansicht.'],
+      demo: { phase: 'stay', tab: 'essen', day: 1, label: 'Nüchtern-Sperre im Prototyp ansehen' } },
+    { id: 'REQ-006', title: 'Stellvertretende Erfassung', prio: 'M', status: 'bereit', type: 'Funktional',
+      st: ['pflege', 'patient'], steps: ['i3', 's1', 's5'], deps: ['REQ-002', 'REQ-008'],
+      story: ['Pflegefachperson oder Hotellerie-Mitarbeitende_r', 'Bestellungen stellvertretend erfassen können', 'auch Patient_innen ohne Smartphone oder mit Einschränkungen bestellen können'],
+      spec: 'Die Lösung muss Mitarbeitenden eine stellvertretende Erfassung mit denselben Regeln wie in der App ermöglichen; Papier bleibt als Rückfallebene erhalten.',
+      ac: ['Erfassung pro Patient_in in höchstens drei Schritten.', 'Es gelten dieselben Regeln wie in der App.', 'Die erfassende Person wird protokolliert.', 'Papier bleibt als Rückfallebene möglich.'] },
+    { id: 'REQ-007', title: 'Ausfallsicherheit & Rückfallebene', prio: 'M', status: 'entwurf', type: 'Nicht-funktional',
+      st: ['ict', 'kueche'], steps: ['s4'], deps: ['REQ-003'],
+      story: ['Küche', 'auch bei einem Systemausfall vollständige Bestelllisten haben', 'die Versorgung nie gefährdet ist'],
+      spec: 'Bei einem Ausfall von App oder Schnittstelle müssen bestätigte Bestellungen erhalten bleiben und ein dokumentierter Papier-Fallback greifen.',
+      ac: ['Nachrichten werden gepuffert und nach der Wiederherstellung zugestellt.', 'Das Monitoring meldet Störungen zeitnah (Zielwert mit ICT festlegen).', 'Ein Notfall-Ausdruck der Bestellungen pro Station ist jederzeit möglich.', 'Der Fallback-Prozess ist dokumentiert und geschult.'] },
+    { id: 'REQ-008', title: 'Zugriffsrechte & Protokollierung', prio: 'M', status: 'klaerung', type: 'Nicht-funktional / Sicherheit',
+      st: ['dsis', 'ict'], steps: ['s2', 's4'], deps: [],
+      story: ['Verantwortliche_r für Datenschutz', 'dass jede Rolle nur die nötigen Daten sieht und Zugriffe nachvollziehbar sind', 'Gesundheitsdaten geschützt bleiben'],
+      spec: 'Die Lösung muss ein rollenbasiertes Berechtigungskonzept umsetzen, Zugriffe auf Gesundheitsdaten protokollieren und Daten in Transit und at Rest verschlüsseln.',
+      ac: ['Eigene Berechtigungsprofile für Patient_in, Pflege, Hotellerie, Küche und Support.', 'Patient_innen sehen ausschliesslich eigene Daten (Login mit verifizierter Identität).', 'Lese- und Schreibzugriffe auf Gesundheitsdaten werden protokolliert.', 'Daten sind in Transit und at Rest verschlüsselt.'] },
+    { id: 'REQ-009', title: 'Datenminimierung gegenüber Küche & Partnern', prio: 'S', status: 'klaerung', type: 'Nicht-funktional / Datenschutz',
+      st: ['dsis', 'kueche'], steps: ['i4', 's2'], deps: ['REQ-002'],
+      story: ['Verantwortliche_r für Datenschutz', 'dass die Küche nur die für die Zubereitung nötigen Angaben erhält', 'keine unnötigen Gesundheitsdaten verteilt werden'],
+      spec: 'Die Lösung soll jedem empfangenden System nur die dokumentierten und freigegebenen Datenfelder übermitteln; Diagnosen werden nicht weitergegeben.',
+      ac: ['Die Küche erhält Kostform-Code und Allergen-Kennzeichen, keine Diagnosen.', 'Externe Partner (z. B. Coiffeur) erhalten keine Gesundheitsdaten.', 'Datenfelder pro Empfänger sind dokumentiert und freigegeben.'] },
+    { id: 'REQ-010', title: 'Barrierefreiheit & Mehrsprachigkeit', prio: 'S', status: 'entwurf', type: 'Nicht-funktional / Usability',
+      st: ['patient'], steps: ['i2', 's1'], deps: [],
+      story: ['Patient_in mit eingeschränktem Sehvermögen oder anderer Muttersprache', 'die Menüwahl verstehen und bedienen können', 'ich selbstständig bestellen kann'],
+      spec: 'Die Oberfläche soll WCAG 2.1 AA erfüllen und mindestens in den Landessprachen sowie Englisch verfügbar sein.',
+      ac: ['Konform zu WCAG 2.1 AA (Kontrast, Schriftgrösse, Screenreader).', 'Sprachen DE, FR, IT, EN im ersten Release; weitere nach Bedarf.', 'Allergene und Kostformen mit Symbol und Text.'] },
+    { id: 'REQ-011', title: 'Auswertung von Bestellungen & Food Waste', prio: 'C', status: 'entwurf', type: 'Funktional / Reporting',
+      st: ['mgmt', 'kueche'], steps: ['i7', 's7'], deps: ['REQ-003', 'REQ-004'],
+      story: ['Küchenleitung', 'Bestellungen, Stornierungen und Bewertungen auswerten', 'ich Mengen besser planen und Food Waste reduzieren kann'],
+      spec: 'Das System kann Bestellungen, Stornierungen und Bewertungen aggregiert auswerten und für die Mengenplanung exportieren.',
+      ac: ['Auswertungen nur aggregiert pro Tag, Station und Menü.', 'Export für die Mengenplanung.', 'Kennzahlen gemäss Messplan (siehe Wirkung).'] },
+    { id: 'REQ-012', title: 'Bestellung per Sprachassistent am Bett', prio: 'W', status: 'entwurf', type: 'Funktional',
+      st: ['patient', 'ict'], steps: ['s1'], deps: ['REQ-006'],
+      story: ['bettlägerige Patient_in', 'per Sprache bestellen', 'ich kein Smartphone brauche'],
+      spec: 'Bewusst nicht Teil der nächsten Releases: hoher Aufwand und offene Datenschutzfragen. Die stellvertretende Erfassung (REQ-006) deckt den Bedarf vorerst ab.',
+      ac: ['Nach dem Pilot neu bewerten.'] },
+  ],
+  releases: [
+    { id: 'M', title: 'MVP · Pilotstation', text: 'Must-haves: sicher bestellen, übermitteln, Rückfallebene.' },
+    { id: 'S', title: 'Inkrement 2', text: 'Should-haves: Ereignisse, Datenminimierung, Barrierefreiheit.' },
+    { id: 'C', title: 'Inkrement 3', text: 'Could-haves: Bewertung und Auswertungen.' },
+    { id: 'W', title: 'Nicht geplant', text: 'Bewusst zurückgestellt, nach dem Pilot neu bewerten.' },
+  ],
+
+  arch: {
+    rows: ['Kanäle', 'Zugang & Logik', 'Integration', 'Fachsysteme'],
+    nodes: [
+      { id: 'begleiter', row: 0, col: 2, title: 'KSB Begleiter', sub: 'App / PWA für Patient_innen',
+        purpose: 'Zeigt Tagesablauf, Menüwahl und Services; nimmt Bestellungen und Anliegen entgegen.',
+        data: ['Eigene Termine (Zeit, Ort)', 'Menüangebot und eigene Bestellungen', 'Kostform und Allergien als verständlicher Hinweis'],
+        iface: 'HTTPS · REST/JSON zum Backend; Login per OpenID Connect',
+        sec: ['Keine Gesundheitsdaten dauerhaft auf dem Gerät', 'Session-Timeout und Gerätesperre', 'Login nur mit verifizierter Identität'],
+        open: ['Eigene App oder Modul der bestehenden KSB App?', 'Leihgeräte für Patient_innen ohne Smartphone?'], owner: 'Digitalisierung ICT (Annahme)' },
+      { id: 'station', row: 0, col: 4, title: 'Stationsansicht', sub: 'Web für Pflege & Hotellerie',
+        purpose: 'Stellvertretende Erfassung, Prüfung von Ausnahmen, Übersicht über offene Bestellungen der Station.',
+        data: ['Bestellungen der eigenen Station', 'Ausnahmen mit Begründung', 'Kostform-Codes'],
+        iface: 'HTTPS · REST/JSON; Single Sign-on',
+        sec: ['Rollenbasiert, nur eigene Station', 'Protokollierung stellvertretender Erfassungen'],
+        open: ['Eigene Oberfläche oder Integration in die KIS-Arbeitsliste?'], owner: 'Digitalisierung ICT (Annahme)' },
+      { id: 'iam', row: 1, col: 1, title: 'Identität & Zugriff', sub: 'Swiss-ID / Spital-SSO',
+        purpose: 'Authentifiziert Patient_innen (z. B. Swiss-ID, wie in der bestehenden KSB App) und Mitarbeitende (Single Sign-on) und liefert Rollen.',
+        data: ['Identität', 'Rollen', 'Zuordnung Person ↔ Aufenthalt'],
+        iface: 'OpenID Connect / OAuth 2.0',
+        sec: ['Mehrfaktor-Authentifizierung für Mitarbeitende', 'Kurzlebige Tokens', 'Zuordnung zum Aufenthalt erst nach Verifikation'],
+        open: ['Lässt sich die Swiss-ID-Verknüpfung der KSB App wiederverwenden?'], owner: 'ICT Security (Annahme)' },
+      { id: 'bff', row: 1, col: 3, title: 'Begleiter-Backend', sub: 'API & Geschäftslogik',
+        purpose: 'Bündelt Daten für die App, prüft Bestellregeln (Bestellschluss, Kostform, Nüchternheit) und führt ein Audit-Log.',
+        data: ['Bestellungen und Regeln', 'Audit-Log', 'Gesundheitsdaten nur so kurz und so wenig wie nötig'],
+        iface: 'REST/JSON zu den Oberflächen, FHIR R4 zur Integrationsplattform',
+        sec: ['Least Privilege je Endpunkt', 'Verschlüsselung at Rest', 'Manipulationssicheres Audit-Log', 'Hosting gemäss Vorgaben, Datenhaltung in der Schweiz'],
+        open: ['Eigenentwicklung, Erweiterung einer Plattform oder Produkt?', 'Wo laufen die Regeln: im Backend oder im Menüsystem?'], owner: 'Digitalisierung ICT (Annahme)' },
+      { id: 'hub', row: 2, col: 3, title: 'Integrationsplattform', sub: 'Kommunikationsserver',
+        purpose: 'Leitet Nachrichten zwischen Fachsystemen weiter, übersetzt zwischen HL7 v2 und FHIR, puffert bei Ausfällen und überwacht die Schnittstellen.',
+        data: ['Nachrichten im Transit, keine dauerhafte Fachdatenhaltung'],
+        iface: 'HL7 v2 (MLLP), FHIR R4 (REST), Hersteller-APIs',
+        sec: ['Transportverschlüsselung (TLS)', 'Monitoring und Alarmierung', 'Begrenzte Aufbewahrung von Nachrichten'],
+        open: ['Welche Plattform ist im Einsatz, und welche Schnittstellen bestehen bereits?'], owner: 'Integration / ICT (Annahme)' },
+      { id: 'ris', row: 3, col: 1, ctx: true, title: 'RIS / PACS', sub: 'Radiologie · nur Kontext',
+        purpose: 'Verwaltet radiologische Aufträge und Bilder. Bilder und Bildkommunikation laufen über DICOM, innerhalb der Radiologie und zu den Modalitäten.',
+        data: ['Bilddaten, Befunde, Aufträge'],
+        iface: 'DICOM (Bilder, Modality Worklist), HL7 v2 ORM/ORU zum KIS',
+        sec: ['Nicht Teil dieses Use Cases', 'Der Begleiter verarbeitet keine Bilddaten'],
+        open: ['Soll die App später den Status einer Untersuchung zeigen? Wenn ja, über das Terminsystem, nicht über DICOM.'], owner: 'Radiologie / ICT (Annahme)' },
+      { id: 'kis', row: 3, col: 2, title: 'KIS', sub: 'Klinisches Informationssystem',
+        purpose: 'Führendes System für Patient_in, Aufenthalt, Verordnungen (Kostform, Nüchternheit) und Allergien.',
+        data: ['Patientenstamm, Aufenthalt, Station/Zimmer', 'Kostform-Verordnung', 'Allergien (strukturiert)'],
+        iface: 'HL7 v2 ADT (A01 Eintritt, A02 Verlegung, A03 Austritt); FHIR (Patient, Encounter, NutritionOrder, AllergyIntolerance), je nach Produkt',
+        sec: ['Systemführerschaft bleibt beim KIS', 'Begleiter liest nur, schreibt keine klinischen Daten'],
+        open: ['Sind Kostform und Allergien strukturiert erfasst?', 'Bietet das KIS eine FHIR-API oder nur HL7 v2?'], owner: 'Klinische Applikationen (Annahme)' },
+      { id: 'termin', row: 3, col: 3, title: 'Termin- & OP-Planung', sub: 'Ressourcen & Zeitfenster',
+        purpose: 'Liefert Termine und OP-Zeiten. Grundlage für Nüchternheit und für die Konfliktprüfung (z. B. beim Coiffeur).',
+        data: ['Termine, Zeitfenster, Ort', 'Keine Befunde'],
+        iface: 'HL7 v2 SIU (S12–S15); FHIR Appointment',
+        sec: ['An die App nur Zeitfenster und Ort, keine Diagnosen'],
+        open: ['Ist die OP-Planung Teil des KIS oder ein eigenes System?'], owner: 'Klinische Applikationen (Annahme)' },
+      { id: 'kueche', row: 3, col: 4, title: 'Menü- & Küchensystem', sub: 'Menüplan, Produktion',
+        purpose: 'Verwaltet Menüplan, Bestellungen sowie Produktions- und Tablettlisten.',
+        data: ['Bestellungen', 'Station/Zimmer', 'Kostform-Code und Allergen-Kennzeichen'],
+        iface: 'HL7 v2 OMD^O03 (Diät-Auftrag) oder Hersteller-API; FHIR NutritionOrder als Zielbild',
+        sec: ['Keine Diagnosen', 'Eigene Rollen für Küche und Hotellerie'],
+        open: ['Welche Schnittstellen bietet der Lieferant?', 'Wie wird das Tablett eindeutig der richtigen Person zugeordnet?'], owner: 'Hotellerie / Küche mit ICT (Annahme)' },
+      { id: 'buchung', row: 3, col: 5, title: 'Service & Buchung', sub: 'Coiffeur, Shop, Partner',
+        purpose: 'Buchbare Services von Partnern im Haus.',
+        data: ['Zeitfenster', 'Zimmer für Lieferungen', 'Kontakt'],
+        iface: 'REST-APIs der Partner',
+        sec: ['Keine Gesundheitsdaten an Partner', 'Vertrag zur Auftragsbearbeitung'],
+        open: ['Haben die Partner ein Buchungssystem, oder braucht es ein einfaches eigenes Modul?'], owner: 'Hotellerie (Annahme)' },
+    ],
+    edges: [
+      { from: 'begleiter', to: 'iam', label: 'OIDC' },
+      { from: 'begleiter', to: 'bff', label: 'REST/JSON' },
+      { from: 'station', to: 'bff', label: 'REST/JSON' },
+      { from: 'bff', to: 'iam', label: 'Token prüfen' },
+      { from: 'bff', to: 'hub', label: 'FHIR R4', std: ['fhir'] },
+      { from: 'hub', to: 'kis', label: 'ADT · FHIR', std: ['hl7', 'fhir'] },
+      { from: 'hub', to: 'termin', label: 'SIU · FHIR', std: ['hl7', 'fhir'] },
+      { from: 'hub', to: 'kueche', label: 'OMD · API', std: ['hl7'] },
+      { from: 'hub', to: 'buchung', label: 'REST' },
+      { from: 'ris', to: 'kis', label: 'ORM/ORU', std: ['hl7'], dash: true },
+    ],
+    flows: [
+      { id: 'order', label: 'Menübestellung', steps: [
+        ['begleiter', 'iam', 'Anmeldung mit verifizierter Identität (OIDC)'],
+        ['begleiter', 'bff', 'Bestellung senden; Backend prüft Regeln und Bestellschluss'],
+        ['bff', 'hub', 'Bestellung als FHIR NutritionOrder'],
+        ['hub', 'kueche', 'Übersetzung in das Format des Küchensystems (z. B. HL7 v2 OMD^O03)'],
+        ['hub', 'bff', 'Quittung zurück, die App zeigt «bestätigt»'] ] },
+      { id: 'read', label: 'Menü filtern', steps: [
+        ['begleiter', 'bff', 'Menüangebot für die nächste Mahlzeit anfragen'],
+        ['bff', 'hub', 'Kostform, Allergien und Nüchtern-Status abfragen (FHIR)'],
+        ['hub', 'kis', 'Lesen im führenden System, keine Kopie im Begleiter'],
+        ['bff', 'begleiter', 'Gefiltertes Angebot mit Begründungen für Sperren'] ] },
+      { id: 'event', label: 'Austritt / Nüchternheit', steps: [
+        ['kis', 'hub', 'Ereignis Austritt (HL7 v2 ADT^A03) bzw. Verlegung (A02)'],
+        ['termin', 'hub', 'OP-Termin (SIU), daraus folgt die Nüchternheit'],
+        ['hub', 'bff', 'Ereignis an das Backend weitergeleitet'],
+        ['hub', 'kueche', 'Offene Bestellungen storniert oder angepasst'],
+        ['bff', 'begleiter', 'Hinweis in der App, z. B. «Morgen nüchtern»'] ] },
+      { id: 'imaging', label: 'Röntgen (DICOM-Kontext)', steps: [
+        ['ris', 'kis', 'Auftrag und Befund via HL7 v2. Bilder bleiben im PACS (DICOM)'],
+        ['termin', 'hub', 'Nur der Termin wird bereitgestellt (SIU / FHIR Appointment)'],
+        ['hub', 'bff', 'Termin für den Tagesablauf'],
+        ['bff', 'begleiter', 'Anzeige «Röntgen 14:00» ohne Bilddaten'] ] },
+    ],
+    standards: [
+      { id: 'hl7', name: 'HL7 v2', what: 'Ereignis- und nachrichtenbasierte Kommunikation zwischen klinischen Systemen (z. B. ADT, SIU, ORM/ORU), in Spitälern weit verbreitet.',
+        yes: ['Eintritt, Verlegung und Austritt (ADT) als Auslöser für Bestellanpassungen', 'Terminereignisse (SIU) aus der OP-Planung', 'Bestehende Schnittstellen zum Küchensystem, falls vorhanden'],
+        no: ['Direkte Anbindung einer Patienten-App', 'Gezielte Abfragen wie «aktuelle Allergien von Patient X»; dafür eignet sich eine API'] },
+      { id: 'fhir', name: 'FHIR R4', what: 'Strukturierte Gesundheitsdaten als Ressourcen über REST-APIs. Für die Schweiz sind die CH-Core-Profile zu prüfen.',
+        yes: ['Lesen von Kostform (NutritionOrder) und Allergien (AllergyIntolerance)', 'Bestellung als NutritionOrder im Zielbild', 'Schnittstelle zwischen Backend und Integrationsplattform'],
+        no: ['Pflicht für jedes Fachsystem: Wo nur HL7 v2 verfügbar ist, übersetzt die Integrationsplattform', 'Übertragung von Bilddaten'] },
+      { id: 'dicom', name: 'DICOM', what: 'Standard für medizinische Bilder und Bildkommunikation: Modalitäten, PACS, Modality Worklist.',
+        yes: ['Radiologie: Bilder, Worklist, Archivierung im PACS', 'Teil der klinischen Systemlandschaft, mit der eine Plattform koexistiert'],
+        no: ['Menübestellung: Hier werden keine Bilddaten benötigt', 'Patienten-App: Sie zeigt höchstens den Termin, nicht die Bilder'] },
+    ],
+    security: [
+      ['users', 'Rollenbasierte Zugriffe', 'Profile für Patient_in, Pflege, Hotellerie, Küche und Support. Patient_innen sehen nur eigene Daten, Mitarbeitende nur ihre Station.'],
+      ['eye-off', 'Datenminimierung', 'Jedes System erhält nur, was es für seine Aufgabe braucht (siehe Matrix).'],
+      ['key', 'Verschlüsselung', 'TLS für alle Verbindungen, Verschlüsselung at Rest, keine Gesundheitsdaten im Klartext auf Geräten.'],
+      ['file', 'Protokollierung', 'Wer hat wann was gelesen oder bestellt, inklusive stellvertretender Erfassung. Logs ohne unnötige Gesundheitsdaten.'],
+      ['check-circle', 'Einwilligung', 'Die Nutzung ist freiwillig. Ob und wofür eine Einwilligung nötig ist (z. B. für Partnerdienste), klärt der Datenschutz.'],
+      ['refresh', 'Datenaktualität', 'Gesundheitsrelevante Daten werden beim Bestellen aktuell gelesen. Ereignisse statt nächtlicher Batches; der Datenstand ist sichtbar.'],
+      ['alert', 'Fehlerbehandlung', 'Pufferung, Wiederholung ohne Duplikate, verständlicher Status in der App, Papier als Rückfallebene.'],
+      ['shield', 'Verantwortlichkeiten', 'Systemführerschaft je Datenobjekt: KIS für klinische Daten, Küchensystem für Menüs, Begleiter nur für Bestellungen.'],
+    ],
+    dataCols: ['App', 'Backend', 'Küchensystem', 'Partner'],
+    dataRows: [
+      ['Name', ['y', 'p', 'p', 'n'], 'Küche: Zuordnung des Tabletts ist eine offene Frage'],
+      ['Station / Zimmer', ['y', 'y', 'y', 'p'], 'Partner nur für Lieferung oder Termin'],
+      ['Kostform-Code', ['y', 'y', 'y', 'n'], ''],
+      ['Allergen-Kennzeichen', ['y', 'y', 'y', 'n'], 'strukturiert, nicht als Freitext'],
+      ['Nüchtern-Status', ['y', 'y', 'y', 'n'], 'als Kennzeichen, ohne Grund'],
+      ['Termine', ['y', 'p', 'n', 'p'], 'Backend und Partner: nur belegte Zeitfenster'],
+      ['Diagnosen / Befunde', ['n', 'n', 'n', 'n'], 'werden im Use Case nicht benötigt'],
+    ],
+  },
+
+  kpis: [
+    { icon: 'cog', title: 'Administrative Entlastung', items: [
+      ['Zeitaufwand pro Menübestellung', '↓', 'Zeitmessung bzw. Selbstaufschreibung vor und nach der Einführung'],
+      ['Manuelle Übertragungen pro Tag', '↓', 'Zählung von Abtipp- und Telefonvorgängen'] ] },
+    { icon: 'check-circle', title: 'Prozessqualität', items: [
+      ['Anteil korrekt übermittelter Bestellungen', '↑', 'Stichprobe: Bestellung ↔ Tablett'],
+      ['Nachbearbeitungen pro 100 Bestellungen', '↓', 'Korrekturen in Küche und auf Station'] ] },
+    { icon: 'heart', title: 'Patient Experience', items: [
+      ['Selbstständige Nutzung', '↑', 'Anteil App-Bestellungen ohne Unterstützung'],
+      ['Zufriedenheit mit der Menübestellung', '↑', 'Kurzbefragung in der App'] ] },
+    { icon: 'target', title: 'Wirtschaftlichkeit', items: [
+      ['Prozessaufwand in Stunden pro Jahr', '↓', 'Hochrechnung aus der Zeitmessung (siehe Rechner)'],
+      ['Implementierungs- und Betriebskosten', '→', 'Projektbudget, Lizenzen, Betrieb'] ] },
+  ],
+  calc: {
+    main: [
+      { k: 'orders', label: 'Bestellungen pro Tag', min: 10, max: 1000, step: 10, v: 100, u: '' },
+      { k: 'manual', label: 'Manueller Aufwand pro Bestellung heute', min: .5, max: 10, step: .5, v: 3, u: 'min' },
+      { k: 'share', label: 'Anteil digitaler Bestellungen', min: 0, max: 100, step: 5, v: 60, u: '%' },
+      { k: 'save', label: 'Zeitersparnis pro digitaler Bestellung', min: 0, max: 10, step: .5, v: 2, u: 'min' },
+      { k: 'days', label: 'Betriebstage pro Jahr', min: 200, max: 365, step: 1, v: 365, u: 'Tage' },
+    ],
+    adv: [
+      { k: 'rate', label: 'Kalkulatorischer Stundensatz', min: 0, max: 150, step: 5, v: 55, u: 'CHF' },
+      { k: 'setup', label: 'Einmalige Projektkosten', min: 0, max: 500000, step: 5000, v: 60000, u: 'CHF' },
+      { k: 'ops', label: 'Betriebskosten pro Jahr', min: 0, max: 200000, step: 1000, v: 12000, u: 'CHF' },
+      { k: 'fte', label: 'Jahresarbeitszeit pro Vollzeitstelle', min: 1600, max: 2200, step: 10, v: 1900, u: 'h' },
+    ],
+  },
+
+  risks: [
+    { id: 'R1', cat: 'Patientensicherheit', p: 1, i: 3, title: 'Fehlbestellung trotz Diät- oder Allergievorgabe',
+      m: ['Regeln nur auf strukturierten, freigegebenen Daten', 'Unklare Fälle gehen zur fachlichen Prüfung', 'Kostform-Code auf dem Tablett als zweite Kontrolle'], req: ['REQ-002', 'REQ-009'] },
+    { id: 'R2', cat: 'Patientensicherheit', p: 2, i: 3, title: 'Veraltete Daten nach Verlegung oder bei Nüchternheit',
+      m: ['Ereignisse statt nächtlicher Batches', 'Datenstand in App und Stationsansicht sichtbar', 'Bestellschluss und Nüchternheit gegeneinander prüfen'], req: ['REQ-005'] },
+    { id: 'R3', cat: 'Datenschutz', p: 1, i: 3, title: 'Unberechtigter Zugriff auf Gesundheitsdaten',
+      m: ['Rollenkonzept und Protokollierung', 'Datenschutz-Folgenabschätzung und Penetrationstest', 'Datenminimierung gegenüber Küche und Partnern'], req: ['REQ-008', 'REQ-009'] },
+    { id: 'R4', cat: 'Verfügbarkeit', p: 2, i: 2, title: 'Ausfall von App oder Schnittstelle',
+      m: ['Pufferung in der Integrationsplattform', 'Monitoring mit Alarmierung', 'Geschulter Papier-Fallback'], req: ['REQ-007'] },
+    { id: 'R5', cat: 'Benutzerakzeptanz', p: 3, i: 2, title: 'Geringe Nutzung durch Patient_innen',
+      m: ['Stellvertretende Erfassung', 'Einfache, mehrsprachige Oberfläche', 'Pilot auf einer Station mit Begleitung'], req: ['REQ-006', 'REQ-010'] },
+    { id: 'R6', cat: 'Benutzerakzeptanz', p: 2, i: 3, title: 'Mehraufwand statt Entlastung für die Pflege',
+      m: ['Shadowing vor dem Design', 'Ausnahmen bündeln statt einzeln melden', 'Aufwand im Pilot messen und nachsteuern'], req: ['REQ-006', 'REQ-005'] },
+    { id: 'R7', cat: 'Umsetzung', p: 2, i: 2, title: 'Küchensystem bietet keine geeignete Schnittstelle',
+      m: ['Machbarkeit früh mit dem Lieferanten klären', 'Integrationsplattform als Adapter', 'Übergangslösung mit strukturiertem Export'], req: ['REQ-003'] },
+  ],
+
+  questions: [
+    { group: 'Fachlich', items: [
+      ['Wie sieht der reale IST-Prozess aus?', 'Shadowing auf zwei Stationen und in der Küche', ['pflege', 'kueche']],
+      ['Wer ist fachlich für die Menübestellung verantwortlich?', 'Klärung im Kick-off, RACI festhalten', ['kueche', 'pflege', 'mgmt']],
+      ['Wie werden Diätvorgaben geprüft und freigegeben?', 'Workshop mit Ärzteschaft und Ernährungsberatung', ['aerzte', 'ernaehrung']],
+      ['Welche Patientengruppen können digitale Angebote nicht selbstständig nutzen?', 'Auswertung pro Station, Gespräche mit der Pflege', ['pflege', 'patient']] ] },
+    { group: 'Technisch', items: [
+      ['Welche Systeme werden heute tatsächlich eingesetzt?', 'Systemlandschaft mit Applikationsmanagement aufnehmen', ['ict']],
+      ['Welche Schnittstellen sind bereits vorhanden?', 'Schnittstellenkatalog der Integrationsplattform sichten', ['ict']],
+      ['Welche Daten dürfen wo gespeichert werden?', 'Schutzbedarfsanalyse und Datenschutz-Folgenabschätzung', ['dsis', 'ict']],
+      ['Wie werden Systemausfälle behandelt?', 'Betriebs- und Notfallkonzept mit ICT und Küche', ['ict', 'kueche']] ] },
+    { group: 'Organisatorisch', items: [
+      ['Welche Prozesse müssen weiterhin analog möglich sein?', 'Rückfallebenen gemeinsam definieren', ['pflege', 'kueche']],
+      ['Wie wird die Wirksamkeit nach der Einführung überprüft?', 'Messplan mit Baseline vor dem Pilot', ['mgmt', 'kueche']] ] },
+  ],
+};
+</script>
+
+<script>
+/* =================================================================
+   PERSPECTIVE A — patient app (phone)
+   ================================================================= */
+(() => {
 /* =============================================================
    State (persisted per browser where possible)
    ============================================================= */
@@ -617,7 +1486,6 @@ function topBar() {
     <div class="brand"><span class="logo">KSB</span>Begleiter</div>
     <div style="display:flex;gap:8px">
       <button class="iconbtn mob-only" data-action="concept-open" aria-label="Über den Prototyp">${ic('info-lg')}</button>
-      <button class="iconbtn" data-action="theme" aria-label="Hell/Dunkel umschalten">${ic('sun')}</button>
       <button class="iconbtn" data-action="notifs" aria-label="Mitteilungen">${ic('bell')}<span class="pip"></span></button>
     </div></div>`;
 }
@@ -1058,8 +1926,615 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSheet(); $('#concept').classList.remove('open'); } });
 
-const th = store.get('theme', null); if (th) document.documentElement.dataset.theme = th;
+// Dark is the default look; the header toggle switches and remembers it.
+document.documentElement.dataset.theme = store.get('theme', 'dark');
+
+// Entry point for the case study ("Im Prototyp ansehen").
+window.KSBApp = {
+  show(phase, tab, day) {
+    if (phase) S.phase = phase;
+    S.mealDay = day ?? null; S.essenMode = 'menu'; S.diet = 'alle';
+    closeSheet(); $('#concept').classList.remove('open'); go(tab || 'home');
+  },
+};
 render();
+})();
+</script>
+
+<script>
+/* =================================================================
+   PERSPECTIVE B — business analysis case study
+   Reads CASE (data block above); renders into #view-ba.
+   ================================================================= */
+(() => {
+const C = CASE;
+const root = document.getElementById('view-ba');
+const scrim = document.getElementById('baScrim');
+const ic = (n, cls = '') => `<svg class="i ${cls}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const fmt = (n, d = 0) => Number(n).toLocaleString('de-CH', { maximumFractionDigits: d });
+const byId = (list, id) => list.find(x => x.id === id);
+const sh = id => byId(C.stakeholders, id);
+const req = id => byId(C.requirements, id);
+const allSteps = () => [...C.process.ist.nodes.map(n => ({ ...n, mode: 'ist' })), ...C.process.soll.nodes.map(n => ({ ...n, mode: 'soll' }))];
+const isMobile = () => matchMedia('(max-width:860px)').matches;
+
+const st = {
+  page: 'erlebnis', method: null,
+  pmode: 'ist', step: { ist: 'i3', soll: 's4' },
+  req: 'REQ-001', reqView: 'story', fSt: null, fPrio: null,
+  sh: 'pflege', arch: 'kueche', flow: 'order', std: null, risk: 'R2',
+  calc: Object.fromEntries([...C.calc.main, ...C.calc.adv].map(f => [f.k, f.v])),
+};
+
+/* ---------- shared building blocks ---------- */
+const shChip = id => `<a class="ba-chip xs" href="#stakeholder/${id}">${ic('users')}${sh(id).short || sh(id).name}</a>`;
+const reqChip = id => `<a class="ba-chip xs mono" href="#anforderungen/${id}" title="${req(id).title}">${id}</a>`;
+const stepChip = s => `<a class="ba-chip xs" href="#prozess/${s.id}"><span class="mono" style="font-size:10.5px;color:var(--muted)">${s.mode.toUpperCase()}</span>${s.title}</a>`;
+const list = (items, icon = 'check', cls = '') => `<ul class="ba-list ${cls}">${items.map(t => `<li>${ic(icon)}<span>${t}</span></li>`).join('')}</ul>`;
+const closeBtn = () => `<button class="iconbtn ba-x" data-ba="close" aria-label="Details schliessen">${ic('x')}</button>`;
+
+function hero(p) {
+  return `<header class="ba-hero">
+    <div class="ba-eyebrow"><span class="mono">${p.n} / 06</span>Business-Analyse · ${p.label}</div>
+    <h1>${p.title}</h1><p class="ba-lead">${p.lead}</p>
+    <div class="ba-comps">${p.comps.map(c => `<span>${ic('check')}${c}</span>`).join('')}</div>
+  </header>
+  <nav class="ba-method" aria-label="Vorgehen eines ICT Business Analysts">${C.method.map((m, i) =>
+    `<button class="mstep ${m.id === p.phase ? 'here' : ''}" aria-expanded="${st.method === m.id}" data-ba="method" data-id="${m.id}"${m.id === p.phase ? ' aria-current="step"' : ''}><span class="mono">${i + 1}</span>${m.label}</button>`).join('<span class="mline"></span>')}
+  </nav><div id="mdetail">${methodDetail()}</div>`;
+}
+function methodDetail() {
+  const m = byId(C.method, st.method); if (!m) return '';
+  const target = byId(C.pages, m.module);
+  return `<div class="ba-panel mdetail fade">
+    <div><div class="ba-label">Phase ${C.method.indexOf(m) + 1} · ${m.label}</div><p>${m.text}</p>${list(m.acts, 'arrow-r')}</div>
+    <div><div class="ba-label">Typische Ergebnisse</div>${list(m.out, 'file')}
+      <a class="ba-chip" style="margin-top:12px" href="#${m.module}${m.anchor ? '/' + m.anchor : ''}">In dieser Fallstudie: ${target.label} ${ic('arrow-r')}</a></div>
+    <p class="ba-foot">Beschreibt ein mögliches professionelles Vorgehen. Für diese Studie wurden keine Interviews, Beobachtungen oder Validierungen mit KSB-Mitarbeitenden durchgeführt.</p>
+  </div>`;
+}
+function footer(p) {
+  const i = C.pages.indexOf(p), prev = C.pages[i - 1], next = C.pages[i + 1];
+  const a = C.about;
+  return `<nav class="ba-pager" aria-label="Fallstudie blättern">
+      ${prev ? `<a href="#${prev.id}"><small>${ic('arrow-l')}Zurück · ${prev.n}</small><b>${prev.label}</b></a>` : '<span></span>'}
+      ${next ? `<a class="next" href="#${next.id}"><small>Weiter · ${next.n}${ic('arrow-r')}</small><b>${next.label}</b></a>` : `<a class="next" href="#erlebnis"><small>Zum Anfang${ic('arrow-r')}</small><b>Erlebnis</b></a>`}
+    </nav>
+    <section class="ba-about" aria-labelledby="aboutH">
+      <div><div class="ba-label">Über diese Konzeptstudie</div>${a.text.map(t => `<p>${t}</p>`).join('')}</div>
+      <div class="who"><h2 id="aboutH" style="font-size:17px;margin:0">${a.name}</h2><span>${a.roles}</span>
+        <div class="ba-chips">${a.links.map(([l, h]) => `<a class="ba-chip" href="${h}" target="_blank" rel="noopener">${l}${ic('ext')}</a>`).join('')}</div></div>
+    </section>`;
+}
+
+/* ---------- connector lines between DOM boxes ---------- */
+function drawEdges(host, edges, { id, dir = 'h', arrows = true }) {
+  const svg = host.querySelector('svg.edges'), lbls = host.querySelector('.edge-lbls');
+  if (!svg || !host.offsetParent) return;
+  const hr = host.getBoundingClientRect();
+  svg.setAttribute('width', hr.width); svg.setAttribute('height', hr.height);
+  const box = n => { const el = host.querySelector(`[data-n="${n}"]`); if (!el) return null; const r = el.getBoundingClientRect();
+    return { l: r.left - hr.left, r: r.right - hr.left, t: r.top - hr.top, b: r.bottom - hr.top, cx: (r.left + r.right) / 2 - hr.left, cy: (r.top + r.bottom) / 2 - hr.top }; };
+  const mk = k => `<marker id="${id}-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" style="fill:var(--${k === 'n' ? 'muted' : k === 'mb' ? 'accent' : 'brand'})"/></marker>`;
+  let paths = '', labels = '';
+  edges.forEach(e => {
+    const a = box(e.from), b = box(e.to); if (!a || !b) return;
+    let d, lx, ly;
+    if (Math.abs(a.cx - b.cx) < 8) {
+      const down = b.cy > a.cy, y1 = down ? a.b : a.t, y2 = down ? b.t : b.b;
+      d = `M${a.cx} ${y1} V${y2}`; lx = a.cx; ly = (y1 + y2) / 2;
+    } else if (dir === 'v' && Math.abs(a.cy - b.cy) > 8) {
+      const down = b.cy > a.cy, y1 = down ? a.b : a.t, y2 = down ? b.t : b.b, my = (y1 + y2) / 2;
+      d = `M${a.cx} ${y1} V${my} H${b.cx} V${y2}`; lx = (a.cx + b.cx) / 2; ly = my;
+    } else {
+      const right = b.cx > a.cx, x1 = right ? a.r : a.l, x2 = right ? b.l : b.r, mx = (x1 + x2) / 2;
+      d = `M${x1} ${a.cy} H${mx} V${b.cy} H${x2}`; lx = mx; ly = (a.cy + b.cy) / 2;
+    }
+    const cls = e.cls || '', m = cls.includes('hl') ? 'hl' : cls.includes('mb') ? 'mb' : 'n';
+    paths += `<path d="${d}" class="${cls}"${arrows ? ` marker-end="url(#${id}-${m})"` : ''}/>`;
+    if (e.label) labels += `<span class="edge-lbl ${cls}" style="left:${lx}px;top:${ly}px">${e.label}</span>`;
+  });
+  svg.innerHTML = `<defs>${mk('n')}${mk('mb')}${mk('hl')}</defs>${paths}`;
+  lbls.innerHTML = labels;
+}
+let redraw = () => {};
+new ResizeObserver(() => redraw()).observe(root);
+if (document.fonts) document.fonts.ready.then(() => redraw());
+
+/* ---------- detail panels: sticky aside on desktop, bottom sheet on mobile ---------- */
+function openDetail(sel) {
+  if (!isMobile()) return;
+  const el = root.querySelector(sel); if (!el) return;
+  el.classList.add('open'); scrim.classList.add('open');
+  el.scrollTop = 0; el.querySelector('.ba-x')?.focus();
+}
+function closeDetail() { root.querySelectorAll('.ba-detail.open').forEach(el => el.classList.remove('open')); scrim.classList.remove('open'); }
+scrim.addEventListener('click', closeDetail);
+
+/* =================================================================
+   02 · Process analysis
+   ================================================================= */
+function pageProzess(p) {
+  return `${hero(p)}
+  <div class="ba-note-bar">${ic('info')}<span><b>Illustrative Annahme:</b> Der IST-Prozess ist ein hypothetisches Beispiel und keine Aussage über die tatsächlichen Abläufe im KSB. Er dient als Ausgangspunkt für die Prozessaufnahme vor Ort.</span></div>
+  <div class="ba-toolbar">
+    <div class="ba-seg" role="group" aria-label="Prozessvariante">
+      <button aria-pressed="${st.pmode === 'ist'}" data-ba="pmode" data-v="ist">IST · heute (Annahme)</button>
+      <button aria-pressed="${st.pmode === 'soll'}" data-ba="pmode" data-v="soll">SOLL · Konzept</button>
+    </div>
+    <div class="ba-legend"><span><i></i>Medienbruch</span><span>${ic('hand')}manuell</span><span>${ic('cog')}automatisiert</span><span>${ic('zap')}Ereignis</span><span>${ic('help')}offene Frage</span></div>
+  </div>
+  <div id="pd-metrics" class="pd-metrics"></div>
+  <div class="pd-scroll"><div class="pd" id="pd"></div></div>
+  <p class="ba-hint">Diagramm horizontal scrollen · Schritt antippen für Details</p>
+  <div class="ba-grid2" style="margin-top:16px">
+    <div id="pd-detail"></div>
+    <aside class="ba-panel" aria-label="Analyse">
+      <div class="ba-label">Analyse · Hypothesen</div>
+      <div class="an-grid">${C.process.analysis.map(([k, v, link]) => `<div class="an-cell"><div class="ba-label">${k}</div>${v === null
+        ? `<div class="ba-chips">${[...new Set(allSteps().flatMap(s => s.st))].map(shChip).join('')}</div>`
+        : v + (link ? ` <a href="#${link}">Details →</a>` : '')}</div>`).join('')}</div>
+    </aside>
+  </div>
+  ${footer(p)}`;
+}
+function procMetrics() {
+  const calc = m => { const P = C.process[m]; return {
+    steps: P.nodes.length, mb: P.nodes.filter(n => n.mb).length, manual: P.nodes.filter(n => n.manual).length,
+    auto: P.nodes.filter(n => n.auto).length }; };
+  const a = calc('ist'), b = calc('soll'), cur = st.pmode;
+  const cell = (k, label) => `<div class="pd-metric"><div class="v">${cur === 'ist' ? a[k] : b[k]}<small>${cur === 'ist' ? 'SOLL: ' + b[k] : 'IST: ' + a[k]}</small></div><div class="k">${label}</div></div>`;
+  root.querySelector('#pd-metrics').innerHTML = cell('mb', 'Medienbrüche') + cell('manual', 'Manuelle Schritte') + cell('auto', 'Automatisierte Schritte') + cell('steps', 'Prozessschritte im Modell');
+}
+function procDiagram() {
+  const P = C.process[st.pmode], sel = st.step[st.pmode], host = root.querySelector('#pd');
+  host.style.setProperty('--cols', P.cols);
+  host.style.gridTemplateRows = `repeat(${C.lanes.length}, minmax(118px, auto))`;
+  const touch = new Set(P.edges.filter(e => e.from === sel || e.to === sel).flatMap(e => [e.from, e.to]));
+  host.innerHTML = C.lanes.map((l, i) => `<div class="lane-bg ${i % 2 ? 'alt' : ''} ${i === C.lanes.length - 1 ? 'last' : ''}" style="grid-row:${i + 1}"></div>
+      <div class="lane-lab ${i % 2 ? 'alt' : ''}" style="grid-row:${i + 1}">${l.label}<small>${P.nodes.filter(n => n.lane === l.id).length} Schritte</small></div>`).join('')
+    + P.nodes.map((n, i) => {
+      const row = C.lanes.findIndex(l => l.id === n.lane) + 1;
+      const flags = [n.mb ? `<span class="fl mb">${ic('zap')}Medienbruch</span>` : '', n.manual ? `<span class="fl">${ic('hand')}manuell</span>` : '',
+        n.auto ? `<span class="fl auto">${ic('cog')}auto</span>` : '', n.event ? `<span class="fl ev">${ic('zap')}Ereignis</span>` : '',
+        n.questions ? `<span class="fl q">${ic('help')}${n.questions.length}</span>` : ''].join('');
+      return `<button class="pd-node ${n.mb ? 'mb' : ''} ${n.start ? 'start' : ''} ${n.end ? 'end' : ''}" data-n="${n.id}" data-ba="step" data-id="${n.id}"
+        aria-pressed="${n.id === sel}" style="grid-row:${row};grid-column:${n.col + 1};${sel && !touch.has(n.id) && n.id !== sel ? 'opacity:.6' : ''}"
+        aria-label="Schritt ${i + 1}: ${n.title}"><span class="no">${String(i + 1).padStart(2, '0')}</span><b>${n.title}</b><span class="flags">${flags}</span></button>`;
+    }).join('')
+    + `<svg class="edges" aria-hidden="true"></svg><div class="edge-lbls" aria-hidden="true"></div>`;
+  const edges = P.edges.map(e => ({ ...e, cls: [e.mb ? 'mb' : '', (e.from === sel || e.to === sel) ? 'hl' : ''].join(' ') }));
+  redraw = () => drawEdges(host, edges, { id: 'pd' });
+  requestAnimationFrame(redraw);
+}
+function procDetail() {
+  const P = C.process[st.pmode], idx = P.nodes.findIndex(n => n.id === st.step[st.pmode]), n = P.nodes[idx];
+  const lane = byId(C.lanes, n.lane).label, ist = st.pmode === 'ist';
+  const reqs = n.req || [];
+  root.querySelector('#pd-detail').innerHTML = `<article class="ba-panel fade" aria-live="polite">
+    <div class="ba-label">${st.pmode.toUpperCase()} · Schritt ${idx + 1} von ${P.nodes.length} · ${lane}</div>
+    <h3>${n.title}</h3><p style="margin:0 0 6px;font-size:14.5px">${n.desc}</p>
+    ${n.event ? `<div class="ba-callout int"><b>Auslöser (Ereignis)</b>${n.event}</div>` : ''}
+    ${n.mb ? `<div class="ba-callout warn"><b>Medienbruch</b>${n.mb}</div>` : ''}
+    ${n.std ? `<div class="ba-callout"><b>Schnittstelle (Zielbild)</b><span class="mono" style="font-size:12.5px">${n.std}</span></div>` : ''}
+    ${n.pains ? `<div class="ba-label">Schwachstellen (Hypothese)</div>${list(n.pains, 'alert', 'warn')}` : ''}
+    ${n.gains ? `<div class="ba-label">Verbesserung</div>${list(n.gains, 'check')}` : ''}
+    ${n.assume ? `<div class="ba-label">Annahme</div><span class="ba-assume">${ic('info')}${n.assume}</span>` : ''}
+    ${n.questions ? `<div class="ba-label">Offene Fragen</div>${list(n.questions, 'help', 'q')}` : ''}
+    <div class="ba-label">Beteiligte</div><div class="ba-chips">${n.st.map(shChip).join('')}</div>
+    ${reqs.length ? `<div class="ba-label">${ist ? 'Daraus abgeleitete Anforderungen' : 'Zugehörige Anforderungen'}</div><div class="ba-chips">${reqs.map(reqChip).join('')}</div>` : ''}
+    <div class="pd-stepnav">
+      <button class="btn ghost" data-ba="stepnav" data-d="-1" ${idx === 0 ? 'disabled' : ''}>${ic('arrow-l')}Vorheriger</button>
+      <button class="btn ghost" data-ba="stepnav" data-d="1" ${idx === P.nodes.length - 1 ? 'disabled' : ''}>Nächster${ic('arrow-r')}</button>
+    </div></article>`;
+}
+function renderProzess() {
+  procMetrics(); procDiagram(); procDetail();
+  // narrow screens: bring the selected step into the visible part of the diagram
+  const node = root.querySelector('.pd-node[aria-pressed="true"]'), sc = root.querySelector('.pd-scroll');
+  if (node && sc.scrollWidth > sc.clientWidth) sc.scrollLeft = node.offsetLeft - (sc.clientWidth - node.offsetWidth) / 2;
+}
+
+/* =================================================================
+   03 · Requirements
+   ================================================================= */
+function pageAnforderungen(p) {
+  return `${hero(p)}
+  <div class="ba-toolbar" style="margin-top:28px">
+    <div class="ba-chips" role="group" aria-label="Nach Stakeholder filtern">
+      <button class="ba-chip" aria-pressed="${!st.fSt}" data-ba="fst" data-v="">Alle Stakeholder</button>
+      ${C.stakeholders.map(s => `<button class="ba-chip" aria-pressed="${st.fSt === s.id}" data-ba="fst" data-v="${s.id}">${s.short || s.name}</button>`).join('')}
+    </div>
+    <div class="ba-seg" role="group" aria-label="Darstellung">
+      <button aria-pressed="${st.reqView === 'story'}" data-ba="rview" data-v="story">User Story</button>
+      <button aria-pressed="${st.reqView === 'spec'}" data-ba="rview" data-v="spec">Fachliche Anforderung</button>
+    </div>
+  </div>
+  <div id="rq-moscow"></div>
+  <div class="ba-grid2"><div id="rq-list"></div><aside class="ba-panel ba-detail" id="rq-detail" aria-label="Anforderung im Detail"></aside></div>
+  <section class="ba-sec" id="release">
+    <div class="ba-sec-h"><div><div class="ba-label">Umsetzen · iterativ</div><h2>Release-Schnitt (Vorschlag)</h2></div>
+      <p>Zuerst das, was die Bestellung sicher und vollständig macht, dann ein Pilot auf einer Station. Weitere Inkremente folgen auf Basis der Messung.</p></div>
+    <div class="release">${C.releases.map(r => `<div class="col ${r.id === 'W' ? 'w' : ''}"><span class="prio p-${r.id}">${r.id}</span><h4 style="margin-top:8px">${r.title}</h4><p>${r.text}</p>
+      <div class="ba-chips">${C.requirements.filter(q => q.prio === r.id).map(q => reqChip(q.id)).join('')}</div></div>`).join('')}</div>
+  </section>
+  ${footer(p)}`;
+}
+function rqFiltered() { return C.requirements.filter(r => (!st.fSt || r.st.includes(st.fSt)) && (!st.fPrio || r.prio === st.fPrio)); }
+function renderAnforderungen() {
+  const base = C.requirements.filter(r => !st.fSt || r.st.includes(st.fSt));
+  root.querySelector('#rq-moscow').innerHTML = `<div class="moscow" role="group" aria-label="Nach Priorität filtern (MoSCoW)">${Object.keys(C.prios).map(k => {
+    const n = base.filter(r => r.prio === k).length;
+    return `<button class="p-${k}" style="flex:${Math.max(n, .6)}" aria-pressed="${!st.fPrio || st.fPrio === k}" data-ba="fprio" data-v="${k}" title="${C.prios[k]}">${k === 'W' ? 'Won’t' : C.prios[k].split(' ')[0]} <span>${n}</span></button>`; }).join('')}</div>`;
+  const rows = rqFiltered();
+  if (rows.length && !rows.some(r => r.id === st.req)) st.req = rows[0].id;
+  root.querySelector('#rq-list').innerHTML = rows.length ? Object.keys(C.prios).map(k => {
+    const g = rows.filter(r => r.prio === k); if (!g.length) return '';
+    return `<div class="rq-group"><h4><span class="prio p-${k}">${k}</span>${C.prios[k]} · ${g.length}</h4>${g.map(r => `
+      <button class="rq-row" aria-pressed="${r.id === st.req}" data-ba="req" data-id="${r.id}">
+        <span class="id">${r.id}</span><span style="min-width:0"><b>${r.title}</b><small>${r.st.map(s => sh(s).short || sh(s).name).join(' · ')}</small></span>
+        <span class="st ${r.status}">${C.statuses[r.status]}</span></button>`).join('')}</div>`; }).join('')
+    : `<div class="ba-panel" style="color:var(--muted)">Keine Anforderung passt zu diesem Filter.</div>`;
+  rqDetail();
+}
+function rqDetail() {
+  const r = req(st.req), el = root.querySelector('#rq-detail');
+  const [who, what, why] = r.story;
+  const body = st.reqView === 'story' ? `Als <em>${who}</em> möchte ich ${what}, damit ${why}.` : r.spec;
+  const steps = allSteps().filter(s => r.steps.includes(s.id));
+  const usedBy = C.requirements.filter(x => x.deps.includes(r.id)).map(x => x.id);
+  el.innerHTML = `${closeBtn()}<div class="fade">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><span class="mono" style="font-size:12px;color:var(--muted)">${r.id} · ${r.type}</span><span class="prio p-${r.prio}" title="${C.prios[r.prio]}">${r.prio}</span></div>
+    <h3 style="margin-top:6px">${r.title}</h3>
+    <div class="ba-chips" style="margin-bottom:6px"><span class="st ${r.status}">${C.statuses[r.status]}</span><span class="ba-chip xs" style="pointer-events:none">${C.prios[r.prio]}</span></div>
+    <div class="ba-label">${st.reqView === 'story' ? 'User Story' : 'Fachliche Anforderung'}</div><p class="rq-text">${body}</p>
+    <div class="ba-label">Akzeptanzkriterien</div>${list(r.ac, 'check-circle')}
+    <div class="ba-label">Stakeholder</div><div class="ba-chips">${r.st.map(shChip).join('')}</div>
+    <div class="ba-label">Abhängigkeiten</div><div class="ba-chips">${r.deps.length ? r.deps.map(reqChip).join('') : '<span style="font-size:13px;color:var(--muted)">keine</span>'}${usedBy.length ? `<span style="font-size:12px;color:var(--muted);align-self:center">· Voraussetzung für</span>${usedBy.map(reqChip).join('')}` : ''}</div>
+    <div class="ba-label">Herkunft im Prozess</div><div class="ba-chips">${steps.map(stepChip).join('')}</div>
+    ${r.demo ? `<button class="btn" style="margin-top:16px" data-ba="demo" data-id="${r.id}">${ic('smartphone')}${r.demo.label}</button>` : ''}
+  </div>`;
+}
+
+/* =================================================================
+   04 · Stakeholders
+   ================================================================= */
+const quadrant = s => s.y >= .5 ? (s.x >= .5 ? 'Eng einbinden' : 'Zufriedenstellen') : (s.x >= .5 ? 'Informieren & beteiligen' : 'Beobachten');
+function pageStakeholder(p) {
+  return `${hero(p)}
+  <div class="ba-note-bar">${ic('info')}<span><b>Beispielhafte Einschätzung:</b> Positionen und Aussagen sind Arbeitshypothesen für den Projektstart. Sie werden in Gesprächen mit den Beteiligten überprüft.</span></div>
+  <div class="ba-grid2">
+    <div class="ba-panel">
+      <div class="ba-label">Stakeholder-Matrix · Einfluss × Betroffenheit</div>
+      <div class="sm-wrap"><div class="sm-y">Einfluss auf Entscheidungen →</div><div class="sm" id="sm"></div><div class="sm-x">Betroffenheit im Alltag →</div></div>
+    </div>
+    <aside class="ba-panel ba-detail" id="sh-detail" aria-label="Stakeholder im Detail"></aside>
+  </div>
+  ${footer(p)}`;
+}
+function renderStakeholder() {
+  root.querySelector('#sm').innerHTML = `<div class="q q1">Eng einbinden</div><div class="q q2">Zufriedenstellen</div><div class="q q3">Beobachten</div><div class="q q4">Informieren & beteiligen</div>`
+    + C.stakeholders.map(s => `<button class="sm-dot ${s.x > .62 ? 'left' : ''}" style="left:${s.x * 100}%;bottom:${s.y * 100}%" aria-pressed="${s.id === st.sh}" data-ba="sh" data-id="${s.id}"><i></i>${s.short || s.name}</button>`).join('');
+  const s = sh(st.sh);
+  const reqs = C.requirements.filter(r => r.st.includes(s.id));
+  const steps = allSteps().filter(n => n.st.includes(s.id));
+  root.querySelector('#sh-detail').innerHTML = `${closeBtn()}<div class="fade">
+    <div class="ba-label">${quadrant(s)}</div><h3>${s.name}</h3>
+    <div class="ba-callout"><b>Business-Analyse-Frage</b>${s.question}</div>
+    <div class="sh-grid">
+      <div class="an-cell"><div class="ba-label">Bedürfnisse</div>${s.need}</div>
+      <div class="an-cell"><div class="ba-label">Herausforderungen</div>${s.challenge}</div>
+      <div class="an-cell"><div class="ba-label">Erwartungen</div>${s.expect}</div>
+      <div class="an-cell"><div class="ba-label">Mögliche Bedenken</div>${s.concern}</div>
+    </div>
+    <div class="ba-label">Beitrag zur Anforderungsanalyse</div><p style="margin:0;font-size:13.5px">${s.contrib}</p>
+    <div class="ba-label">Betroffene Anforderungen · ${reqs.length}</div><div class="ba-chips">${reqs.map(r => reqChip(r.id)).join('') || '–'}</div>
+    <div class="ba-label">Berührungspunkte im Prozess · ${steps.length}</div><div class="ba-chips">${steps.map(stepChip).join('') || '–'}</div>
+  </div>`;
+}
+
+/* =================================================================
+   05 · Architecture
+   ================================================================= */
+function pageArchitektur(p) {
+  const A = C.arch;
+  return `${hero(p)}
+  <div class="ba-note-bar">${ic('info')}<span><b>Architekturannahme:</b> Vereinfachtes Zielbild ohne Kenntnis der tatsächlichen Systemlandschaft des KSB. Systemnamen sind generisch; es werden keine echten Endpunkte angesprochen und keine echten Daten verwendet.</span></div>
+  <div class="ba-toolbar">
+    <div class="ba-seg" role="group" aria-label="Datenfluss hervorheben">
+      ${A.flows.map(f => `<button aria-pressed="${st.flow === f.id}" data-ba="flow" data-v="${f.id}">${f.label}</button>`).join('')}
+      <button aria-pressed="${!st.flow}" data-ba="flow" data-v="">Alle Verbindungen</button>
+    </div>
+  </div>
+  <div class="pd-scroll"><div class="ad" id="ad"></div></div>
+  <p class="ba-hint">Diagramm horizontal scrollen · Komponente antippen für Details</p>
+  <div class="ba-grid2 even" style="margin-top:12px">
+    <div class="ba-panel" id="flow-steps"></div>
+    <aside class="ba-panel ba-detail" id="ad-detail" aria-label="Komponente im Detail"></aside>
+  </div>
+
+  <section class="ba-sec">
+    <div class="ba-sec-h"><div><div class="ba-label">Standards aus dem Stelleninserat</div><h2>HL7 v2, FHIR, DICOM: wo sinnvoll, wo nicht</h2></div>
+      <p>Ein Standard ist kein Selbstzweck. Entscheidend ist, welches System welche Daten führt und welche Schnittstellen bereits bestehen.</p></div>
+    <div class="std-grid">${A.standards.map(s => `<div class="ba-panel std">
+      <h3>${s.name}<span class="ba-chip xs mono" style="pointer-events:none">${A.edges.filter(e => (e.std || []).includes(s.id)).length || (s.id === 'dicom' ? 'Kontext' : 0)}${s.id === 'dicom' ? '' : ' Verbindungen'}</span></h3>
+      <p style="margin:0 0 6px;font-size:13.5px;color:var(--muted)">${s.what}</p>
+      <div class="ba-label">Sinnvoll für</div><div class="yes">${list(s.yes, 'check')}</div>
+      <div class="ba-label">Nicht sinnvoll für</div><div class="no">${list(s.no, 'x')}</div>
+      <button class="btn ghost" style="margin-top:14px;height:40px;font-size:13px" data-ba="std" data-v="${s.id}" aria-pressed="${st.std === s.id}">${st.std === s.id ? 'Hervorhebung aufheben' : 'Im Diagramm zeigen'}</button>
+    </div>`).join('')}</div>
+  </section>
+
+  <section class="ba-sec">
+    <div class="ba-sec-h"><div><div class="ba-label">Sicherheitskonzept (Grundsätze)</div><h2>Datenschutz und Informationssicherheit von Anfang an</h2></div>
+      <p>Gesundheitsdaten sind besonders schützenswert. Diese Grundsätze werden mit Datenschutz und ICT Security konkretisiert und freigegeben.</p></div>
+    <div class="sec-grid">${A.security.map(([i, t, d]) => `<div class="sec-tile"><b>${ic(i)}${t}</b>${d}</div>`).join('')}</div>
+    <div class="ba-panel" style="margin-top:12px">
+      <div class="ba-label">Datenminimierung · Wer sieht was?</div>
+      <div class="dm-scroll"><table class="dm"><thead><tr><th>Datenelement</th>${A.dataCols.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+      <tbody>${A.dataRows.map(([n, v, note]) => `<tr><td><b>${n}</b>${note ? `<small>${note}</small>` : ''}</td>${v.map(x => `<td class="${x}" aria-label="${{ y: 'ja', p: 'eingeschränkt', n: 'nein' }[x]}">${{ y: '●', p: '◐', n: '–' }[x]}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+      <div class="ba-legend" style="margin-top:10px"><span><b class="mono" style="color:var(--brand)">●</b> benötigt</span><span><b class="mono" style="color:var(--accent)">◐</b> eingeschränkt / Referenz</span><span><b class="mono">–</b> nicht übermittelt</span></div>
+    </div>
+  </section>
+  ${footer(p)}`;
+}
+function renderArchitektur() {
+  const A = C.arch, host = root.querySelector('#ad');
+  const flow = byId(A.flows, st.flow);
+  const key = (a, b) => [a, b].sort().join('|');
+  const flowKeys = new Set(flow ? flow.steps.map(([a, b]) => key(a, b)) : []);
+  const stdNodes = new Set(st.std ? (st.std === 'dicom' ? ['ris'] : A.edges.filter(e => (e.std || []).includes(st.std)).flatMap(e => [e.from, e.to])) : []);
+  const active = st.std ? stdNodes : flow ? new Set(flow.steps.flatMap(s => [s[0], s[1]])) : null;
+  host.style.gridTemplateRows = `repeat(${A.rows.length}, minmax(112px, auto))`;
+  host.innerHTML = A.rows.map((r, i) => `<div class="lane-bg ${i % 2 ? 'alt' : ''} ${i === A.rows.length - 1 ? 'last' : ''}" style="grid-row:${i + 1}"></div><div class="lane-lab ${i % 2 ? 'alt' : ''}" style="grid-row:${i + 1}">${r}</div>`).join('')
+    + A.nodes.map(n => `<button class="ad-node ${n.ctx ? 'ctx' : ''} ${active && !active.has(n.id) ? 'dim' : ''}" data-n="${n.id}" data-ba="arch" data-id="${n.id}" aria-pressed="${n.id === st.arch}"
+        style="grid-row:${n.row + 1};grid-column:${n.col + 1}"><b>${n.title}</b><span class="sub">${n.sub}</span>${n.id === 'ris' ? '<span class="fl q">DICOM</span>' : ''}${n.ctx ? '<span class="fl">nicht im Use Case</span>' : ''}</button>`).join('')
+    + `<svg class="edges" aria-hidden="true"></svg><div class="edge-lbls" aria-hidden="true"></div>`;
+  const edges = A.edges.map(e => {
+    const on = st.std ? (e.std || []).includes(st.std) : flow ? flowKeys.has(key(e.from, e.to)) : false;
+    const dim = (st.std || flow) && !on;
+    return { ...e, cls: [on ? 'hl' : '', dim ? 'dim' : '', e.dash ? 'dash' : ''].join(' ') };
+  });
+  redraw = () => drawEdges(host, edges, { id: 'ad', dir: 'v', arrows: false });
+  requestAnimationFrame(redraw);
+
+  root.querySelector('#flow-steps').innerHTML = st.std
+    ? `<div class="ba-label">Hervorgehoben: ${byId(A.standards, st.std).name}</div><p style="margin:0;font-size:13.5px">${st.std === 'dicom'
+      ? 'DICOM bleibt innerhalb der Radiologie (Modalitäten, PACS). Der Begleiter braucht keine Bilddaten und daher keine DICOM-Schnittstelle.'
+      : 'Verbindungen, auf denen dieser Standard im Zielbild eingesetzt werden könnte.'}</p>`
+    : flow ? `<div class="ba-label">Datenfluss · ${flow.label}</div><ol class="flow-steps">${flow.steps.map(([a, b, t], i) => `<li><span class="mono">${i + 1}</span><span><b>${byId(A.nodes, a).title} → ${byId(A.nodes, b).title}</b><br><span style="color:var(--muted)">${t}</span></span></li>`).join('')}</ol>`
+    : `<div class="ba-label">Alle Verbindungen</div><p style="margin:0;font-size:13.5px;color:var(--muted)">Wähle oben einen Datenfluss, um ihn Schritt für Schritt nachzuvollziehen.</p>`;
+
+  const n = byId(A.nodes, st.arch);
+  root.querySelector('#ad-detail').innerHTML = `${closeBtn()}<div class="fade">
+    <div class="ba-label">${A.rows[n.row]}${n.ctx ? ' · Kontext' : ''}</div><h3>${n.title}</h3>
+    <span class="ba-assume">${ic('info')}Architekturannahme</span>
+    <div class="ba-label">Zweck</div><p style="margin:0;font-size:13.5px">${n.purpose}</p>
+    <div class="ba-label">Benötigte Daten</div>${list(n.data, 'file')}
+    <div class="ba-label">Mögliche Schnittstelle</div><p class="mono" style="margin:0;font-size:12px;line-height:1.6">${n.iface}</p>
+    <div class="ba-label">Sicherheitsanforderungen</div>${list(n.sec, 'shield')}
+    <div class="ba-label">Offene Architekturfragen</div>${list(n.open, 'help', 'q')}
+    <div class="ba-label">Systemführerschaft</div><p style="margin:0;font-size:13.5px">${n.owner}</p>
+  </div>`;
+}
+
+/* =================================================================
+   06 · Impact, risks, open questions
+   ================================================================= */
+function pageWirkung(p) {
+  const field = f => `<label>${f.label}<span class="num"><input type="number" min="${f.min}" max="${f.max}" step="${f.step}" value="${st.calc[f.k]}" data-calc="${f.k}" aria-label="${f.label}"><span class="u">${f.u}</span></span>
+      <input type="range" min="${f.min}" max="${f.max}" step="${f.step}" value="${st.calc[f.k]}" data-calc="${f.k}" aria-label="${f.label} (Regler)"></label>`;
+  return `${hero(p)}
+  <section class="ba-sec" style="margin-top:28px">
+    <div class="ba-sec-h"><div><div class="ba-label">Messplan</div><h2>Woran wir Wirkung erkennen würden</h2></div>
+      <p>Baselines werden vor der Einführung erhoben, Zielwerte gemeinsam mit den Fachbereichen festgelegt. Deshalb stehen hier keine Zahlen.</p></div>
+    <div class="kpi-grid">${C.kpis.map(k => `<div class="ba-panel kpi"><h3>${ic(k.icon)}${k.title}</h3>${k.items.map(([t, d, m]) => `<div class="kpi-item"><b>${t}<span class="dir" aria-label="Zielrichtung">${d}</span></b><div>Messung: ${m}</div><div>Baseline: vor Einführung erheben</div></div>`).join('')}</div>`).join('')}</div>
+  </section>
+
+  <section class="ba-sec">
+    <div class="ba-sec-h"><div><div class="ba-label">Szenario-Rechner</div><h2>Was wäre, wenn …?</h2></div>
+      <p>Alle Werte sind veränderbare Annahmen. Die Rechnung ist bewusst einfach und vollständig sichtbar.</p></div>
+    <div class="ba-note-bar" style="margin-top:0">${ic('info')}<span><b>Illustrative Szenariorechnung – keine erhobenen KSB-Betriebsdaten.</b> Eine Zeitersparnis ist nicht automatisch eine finanzielle Einsparung.</span></div>
+    <div class="calc">
+      <div class="ba-panel cin">${C.calc.main.map(field).join('')}
+        <details><summary>Wirtschaftlichkeit (optional)</summary><div class="cin">${C.calc.adv.map(field).join('')}</div></details>
+      </div>
+      <div class="ba-panel" id="calc-out" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="ba-sec">
+    <div class="ba-sec-h"><div><div class="ba-label">Risiken</div><h2>Was schiefgehen könnte, und was wir dagegen tun</h2></div>
+      <p>Schwerpunkt auf Patientensicherheit, Datenschutz, Verfügbarkeit und Benutzerakzeptanz. Einschätzungen sind beispielhaft.</p></div>
+    <div class="ba-grid2 even">
+      <div class="ba-panel"><div class="rm-wrap">
+        <div class="sm-y" style="align-self:center">Auswirkung →</div>
+        <div class="rm" id="rm"></div>
+        <div class="rm-xl"><span class="ax">niedrig</span><span class="ax">mittel</span><span class="ax">hoch</span></div>
+      </div><div class="sm-x" style="margin-top:4px;text-align:center;font-size:11.5px;font-weight:700;color:var(--muted)">Eintrittswahrscheinlichkeit →</div>
+      <div class="ba-legend" style="margin-top:10px"><span class="lvl lo">niedrig</span><span class="lvl mid">mittel</span><span class="lvl hi">hoch</span></div></div>
+      <aside class="ba-panel ba-detail" id="risk-detail" aria-label="Risiko im Detail"></aside>
+    </div>
+  </section>
+
+  <section class="ba-sec">
+    <div class="ba-sec-h"><div><div class="ba-label">Vor der Umsetzung</div><h2>Was müsste vor einer Umsetzung geklärt werden?</h2></div>
+      <p>Die wichtigsten Fragen. Sie sind der eigentliche Startpunkt der Analyse vor Ort.</p></div>
+    <div class="oq-grid">${C.questions.map(g => `<div class="ba-panel"><h3>${g.group}</h3>${g.items.map(([q, how, who]) => `<div class="oq"><b>${q}</b><div>${ic('arrow-r', '')} ${how}</div><div class="ba-chips">${who.map(shChip).join('')}</div></div>`).join('')}</div>`).join('')}</div>
+  </section>
+  ${footer(p)}`;
+}
+const lvl = r => { const s = r.p * r.i; return s >= 6 ? ['hi', 'hoch'] : s >= 3 ? ['mid', 'mittel'] : ['lo', 'niedrig']; };
+function renderRisks() {
+  let cells = '';
+  for (let i = 3; i >= 1; i--) for (let p = 1; p <= 3; p++) {
+    const s = p * i, c = s >= 6 ? 'hi' : s >= 3 ? 'mid' : 'lo';
+    cells += `<div class="cell ${c}" aria-label="Wahrscheinlichkeit ${p}, Auswirkung ${i}">${C.risks.filter(r => r.p === p && r.i === i).map(r => `<button class="risk-chip" aria-pressed="${r.id === st.risk}" data-ba="risk" data-id="${r.id}" title="${r.title}">${r.id}</button>`).join('')}</div>`;
+  }
+  root.querySelector('#rm').innerHTML = cells;
+  const r = byId(C.risks, st.risk), [c, l] = lvl(r);
+  root.querySelector('#risk-detail').innerHTML = `${closeBtn()}<div class="fade">
+    <div class="ba-label">${r.id} · ${r.cat}</div><h3>${r.title}</h3>
+    <div class="ba-chips"><span class="lvl ${c}">Risiko ${l}</span><span class="ba-chip xs" style="pointer-events:none">Wahrscheinlichkeit ${['', 'niedrig', 'mittel', 'hoch'][r.p]}</span><span class="ba-chip xs" style="pointer-events:none">Auswirkung ${['', 'gering', 'mittel', 'hoch'][r.i]}</span></div>
+    <div class="ba-label">Massnahmen</div>${list(r.m, 'shield')}
+    <div class="ba-label">Abgesichert durch</div><div class="ba-chips">${r.req.map(reqChip).join('')}</div>
+    <div class="ba-label">Alle Risiken</div>${C.risks.map(x => `<button class="rq-row" style="grid-template-columns:40px 1fr auto;padding:8px 11px" aria-pressed="${x.id === r.id}" data-ba="risk" data-id="${x.id}"><span class="id">${x.id}</span><span style="font-size:13px;font-weight:700">${x.title}</span><span class="lvl ${lvl(x)[0]}">${lvl(x)[1]}</span></button>`).join('')}
+  </div>`;
+}
+function renderCalc() {
+  const v = st.calc;
+  const perDay = v.orders * v.share / 100 * v.save, perYearMin = perDay * v.days, perYearH = perYearMin / 60;
+  const istH = v.orders * v.manual * v.days / 60, sollH = Math.max(istH - perYearH, 0), red = istH ? perYearH / istH * 100 : 0;
+  const fte = perYearH / v.fte, value = perYearH * v.rate, net = value - v.ops, payback = net > 0 ? v.setup / net : null;
+  const opsH = v.rate ? v.ops / v.rate : 0;
+  const beShare = v.orders * v.save * v.days ? opsH * 60 / (v.orders * v.save * v.days) * 100 : null;
+  const warn = v.save > v.manual ? `<p class="warnline">${ic('alert')} Die Ersparnis pro Bestellung ist grösser als der heutige Aufwand. Annahme prüfen.</p>` : '';
+  const max = Math.max(istH, 1);
+  root.querySelector('#calc-out').innerHTML = `
+    <div class="hero-nums">
+      <div class="hn"><div class="v">${fmt(perDay)} <small>min</small></div><div class="k">Zeitersparnis pro Tag</div></div>
+      <div class="hn"><div class="v">${fmt(perYearH)} <small>h</small></div><div class="k">pro Jahr (hypothetisch)</div></div>
+      <div class="hn"><div class="v">${fmt(red)} <small>%</small></div><div class="k">weniger manueller Aufwand</div></div>
+    </div>${warn}
+    <div class="formula" aria-label="Rechenweg">
+      <span class="c">Ersparnis/Tag  </span>= ${fmt(v.orders)} Bestellungen × ${fmt(v.share)} % × ${fmt(v.save, 1)} min = <b>${fmt(perDay)} min</b><br>
+      <span class="c">Ersparnis/Jahr </span>= ${fmt(perDay)} min × ${fmt(v.days)} Tage = ${fmt(perYearMin)} min ≈ <b>${fmt(perYearH)} h</b><br>
+      <span class="c">Aufwand IST    </span>= ${fmt(v.orders)} × ${fmt(v.manual, 1)} min × ${fmt(v.days)} Tage ≈ <b>${fmt(istH)} h</b> → SOLL ≈ <b>${fmt(sollH)} h</b><br>
+      <span class="c">Kapazität      </span>≈ ${fmt(perYearH)} h ÷ ${fmt(v.fte)} h ≈ <b>${fmt(fte, 2)} Vollzeitstellen</b> <span class="c">(umverteilbar, nicht eingespart)</span>
+    </div>
+    <div class="ba-label">Manueller Aufwand pro Jahr</div>
+    <div class="bars">
+      <div class="bar-row"><span>IST (Annahme)</span><span class="track"><span class="fill" style="display:block;width:${istH / max * 100}%;background:var(--muted);opacity:.55"></span></span><span class="v">${fmt(istH)} h</span></div>
+      <div class="bar-row"><span>SOLL</span><span class="track"><span class="fill" style="display:block;width:${sollH / max * 100}%;background:var(--brand)"></span></span><span class="v">${fmt(sollH)} h</span></div>
+    </div>
+    <div class="ba-label" style="margin-top:18px">Zeitersparnis in Abhängigkeit vom Digitalanteil</div>
+    <div class="chart-box" id="sens"></div>
+    <div class="ba-label" style="margin-top:16px">Wirtschaftlichkeit (kalkulatorisch)</div>
+    <div class="formula" style="margin-top:0">
+      <span class="c">Zeitwert/Jahr  </span>= ${fmt(perYearH)} h × CHF ${fmt(v.rate)} = <b>CHF ${fmt(value)}</b><br>
+      <span class="c">abzgl. Betrieb </span>= CHF ${fmt(value)} − CHF ${fmt(v.ops)} = <b>CHF ${fmt(net)}</b><br>
+      <span class="c">Amortisation   </span>= ${payback ? `CHF ${fmt(v.setup)} ÷ CHF ${fmt(net)} ≈ <b>${fmt(payback, 1)} Jahre</b>` : '<b>nicht erreicht</b> <span class="c">(Zeitwert deckt Betrieb nicht)</span>'}<br>
+      <span class="c">Mindestnutzung </span>≈ ${beShare === null ? '–' : beShare > 100 ? '<b>über 100 %</b> <span class="c">(unter diesen Annahmen nicht erreichbar)</span>' : `<b>${fmt(beShare)} %</b> digitale Bestellungen, damit der Zeitwert den Betrieb deckt`}
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Freigesetzte Zeit wird in der Regel umverteilt, zum Beispiel in die Pflege am Bett. Finanziell wirksam wird sie erst, wenn Kapazitäten tatsächlich anders geplant werden. Das ist eine Managemententscheidung, keine Rechenfrage.</p>`;
+  renderSens(perYearH, opsH, beShare);
+}
+function renderSens(curH, opsH, beShare) {
+  const v = st.calc, W = 520, H = 220, L = 46, R = 14, T = 24, B = 34;
+  const yearAt = s => v.orders * s / 100 * v.save * v.days / 60;
+  // round axis to a "nice" step (1, 2, 2.5, 5 × 10^n) so tick labels read cleanly
+  const raw = Math.max(yearAt(100), opsH, 1) / 4, mag = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(m => m >= raw);
+  const yMax = step * 4;
+  const x = s => L + s / 100 * (W - L - R), y = h => T + (1 - h / yMax) * (H - T - B);
+  const ticks = [0, 1, 2, 3, 4].map(t => t * step);
+  const showOps = v.rate > 0 && opsH > 0;
+  const el = root.querySelector('#sens');
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Linie: Zeitersparnis pro Jahr steigt linear mit dem Anteil digitaler Bestellungen. Aktuell ${fmt(v.share)} %, ${fmt(curH)} Stunden.">
+      <g class="grid">${ticks.map(t => `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 8}" y="${y(t) + 4}" text-anchor="end">${fmt(t)}</text>`).join('')}</g>
+      ${[0, 25, 50, 75, 100].map(s => `<text x="${x(s)}" y="${H - 14}" text-anchor="middle">${s} %</text>`).join('')}
+      <text x="${W - R}" y="${H - 1}" text-anchor="end">Anteil digitaler Bestellungen</text>
+      <text x="${L}" y="${T - 12}" text-anchor="start">Stunden pro Jahr</text>
+      ${showOps ? `<line x1="${L}" x2="${W - R}" y1="${y(opsH)}" y2="${y(opsH)}" style="stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 4"/>
+        <text x="${W - R}" y="${y(opsH) - 6}" text-anchor="end" style="fill:var(--accent);font-weight:700">Betriebskosten ≙ ${fmt(opsH)} h</text>` : ''}
+      <line x1="${x(0)}" y1="${y(0)}" x2="${x(100)}" y2="${y(yearAt(100))}" style="stroke:var(--brand);stroke-width:2.5;stroke-linecap:round"/>
+      ${showOps && beShare !== null && beShare <= 100 ? `<circle cx="${x(beShare)}" cy="${y(opsH)}" r="4.5" style="fill:var(--accent);stroke:var(--surface);stroke-width:2"/>` : ''}
+      <line x1="${x(v.share)}" x2="${x(v.share)}" y1="${y(curH)}" y2="${H - B}" style="stroke:var(--brand);stroke-width:1;stroke-dasharray:2 3"/>
+      <circle cx="${x(v.share)}" cy="${y(curH)}" r="6" style="fill:var(--brand);stroke:var(--surface);stroke-width:2.5"/>
+      <text class="lbl" x="${x(v.share) + (v.share >= 30 ? -12 : 12)}" y="${y(curH) + (v.share >= 30 ? -12 : 20)}" text-anchor="${v.share >= 30 ? 'end' : 'start'}">${fmt(curH)} h bei ${fmt(v.share)} %</text>
+      <line class="xh" x1="0" x2="0" y1="${T}" y2="${H - B}" style="stroke:var(--muted);stroke-width:1;opacity:0"/>
+      <rect class="hit" x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent"/>
+    </svg><div class="ba-tip"></div>`;
+  const svg = el.querySelector('svg'), tip = el.querySelector('.ba-tip'), xh = el.querySelector('.xh');
+  const move = ev => {
+    const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) / r.width * W;
+    const s = Math.min(100, Math.max(0, Math.round((px - L) / (W - L - R) * 20) * 5));
+    xh.setAttribute('x1', x(s)); xh.setAttribute('x2', x(s)); xh.style.opacity = .5;
+    tip.innerHTML = `${s} % digital → <b>${fmt(yearAt(s))} h/Jahr</b>`;
+    tip.style.left = `${x(s) / W * 100}%`; tip.style.top = `${y(yearAt(s)) / H * r.height}px`; tip.classList.add('show');
+  };
+  svg.querySelector('.hit').addEventListener('pointermove', move);
+  svg.querySelector('.hit').addEventListener('pointerleave', () => { tip.classList.remove('show'); xh.style.opacity = 0; });
+}
+function renderWirkung() { renderCalc(); renderRisks(); }
+
+/* =================================================================
+   Router & events
+   ================================================================= */
+const PAGES = { prozess: [pageProzess, renderProzess], anforderungen: [pageAnforderungen, renderAnforderungen],
+  stakeholder: [pageStakeholder, renderStakeholder], architektur: [pageArchitektur, renderArchitektur], wirkung: [pageWirkung, renderWirkung] };
+
+function route() {
+  const [page, param] = decodeURIComponent(location.hash.slice(1)).split('/');
+  const id = PAGES[page] ? page : 'erlebnis';
+  const changed = id !== st.page; st.page = id; closeDetail();
+  document.querySelectorAll('#csNav a').forEach(a => {
+    const on = a.dataset.route === id; on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
+    if (on && changed) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
+  document.getElementById('view-erlebnis').hidden = id !== 'erlebnis';
+  root.hidden = id === 'erlebnis';
+  const p = byId(C.pages, id);
+  document.title = id === 'erlebnis' ? 'KSB Begleiter – Prototyp' : `${p.label} · KSB Begleiter Fallstudie`;
+  if (id === 'erlebnis') { redraw = () => {}; if (changed) window.scrollTo(0, 0); return; }
+
+  // apply deep-link parameter
+  let focusSel = null;
+  if (param) {
+    if (id === 'prozess') { const s = allSteps().find(n => n.id === param); if (s) { st.pmode = s.mode; st.step[s.mode] = s.id; focusSel = '#pd-detail'; } }
+    if (id === 'anforderungen' && req(param)) { st.req = param; st.fSt = null; st.fPrio = null; focusSel = '#rq-detail'; }
+    if (id === 'stakeholder' && sh(param)) { st.sh = param; focusSel = '#sh-detail'; }
+    if (id === 'architektur' && byId(C.arch.nodes, param)) { st.arch = param; focusSel = '#ad-detail'; }
+  }
+  st.method = null;
+  root.innerHTML = `<div class="ba fade">${PAGES[id][0](p)}</div>`;
+  PAGES[id][1]();
+  window.scrollTo(0, 0);
+  if (param === 'release') root.querySelector('#release').scrollIntoView();
+  else if (focusSel === '#pd-detail') { if (isMobile()) root.querySelector('#pd-detail').scrollIntoView(); }
+  else if (focusSel) openDetail(focusSel);
+}
+window.addEventListener('hashchange', route);
+
+root.addEventListener('click', e => {
+  const el = e.target.closest('[data-ba]'); if (!el) return;
+  const { id, v } = el.dataset;
+  switch (el.dataset.ba) {
+    case 'method': st.method = st.method === id ? null : id;
+      root.querySelectorAll('.mstep').forEach(b => b.setAttribute('aria-expanded', b.dataset.id === st.method));
+      root.querySelector('#mdetail').innerHTML = methodDetail(); break;
+    case 'pmode': st.pmode = v; root.querySelectorAll('[data-ba="pmode"]').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); renderProzess(); break;
+    case 'step': st.step[st.pmode] = id; procDiagram(); procDetail(); if (isMobile()) root.querySelector('#pd-detail').scrollIntoView({ behavior: 'smooth', block: 'start' }); break;
+    case 'stepnav': { const P = C.process[st.pmode], i = P.nodes.findIndex(n => n.id === st.step[st.pmode]) + Number(el.dataset.d);
+      if (P.nodes[i]) { st.step[st.pmode] = P.nodes[i].id; procDiagram(); procDetail(); root.querySelector(`[data-n="${P.nodes[i].id}"]`)?.scrollIntoView({ block: 'nearest', inline: 'center' }); } break; }
+    case 'fst': st.fSt = v || null; root.querySelectorAll('[data-ba="fst"]').forEach(b => b.setAttribute('aria-pressed', (b.dataset.v || null) === st.fSt)); renderAnforderungen(); break;
+    case 'fprio': st.fPrio = st.fPrio === v ? null : v; renderAnforderungen(); break;
+    case 'rview': st.reqView = v; root.querySelectorAll('[data-ba="rview"]').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); rqDetail(); break;
+    case 'req': st.req = id; root.querySelectorAll('.rq-row[data-ba="req"]').forEach(b => b.setAttribute('aria-pressed', b.dataset.id === id)); rqDetail(); openDetail('#rq-detail'); break;
+    case 'demo': { const d = req(id).demo; location.hash = 'erlebnis'; window.KSBApp.show(d.phase, d.tab, d.day); break; }
+    case 'sh': st.sh = id; renderStakeholder(); openDetail('#sh-detail'); break;
+    case 'arch': st.arch = id; renderArchitektur(); openDetail('#ad-detail'); break;
+    case 'flow': st.flow = v || null; st.std = null; root.querySelectorAll('[data-ba="flow"]').forEach(b => b.setAttribute('aria-pressed', (b.dataset.v || null) === st.flow));
+      root.querySelectorAll('[data-ba="std"]').forEach(b => { b.setAttribute('aria-pressed', false); b.textContent = 'Im Diagramm zeigen'; }); renderArchitektur(); break;
+    case 'std': st.std = st.std === v ? null : v; if (st.std) st.flow = null;
+      root.querySelectorAll('[data-ba="flow"]').forEach(b => b.setAttribute('aria-pressed', (b.dataset.v || null) === st.flow));
+      root.querySelectorAll('[data-ba="std"]').forEach(b => { const on = b.dataset.v === st.std; b.setAttribute('aria-pressed', on); b.textContent = on ? 'Hervorhebung aufheben' : 'Im Diagramm zeigen'; });
+      renderArchitektur(); if (st.std) root.querySelector('#ad').scrollIntoView({ behavior: 'smooth', block: 'center' }); break;
+    case 'risk': st.risk = id; renderRisks(); openDetail('#risk-detail'); break;
+    case 'close': closeDetail(); break;
+  }
+});
+root.addEventListener('input', e => {
+  const k = e.target.dataset.calc; if (!k) return;
+  const f = [...C.calc.main, ...C.calc.adv].find(x => x.k === k);
+  let val = Number(e.target.value); if (Number.isNaN(val)) return;
+  val = Math.min(f.max, Math.max(f.min, val)); st.calc[k] = val;
+  root.querySelectorAll(`[data-calc="${k}"]`).forEach(inp => { if (inp !== e.target) inp.value = val; });
+  renderCalc();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+route();
 })();
 </script>
 </body>
