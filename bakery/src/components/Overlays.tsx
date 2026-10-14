@@ -1,5 +1,5 @@
 import { Coffee, FlaskConical, Gift, Plus, RotateCcw, ShoppingBag, Sparkles, Wand2 } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Buddy } from '../buddy/Buddy'
 import { ACCESSORIES, CHALLENGES, CHAPTERS, DEMO_PRODUCTS, REWARD_THRESHOLD } from '../data/catalog'
 import {
@@ -109,11 +109,18 @@ export function Celebrations() {
   const isBig = fx?.type === 'reward' || fx?.type === 'chapter'
   useModalFocus(big, isBig, shiftEffect)
 
+  // A completed moment and the accessory it unlocks share one toast instead of two in a row
+  const paired = fx?.type === 'challenge' && effects[1]?.type === 'accessory' ? effects[1] : null
+  const dismiss = useCallback(() => {
+    shiftEffect()
+    if (paired) shiftEffect()
+  }, [shiftEffect, paired])
+
   useEffect(() => {
     if (!fx || fx.type === 'reward' || fx.type === 'chapter') return
-    const t = setTimeout(shiftEffect, fx.type === 'yum' ? 1900 : 1600)
+    const t = setTimeout(dismiss, fx.type === 'yum' ? 1900 : paired ? 2400 : 1600)
     return () => clearTimeout(t)
-  }, [fx, shiftEffect])
+  }, [fx, dismiss, paired])
 
   if (!fx) return null
   const chapter = chapterOf(state)
@@ -154,15 +161,18 @@ export function Celebrations() {
           : fx.text
     return (
       <div className="absolute inset-x-0 bottom-24 z-50 flex justify-center px-4" role="status" aria-live="polite">
-        <button onClick={shiftEffect} title="Tap to dismiss" className="pop-in flex items-center gap-3 rounded-[1.4rem] border-[2.5px] border-blue bg-white py-2 pr-4 pl-2 text-left shadow-[0_4px_0_#0025FF]">
-          {fx.type === 'accessory' ? (
-            <Buddy species={state.buddy.species} equipped={[fx.accessory]} size={44} animate={false} />
+        <button onClick={dismiss} title="Tap to dismiss" className="pop-in flex items-center gap-3 rounded-[1.4rem] border-[2.5px] border-blue bg-white py-2 pr-4 pl-2 text-left shadow-[0_4px_0_#0025FF]">
+          {fx.type === 'accessory' || paired ? (
+            <Buddy species={state.buddy.species} equipped={[fx.type === 'accessory' ? fx.accessory : paired!.accessory]} size={44} animate={false} />
           ) : (
             <span className="grid h-10 w-10 place-items-center rounded-full bg-pink text-blue">
               <Sparkles size={20} />
             </span>
           )}
-          <span className="text-sm font-bold text-blue">{text}</span>
+          <span className="text-sm font-bold text-blue">
+            {text}
+            {paired && <span className="block text-xs font-semibold text-ink/75">Unlocked: {ACCESSORIES[paired.accessory].label}</span>}
+          </span>
         </button>
       </div>
     )
