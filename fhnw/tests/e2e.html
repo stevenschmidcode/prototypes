@@ -1,0 +1,108 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>e2e running</title>
+<body>
+<iframe id="f" style="width:1280px;height:900px;border:0"></iframe>
+<pre id="out"></pre>
+<script>
+// Drives the real index.html in an iframe; results end up in document.title and #out.
+const APP = new URL('../index.html', location.href).href;
+const f = document.getElementById('f');
+const results = [];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const W = () => f.contentWindow, D = () => f.contentDocument;
+const $ = s => D().querySelector(s);
+const check = (name, ok, info) => results.push(`${ok ? 'PASS' : 'FAIL'} ${name}${info ? ' — ' + info : ''}`);
+function load(hash) { return new Promise(res => { f.onload = () => setTimeout(res, 300); f.src = APP + '?t=' + Math.random() + hash; }); }
+async function go(hash) { W().location.hash = hash; await sleep(150); }
+async function click(sel) { const el = $(sel); if (!el) throw new Error('missing ' + sel); el.click(); await sleep(120); }
+function change(sel, prop, val) { const el = $(sel); el[prop] = val; el.dispatchEvent(new Event('change', { bubbles: true })); }
+
+(async () => {
+  try {
+    localStorage.removeItem('epl.state.v1');
+    await load('#/');
+    check('landing renders hero', /Different schools/.test($('h1').textContent));
+    check('nav has 9 sections', D().querySelectorAll('nav.main a').length === 9);
+
+    // Explorer: select school, lens, node, drawer
+    await go('#/explorer');
+    await click('[data-act="school"][data-id="gamma"]');
+    await click('[data-act="lens"][data-id="ownership"]');
+    const hits = D().querySelectorAll('.node.hit');
+    check('ownership lens highlights exactly C-04', hits.length === 1 && hits[0].dataset.id === 'C-04', `hits=${hits.length}`);
+    await click('[data-act="select-step"][data-id="C-04"]');
+    check('drawer shows step details + simulated finding', !!$('#step-drawer') && /Zulassungsprüfung/.test($('#step-drawer').textContent) && !!$('#step-drawer .sim-badge'));
+    W().document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); await sleep(120);
+    check('Escape closes drawer', !$('#step-drawer'));
+    await click('[data-act="view"][data-id="list"]');
+    check('list view offers text alternative', D().querySelectorAll('.steplist li').length === 8);
+    await click('[data-act="compare"]');
+    check('compare matrix shows 3 schools × 6 stages', D().querySelectorAll('.matrix .rowh').length === 4 && D().querySelectorAll('.matrix .mh').length === 7);
+
+    // Harmonise: IST/SOLL toggle without re-render, variant changes KPI
+    await go('#/harmonise');
+    const chip = $('.hchip'); const before = chip.style.top;
+    await click('[data-act="h-mode"][data-id="soll"]');
+    check('SOLL toggle moves IST chips into the core row', $('#hcanvas').classList.contains('soll') && chip.isConnected && chip.style.top !== before);
+    const leadBefore = $('.kpi [data-count-key="h-leadDays"]').dataset.count;
+    await click('[data-act="toggle-variant"][data-id="aptitude"]');
+    const leadAfter = $('.kpi [data-count-key="h-leadDays"]').dataset.count;
+    check('activating a variant raises lead time', +leadAfter > +leadBefore, `${leadBefore} → ${leadAfter}`);
+    change('input[name="dp-completeness"][value="manual"]', 'checked', true); await sleep(150);
+    const s1 = JSON.parse(localStorage.getItem('epl.state.v1'));
+    check('option choice persisted', s1.target.completeness === 'manual' && s1.target.variants.aptitude === true && s1.harmoniseMode === 'soll');
+
+    // Impact reflects target config
+    await go('#/impact');
+    check('impact shows manual completeness in config', /Vollständigkeitsprüfung: Manuell/.test($('#app').textContent));
+    check('illustrative disclaimer present', /not measured FHNW data/.test($('#app').textContent));
+    await click('[data-act="baseline"][data-id="beta"]');
+    check('baseline switch to Beta', $('[data-act="baseline"][data-id="beta"]').getAttribute('aria-pressed') === 'true');
+
+    // People: WSJF slider re-ranks
+    await go('#/people');
+    const firstBefore = $('details.req').id;
+    change('#REQ-006-effort', 'value', '1'); change('#REQ-006-value', 'value', '5'); change('#REQ-006-urgency', 'value', '5'); change('#REQ-006-risk', 'value', '5'); await sleep(150);
+    check('re-scored requirement moves to rank 1', $('details.req').id === 'REQ-006', `${firstBefore} → ${$('details.req').id}`);
+
+    // Workshop full flow
+    await go('#/workshop');
+    check('next disabled before choosing a process', $('[data-act="ws-next"]').disabled);
+    await click('[data-act="ws"][data-type="process"][data-id="alpha"]');
+    await click('[data-act="ws-next"]');
+    await click('[data-act="ws"][data-type="finding"][data-id="A-05:waiting"]');
+    await click('[data-act="ws-next"]');
+    const need = D().querySelector('[data-act="ws"][data-type="need"]');
+    need.click(); await sleep(120);
+    await click('[data-act="ws-next"]');
+    await click('[data-act="ws"][data-type="measure"][data-id="M-03"]');
+    await click('[data-act="ws-next"]');
+    check('impact step shows computed improvement', /verbessert/.test($('.ws-stage').textContent));
+    await click('[data-act="ws-next"]');
+    const ta = $('#ws-rat'); ta.value = 'E2E Begründung'; ta.dispatchEvent(new Event('input', { bubbles: true })); await sleep(80);
+    check('summary updates live with rationale', $('#sum-rat').textContent === 'E2E Begründung');
+    check('summary title present', /Your process transformation summary/.test($('#ws-summary').textContent));
+    await click('[data-act="ws-save"]');
+    await go('#/governance');
+    check('workshop decision appears in decision log', /DEC-W01/.test($('#app').textContent) && /Arbeitskorb/.test($('#app').textContent));
+
+    // Persistence across reload
+    await load('#/workshop');
+    check('workshop state survives reload', /Gespeichert als DEC-W01/.test($('#app').textContent));
+
+    // Demo reset
+    W().confirm = () => true;
+    await click('footer [data-act="reset-demo"]');
+    const s2 = localStorage.getItem('epl.state.v1');
+    const st = s2 ? JSON.parse(s2) : null;
+    check('reset restores defaults', !st || (st.extraDecisions.length === 0 && st.target.completeness === 'partial'));
+    await go('#/governance');
+    check('decision log back to 3 defaults', !/DEC-W01/.test($('#app').textContent));
+  } catch (e) { results.push('FAIL exception — ' + e.message); }
+  const fails = results.filter(r => r.startsWith('FAIL')).length;
+  document.getElementById('out').textContent = results.join('\n');
+  document.title = `E2E ${results.length - fails}/${results.length} passed`;
+})();
+</script>
+</body>
