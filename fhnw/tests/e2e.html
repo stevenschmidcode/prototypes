@@ -22,8 +22,8 @@ function change(sel, prop, val) { const el = $(sel); el[prop] = val; el.dispatch
   try {
     localStorage.removeItem('epl.state.v1');
     await load('#/');
-    check('landing renders hero', /Different schools/.test($('h1').textContent));
-    check('nav has 9 sections', D().querySelectorAll('nav.main a').length === 9);
+    check('landing renders hero', /Verschiedene Hochschulen/.test($('h1').textContent));
+    check('nav has 5 sections', D().querySelectorAll('nav.main a').length === 5);
 
     // Explorer: select school, lens, node, drawer
     await go('#/explorer');
@@ -56,7 +56,7 @@ function change(sel, prop, val) { const el = $(sel); el[prop] = val; el.dispatch
     // Impact reflects target config
     await go('#/impact');
     check('impact shows manual completeness in config', /Vollständigkeitsprüfung: Manuell/.test($('#app').textContent));
-    check('illustrative disclaimer present', /not measured FHNW data/.test($('#app').textContent));
+    check('illustrative disclaimer present', /keine gemessenen FHNW-Daten/.test($('#app').textContent));
     await click('[data-act="baseline"][data-id="beta"]');
     check('baseline switch to Beta', $('[data-act="baseline"][data-id="beta"]').getAttribute('aria-pressed') === 'true');
 
@@ -82,7 +82,7 @@ function change(sel, prop, val) { const el = $(sel); el[prop] = val; el.dispatch
     await click('[data-act="ws-next"]');
     const ta = $('#ws-rat'); ta.value = 'E2E Begründung'; ta.dispatchEvent(new Event('input', { bubbles: true })); await sleep(80);
     check('summary updates live with rationale', $('#sum-rat').textContent === 'E2E Begründung');
-    check('summary title present', /Your process transformation summary/.test($('#ws-summary').textContent));
+    check('summary title present', /Zusammenfassung der Prozessverbesserung/.test($('#ws-summary').textContent));
     await click('[data-act="ws-save"]');
     await go('#/governance');
     check('workshop decision appears in decision log', /DEC-W01/.test($('#app').textContent) && /Arbeitskorb/.test($('#app').textContent));

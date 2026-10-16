@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Education Process Lab — From Complexity to Clarity</title>
-<meta name="description" content="Independent process design experiment by Steven Schmid: analysing, harmonising and digitalising continuing-education processes. Fictitious scenario for demonstration purposes.">
+<title>Education Process Lab — Von Komplexität zu Klarheit</title>
+<meta name="description" content="Unabhängige Konzeptstudie von Steven Schmid: Weiterbildungsprozesse analysieren, harmonisieren und digitalisieren. Fiktives Szenario zu Demonstrationszwecken.">
 <meta name="author" content="Steven Schmid">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23243B53'/%3E%3Cpath d='M6 9h8M6 16h20M6 23h8M14 9c4 0 4 7 8 7M14 23c4 0 4-7 8-7' stroke='%23F8F7F4' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='26' cy='16' r='2.6' fill='%23E76F51'/%3E%3C/svg%3E">
@@ -59,6 +59,8 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; letter-spac
 p { margin: 0 0 1em; }
 :focus { outline: none; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+/* Überschrift bekommt nach einem Seitenwechsel den Fokus (Screenreader), ohne sichtbaren Rahmen */
+#app h1[tabindex="-1"]:focus-visible { outline: none; }
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: var(--radius); }
 .skip:focus { top: 12px; }
@@ -98,7 +100,7 @@ main { min-height: 70vh; }
 @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .kicker { font: 500 11.5px/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); display: flex; gap: 12px; align-items: center; margin-bottom: 18px; }
 .kicker::before { content: ""; width: 28px; height: 2px; background: var(--accent); flex: none; }
-.display { font-size: clamp(40px, 7.2vw, 96px); line-height: .98; letter-spacing: -0.035em; font-weight: 600; }
+.display { font-size: clamp(36px, 5.4vw, 72px); line-height: .98; letter-spacing: -0.035em; font-weight: 600; }
 .h-section { font-size: clamp(32px, 4.8vw, 60px); letter-spacing: -0.03em; }
 .h-sub { font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.02em; }
 .h-card { font-size: 19px; letter-spacing: -0.01em; line-height: 1.2; }
@@ -106,6 +108,8 @@ main { min-height: 70vh; }
 .page-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px 64px; align-items: end; margin-bottom: clamp(32px, 5vw, 56px); }
 .page-head .lead { margin: 0; }
 @media (max-width: 860px) { .page-head { grid-template-columns: 1fr; } }
+/* zweiter Teil einer zusammengefassten Seite */
+.page-head.sub { margin-top: clamp(64px, 9vw, 112px); padding-top: clamp(40px, 6vw, 64px); border-top: 1px solid var(--line); scroll-margin-top: 80px; }
 .block { margin-top: clamp(48px, 7vw, 96px); }
 .block-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; border-top: 2px solid var(--ink); padding-top: 18px; margin-bottom: 24px; }
 .block-head p { margin: 8px 0 0; color: var(--ink-2); max-width: 60ch; }
@@ -205,6 +209,14 @@ select.input:hover, input.input:hover, textarea.input:hover { border-color: var(
 .journey p { font-size: 14px; color: var(--ink-2); margin: 0; }
 @media (max-width: 960px) { .journey { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .journey { grid-template-columns: 1fr; } .journey a { min-height: 0; } }
+/* fünf Schritte: in einer Reihe, auf schmaleren Bildschirmen als ruhige Liste */
+.journey.j5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+@media (max-width: 1100px) {
+  .journey.j5 { grid-template-columns: 1fr; }
+  .journey.j5 a { min-height: 0; display: grid; grid-template-columns: 40px minmax(0, 12rem) minmax(0, 1fr); gap: 4px 16px; align-items: baseline; border-right: 0; }
+  .journey.j5 h3 { margin: 0; font-size: 19px; }
+}
+@media (max-width: 560px) { .journey.j5 a { grid-template-columns: 32px minmax(0, 1fr); } .journey.j5 p { grid-column: 2; } }
 
 /* ---------- Process graph (BPMN-inspired swimlanes) ---------- */
 .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; font-size: 12.5px; color: var(--ink-2); padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
@@ -555,23 +567,23 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
 </head>
 <body>
 <a class="skip" href="#app">Zum Inhalt springen</a>
-<div class="strip" role="note"><div class="wrap"><span><span class="dot" aria-hidden="true"></span><b>Independent concept study</b> · Not an official FHNW project</span><span>Fictitious scenario for demonstration purposes</span></div></div>
+<div class="strip" role="note"><div class="wrap"><span><span class="dot" aria-hidden="true"></span><b>Unabhängige Konzeptstudie</b> · Kein offizielles Projekt der FHNW</span><span>Fiktives Szenario zu Demonstrationszwecken</span></div></div>
 <header class="site">
   <div class="wrap">
     <a class="brand" href="#/" aria-label="Education Process Lab – Startseite">
       <span class="brand-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 32 32"><path d="M4 8h9M4 16h24M4 24h9M13 8c5 0 5 8 10 8M13 24c5 0 5-8 10-8" stroke="#F8F7F4" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="27" cy="16" r="3" fill="#E76F51"/></svg></span>
-      <span class="brand-name">Education Process Lab<small>From Complexity to Clarity</small></span>
+      <span class="brand-name">Education Process Lab<small>Von Komplexität zu Klarheit</small></span>
     </a>
-    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="main-nav">Menü</button>
     <nav class="main" id="main-nav" aria-label="Hauptnavigation"><ol id="nav-list"></ol></nav>
   </div>
 </header>
 <main id="app" tabindex="-1"><noscript><div class="wrap" style="padding:64px 0"><h1>Education Process Lab</h1><p>Dieser interaktive Prototyp benötigt JavaScript.</p></div></noscript></main>
 <footer class="site">
   <div class="wrap">
-    <div><h4>Education Process Lab</h4><p style="margin:0">Designing better processes for people, education and technology.<br>Eine unabhängige Konzeptstudie von Steven Schmid. Kein offizielles Projekt der FHNW; alle Daten sind fiktiv.</p></div>
-    <div><h4>Creator</h4><p style="margin:0"><a href="https://stevenschmid.ch" rel="noopener">stevenschmid.ch</a><br><a href="https://officebaden.ch" rel="noopener">officebaden.ch</a></p></div>
-    <div><h4>Demo</h4><p style="margin:0 0 10px">Änderungen werden lokal im Browser gespeichert.</p><button class="btn small ghost" data-act="reset-demo">Reset demo</button></div>
+    <div><h4>Education Process Lab</h4><p style="margin:0">Bessere Prozesse für Menschen, Bildung und Technologie.<br>Eine unabhängige Konzeptstudie von Steven Schmid. Kein offizielles Projekt der FHNW; alle Daten sind fiktiv.</p></div>
+    <div><h4>Autor</h4><p style="margin:0"><a href="https://stevenschmid.ch" rel="noopener">stevenschmid.ch</a><br><a href="https://officebaden.ch" rel="noopener">officebaden.ch</a><br><a href="#/about">Über das Projekt</a></p></div>
+    <div><h4>Demo</h4><p style="margin:0 0 10px">Änderungen werden lokal im Browser gespeichert.</p><button class="btn small ghost" data-act="reset-demo">Demo zurücksetzen</button></div>
   </div>
 </footer>
 <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
@@ -627,12 +639,12 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
   };
 
   const CATEGORIES = {
-    mediaBreak: { id: 'mediaBreak', label: 'Medienbrüche', action: 'Show media breaks', question: 'Wo werden Daten zwischen Systemen oder Dokumenten manuell übertragen?' },
-    duplicate: { id: 'duplicate', label: 'Doppelarbeit', action: 'Show duplicate work', question: 'Wo werden Informationen mehrfach erfasst?' },
-    waiting: { id: 'waiting', label: 'Wartezeiten', action: 'Show waiting time', question: 'Wo entstehen längere Liegezeiten?' },
-    ownership: { id: 'ownership', label: 'Unklare Verantwortung', action: 'Show unclear ownership', question: 'Wo ist unklar, wer über den nächsten Schritt entscheidet?' },
-    standards: { id: 'standards', label: 'Unterschiedliche Standards', action: 'Show differing standards', question: 'Wo existieren ähnliche Tätigkeiten mit unterschiedlichen Regeln?' },
-    ux: { id: 'ux', label: 'Nutzererlebnis', action: 'Show applicant pain points', question: 'Welche Schritte sind für Teilnehmende kompliziert oder wenig transparent?' }
+    mediaBreak: { id: 'mediaBreak', label: 'Medienbrüche', action: 'Medienbrüche', question: 'Wo werden Daten zwischen Systemen oder Dokumenten manuell übertragen?' },
+    duplicate: { id: 'duplicate', label: 'Doppelarbeit', action: 'Doppelarbeit', question: 'Wo werden Informationen mehrfach erfasst?' },
+    waiting: { id: 'waiting', label: 'Wartezeiten', action: 'Wartezeiten', question: 'Wo entstehen längere Liegezeiten?' },
+    ownership: { id: 'ownership', label: 'Unklare Verantwortung', action: 'Unklare Verantwortung', question: 'Wo ist unklar, wer über den nächsten Schritt entscheidet?' },
+    standards: { id: 'standards', label: 'Unterschiedliche Standards', action: 'Unterschiedliche Standards', question: 'Wo existieren ähnliche Tätigkeiten mit unterschiedlichen Regeln?' },
+    ux: { id: 'ux', label: 'Nutzererlebnis', action: 'Hürden für Interessierte', question: 'Welche Schritte sind für Teilnehmende kompliziert oder wenig transparent?' }
   };
 
   /* ------------------------------------------------------------------------
@@ -1057,7 +1069,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     { id: 'REQ-008', title: 'Messbare Prozesskennzahlen', stakeholders: ['central'],
       desc: 'Durchlaufzeit, Nachforderungsquote und Medienbrüche werden einheitlich erhoben.',
       value: 3, urgency: 2, risk: 3, effort: 3, moscow: 'Could', status: 'Proposed',
-      acceptance: ['Gemeinsame Kennzahlendefinitionen', 'Messung ab Pilotstart', 'Quartalsweiser Review mit allen Bereichen'],
+      acceptance: ['Gemeinsame Kennzahlendefinitionen', 'Messung ab Pilotstart', 'Quartalsweise Überprüfung mit allen Bereichen'],
       stages: ['intake', 'completeness', 'admission', 'decision', 'communication', 'handover'] },
     { id: 'REQ-009', title: 'Sichere Dokumentablage', stakeholders: ['it', 'applicant'],
       desc: 'Hochgeladene Dokumente werden geschützt abgelegt und nach definierter Frist gelöscht.',
@@ -1080,7 +1092,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
         { id: 'c', label: 'Gemeinsamer Ablauf, fachspezifisches Kriterienraster', pro: 'Gleiche Schritte und Daten; Kriterien als konfigurierte Variante.', con: 'Varianten brauchen Governance und Pflege.' }
       ],
       recommendation: 'c',
-      reasoning: 'Der Ablauf (wer, wann, womit) wird standardisiert, der fachliche Inhalt (wonach) bleibt bei der Studiengangsleitung. Varianten werden begründet beantragt (siehe Governance).'
+      reasoning: 'Der Ablauf (wer, wann, womit) wird standardisiert, der fachliche Inhalt (wonach) bleibt bei der Studiengangsleitung. Varianten werden begründet beantragt (siehe 04 Umsetzung, Governance).'
     },
     {
       id: 'CON-02', title: 'Schnelle Rückmeldung vs. sorgfältige Prüfung',
@@ -1198,40 +1210,40 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
   ];
 
   const ROADMAP = [
-    { id: 'P1', name: 'Understand', title: 'Verstehen', goal: 'Gemeinsames Bild der heutigen Abläufe und Probleme.',
+    { id: 'P1', name: 'Verstehen', title: 'IST aufnehmen', goal: 'Gemeinsames Bild der heutigen Abläufe und Probleme.',
       activities: ['Stakeholder identifizieren', 'IST-Prozesse aufnehmen', 'Unterschiede dokumentieren', 'Prozessprobleme priorisieren'],
       deliverables: ['Stakeholder-Map', 'IST-Prozessmodelle', 'Problemkatalog mit Priorität'],
       stakeholders: ['Administration', 'Studiengangsleitungen', 'Zentrale Services'],
       dependencies: ['Mandat und Ansprechpersonen je Organisationsbereich'],
       success: ['Alle Bereiche bestätigen ihre IST-Modelle', 'Top-5-Probleme sind gemeinsam priorisiert'],
       goals: ['G1', 'G2', 'G5'], status: 'Proposed' },
-    { id: 'P2', name: 'Align', title: 'Abstimmen', goal: 'Einigung auf Kernprozess, Varianten und Rollen.',
+    { id: 'P2', name: 'Abstimmen', title: 'Kernprozess festlegen', goal: 'Einigung auf Kernprozess, Varianten und Rollen.',
       activities: ['Gemeinsamen Kernprozess definieren', 'Fachliche Varianten abstimmen', 'Rollen und Verantwortlichkeiten klären', 'Anforderungen priorisieren'],
       deliverables: ['Kernprozess v1', 'Variantenkatalog', 'RACI', 'Priorisiertes Backlog'],
       stakeholders: ['Dezentrale Prozessverantwortliche', 'Studiengangsleitungen', 'Corporate IT'],
       dependencies: ['Ergebnisse Phase 1', 'Entscheidungsgremium für Standards'],
       success: ['Kernprozess von allen Bereichen getragen', 'Jede Variante ist begründet'],
       goals: ['G3', 'G5'], status: 'Proposed' },
-    { id: 'P3', name: 'Design', title: 'Gestalten', goal: 'Umsetzbare SOLL-Prozesse und Systemanforderungen.',
+    { id: 'P3', name: 'Gestalten', title: 'SOLL modellieren', goal: 'Umsetzbare SOLL-Prozesse und Systemanforderungen.',
       activities: ['SOLL-Prozesse modellieren', 'Systemanforderungen definieren', 'Schnittstellen prüfen', 'Entscheidungsgrundlagen schaffen'],
-      deliverables: ['SOLL-Modelle', 'Requirements mit Akzeptanzkriterien', 'Schnittstellenkonzept', 'Entscheidungsvorlagen'],
+      deliverables: ['SOLL-Modelle', 'Anforderungen mit Akzeptanzkriterien', 'Schnittstellenkonzept', 'Entscheidungsvorlagen'],
       stakeholders: ['Corporate IT', 'Administration', 'Zentrale Services'],
       dependencies: ['Priorisiertes Backlog', 'Architekturvorgaben der IT'],
-      success: ['Requirements sind testbar formuliert', 'Technische Machbarkeit bestätigt'],
+      success: ['Anforderungen sind testbar formuliert', 'Technische Machbarkeit bestätigt'],
       goals: ['G2', 'G4'], status: 'Proposed' },
-    { id: 'P4', name: 'Pilot', title: 'Pilotieren', goal: 'Den neuen Prozess unter realen Bedingungen testen.',
+    { id: 'P4', name: 'Pilot', title: 'Im Alltag testen', goal: 'Den neuen Prozess unter realen Bedingungen testen.',
       activities: ['Pilotbereich auswählen', 'Beteiligte schulen', 'Prozess testen', 'Feedback einholen', 'Kennzahlen überprüfen'],
       deliverables: ['Pilotplan', 'Schulungsunterlagen', 'Feedback-Auswertung', 'Messbericht IST vs. Pilot'],
       stakeholders: ['Pilotbereich', 'Interessierte', 'Studiengangsleitungen'],
       dependencies: ['Umgesetzte Mindestfunktionen', 'Ausgangsmessung aus Phase 1'],
       success: ['Kennzahlen gegenüber Ausgangswert erhoben', 'Beteiligte würden den Prozess weiterempfehlen'],
       goals: ['G1', 'G2', 'G3'], status: 'Proposed' },
-    { id: 'P5', name: 'Scale', title: 'Skalieren', goal: 'Schrittweise Ausweitung und kontinuierliche Verbesserung.',
+    { id: 'P5', name: 'Skalieren', title: 'Ausweiten und verbessern', goal: 'Schrittweise Ausweitung und kontinuierliche Verbesserung.',
       activities: ['Erkenntnisse auswerten', 'Standards verbessern', 'Einführung schrittweise ausweiten', 'Wirksamkeit kontinuierlich überprüfen'],
-      deliverables: ['Rollout-Plan', 'Kernprozess v2', 'Kennzahlen-Review im Quartal'],
+      deliverables: ['Einführungsplan', 'Kernprozess v2', 'Quartalsweise Überprüfung der Kennzahlen'],
       stakeholders: ['Alle Organisationsbereiche', 'Zentrale Services'],
       dependencies: ['Positiver Pilotentscheid', 'Kapazität für Schulung'],
-      success: ['Adoption in allen Bereichen', 'Verbesserungen fliessen in den Standard zurück'],
+      success: ['Neuer Prozess in allen Bereichen im Einsatz', 'Verbesserungen fliessen in den Standard zurück'],
       goals: ['G3', 'G4', 'G5'], status: 'Proposed' }
   ];
 
@@ -1240,16 +1252,16 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     { id: 'communication', title: 'Kommunikation', text: 'Das Warum vor dem Was: welches Problem lösen wir, was bleibt gleich, was ändert sich für wen – in der Sprache der jeweiligen Rolle.' },
     { id: 'training', title: 'Schulung', text: 'Kurze, rollenbasierte Lerneinheiten nahe am Einsatzzeitpunkt; Key-User als erste Anlaufstelle im Bereich.' },
     { id: 'pilot', title: 'Pilotierung', text: 'Ein Bereich startet mit klaren Erfolgskriterien und einem definierten Rückfallweg. Lernen ist das Ziel, nicht der Beweis.' },
-    { id: 'feedback', title: 'Feedback', text: 'Feste Feedbackkanäle (Retro nach 2 und 6 Wochen, laufendes Formular). Jede Rückmeldung erhält eine sichtbare Antwort.' },
-    { id: 'adoption', title: 'Adoption', text: 'Gemessen wird Nutzung, nicht Einführung: Anteil Fälle im neuen Prozess, Schattenprozesse, Zufriedenheit der Rollen.' }
+    { id: 'feedback', title: 'Feedback', text: 'Feste Feedbackkanäle (Rückblick nach 2 und 6 Wochen, laufendes Formular). Jede Rückmeldung erhält eine sichtbare Antwort.' },
+    { id: 'adoption', title: 'Nutzung', text: 'Gemessen wird Nutzung, nicht Einführung: Anteil Fälle im neuen Prozess, Schattenprozesse, Zufriedenheit der Rollen.' }
   ];
 
   const CHANGE_JOURNEY = [
-    { id: 'understand', name: 'Understand', groups: ['Leitungen der Organisationsbereiche', 'Administration'], comms: ['Kick-off mit Problembild', 'Interviews und Prozessbegehungen'], support: ['Ansprechperson pro Bereich', 'Transparente Projektseite'], risks: ['Wahrnehmung als Kontrollprojekt'], success: ['Probleme werden von Betroffenen selbst benannt'] },
-    { id: 'participate', name: 'Participate', groups: ['Administration', 'Studiengangsleitungen', 'Corporate IT'], comms: ['Co-Design-Workshops', 'Entscheide mit Begründung teilen'], support: ['Moderierte Workshops', 'Decision Log'], risks: ['Dominanz einzelner Bereiche'], success: ['Jeder Bereich ist in Entscheiden vertreten'] },
-    { id: 'prepare', name: 'Prepare', groups: ['Key-User', 'Pilotbereich'], comms: ['Was ändert sich für mich? (Rollen-Steckbriefe)', 'Termine früh ankündigen'], support: ['Rollenbasierte Schulung', 'Sandbox zum Ausprobieren'], risks: ['Schulung zu früh oder zu theoretisch'], success: ['Key-User fühlen sich sicher'] },
-    { id: 'adopt', name: 'Adopt', groups: ['Alle Prozessbeteiligten', 'Interessierte'], comms: ['Go-live-Info', 'Sprechstunden in den ersten Wochen'], support: ['Hypercare', 'FAQ aus echten Fragen'], risks: ['Rückfall in alte Abläufe unter Zeitdruck'], success: ['Anteil Fälle im neuen Prozess steigt'] },
-    { id: 'improve', name: 'Improve', groups: ['Dezentrale Prozessverantwortliche', 'Zentrale Services'], comms: ['Quartalsreview der Kennzahlen', 'Changelog des Standards'], support: ['Change-Request-Verfahren', 'Community of Practice'], risks: ['Standard erstarrt'], success: ['Verbesserungen fliessen regelmässig in den Standard'] }
+    { id: 'understand', name: 'Verstehen', groups: ['Leitungen der Organisationsbereiche', 'Administration'], comms: ['Auftakt mit Problembild', 'Interviews und Prozessbegehungen'], support: ['Ansprechperson pro Bereich', 'Transparente Projektseite'], risks: ['Wahrnehmung als Kontrollprojekt'], success: ['Probleme werden von Betroffenen selbst benannt'] },
+    { id: 'participate', name: 'Mitwirken', groups: ['Administration', 'Studiengangsleitungen', 'Corporate IT'], comms: ['Gemeinsame Gestaltungsworkshops', 'Entscheide mit Begründung teilen'], support: ['Moderierte Workshops', 'Entscheidungsprotokoll'], risks: ['Dominanz einzelner Bereiche'], success: ['Jeder Bereich ist in Entscheiden vertreten'] },
+    { id: 'prepare', name: 'Vorbereiten', groups: ['Key-User', 'Pilotbereich'], comms: ['Was ändert sich für mich? (Rollen-Steckbriefe)', 'Termine früh ankündigen'], support: ['Rollenbasierte Schulung', 'Testumgebung zum Ausprobieren'], risks: ['Schulung zu früh oder zu theoretisch'], success: ['Key-User fühlen sich sicher'] },
+    { id: 'adopt', name: 'Anwenden', groups: ['Alle Prozessbeteiligten', 'Interessierte'], comms: ['Info zum Start', 'Sprechstunden in den ersten Wochen'], support: ['Enge Begleitung nach dem Start', 'FAQ aus echten Fragen'], risks: ['Rückfall in alte Abläufe unter Zeitdruck'], success: ['Anteil Fälle im neuen Prozess steigt'] },
+    { id: 'improve', name: 'Verbessern', groups: ['Dezentrale Prozessverantwortliche', 'Zentrale Services'], comms: ['Quartalsweise Überprüfung der Kennzahlen', 'Änderungsverlauf des Standards'], support: ['Verfahren für Änderungsanträge', 'Austausch unter Prozessverantwortlichen'], risks: ['Standard erstarrt'], success: ['Verbesserungen fliessen regelmässig in den Standard'] }
   ];
 
   const CHANGE_SCENARIO = {
@@ -1299,12 +1311,12 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     id: 'CR-014', title: 'Neue Zulassungsanforderung für einen CAS',
     summary: 'Eine Studiengangsleitung möchte für einen CAS ein Aufnahmegespräch einführen.',
     steps: [
-      { role: 'lead', title: 'Antrag stellen', text: 'Die Studiengangsleitung beschreibt Anforderung, Begründung und betroffene Programme im Change-Request-Formular.', out: 'CR-014 erfasst' },
+      { role: 'lead', title: 'Antrag stellen', text: 'Die Studiengangsleitung beschreibt Anforderung, Begründung und betroffene Programme im Formular für Änderungsanträge.', out: 'CR-014 erfasst' },
       { role: 'dpo', title: 'Fachlich vorprüfen', text: 'Die dezentrale Prozessverantwortliche Person prüft: Gibt es bereits eine passende Variante? Betrifft es weitere Programme?', out: 'Bestehende Variante «Aufnahmegespräch» passt' },
       { role: 'po', title: 'Einordnen', text: 'Der zentrale Process Owner entscheidet über den Weg: Nutzung einer bestehenden Variante (schnell) oder Änderung des Standards (Gremium).', out: 'Nutzung bestehender Variante' },
       { role: 'it', title: 'Technische Auswirkungen prüfen', text: 'Corporate IT prüft Konfiguration, Termine und Datenfelder im System.', out: 'Konfiguration ohne Entwicklung möglich' },
-      { role: 'po', title: 'Entscheiden', text: 'Der Process Owner bewilligt die Variante für den CAS, mit Überprüfung nach dem ersten Durchgang.', out: 'Bewilligt, Review nach Durchgang 1' },
-      { role: 'dpo', title: 'Dokumentieren & informieren', text: 'Eintrag im Decision Log, Information an Administration und Studiengangsleitung, Anpassung der Statustexte.', out: 'Decision Log aktualisiert' }
+      { role: 'po', title: 'Entscheiden', text: 'Der Process Owner bewilligt die Variante für den CAS, mit Überprüfung nach dem ersten Durchgang.', out: 'Bewilligt, Überprüfung nach Durchgang 1' },
+      { role: 'dpo', title: 'Dokumentieren & informieren', text: 'Eintrag im Entscheidungsprotokoll, Information an Administration und Studiengangsleitung, Anpassung der Statustexte.', out: 'Entscheidungsprotokoll aktualisiert' }
     ]
   };
 
@@ -1734,6 +1746,9 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
   const roleLabel = r => (E.ROLES[r] || {}).label || r;
   const stageLabel = s => (E.STAGES.find(x => x.id === s) || {}).label || s;
   const stakeholder = id => E.STAKEHOLDERS.find(s => s.id === id);
+  // Statuswerte bleiben intern englisch (gespeicherter Zustand, Tests); angezeigt wird Deutsch.
+  const STATUS_DE = { 'Proposed': 'Vorgeschlagen', 'In analysis': 'In Analyse', 'Validated': 'Validiert', 'Accepted': 'Angenommen', 'Deferred': 'Zurückgestellt', 'Concept proposal': 'Konzeptvorschlag', 'Requires validation': 'Zu validieren', 'Agreed (simulated)': 'Vereinbart (simuliert)', 'Rejected': 'Abgelehnt', 'Superseded': 'Abgelöst' };
+  const statusLabel = s => STATUS_DE[s] || s;
   const local = {}; // transient UI state that does not need persistence
 
   const ICON = {
@@ -1744,44 +1759,53 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     check: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>'
   };
 
+  // Fünf Bereiche statt neun: Harmonisieren & Wirkung sowie Roadmap, Change und Governance sind
+  // je auf einer Seite zusammengefasst. Die alten Adressen (#/impact, #/roadmap …) bleiben gültig und
+  // springen an die passende Stelle (ALIASES).
   const ROUTES = [
-    { id: '', label: 'Start', render: viewLanding, mount: mountLanding, title: 'From Complexity to Clarity' },
-    { id: 'explorer', n: '01', label: 'Explore', render: viewExplorer, mount: mountExplorer, title: 'Process Explorer' },
-    { id: 'people', n: '02', label: 'People', render: viewPeople, mount: mountPeople, title: 'Stakeholders & Requirements' },
-    { id: 'harmonise', n: '03', label: 'Harmonise', render: viewHarmonise, mount: mountHarmonise, title: 'Harmonisation' },
-    { id: 'impact', n: '04', label: 'Impact', render: viewImpact, mount: mountImpact, title: 'Process Impact' },
-    { id: 'roadmap', n: '05', label: 'Roadmap', render: viewRoadmap, title: 'Transformation Roadmap' },
-    { id: 'change', n: '06', label: 'Change', render: viewChange, title: 'Change Management' },
-    { id: 'governance', n: '07', label: 'Governance', render: viewGovernance, title: 'Governance & Decisions' },
-    { id: 'workshop', n: '08', label: 'Workshop', render: viewWorkshop, mount: mountWorkshop, title: 'Workshop Mode' },
-    { id: 'about', n: '09', label: 'About', render: viewAbout, title: 'Behind the Process' }
+    { id: '', label: 'Start', render: viewLanding, mount: mountLanding, title: 'Von Komplexität zu Klarheit' },
+    { id: 'explorer', n: '01', label: 'Erkunden', render: viewExplorer, mount: mountExplorer, title: 'Prozesse erkunden' },
+    { id: 'people', n: '02', label: 'Menschen', render: viewPeople, mount: mountPeople, title: 'Menschen & Anforderungen' },
+    { id: 'harmonise', n: '03', label: 'Harmonisieren', render: viewHarmoniseImpact, mount: mountHarmoniseImpact, title: 'Harmonisieren & Wirkung' },
+    { id: 'umsetzung', n: '04', label: 'Umsetzung', render: viewUmsetzung, title: 'Umsetzung' },
+    { id: 'workshop', n: '05', label: 'Workshop', render: viewWorkshop, mount: mountWorkshop, title: 'Workshop' },
+    { id: 'about', label: 'Über das Projekt', render: viewAbout, title: 'Über das Projekt', hidden: true }
   ];
+  const ALIASES = { impact: ['harmonise', 'wirkung'], roadmap: ['umsetzung', ''], change: ['umsetzung', 'change'], governance: ['umsetzung', 'governance'], entscheide: ['umsetzung', 'dl-h'] };
 
   function parseHash() {
     const h = (location.hash || '#/').replace(/^#\/?/, '');
     const [path, q] = h.split('?');
     const params = {};
     (q || '').split('&').filter(Boolean).forEach(kv => { const [k, v] = kv.split('='); params[decodeURIComponent(k)] = decodeURIComponent(v || ''); });
-    const route = ROUTES.find(r => r.id === path) || ROUTES[0];
-    return { route, params };
+    const alias = ALIASES[path];
+    const route = ROUTES.find(r => r.id === (alias ? alias[0] : path)) || ROUTES[0];
+    return { route, params, anchor: alias ? alias[1] : '' };
   }
 
   function nextLink(id) {
-    const i = ROUTES.findIndex(r => r.id === id);
-    const n = ROUTES[i + 1];
+    const visible = ROUTES.filter(r => r.id && !r.hidden);
+    const i = visible.findIndex(r => r.id === id);
+    const n = visible[i + 1];
     if (!n) return '';
-    return `<a class="next-link" href="#/${n.id}"><span><span class="label">Next · ${esc(n.n)}</span><span class="nt">${esc(n.title)}</span></span><span class="arrow" aria-hidden="true">→</span></a>`;
+    return `<a class="next-link" href="#/${n.id}"><span><span class="label">Weiter · ${esc(n.n)}</span><span class="nt">${esc(n.title)}</span></span><span class="arrow" aria-hidden="true">→</span></a>`;
   }
 
   function pageHead(n, kicker, title, lead, extra) {
-    return `<div class="page-head"><div><div class="kicker">${esc(n)} — ${esc(kicker)}</div><h1 class="h-section">${title}</h1></div><div><p class="lead">${lead}</p>${extra || ''}</div></div>`;
+    return `<div class="page-head"><div><div class="kicker">${n ? `${esc(n)} — ` : ''}${esc(kicker)}</div><h1 class="h-section">${title}</h1></div><div><p class="lead">${lead}</p>${extra || ''}</div></div>`;
   }
-  const fiction = (txt) => `<div class="fiction"><span class="mono">Fictitious</span><span>${txt || 'Fictitious scenario for demonstration purposes. Alpha, Beta und Gamma sind konstruierte Organisationsbereiche und stehen nicht für reale FHNW-Hochschulen.'}</span></div>`;
+  // Zweiter Teil einer zusammengefassten Seite: gleicher Aufbau, aber h2 und mit Sprungziel
+  function subHead(anchor, kicker, title, lead, extra) {
+    return `<div class="page-head sub" id="${esc(anchor)}"><div><div class="kicker">${esc(kicker)}</div><h2 class="h-section">${title}</h2></div><div><p class="lead">${lead}</p>${extra || ''}</div></div>`;
+  }
+  const head = (opts, n, anchor, kicker, title, lead, extra) =>
+    opts && opts.sub ? subHead(anchor, kicker, title, lead, extra) : pageHead(n, kicker, title, lead, extra);
+  const fiction = (txt) => `<div class="fiction"><span class="mono">Fiktiv</span><span>${txt || 'Fiktives Szenario zu Demonstrationszwecken. Alpha, Beta und Gamma sind konstruierte Organisationsbereiche und stehen nicht für reale FHNW-Hochschulen.'}</span></div>`;
 
   /* ---------------- render loop ---------------- */
   const prevCounts = {};
   function render(opts = {}) {
-    const { route, params } = parseHash();
+    const { route, params, anchor } = parseHash();
     if (route.prepare) route.prepare(params);
     if (route.id === 'explorer' && params.step) {
       const proc = E.PROCESSES.find(p => p.steps.some(s => s.id === params.step));
@@ -1797,9 +1821,12 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     $$('[data-scroll-key]', app).forEach(el => { if (scrolls[el.dataset.scrollKey] != null) el.scrollLeft = scrolls[el.dataset.scrollKey]; });
     if (fkey) { const el = app.querySelector(`[data-fkey="${CSS.escape(fkey)}"]`); if (el) el.focus({ preventScroll: true }); }
     $$('nav.main a').forEach(a => { if (a.dataset.route === route.id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    document.title = route.id ? `${route.title} · Education Process Lab` : 'Education Process Lab — From Complexity to Clarity';
+    document.title = route.id ? `${route.title} · Education Process Lab` : 'Education Process Lab — Von Komplexität zu Klarheit';
     if (route.mount) route.mount(store.get(), params);
     animateCounts();
+    // Alte Adresse eines zusammengelegten Bereichs: an die passende Stelle springen
+    if (anchor && local.anchorHash !== location.hash) { const el = document.getElementById(anchor); if (el) requestAnimationFrame(() => el.scrollIntoView({ block: 'start' })); }
+    local.anchorHash = anchor ? location.hash : null;
   }
 
   function animateCounts() {
@@ -1881,8 +1908,8 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
         ${core}
         <g class="pop" style="--d:2.6s"><rect x="488" y="254" width="56" height="24" rx="5" fill="#fff" stroke="#2E9874" stroke-width="1.6" stroke-dasharray="4 3"/><text x="516" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#1E2933">Interview</text></g>
         <g font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing=".08em">
-          <text class="pop" style="--d:2s" x="356" y="132" fill="#2A715B">STANDARDISE WHERE POSSIBLE.</text>
-          <text class="pop" style="--d:2.8s" x="420" y="314" fill="#B0452A">DIFFERENTIATE WHERE NECESSARY.</text>
+          <text class="pop" style="--d:2s" x="356" y="132" fill="#2A715B">STANDARDISIEREN, WO MÖGLICH.</text>
+          <text class="pop" style="--d:2.8s" x="420" y="314" fill="#B0452A">UNTERSCHEIDEN, WO NÖTIG.</text>
         </g>
       </g>
       <g font-family="Inter, sans-serif" font-size="10.5" fill="#5E6A76">
@@ -1894,25 +1921,21 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
 
   function viewLanding() {
     const steps = [
-      ['01', 'Explore', 'Drei fiktive Varianten der CAS-Anmeldung im Swimlane-Modell vergleichen.', 'explorer'],
-      ['02', 'People', 'Stakeholder, Anforderungen und Zielkonflikte sichtbar machen.', 'people'],
-      ['03', 'Harmonise', 'Vom IST zum gemeinsamen Kernprozess – mit begründeten Varianten.', 'harmonise'],
-      ['04', 'Impact', 'Kennzahlen, berechnet aus den Prozessdaten und den gewählten Optionen.', 'impact'],
-      ['05', 'Roadmap', 'Von strategischen Zielen zu Umsetzungsschritten.', 'roadmap'],
-      ['06', 'Change', 'Beteiligung, Schulung, Pilotierung und Adoption.', 'change'],
-      ['07', 'Governance', 'RACI, Change Requests und ein nachvollziehbares Decision Log.', 'governance'],
-      ['08', 'Workshop', 'In fünf Minuten selbst einen Prozess verbessern.', 'workshop']
+      ['01', 'Erkunden', 'Drei fiktive Varianten der CAS-Anmeldung im Swimlane-Modell vergleichen.', 'explorer'],
+      ['02', 'Menschen', 'Stakeholder, Anforderungen und Zielkonflikte sichtbar machen.', 'people'],
+      ['03', 'Harmonisieren', 'Vom Ist zum gemeinsamen Kernprozess, mit berechneter Wirkung.', 'harmonise'],
+      ['04', 'Umsetzung', 'Roadmap, Change und klare Zuständigkeiten.', 'umsetzung'],
+      ['05', 'Workshop', 'In fünf Minuten selbst einen Prozess verbessern.', 'workshop']
     ];
     return `
       <section class="hero" aria-labelledby="hero-h">
         <div>
-          <div class="kicker">Independent process design experiment</div>
-          <h1 class="display" id="hero-h"><span>Different schools.</span><span class="soft">One shared direction.</span></h1>
-          <p class="lead" style="margin-top:28px">Exploring how higher education institutions can harmonise administrative processes while preserving what makes each academic programme unique.</p>
-          <p class="disciplines">Process Analysis · Business Design · Digital Transformation</p>
+          <div class="kicker">Unabhängige Konzeptstudie</div>
+          <h1 class="display" id="hero-h"><span>Verschiedene Hochschulen.</span><span class="soft">Eine gemeinsame Richtung.</span></h1>
+          <p class="lead" style="margin-top:28px">Wie sich Administrationsprozesse in der Weiterbildung harmonisieren lassen, ohne zu verlieren, was jeden Studiengang ausmacht.</p>
           <div class="cta">
-            <a class="btn" href="#/explorer">Explore the process ${ICON.arrow}</a>
-            <a class="btn ghost" href="#/about">Behind the concept</a>
+            <a class="btn" href="#/explorer">Prozess erkunden ${ICON.arrow}</a>
+            <a class="btn ghost" href="#/about">Über das Projekt</a>
           </div>
         </div>
         <figure class="hero-viz animate" id="hero-viz" style="margin:0">
@@ -1921,28 +1944,28 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
             <span class="label">Fokus</span>
             <span class="chips" role="group" aria-label="Pfad hervorheben">
               ${['alpha', 'beta', 'gamma'].map(id => `<button class="chip" data-act="hero-focus" data-id="${id}" aria-pressed="false">${E.getProcess(id).name.replace('Hochschule ', '')}</button>`).join('')}
-              <button class="chip" data-act="hero-replay">↻ Replay</button>
+              <button class="chip" data-act="hero-replay">↻ Nochmals</button>
             </span>
           </figcaption>
         </figure>
       </section>
       ${fiction('Unabhängige Konzeptstudie von Steven Schmid im Rahmen einer Bewerbung. Kein offizielles Projekt der FHNW. Alle Prozesse, Rollen, Kennzahlen und Szenarien sind fiktive, realitätsnahe Beispiele.')}
-      <section class="block" aria-labelledby="pr-h">
-        <h2 class="sr-only" id="pr-h">Leitprinzipien</h2>
-        <div class="principles">
-          <div><span class="label">Principle 01</span><p class="big">Standardise where possible.</p><p class="muted small">Gleiche Phasen, gleiche Daten, gleiche Begriffe – damit Prozesse vergleichbar, steuerbar und digital unterstützbar werden.</p></div>
-          <div><span class="label">Principle 02</span><p class="big">Differentiate where necessary.</p><p class="muted small">Fachlich begründete Unterschiede bleiben – als definierte, dokumentierte Varianten statt als Schattenprozesse.</p></div>
-          <div><span class="label">Principle 03</span><p class="big">Measure, don't assume.</p><p class="muted small">Jede Kennzahl ist aus den Prozessdaten berechnet; jede Annahme ist offengelegt und im Pilot zu validieren.</p></div>
+      <section class="block">
+        <div class="grid g2">
+          <div><span class="label">Die Frage</span><p class="h-sub" style="margin-top:12px;font-family:var(--font-display);font-weight:600;line-height:1.15">«Wie schaffen wir gemeinsame, effiziente und nutzerfreundliche Weiterbildungsprozesse, ohne fachlich notwendige Unterschiede zwischen den Hochschulen zu verlieren?»</p></div>
+          <div class="stack"><span class="label">Das Szenario</span><p>Eine Person möchte sich für einen CAS anmelden. Drei fiktive Organisationsbereiche – <strong>Alpha</strong>, <strong>Beta</strong> und <strong>Gamma</strong> – haben dafür über die Jahre eigene Abläufe entwickelt: vom PDF-Formular bis zum Webformular mit automatischer Prüfung.</p><p class="muted">Der Prototyp zeigt, wie ein Process Owner daraus einen gemeinsamen, messbaren Prozess entwickelt – mit den Menschen, die ihn tragen.</p></div>
         </div>
       </section>
       <section class="block" aria-labelledby="jr-h">
-        <div class="block-head"><div><span class="label">How to read this prototype</span><h2 class="h-sub" id="jr-h" style="margin-top:8px">Listen. Understand. Analyse. Align. Design. Implement. Measure. Improve.</h2></div></div>
-        <div class="journey">${steps.map(s => `<a href="#/${s[3]}"><span class="num">${s[0]}</span><h3>${s[1]}</h3><p>${s[2]}</p></a>`).join('')}</div>
+        <div class="block-head"><div><span class="label">So ist der Prototyp aufgebaut</span><h2 class="h-sub" id="jr-h" style="margin-top:8px">Fünf Schritte vom Ist zum gemeinsamen Prozess.</h2></div></div>
+        <div class="journey j5">${steps.map(s => `<a href="#/${s[3]}"><span class="num">${s[0]}</span><h3>${s[1]}</h3><p>${s[2]}</p></a>`).join('')}</div>
       </section>
-      <section class="block">
-        <div class="grid g2">
-          <div><span class="label">The question</span><p class="h-sub" style="margin-top:12px;font-family:var(--font-display);font-weight:600;line-height:1.15">«Wie schaffen wir gemeinsame, effiziente und nutzerfreundliche Weiterbildungsprozesse, ohne fachlich notwendige Unterschiede zwischen den Hochschulen zu verlieren?»</p></div>
-          <div class="stack"><span class="label">The scenario</span><p>Eine Person möchte sich für einen CAS anmelden. Drei fiktive Organisationsbereiche – <strong>Alpha</strong>, <strong>Beta</strong> und <strong>Gamma</strong> – haben dafür über die Jahre eigene Abläufe entwickelt: vom PDF-Formular bis zum Webformular mit automatischer Prüfung.</p><p class="muted">Der Prototyp zeigt, wie ein Process Owner daraus einen gemeinsamen, messbaren Prozess entwickelt – mit den Menschen, die ihn tragen.</p><a class="btn small ghost" href="#/explorer">Start with the current state ${ICON.arrow}</a></div>
+      <section class="block" aria-labelledby="pr-h">
+        <h2 class="sr-only" id="pr-h">Leitprinzipien</h2>
+        <div class="principles">
+          <div><span class="label">Grundsatz 01</span><p class="big">Standardisieren, wo möglich.</p><p class="muted small">Gleiche Phasen, gleiche Daten, gleiche Begriffe – damit Prozesse vergleichbar, steuerbar und digital unterstützbar werden.</p></div>
+          <div><span class="label">Grundsatz 02</span><p class="big">Unterscheiden, wo nötig.</p><p class="muted small">Fachlich begründete Unterschiede bleiben – als definierte, dokumentierte Varianten statt als Schattenprozesse.</p></div>
+          <div><span class="label">Grundsatz 03</span><p class="big">Messen statt annehmen.</p><p class="muted small">Jede Kennzahl ist aus den Prozessdaten berechnet; jede Annahme ist offengelegt und im Pilot zu validieren.</p></div>
         </div>
       </section>`;
   }
@@ -2096,7 +2119,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     return `<div class="chips" role="group" aria-label="Analyse-Linse">${Object.values(E.CATEGORIES).map(c => {
       const n = steps.filter(s => E.flaggedCategories(s).includes(c.id)).length;
       return `<button class="chip" data-act="lens" data-id="${c.id}" data-fkey="lens-${c.id}" aria-pressed="${state.lens === c.id}" data-tip="${esc(c.question)}">${esc(c.action)} <span class="count">${n}</span></button>`;
-    }).join('')}${state.lens ? '<button class="linkbtn" data-act="lens" data-id="">Clear</button>' : ''}</div>`;
+    }).join('')}${state.lens ? '<button class="linkbtn" data-act="lens" data-id="">Zurücksetzen</button>' : ''}</div>`;
   }
 
   function listHtml(proc, state) {
@@ -2113,7 +2136,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
   }
 
   function findingHtml(f) {
-    return `<div class="finding"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${esc(E.CATEGORIES[f.cat].label)}</strong><span class="sim-badge">Simulated case</span></div>
+    return `<div class="finding"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${esc(E.CATEGORIES[f.cat].label)}</strong><span class="sim-badge">Simuliertes Beispiel</span></div>
       <dl><dt>Beobachtung</dt><dd>${esc(f.obs)}</dd><dt>Vermutete Ursache</dt><dd>${esc(f.cause)}</dd><dt>Auswirkungen</dt><dd>${esc(f.impact)}</dd><dt>Betroffene Rolle</dt><dd>${esc(f.role)}</dd><dt>Mögliche Verbesserung</dt><dd>${esc(f.measure)}</dd></dl></div>`;
   }
 
@@ -2175,7 +2198,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
         <span style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">${E.PROCESSES.map((p, i) => `<span class="pill ${counts[i] ? 'warn' : ''}">${p.code} ${counts[i]}</span>`).join('')}</span></button>`;
     }).join('');
     return `<section class="block" aria-labelledby="an-h">
-      <div class="block-head"><div><span class="label">IST-Analyse</span><h2 class="h-sub" id="an-h" style="margin-top:8px">Before we improve, we understand.</h2><p>Die Linsen werden aus den Prozessdaten abgeleitet – z. B. gilt ein Schritt als Wartezeit-Hotspot, wenn die erwartete Liegezeit ≥ ${E.MODEL.waitingHotspotDays} Tage beträgt. Jede Markierung ist mit einer Beobachtung hinterlegt.</p></div><span class="sim-badge">Simulated case examples</span></div>
+      <div class="block-head"><div><span class="label">IST-Analyse</span><h2 class="h-sub" id="an-h" style="margin-top:8px">Erst verstehen, dann verbessern.</h2><p>Die Linsen werden aus den Prozessdaten abgeleitet – z. B. gilt ein Schritt als Wartezeit-Hotspot, wenn die erwartete Liegezeit ≥ ${E.MODEL.waitingHotspotDays} Tage beträgt. Jede Markierung ist mit einer Beobachtung hinterlegt.</p></div><span class="sim-badge">Simulierte Beispiele</span></div>
       <div class="grid g3">${rows}</div></section>`;
   }
 
@@ -2184,15 +2207,15 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     const compare = state.explorerMode === 'compare';
     const view = effectiveView(state);
     const lensCount = state.lens ? (compare ? E.PROCESSES.reduce((a, p) => a + E.stepsForCategory(p.steps, state.lens).length, 0) : E.stepsForCategory(proc.steps, state.lens).length) : 0;
-    return `${pageHead('01', 'Process Explorer', 'Three schools.<br>One registration.', 'Die CAS-Anmeldung in drei fiktiven Varianten. Rollen als Swimlanes, Zeiten und Auffälligkeiten direkt am Schritt. Wähle eine Analyse-Linse, um Schwachstellen hervorzuheben.', fiction())}
+    return `${pageHead('01', 'Erkunden', 'Drei Hochschulen.<br>Eine Anmeldung.', 'Die CAS-Anmeldung in drei fiktiven Varianten. Rollen als Swimlanes, Zeiten und Auffälligkeiten direkt am Schritt. Wähle eine Analyse-Linse, um Schwachstellen hervorzuheben.', fiction())}
       <div class="toolbar">
         <div class="group"><span class="label">Bereich</span>
-          <div class="seg" role="group" aria-label="Organisationsbereich wählen">${E.PROCESSES.map(p => `<button data-act="school" data-id="${p.id}" data-fkey="school-${p.id}" aria-pressed="${!compare && state.school === p.id}">${p.name.replace('Hochschule ', '')}</button>`).join('')}<button data-act="compare" data-fkey="compare" aria-pressed="${compare}">Compare all</button></div></div>
+          <div class="seg" role="group" aria-label="Organisationsbereich wählen">${E.PROCESSES.map(p => `<button data-act="school" data-id="${p.id}" data-fkey="school-${p.id}" aria-pressed="${!compare && state.school === p.id}">${p.name.replace('Hochschule ', '')}</button>`).join('')}<button data-act="compare" data-fkey="compare" aria-pressed="${compare}">Alle vergleichen</button></div></div>
         ${compare ? '' : `<div class="group"><span class="label">Ansicht</span><div class="seg" role="group" aria-label="Darstellung"><button data-act="view" data-id="graph" data-fkey="v-graph" aria-pressed="${view === 'graph'}">Diagramm</button><button data-act="view" data-id="list" data-fkey="v-list" aria-pressed="${view === 'list'}">Liste</button></div></div>`}
       </div>
       <div class="toolbar"><div class="group"><span class="label">Analyse-Linse</span>${lensChips(state, compare ? E.PROCESSES.flatMap(p => p.steps) : proc.steps)}</div></div>
       <p class="sr-only" aria-live="polite">${state.lens ? `${E.CATEGORIES[state.lens].label}: ${lensCount} Schritte hervorgehoben` : ''}</p>
-      ${compare ? `${compareHtml(state)}<p class="small muted" style="margin-top:12px">Spalten = Phasen des gemeinsamen Kernprozesses (siehe Harmonise). Die Zuordnung der IST-Schritte zu Phasen ist Teil der Analyse. Klick auf einen Schritt öffnet ihn im Diagramm.</p>` : `
+      ${compare ? `${compareHtml(state)}<p class="small muted" style="margin-top:12px">Spalten = Phasen des gemeinsamen Kernprozesses (siehe 03 Harmonisieren). Die Zuordnung der IST-Schritte zu Phasen ist Teil der Analyse. Klick auf einen Schritt öffnet ihn im Diagramm.</p>` : `
       ${procStrip(proc)}
       <div class="explorer${state.selected ? ' has-drawer' : ''}">
         <div>${view === 'graph' ? graphHtml(proc, state) + `<div style="margin-top:12px">${legendHtml()}</div>` : listHtml(proc, state)}</div>
@@ -2250,9 +2273,9 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     const ranked = E.rankRequirements(state.reqOverrides).filter(r => filter === 'all' || r.stakeholders.includes(filter));
     const openReq = params.req || local.openReq;
     const pi = E.STAKEHOLDERS.map(s => `<span class="pi-dot" style="left:${(s.interest - 0.5) / 5 * 100}%;bottom:${(s.influence - 0.5) / 5 * 100}%" data-tip="${esc(s.name)} · Einfluss ${s.influence}/5 · Interesse ${s.interest}/5">${esc(s.short)}</span>`).join('');
-    return `${pageHead('02', 'Requirements & Stakeholder Hub', 'People behind the process.', 'Ein Prozess ist nur dann gut, wenn er die Anforderungen der beteiligten Menschen berücksichtigt. Hier treffen Bedürfnisse, Anforderungen und Zielkonflikte aufeinander.', fiction('Fiktive Rollen und Anforderungen. Bewertungen sind Beispiele und lassen sich interaktiv anpassen.'))}
+    return `${pageHead('02', 'Menschen & Anforderungen', 'Die Menschen hinter dem Prozess.', 'Ein Prozess ist nur dann gut, wenn er die Anforderungen der beteiligten Menschen berücksichtigt. Hier treffen Bedürfnisse, Anforderungen und Zielkonflikte aufeinander.', fiction('Fiktive Rollen und Anforderungen. Bewertungen sind Beispiele und lassen sich interaktiv anpassen.'))}
       <section aria-labelledby="st-h">
-        <div class="block-head" style="margin-top:0"><div><span class="label">Stakeholder</span><h2 class="h-sub" id="st-h" style="margin-top:8px">Five perspectives on one process.</h2></div></div>
+        <div class="block-head" style="margin-top:0"><div><span class="label">Stakeholder</span><h2 class="h-sub" id="st-h" style="margin-top:8px">Fünf Sichten auf einen Prozess.</h2></div></div>
         <div class="grid g5">${E.STAKEHOLDERS.map(s => `<article class="card stake"><div class="avatar" aria-hidden="true">${esc(s.short.slice(0, 2))}</div><h3 class="h-card">${esc(s.name)}</h3><blockquote>«${esc(s.quote)}»</blockquote><div><span class="label">Bedürfnisse</span><ul class="ticks small">${s.needs.map(n => `<li>${esc(n)}</li>`).join('')}</ul></div></article>`).join('')}</div>
         <div class="grid g2" style="margin-top:24px;align-items:center">
           <div><span class="label">Einfluss / Interesse</span><p class="small muted" style="margin-top:8px">Die Matrix hilft, Beteiligung zu planen: Wer mit hohem Einfluss und hohem Interesse muss aktiv mitgestalten, wer mit hohem Interesse und wenig Einfluss braucht eine Stimme – etwa Interessierte über Nutzertests.</p></div>
@@ -2262,12 +2285,12 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
         </div>
       </section>
       <section class="block" aria-labelledby="rq-h">
-        <div class="block-head"><div><span class="label">Requirements</span><h2 class="h-sub" id="rq-h" style="margin-top:8px">From needs to testable requirements.</h2><p>Priorisierung nach WSJF-Logik: <span class="mono small">(Business Value + Dringlichkeit + Risikoreduktion) ÷ Aufwand</span>. Passe die Bewertungen an – die Rangfolge wird neu berechnet.</p></div>
+        <div class="block-head"><div><span class="label">Anforderungen</span><h2 class="h-sub" id="rq-h" style="margin-top:8px">Von Bedürfnissen zu prüfbaren Anforderungen.</h2><p>Priorisierung nach WSJF-Logik: <span class="mono small">(Nutzen + Dringlichkeit + Risikoreduktion) ÷ Aufwand</span>. Passe die Bewertungen an – die Rangfolge wird neu berechnet.</p></div>
           <div class="group" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label class="label" for="rq-f">Stakeholder</label><select class="input" id="rq-f" data-change="req-filter" data-fkey="rq-f"><option value="all">Alle</option>${E.STAKEHOLDERS.map(s => `<option value="${s.id}" ${filter === s.id ? 'selected' : ''}>${esc(s.name)}</option>`).join('')}</select>${Object.keys(state.reqOverrides).length ? '<button class="linkbtn" data-act="req-reset">Bewertungen zurücksetzen</button>' : ''}</div></div>
         <div class="req-list">${ranked.map(r => reqHtml(r, openReq === r.id)).join('') || '<p class="muted">Keine Anforderungen für diesen Filter.</p>'}</div>
       </section>
       <section class="block" aria-labelledby="cf-h">
-        <div class="block-head"><div><span class="label">Stakeholder conflicts</span><h2 class="h-sub" id="cf-h" style="margin-top:8px">Different goals. Shared interests.</h2><p>Zielkonflikte werden nicht weg-standardisiert. Wähle eine Option, um ihre Konsequenzen zu sehen – die Empfehlung ist begründet, aber nicht immer maximale Standardisierung.</p></div></div>
+        <div class="block-head"><div><span class="label">Zielkonflikte</span><h2 class="h-sub" id="cf-h" style="margin-top:8px">Verschiedene Ziele. Gemeinsame Interessen.</h2><p>Zielkonflikte werden nicht weg-standardisiert. Wähle eine Option, um ihre Konsequenzen zu sehen – die Empfehlung ist begründet, aber nicht immer maximale Standardisierung.</p></div></div>
         <div class="stack" style="--gap:20px">${E.CONFLICTS.map(conflictHtml).join('<div style="height:12px"></div>')}</div>
       </section>
       ${nextLink('people')}`;
@@ -2277,13 +2300,13 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     const steps = E.stepsForRequirement(r.id);
     const slider = (k, label) => `<label for="${r.id}-${k}">${label}</label><input type="range" min="1" max="5" step="1" id="${r.id}-${k}" value="${r[k]}" data-change="req-score" data-id="${r.id}" data-k="${k}" data-fkey="${r.id}-${k}"><output for="${r.id}-${k}">${r[k]}</output>`;
     return `<details class="req" id="${r.id}" ${open ? 'open' : ''} data-req="${r.id}">
-      <summary data-fkey="sum-${r.id}"><span class="rank">${String(r.rank).padStart(2, '0')}</span><span class="tag-id rid">${r.id}</span><span><strong>${esc(r.title)}</strong><span class="tiny muted" style="display:block">${r.stakeholders.map(s => stakeholder(s).name).join(' · ')}</span></span><span style="display:flex;gap:6px;align-items:center"><span class="pill outline">${esc(r.moscow)}</span><span class="pill ${r.status === 'Validated' || r.status === 'Accepted' ? 'soll' : ''}">${esc(r.status)}</span><span class="score" data-tip="WSJF-Score">${fmtN(r.score, 1)}</span></span></summary>
+      <summary data-fkey="sum-${r.id}"><span class="rank">${String(r.rank).padStart(2, '0')}</span><span class="tag-id rid">${r.id}</span><span><strong>${esc(r.title)}</strong><span class="tiny muted" style="display:block">${r.stakeholders.map(s => stakeholder(s).name).join(' · ')}</span></span><span style="display:flex;gap:6px;align-items:center"><span class="pill outline">${esc(r.moscow)}</span><span class="pill ${r.status === 'Validated' || r.status === 'Accepted' ? 'soll' : ''}">${esc(statusLabel(r.status))}</span><span class="score" data-tip="WSJF-Wert">${fmtN(r.score, 1)}</span></span></summary>
       <div class="body"><div><p>${esc(r.desc)}</p><span class="label">Akzeptanzkriterien</span><ul class="ticks small">${r.acceptance.map(a => `<li>${esc(a)}</li>`).join('')}</ul>
         <span class="label" style="display:block;margin-top:14px">Betroffene Prozessschritte</span><div class="chips" style="margin-top:8px">${steps.map(s => `<a class="pill ist" href="#/explorer?step=${s.id}" style="text-decoration:none">${s.id} · ${esc(s.title)}</a>`).join('') || '<span class="small muted">Querschnittsanforderung</span>'}</div>
         <p class="tiny muted" style="margin-top:10px">SOLL-Phasen: ${r.stages.map(stageLabel).join(', ')}</p></div>
-        <div><span class="label">Bewertung (1–5)</span><div class="sliders" style="margin-top:10px">${slider('value', 'Business Value')}${slider('urgency', 'Dringlichkeit')}${slider('risk', 'Risikoreduktion')}${slider('effort', 'Aufwand')}</div>
-        <p class="small" style="margin-top:12px">Score <strong class="mono">(${r.value} + ${r.urgency} + ${r.risk}) ÷ ${r.effort} = ${fmtN(r.score, 1)}</strong></p>
-        <label class="label" for="${r.id}-st" style="display:block;margin-top:12px">Status</label><select class="input" id="${r.id}-st" data-change="req-status" data-id="${r.id}" data-fkey="${r.id}-st" style="margin-top:6px">${E.REQ_STATUSES.map(s => `<option ${s === r.status ? 'selected' : ''}>${s}</option>`).join('')}</select></div>
+        <div><span class="label">Bewertung (1–5)</span><div class="sliders" style="margin-top:10px">${slider('value', 'Nutzen')}${slider('urgency', 'Dringlichkeit')}${slider('risk', 'Risikoreduktion')}${slider('effort', 'Aufwand')}</div>
+        <p class="small" style="margin-top:12px">Wert <strong class="mono">(${r.value} + ${r.urgency} + ${r.risk}) ÷ ${r.effort} = ${fmtN(r.score, 1)}</strong></p>
+        <label class="label" for="${r.id}-st" style="display:block;margin-top:12px">Status</label><select class="input" id="${r.id}-st" data-change="req-status" data-id="${r.id}" data-fkey="${r.id}-st" style="margin-top:6px">${E.REQ_STATUSES.map(s => `<option value="${esc(s)}" ${s === r.status ? 'selected' : ''}>${esc(statusLabel(s))}</option>`).join('')}</select></div>
       </div></details>`;
   }
 
@@ -2296,7 +2319,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
       <div class="side"><span class="label">${esc(stakeholder(c.b.who).name)}</span><p style="margin-top:8px">${esc(c.b.view)}</p></div>
       <div class="shared"><strong>Gemeinsames Interesse:</strong> ${esc(c.shared)}</div>
       <div class="opts" role="group" aria-label="Lösungsvarianten">${c.options.map(x => `<button class="copt" data-act="conf-opt" data-c="${c.id}" data-id="${x.id}" data-fkey="${c.id}-${x.id}" aria-pressed="${x.id === sel}"><span class="t">${x.id.toUpperCase()} · ${esc(x.label)}</span>${x.id === c.recommendation ? '<span class="pill soll rec-badge">Empfehlung</span>' : ''}</button>`).join('')}</div>
-      <div class="rec"><div class="grid g2"><div><span class="label">Pro</span><p class="small" style="margin-top:4px">${esc(o.pro)}</p></div><div><span class="label">Contra</span><p class="small" style="margin-top:4px">${esc(o.con)}</p></div></div>
+      <div class="rec"><div class="grid g2"><div><span class="label">Vorteil</span><p class="small" style="margin-top:4px">${esc(o.pro)}</p></div><div><span class="label">Nachteil</span><p class="small" style="margin-top:4px">${esc(o.con)}</p></div></div>
       ${sel === c.recommendation ? `<p style="margin:12px 0 0"><strong>Begründete Empfehlung:</strong> ${esc(c.reasoning)}</p>` : `<p class="small muted" style="margin:12px 0 0">Diese Option ist möglich, wird im gegebenen Kontext aber nicht empfohlen. Die Empfehlung ist ${c.recommendation.toUpperCase()}.</p>`}</div>
     </article>`;
   }
@@ -2364,7 +2387,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
       const before = stageLead(iStages[si]), after = stageLead(tStages[si]);
       const mbBefore = E.PROCESSES.reduce((a, p) => a + p.steps.filter(s => s.stage === ts.stage && E.isActivity(s) && s.mediaBreak).length, 0) / E.PROCESSES.length;
       const mbAfter = target.steps.filter(s => s.stage === ts.stage && E.isActivity(s) && s.mediaBreak).length;
-      return `<div class="hcore" style="left:${hx(si)}px;top:${H.coreY}px"><span class="n">0${si + 1} · CORE</span><h4>${esc(E.STAGES[si].short)}</h4><div class="opt">${esc(ts.fixed ? opt.label : opt.short)}${ts.stage === 'admission' && activeVars ? ` + ${activeVars} Variante${activeVars > 1 ? 'n' : ''}` : ''}</div>
+      return `<div class="hcore" style="left:${hx(si)}px;top:${H.coreY}px"><span class="n">0${si + 1} · KERN</span><h4>${esc(E.STAGES[si].short)}</h4><div class="opt">${esc(ts.fixed ? opt.label : opt.short)}${ts.stage === 'admission' && activeVars ? ` + ${activeVars} Variante${activeVars > 1 ? 'n' : ''}` : ''}</div>
         <div class="delta"><span class="pill ${after < before ? 'soll' : after > before ? 'warn' : ''}" title="Durchlaufzeit der Phase: Ø IST → SOLL">⏱ ${fmtN(before, 1)} → ${fmtN(after, 1)} T</span>${mbBefore || mbAfter ? `<span class="pill ${mbAfter < mbBefore ? 'soll' : ''}" title="Medienbrüche: Ø IST → SOLL">MB ${fmtN(mbBefore, 1)} → ${mbAfter}</span>` : ''}</div></div>`;
     }).join('');
     const ax = hx(stageIdx('admission'));
@@ -2392,7 +2415,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
           const checked = cfg[ts.key] === o.id;
           return `<label class="option${checked ? ' checked' : ''}"><input type="radio" name="dp-${ts.key}" value="${o.id}" ${checked ? 'checked' : ''} data-change="target-opt" data-key="${ts.key}" data-fkey="dp-${ts.key}-${o.id}">
             <span class="o-title">${esc(o.label)}</span><p class="o-sum">${esc(o.summary)}</p><span class="o-kpis">${optionKpis(m)}</span>
-            <details><summary>Trade-offs & Annahmen</summary><dl class="kv" style="margin:8px 0"><dt>Aufwand</dt><dd>${esc(o.tradeoffs.effort)}</dd><dt>Flexibilität</dt><dd>${esc(o.tradeoffs.flexibility)}</dd><dt>Risiko</dt><dd>${esc(o.tradeoffs.risk)}</dd></dl><ul class="ticks">${o.assumptions.map(a => `<li>${esc(a)}</li>`).join('')}</ul></details></label>`;
+            <details><summary>Abwägungen & Annahmen</summary><dl class="kv" style="margin:8px 0"><dt>Aufwand</dt><dd>${esc(o.tradeoffs.effort)}</dd><dt>Flexibilität</dt><dd>${esc(o.tradeoffs.flexibility)}</dd><dt>Risiko</dt><dd>${esc(o.tradeoffs.risk)}</dd></dl><ul class="ticks">${o.assumptions.map(a => `<li>${esc(a)}</li>`).join('')}</ul></details></label>`;
         }).join('')}</div></div>`;
     }).join('');
   }
@@ -2407,21 +2430,21 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
       const c = E.compareMetrics(ist, tm).find(x => x.key === k);
       return `<div class="kpi"><div class="k-label">${l}</div><div class="k-row"><span class="k-before">${fmtKpi(k, c.before)}</span><span class="k-arrow">→</span><span class="k-after">${count('h-' + k, c.after, k === 'leadDays' ? 1 : 0)}</span><span class="k-unit">${k === 'leadDays' ? 'T' : k === 'procMin' ? 'min' : ''}</span></div><div class="k-delta ${c.unchanged ? 'same' : c.improved ? 'good' : 'bad'}">${c.pct == null ? '' : (c.pct > 0 ? '+' : '') + c.pct + ' % ggü. Ø IST'}</div></div>`;
     }).join('');
-    return `${pageHead('03', 'Process Harmonisation Engine', 'One process.<br>Room for differences.', 'Aus drei Abläufen wird ein gemeinsamer Kernprozess mit sechs Phasen. Fachlich notwendige Unterschiede bleiben – als klar definierte Erweiterungen statt als eigene Prozesse.')}
+    return `${pageHead('03', 'Harmonisieren', 'Ein Prozess.<br>Raum für Unterschiede.', 'Aus drei Abläufen wird ein gemeinsamer Kernprozess mit sechs Phasen. Fachlich notwendige Unterschiede bleiben – als klar definierte Erweiterungen statt als eigene Prozesse.')}
       <div class="toolbar"><div class="group"><div class="seg big" role="radiogroup" aria-label="Zustand"><button role="radio" data-act="h-mode" data-id="ist" data-fkey="h-ist" aria-checked="${!soll}">IST</button><button role="radio" data-act="h-mode" data-id="soll" data-fkey="h-soll" aria-checked="${soll}">SOLL</button></div>
         <p class="small muted" id="h-desc" style="margin:0;max-width:52ch">${soll ? 'SOLL: Die Schritte aller Bereiche verschmelzen zu einem Kernprozess. Varianten (unten) lassen sich direkt an- und abwählen.' : 'IST: Jede Zeile ist ein Bereich, jede Spalte eine Phase. Orange Punkte markieren Schritte mit Auffälligkeiten.'}</p></div>
         <span class="pill outline">Ø IST ${fmtDays(ist.leadDays)} → SOLL ${fmtDays(tm.leadDays)}</span></div>
       ${harmoniseCanvas(state)}
       <div class="grid g2 block" style="margin-top:40px;align-items:center">
-        <p class="message">Harmonisation is not the elimination of differences. It is the conscious management of them.<small>Core principle of this concept</small></p>
-        <div class="stack small"><p>Der Kernprozess standardisiert <strong>wer, wann, womit</strong> – Phasen, Datenfelder, Rollen, Status. Die Studiengangsleitung behält <strong>wonach</strong> entschieden wird: fachliche Kriterien und definierte Varianten.</p><p class="muted">Jede Variante ist begründet, sichtbar im Prozessmodell und über das Change-Request-Verfahren beantragbar (siehe Governance).</p></div>
+        <p class="message">Harmonisieren heisst nicht, Unterschiede abzuschaffen, sondern bewusst mit ihnen umzugehen.<small>Grundsatz dieses Konzepts</small></p>
+        <div class="stack small"><p>Der Kernprozess standardisiert <strong>wer, wann, womit</strong> – Phasen, Datenfelder, Rollen, Status. Die Studiengangsleitung behält <strong>wonach</strong> entschieden wird: fachliche Kriterien und definierte Varianten.</p><p class="muted">Jede Variante ist begründet, im Prozessmodell sichtbar und lässt sich mit einem Änderungsantrag beantragen (siehe 04 Umsetzung, Governance).</p></div>
       </div>
       <section class="block" aria-labelledby="dp-h">
-        <div class="block-head"><div><span class="label">Design choices</span><h2 class="h-sub" id="dp-h" style="margin-top:8px">Choose the target design – see the trade-offs.</h2><p>Jede Option erzeugt andere Prozessschritte. Die Auswirkungen werden aus diesen Schritten berechnet, nicht geschätzt. Die Parameter jeder Option sind offengelegt.</p></div></div>
+        <div class="block-head"><div><span class="label">Gestaltungsentscheide</span><h2 class="h-sub" id="dp-h" style="margin-top:8px">Zielbild wählen, Abwägungen sehen.</h2><p>Jede Option erzeugt andere Prozessschritte. Die Auswirkungen werden aus diesen Schritten berechnet, nicht geschätzt. Die Parameter jeder Option sind offengelegt.</p></div></div>
         ${decisionPoints(state)}
       </section>
       <section class="block" aria-labelledby="var-h">
-        <div class="block-head"><div><span class="label">Defined variants</span><h2 class="h-sub" id="var-h" style="margin-top:8px">Differences, made explicit.</h2><p>Varianten erweitern die Zulassungsphase. Sie kosten Zeit – das ist kein Fehler, sondern fachlich begründet. Wichtig ist, dass der Aufwand sichtbar und bewusst entschieden ist.</p></div>
+        <div class="block-head"><div><span class="label">Definierte Varianten</span><h2 class="h-sub" id="var-h" style="margin-top:8px">Unterschiede, offen ausgewiesen.</h2><p>Varianten erweitern die Zulassungsphase. Sie kosten Zeit – das ist kein Fehler, sondern fachlich begründet. Wichtig ist, dass der Aufwand sichtbar und bewusst entschieden ist.</p></div>
           <span class="pill ${vc.addedSteps ? 'warn' : ''}">Aktive Varianten: +${vc.addedSteps} Schritte · +${fmtN(vc.addedWaitDays, 1)} T · +${fmtN(vc.addedProcMin, 0)} min</span></div>
         <div class="grid g4">${E.VARIANTS.map(v => {
           const one = E.variantCost(Object.assign({}, cfg, { variants: { [v.id]: true } }));
@@ -2429,12 +2452,12 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
         }).join('')}</div>
       </section>
       <section class="block" aria-labelledby="res-h">
-        <div class="block-head"><div><span class="label">Result</span><h2 class="h-sub" id="res-h" style="margin-top:8px">Ø IST vs. harmonised SOLL</h2></div><a class="btn small ghost" href="#/impact">Full impact analysis ${ICON.arrow}</a></div>
+        <div class="block-head"><div><span class="label">Ergebnis</span><h2 class="h-sub" id="res-h" style="margin-top:8px">Ø IST vs. harmonisierter SOLL-Prozess</h2></div><a class="btn small ghost" href="#/impact">Zur Wirkung ${ICON.arrow}</a></div>
         <div class="kpis">${strip}</div>
-        <details style="margin-top:20px"><summary class="label" style="cursor:pointer">Text alternative: SOLL-Prozess als Liste (${target.steps.length} Elemente)</summary>
+        <details style="margin-top:20px"><summary class="label" style="cursor:pointer">Textalternative: SOLL-Prozess als Liste (${target.steps.length} Elemente)</summary>
           <ol class="steplist" style="margin-top:12px">${target.steps.map(s => `<li><div style="padding:12px 16px;display:grid;grid-template-columns:90px 1fr;gap:12px"><span class="tag-id">${esc(s.id)}</span><span><strong>${esc(s.title)}</strong><span class="tiny muted" style="display:block">${esc(E.STEP_TYPES[s.type].label)} · ${esc(roleLabel(s.role))} · ${esc(stageLabel(s.stage))}${E.isActivity(s) ? ` · ${fmtMin(s.procMin)} · ${fmtN(s.waitDays, 1)} T${s.probability < 1 ? ` · p ${fmtN(s.probability * 100, 0)} %` : ''}` : ''}${s.variant ? ' · Variante' : ''}</span></span></div></li>`).join('')}</ol></details>
       </section>
-      ${nextLink('harmonise')}`;
+      `;
   }
 
   function mountHarmonise(state) {
@@ -2481,7 +2504,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     return `<svg class="stagechart" viewBox="0 0 ${W} ${H2}" role="img" aria-label="Durchlaufzeit nach Phase in Tagen: ${rows.map(r => `${r.label} ${fmtN(r.ist, 1)} zu ${fmtN(r.soll, 1)}`).join('; ')}">${g}${bars}<text class="axis-label" x="${W - R + 8}" y="${H2 - 6}">Tage</text></svg>`;
   }
 
-  function viewImpact(state) {
+  function viewImpact(state, params, opts) {
     const base = state.impactBaseline;
     const baseLabel = base === 'avg' ? 'Ø IST (Alpha, Beta, Gamma)' : E.getProcess(base).name;
     const cfg = E.normalizeTarget(state.target);
@@ -2505,27 +2528,27 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     const vc = E.variantCost(cfg);
     const allRows = E.KPIS.map(k => `<tr><th scope="row">${esc(k.label)}</th>${E.PROCESSES.map(p => `<td class="num">${fmtKpi(k.key, E.computeMetrics(p.steps)[k.key])}</td>`).join('')}<td class="num">${fmtKpi(k.key, E.baselineMetrics('avg')[k.key])}</td><td class="num"><strong>${fmtKpi(k.key, after[k.key])}</strong></td></tr>`).join('');
     const cfgPills = E.TARGET_STAGES.filter(t => t.key).map(t => `<span class="pill soll">${esc(t.title)}: ${esc(E.selectedOption(t, cfg).short)}</span>`).join('') + E.VARIANTS.filter(v => cfg.variants[v.id]).map(v => `<span class="pill warn">+ ${esc(v.label)}</span>`).join('');
-    return `${pageHead('04', 'Process Impact Dashboard', 'Make improvement measurable.', 'Alle Kennzahlen werden aus den strukturierten Prozessschritten und den in «Harmonise» gewählten Optionen berechnet. Ändert sich eine Option, ändern sich die Zahlen – nachvollziehbar.', '<div class="fiction" style="border-color:var(--accent)"><span class="mono">Illustrative</span><span><strong>Illustrative scenario – not measured FHNW data.</strong> Simulierte Annahmen zur Demonstration der Methode.</span></div>')}
+    return `${head(opts, '', 'wirkung', 'Wirkung', 'Verbesserung messbar machen.', 'Alle Kennzahlen werden aus den strukturierten Prozessschritten und den oben gewählten Optionen berechnet. Ändert sich eine Option, ändern sich die Zahlen – nachvollziehbar.', '<div class="fiction" style="border-color:var(--accent)"><span class="mono">Illustrativ</span><span><strong>Illustratives Szenario – keine gemessenen FHNW-Daten.</strong> Simulierte Annahmen zur Demonstration der Methode.</span></div>')}
       <div class="toolbar"><div class="group"><span class="label">Vergleichsbasis</span><div class="seg" role="group" aria-label="Vergleichsbasis">${[['avg', 'Ø IST'], ['alpha', 'Alpha'], ['beta', 'Beta'], ['gamma', 'Gamma']].map(([id, l]) => `<button data-act="baseline" data-id="${id}" data-fkey="bl-${id}" aria-pressed="${base === id}">${l}</button>`).join('')}</div></div>
         <div class="group"><span class="label">SOLL-Konfiguration</span><span class="chips">${cfgPills}</span><a class="linkbtn" href="#/harmonise">ändern</a></div></div>
       <div class="chart-legend" style="margin:8px 0 14px"><span><i style="background:var(--ist)"></i>${esc(baseLabel)}</span><span><i style="background:var(--soll)"></i>Harmonisierter SOLL-Prozess</span></div>
       <div class="kpis k3">${tiles}</div>
       <p class="small muted" style="margin-top:12px">Lesehilfe: Der SOLL-Prozess kann <em>mehr</em> Prozessschritte haben als das IST – etwa explizite Systemschritte und die Übergabe an die Durchführung. Entscheidend ist der Personenaufwand und die Durchlaufzeit, nicht die Anzahl Kästchen.</p>
       <section class="block" aria-labelledby="ba-h">
-        <div class="block-head"><div><span class="label">Before / after</span><h2 class="h-sub" id="ba-h" style="margin-top:8px">Every indicator, side by side.</h2></div></div>
+        <div class="block-head"><div><span class="label">Vorher / nachher</span><h2 class="h-sub" id="ba-h" style="margin-top:8px">Alle Kennzahlen im Vergleich.</h2></div></div>
         <div class="grid g2" style="gap:40px"><div class="bars">${pairs}</div>
-          <div><span class="label">Where does the time go?</span><h3 class="h-card" style="margin:8px 0 14px">Durchlaufzeit nach Phase (Tage)</h3>${stageChart(base === 'avg' ? E.baselineStages('avg') : E.stageBreakdown(E.getProcess(base).steps), E.stageBreakdown(target.steps), baseLabel)}
+          <div><span class="label">Wo bleibt die Zeit?</span><h3 class="h-card" style="margin:8px 0 14px">Durchlaufzeit nach Phase (Tage)</h3>${stageChart(base === 'avg' ? E.baselineStages('avg') : E.stageBreakdown(E.getProcess(base).steps), E.stageBreakdown(target.steps), baseLabel)}
           <p class="tiny muted">Durchlaufzeit je Phase = erwartete Wartezeit + Bearbeitungszeit ÷ ${E.MODEL.minutesPerDay / 60} h. Bei Gamma ist die Vollständigkeitsprüfung Teil der Zulassung und erscheint deshalb dort.</p></div></div>
       </section>
       <section class="block" aria-labelledby="vc-h">
         <div class="grid g2" style="gap:40px">
-          <div><span class="label">Cost of variants</span><h2 class="h-sub" id="vc-h" style="margin:8px 0 12px">Differences have a price – and a reason.</h2>
-            <p class="small">Kernprozess ohne Varianten: <strong class="mono">${fmtDays(vc.core.leadDays)}</strong> · mit aktiven Varianten: <strong class="mono">${fmtDays(vc.full.leadDays)}</strong>. ${vc.addedSteps ? `Die ${vc.addedSteps} zusätzlichen Schritte sind fachlich begründet und werden bewusst in Kauf genommen.` : 'Aktiviere in «Harmonise» Varianten, um ihren Zusatzaufwand zu sehen.'}</p></div>
-          <div><span class="label">Definitions</span><dl class="kv" style="grid-template-columns:140px 1fr"><dt>Bearbeitungszeit</dt><dd>Tatsächlicher Aufwand zur Ausführung der Aktivitäten (Minuten).</dd><dt>Wartezeit</dt><dd>Zeit, während der ein Vorgang liegen bleibt (Arbeitstage).</dd><dt>Durchlaufzeit</dt><dd>Gesamtzeit zwischen Prozessbeginn und Prozessende. Im Modell: Wartezeit + Bearbeitungszeit, sequenziell.</dd></dl></div>
+          <div><span class="label">Kosten der Varianten</span><h2 class="h-sub" id="vc-h" style="margin:8px 0 12px">Unterschiede kosten Zeit – und haben einen Grund.</h2>
+            <p class="small">Kernprozess ohne Varianten: <strong class="mono">${fmtDays(vc.core.leadDays)}</strong> · mit aktiven Varianten: <strong class="mono">${fmtDays(vc.full.leadDays)}</strong>. ${vc.addedSteps ? `Die ${vc.addedSteps} zusätzlichen Schritte sind fachlich begründet und werden bewusst in Kauf genommen.` : 'Aktiviere oben Varianten, um ihren Zusatzaufwand zu sehen.'}</p></div>
+          <div><span class="label">Begriffe</span><dl class="kv" style="grid-template-columns:140px 1fr"><dt>Bearbeitungszeit</dt><dd>Tatsächlicher Aufwand zur Ausführung der Aktivitäten (Minuten).</dd><dt>Wartezeit</dt><dd>Zeit, während der ein Vorgang liegen bleibt (Arbeitstage).</dd><dt>Durchlaufzeit</dt><dd>Gesamtzeit zwischen Prozessbeginn und Prozessende. Im Modell: Wartezeit + Bearbeitungszeit, sequenziell.</dd></dl></div>
         </div>
       </section>
       <section class="block" aria-labelledby="as-h">
-        <div class="block-head"><div><span class="label">Model & assumptions</span><h2 class="h-sub" id="as-h" style="margin-top:8px">How these numbers are calculated.</h2></div><button class="btn small ghost" data-act="toggle-table" aria-expanded="${!!state.settings.showTables}" data-fkey="tbl">${state.settings.showTables ? 'Hide' : 'Show'} data table</button></div>
+        <div class="block-head"><div><span class="label">Modell & Annahmen</span><h2 class="h-sub" id="as-h" style="margin-top:8px">So werden die Zahlen berechnet.</h2></div><button class="btn small ghost" data-act="toggle-table" aria-expanded="${!!state.settings.showTables}" data-fkey="tbl">Datentabelle ${state.settings.showTables ? 'ausblenden' : 'anzeigen'}</button></div>
         ${state.settings.showTables ? `<div class="table-wrap" style="margin-bottom:24px"><table class="data"><caption class="sr-only">Kennzahlen pro Prozess</caption><thead><tr><th scope="col">Kennzahl</th>${E.PROCESSES.map(p => `<th scope="col" class="num">${esc(p.name.replace('Hochschule ', ''))}</th>`).join('')}<th scope="col" class="num">Ø IST</th><th scope="col" class="num">SOLL</th></tr></thead><tbody>${allRows}</tbody></table></div>` : ''}
         <ol class="assumptions">
           <li>Sequenzielle Ausführung: Schritte laufen nacheinander. Deshalb dürfen Warte- und Bearbeitungszeiten addiert werden. Parallele Aktivitäten würden einen kritischen Pfad statt einer Summe erfordern – im Szenario gibt es keine.</li>
@@ -2533,11 +2556,11 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
           <li>1 Arbeitstag = ${E.MODEL.minutesPerDay / 60} h Bearbeitungszeit. Wartezeiten sind in Arbeitstagen angegeben.</li>
           <li>Übergaben = Rollenwechsel zwischen aufeinanderfolgenden Aktivitäten von Personen; Systemschritte zählen nicht als Übergabe.</li>
           <li>Ein Medienbruch wird pro Schritt gezählt, in dem Daten manuell zwischen Medien übertragen werden (Papier, E-Mail, Export, Abtippen).</li>
-          <li>Alle Zeit- und Wahrscheinlichkeitswerte sind plausible Annahmen für ein fiktives Szenario – keine Messwerte. Im realen Vorgehen werden sie in Phase 1 (Understand) erhoben und im Pilot überprüft.</li>
+          <li>Alle Zeit- und Wahrscheinlichkeitswerte sind plausible Annahmen für ein fiktives Szenario – keine Messwerte. Im realen Vorgehen werden sie in Phase 1 (Verstehen) erhoben und im Pilot überprüft.</li>
           <li>Der SOLL-Prozess enthält die Übergabe an die Durchführung explizit; im IST ist sie nicht modelliert. Das erhöht die Schrittzahl im SOLL leicht.</li>
         </ol>
       </section>
-      ${nextLink('impact')}`;
+      `;
   }
   function mountImpact() { }
   ACTIONS['baseline'] = el => store.set({ impactBaseline: el.dataset.id });
@@ -2546,27 +2569,27 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
   /* ======================================================================
      ROADMAP
      ====================================================================== */
-  function viewRoadmap() {
+  function viewRoadmap(state, params, opts) {
     const sel = local.phase || 'P1';
     const ph = E.ROADMAP.find(p => p.id === sel);
     const list = arr => `<ul class="ticks small">${arr.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
-    return `${pageHead('05', 'Transformation Roadmap', 'From strategy to implementation.', 'Wie strategische Ziele in konkrete, überprüfbare Schritte übersetzt werden. Bewusst ohne Termine: die Dauer hängt von Mandat, Kapazität und Pilotergebnissen ab.', fiction('Hypothetischer Vorgehensvorschlag – keine FHNW-Projektplanung.'))}
+    return `${pageHead('04', 'Umsetzung · Roadmap', 'Von der Strategie zur Umsetzung.', 'Wie strategische Ziele in konkrete, überprüfbare Schritte übersetzt werden. Bewusst ohne Termine: die Dauer hängt von Mandat, Kapazität und Pilotergebnissen ab.', fiction('Hypothetischer Vorgehensvorschlag – keine FHNW-Projektplanung.'))}
       <div class="road" role="tablist" aria-label="Phasen der Roadmap">${E.ROADMAP.map((p, i) => `<button role="tab" id="tab-${p.id}" aria-controls="phase-panel" aria-selected="${p.id === sel}" tabindex="${p.id === sel ? 0 : -1}" data-act="phase" data-id="${p.id}" data-fkey="ph-${p.id}"><span class="dotn">0${i + 1}</span><span><span class="rname">${esc(p.name)}</span><span class="rsub">${esc(p.title)} · ${p.activities.length} Aktivitäten</span></span></button>`).join('')}</div>
       <div class="phase-detail" id="phase-panel" role="tabpanel" aria-labelledby="tab-${ph.id}" style="margin-top:24px">
-        <div class="wide"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center"><span class="label">Phase ${ph.id.slice(1)} · Ziel</span><span class="pill outline">Status: ${esc(ph.status)} (hypothetisch)</span></div><p class="h-sub" style="margin:10px 0 0;font-family:var(--font-display);font-weight:600">${esc(ph.goal)}</p></div>
+        <div class="wide"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center"><span class="label">Phase ${ph.id.slice(1)} · Ziel</span><span class="pill outline">Status: ${esc(statusLabel(ph.status))} (hypothetisch)</span></div><p class="h-sub" style="margin:10px 0 0;font-family:var(--font-display);font-weight:600">${esc(ph.goal)}</p></div>
         <div><span class="label">Aktivitäten</span>${list(ph.activities)}</div>
-        <div><span class="label">Deliverables</span>${list(ph.deliverables)}</div>
+        <div><span class="label">Ergebnisse</span>${list(ph.deliverables)}</div>
         <div><span class="label">Stakeholder</span>${list(ph.stakeholders)}</div>
         <div><span class="label">Abhängigkeiten</span>${list(ph.dependencies)}</div>
         <div><span class="label">Erfolgskriterien</span>${list(ph.success)}</div>
         <div><span class="label">Strategische Ziele</span><div class="chips" style="margin-top:10px">${ph.goals.map(g => `<span class="pill soll">${esc(E.GOALS.find(x => x.id === g).label)}</span>`).join('')}</div></div>
       </div>
       <section class="block" aria-labelledby="gm-h">
-        <div class="block-head"><div><span class="label">Strategic alignment</span><h2 class="h-sub" id="gm-h" style="margin-top:8px">Which phase serves which goal?</h2><p>Jede Phase zahlt auf strategische Ziele ein. Lücken in dieser Matrix wären ein Hinweis auf fehlende Massnahmen.</p></div></div>
+        <div class="block-head"><div><span class="label">Ausrichtung</span><h2 class="h-sub" id="gm-h" style="margin-top:8px">Welche Phase dient welchem Ziel?</h2><p>Jede Phase zahlt auf strategische Ziele ein. Lücken in dieser Matrix wären ein Hinweis auf fehlende Massnahmen.</p></div></div>
         <div class="table-wrap"><table class="goalmap"><caption class="sr-only">Zuordnung strategischer Ziele zu Roadmap-Phasen</caption><thead><tr><th scope="col">Strategisches Ziel</th>${E.ROADMAP.map(p => `<th scope="col" ${p.id === sel ? 'style="color:var(--ink)"' : ''}>${esc(p.name)}</th>`).join('')}</tr></thead>
         <tbody>${E.GOALS.map(g => `<tr class="${ph.goals.includes(g.id) ? 'sel' : ''}"><th scope="row" style="font-weight:500;text-align:left">${esc(g.label)}</th>${E.ROADMAP.map(p => `<td>${p.goals.includes(g.id) ? `<span class="on" role="img" aria-label="ja"></span>` : '<span class="sr-only">nein</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
       </section>
-      ${nextLink('roadmap')}`;
+      `;
   }
   ACTIONS['phase'] = el => { local.phase = el.dataset.id; render({ sameRoute: true }); };
   document.addEventListener('keydown', ev => {
@@ -2580,23 +2603,23 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
   /* ======================================================================
      CHANGE MANAGEMENT
      ====================================================================== */
-  function viewChange(state) {
+  function viewChange(state, params, opts) {
     const sel = local.cj || 'understand';
     const j = E.CHANGE_JOURNEY.find(x => x.id === sel);
     const evals = E.evaluateChangeApproach(state.changeContext);
     const list = arr => `<ul class="ticks small">${arr.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
     const fit = s => s >= 4 ? 'passt gut' : s >= 2 ? 'bedingt geeignet' : 'passt kaum';
-    return `${pageHead('06', 'Change Management', 'Good processes need people.', 'Ein Prozess ist erst verbessert, wenn er gelebt wird. Change Management ist deshalb kein Anhang, sondern ein Kernbestandteil der Rolle des Process Owners.')}
+    return `${head(opts, '', 'change', 'Change-Management', 'Gute Prozesse brauchen Menschen.', 'Ein Prozess ist erst verbessert, wenn er gelebt wird. Change-Management ist deshalb kein Anhang, sondern ein Kernbestandteil der Rolle des Process Owners.')}
       <div class="grid g3">${E.CHANGE_AREAS.map((a, i) => `<div class="card"><span class="label">0${i + 1}</span><h3 class="h-card" style="margin:8px 0">${esc(a.title)}</h3><p class="small" style="margin:0">${esc(a.text)}</p></div>`).join('')}</div>
       <section class="block" aria-labelledby="cj-h">
-        <div class="block-head"><div><span class="label">Change journey</span><h2 class="h-sub" id="cj-h" style="margin-top:8px">Understand → Participate → Prepare → Adopt → Improve</h2></div></div>
-        <div class="cj" role="tablist" aria-label="Change Journey">${E.CHANGE_JOURNEY.map((x, i) => `<button role="tab" id="cjt-${x.id}" aria-controls="cj-panel" aria-selected="${x.id === sel}" tabindex="${x.id === sel ? 0 : -1}" data-act="cj" data-id="${x.id}" data-fkey="cj-${x.id}"><small>0${i + 1}</small>${esc(x.name)}</button>`).join('')}</div>
+        <div class="block-head"><div><span class="label">Change in fünf Schritten</span><h2 class="h-sub" id="cj-h" style="margin-top:8px">Verstehen → Mitwirken → Vorbereiten → Anwenden → Verbessern</h2></div></div>
+        <div class="cj" role="tablist" aria-label="Change in fünf Schritten">${E.CHANGE_JOURNEY.map((x, i) => `<button role="tab" id="cjt-${x.id}" aria-controls="cj-panel" aria-selected="${x.id === sel}" tabindex="${x.id === sel ? 0 : -1}" data-act="cj" data-id="${x.id}" data-fkey="cj-${x.id}"><small>0${i + 1}</small>${esc(x.name)}</button>`).join('')}</div>
         <div class="phase-detail" id="cj-panel" role="tabpanel" aria-labelledby="cjt-${j.id}" style="margin-top:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
           <div><span class="label">Zielgruppen</span>${list(j.groups)}</div><div><span class="label">Kommunikation</span>${list(j.comms)}</div><div><span class="label">Unterstützung</span>${list(j.support)}</div><div><span class="label">Risiken</span>${list(j.risks)}</div><div><span class="label">Erfolgskriterien</span>${list(j.success)}</div>
         </div>
       </section>
       <section class="block" aria-labelledby="sc-h">
-        <div class="block-head"><div><span class="label">Scenario</span><h2 class="h-sub" id="sc-h" style="margin-top:8px">«${esc(E.CHANGE_SCENARIO.title)}»</h2><p>Keine Option ist pauschal richtig. Wähle den Kontext – die Einschätzung ändert sich mit ihm. Entscheidend ist die Begründung.</p></div></div>
+        <div class="block-head"><div><span class="label">Szenario</span><h2 class="h-sub" id="sc-h" style="margin-top:8px">«${esc(E.CHANGE_SCENARIO.title)}»</h2><p>Keine Option ist pauschal richtig. Wähle den Kontext – die Einschätzung ändert sich mit ihm. Entscheidend ist die Begründung.</p></div></div>
         <fieldset class="card" style="margin:0 0 20px"><legend class="label" style="padding:0 6px">Kontext</legend><div class="grid g2" style="gap:12px">${E.CHANGE_SCENARIO.contexts.map(c => `<label class="switch"><input type="checkbox" data-change="ctx" data-id="${c.id}" data-fkey="ctx-${c.id}" ${state.changeContext[c.id] ? 'checked' : ''}>${esc(c.label)}</label>`).join('')}</div></fieldset>
         <div class="grid g3">${E.CHANGE_SCENARIO.options.map(o => {
           const ev = evals.find(x => x.id === o.id);
@@ -2608,7 +2631,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
         }).join('')}</div>
         <p class="small" style="margin-top:20px;max-width:75ch"><strong>Process-Owner-Sicht:</strong> Ohne besondere Rahmenbedingungen ist C meist der tragfähigste Weg, weil fachliches Wissen und Akzeptanz erhalten bleiben. Bei einer verbindlichen Vorgabe oder einem nachweislich leistungsfähigen Prozess kann A oder B begründet richtig sein – dann zählt, die Entscheidung transparent zu dokumentieren.</p>
       </section>
-      ${nextLink('change')}`;
+      `;
   }
   ACTIONS['cj'] = el => { local.cj = el.dataset.id; render({ sameRoute: true }); };
   ACTIONS['ctx'] = el => { const s = store.get(); store.set({ changeContext: Object.assign({}, s.changeContext, { [el.dataset.id]: el.checked }) }); };
@@ -2616,40 +2639,40 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
   /* ======================================================================
      GOVERNANCE & DECISION LOG
      ====================================================================== */
-  function viewGovernance(state) {
+  function viewGovernance(state, params, opts) {
     const roleName = id => E.GOV_ROLES.find(r => r.id === id).label;
     const who = (taskId, letters) => { const t = E.RACI.find(r => r.id === taskId); return E.GOV_ROLES.filter(r => letters.includes(t.cells[r.id])).map(r => `${roleName(r.id)} (${t.cells[r.id]})`).join(', '); };
     const crStep = local.crStep || 0;
     const cr = E.CHANGE_REQUEST;
     const decisions = E.allDecisions(state);
     const qa = [['Wer entscheidet über Standardänderungen?', 'std'], ['Wer beantragt Ausnahmen?', 'exc-req'], ['Wer prüft technische Auswirkungen?', 'tech'], ['Wer informiert betroffene Mitarbeitende?', 'inform'], ['Wer misst die Prozessqualität?', 'measure']];
-    return `${pageHead('07', 'Governance & Responsibilities', 'Clear roles.<br>Traceable decisions.', 'Ein gemeinsamer Prozess braucht klare Zuständigkeiten: wer verantwortet den Standard, wer darf abweichen, wer wird gefragt und wer informiert.', fiction('Governance-Vorschlag – keine tatsächliche FHNW-Organisationsregelung.'))}
+    return `${head(opts, '', 'governance', 'Governance', 'Klare Rollen.<br>Nachvollziehbare Entscheide.', 'Ein gemeinsamer Prozess braucht klare Zuständigkeiten: wer verantwortet den Standard, wer darf abweichen, wer wird gefragt und wer informiert.', fiction('Governance-Vorschlag – keine tatsächliche FHNW-Organisationsregelung.'))}
       <section aria-labelledby="raci-h">
-        <div class="block-head" style="margin-top:0"><div><span class="label">RACI</span><h2 class="h-sub" id="raci-h" style="margin-top:8px">Who does what in the harmonised process?</h2></div>
-          <div class="chart-legend"><span><span class="raci-cell R" style="width:22px;height:22px;font-size:11px">R</span> Responsible</span><span><span class="raci-cell A" style="width:22px;height:22px;font-size:11px">A</span> Accountable</span><span><span class="raci-cell C" style="width:22px;height:22px;font-size:11px">C</span> Consulted</span><span><span class="raci-cell I" style="width:22px;height:22px;font-size:11px">I</span> Informed</span></div></div>
+        <div class="block-head" style="margin-top:0"><div><span class="label">RACI</span><h2 class="h-sub" id="raci-h" style="margin-top:8px">Wer macht was im harmonisierten Prozess?</h2></div>
+          <div class="chart-legend"><span><span class="raci-cell R" style="width:22px;height:22px;font-size:11px">R</span> Durchführend</span><span><span class="raci-cell A" style="width:22px;height:22px;font-size:11px">A</span> Verantwortlich</span><span><span class="raci-cell C" style="width:22px;height:22px;font-size:11px">C</span> Konsultiert</span><span><span class="raci-cell I" style="width:22px;height:22px;font-size:11px">I</span> Informiert</span></div></div>
         <div class="table-wrap"><table class="data raci"><caption class="sr-only">RACI-Matrix</caption><thead><tr><th scope="col">Aufgabe</th>${E.GOV_ROLES.map(r => `<th scope="col">${esc(r.label)}</th>`).join('')}</tr></thead>
-          <tbody>${E.RACI.map(t => `<tr><th scope="row" style="font-weight:500">${esc(t.task)}</th>${E.GOV_ROLES.map(r => `<td>${t.cells[r.id] ? `<span class="raci-cell ${t.cells[r.id]}" aria-label="${({ R: 'Responsible', A: 'Accountable', C: 'Consulted', I: 'Informed' })[t.cells[r.id]]}">${t.cells[r.id]}</span>` : '<span class="sr-only">keine Rolle</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+          <tbody>${E.RACI.map(t => `<tr><th scope="row" style="font-weight:500">${esc(t.task)}</th>${E.GOV_ROLES.map(r => `<td>${t.cells[r.id] ? `<span class="raci-cell ${t.cells[r.id]}" aria-label="${({ R: 'Durchführend', A: 'Verantwortlich', C: 'Konsultiert', I: 'Informiert' })[t.cells[r.id]]}">${t.cells[r.id]}</span>` : '<span class="sr-only">keine Rolle</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
         <div class="grid g5" style="margin-top:20px">${qa.map(([q, id]) => `<div class="card" style="padding:16px"><span class="label">${esc(q)}</span><p class="small" style="margin:8px 0 0">${esc(who(id, ['R', 'A']))}</p></div>`).join('')}</div>
       </section>
       <section class="block" aria-labelledby="cr-h">
-        <div class="block-head"><div><span class="label">Change request · ${esc(cr.id)}</span><h2 class="h-sub" id="cr-h" style="margin-top:8px">«${esc(cr.title)}»</h2><p>${esc(cr.summary)} Vom Antrag bis zur Entscheidung:</p></div>
+        <div class="block-head"><div><span class="label">Änderungsantrag · ${esc(cr.id)}</span><h2 class="h-sub" id="cr-h" style="margin-top:8px">«${esc(cr.title)}»</h2><p>${esc(cr.summary)} Vom Antrag bis zur Entscheidung:</p></div>
           <div style="display:flex;gap:8px"><button class="btn small ghost" data-act="cr" data-d="-1" data-fkey="cr-back" ${crStep === 0 ? 'disabled' : ''}>← Zurück</button><button class="btn small" data-act="cr" data-d="1" data-fkey="cr-next" ${crStep >= cr.steps.length - 1 ? 'disabled' : ''}>Nächster Schritt →</button></div></div>
-        <ol class="cr-flow clean" aria-label="Ablauf Change Request">${cr.steps.map((s, i) => `<li class="cr-step ${i < crStep ? 'done' : i === crStep ? 'current' : 'todo'}" ${i === crStep ? 'aria-current="step"' : ''}><span class="n">0${i + 1} · ${esc(roleName(s.role))}</span><span class="t">${esc(s.title)}</span>${i <= crStep ? `<span class="tiny">${esc(s.text)}</span><span class="pill soll" style="margin-top:8px;white-space:normal">→ ${esc(s.out)}</span>` : '<span class="tiny muted">…</span>'}</li>`).join('')}</ol>
+        <ol class="cr-flow clean" aria-label="Ablauf Änderungsantrag">${cr.steps.map((s, i) => `<li class="cr-step ${i < crStep ? 'done' : i === crStep ? 'current' : 'todo'}" ${i === crStep ? 'aria-current="step"' : ''}><span class="n">0${i + 1} · ${esc(roleName(s.role))}</span><span class="t">${esc(s.title)}</span>${i <= crStep ? `<span class="tiny">${esc(s.text)}</span><span class="pill soll" style="margin-top:8px;white-space:normal">→ ${esc(s.out)}</span>` : '<span class="tiny muted">…</span>'}</li>`).join('')}</ol>
       </section>
       <section class="block" aria-labelledby="dl-h">
-        <div class="block-head"><div><span class="label">Decision log</span><h2 class="h-sub" id="dl-h" style="margin-top:8px">Decisions, not assumptions.</h2><p>Jede Entscheidung mit Ausgangslage, Optionen, Empfehlung und Status. Option, Status und Begründung sind bearbeitbar und werden lokal gespeichert. Workshop-Entscheide erscheinen hier automatisch.</p></div></div>
+        <div class="block-head"><div><span class="label">Entscheidungsprotokoll</span><h2 class="h-sub" id="dl-h" style="margin-top:8px">Entscheide statt Annahmen.</h2><p>Jede Entscheidung mit Ausgangslage, Optionen, Empfehlung und Status. Option, Status und Begründung sind bearbeitbar und werden lokal gespeichert. Workshop-Entscheide erscheinen hier automatisch.</p></div></div>
         <div class="stack">${decisions.map(d => decisionHtml(d)).join('')}</div>
       </section>
-      ${nextLink('governance')}`;
+      `;
   }
 
   function decisionHtml(d) {
     const chosen = d.chosen || d.recommended;
     const open = local.openDec === d.id;
-    return `<details class="dec" ${open ? 'open' : ''} data-dec="${d.id}"><summary data-fkey="dsum-${d.id}"><span class="tag-id">${esc(d.id)}</span><span><strong>${esc(d.topic)}</strong>${d.source === 'workshop' ? ' <span class="pill warn">Workshop</span>' : ''}<span class="tiny muted" style="display:block">Gewählt: ${esc((d.options.find(o => o.id === chosen) || {}).label || '')}</span></span><span class="pill ${d.status.startsWith('Agreed') ? 'soll' : d.status === 'Rejected' ? 'warn' : 'outline'}">${esc(d.status)}</span></summary>
+    return `<details class="dec" ${open ? 'open' : ''} data-dec="${d.id}"><summary data-fkey="dsum-${d.id}"><span class="tag-id">${esc(d.id)}</span><span><strong>${esc(d.topic)}</strong>${d.source === 'workshop' ? ' <span class="pill warn">Workshop</span>' : ''}<span class="tiny muted" style="display:block">Gewählt: ${esc((d.options.find(o => o.id === chosen) || {}).label || '')}</span></span><span class="pill ${d.status.startsWith('Agreed') ? 'soll' : d.status === 'Rejected' ? 'warn' : 'outline'}">${esc(statusLabel(d.status))}</span></summary>
       <div class="body"><div><span class="label">Ausgangslage</span><p class="small" style="margin-top:6px">${esc(d.context)}</p>
         <fieldset style="border:0;padding:0;margin:0"><legend class="label">Optionen</legend><div class="stack" style="margin-top:8px">${d.options.map(o => `<label class="option ${o.id === chosen ? 'checked' : ''}" style="padding-top:12px"><input type="radio" name="dec-${d.id}" value="${o.id}" ${o.id === chosen ? 'checked' : ''} data-change="dec-opt" data-id="${d.id}" data-fkey="dec-${d.id}-${o.id}"><span class="o-title">${esc(o.label)}</span>${o.id === d.recommended ? ' <span class="pill soll">Empfehlung</span>' : ''}<p class="o-sum" style="margin-bottom:0">${esc(o.note)}</p></label>`).join('')}</div></fieldset></div>
-        <div><label class="label" for="dst-${d.id}">Status</label><select class="input" id="dst-${d.id}" data-change="dec-status" data-id="${d.id}" data-fkey="dst-${d.id}" style="display:block;margin:6px 0 14px">${E.DECISION_STATUSES.map(s => `<option ${s === d.status ? 'selected' : ''}>${s}</option>`).join('')}</select>
+        <div><label class="label" for="dst-${d.id}">Status</label><select class="input" id="dst-${d.id}" data-change="dec-status" data-id="${d.id}" data-fkey="dst-${d.id}" style="display:block;margin:6px 0 14px">${E.DECISION_STATUSES.map(s => `<option value="${esc(s)}" ${s === d.status ? 'selected' : ''}>${esc(statusLabel(s))}</option>`).join('')}</select>
           <label class="label" for="drat-${d.id}">Begründung</label><textarea class="input" id="drat-${d.id}" data-input="dec-rat" data-id="${d.id}" style="margin-top:6px">${esc(d.rationale)}</textarea>
           ${d.links && d.links.length ? `<p class="tiny muted" style="margin-top:10px">Bezug: ${d.links.map(esc).join(', ')}</p>` : ''}
           <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap"><button class="linkbtn" data-act="dec-reset" data-id="${d.id}">Änderungen verwerfen</button>${d.source === 'workshop' ? `<button class="linkbtn" data-act="dec-delete" data-id="${d.id}">Entscheid löschen</button>` : ''}</div></div>
@@ -2682,51 +2705,51 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     const stepsNav = `<ol class="ws-steps" aria-label="Workshop-Fortschritt">${E.WORKSHOP_STEPS.map((l, i) => `<li><button data-act="ws-goto" data-step="${i}" data-fkey="wsg-${i}" class="${i < ws.step ? 'done' : i === ws.step ? 'current' : ''}" ${i > ws.step ? 'disabled' : ''} ${i === ws.step ? 'aria-current="step"' : ''}><span class="n">0${i + 1}</span><span class="lbl">${esc(l)}</span></button></li>`).join('')}</ol>`;
     let body = '';
     if (ws.step === 0) {
-      body = `<h2 class="h-sub">Which process do we look at?</h2><p class="muted" style="margin:8px 0 20px">Wähle einen Organisationsbereich. Wir arbeiten mit seinem IST-Prozess.</p>
+      body = `<h2 class="h-sub">Welchen Prozess schauen wir an?</h2><p class="muted" style="margin:8px 0 20px">Wähle einen Organisationsbereich. Wir arbeiten mit seinem IST-Prozess.</p>
         <div class="grid g3">${E.PROCESSES.map(p => { const m = E.computeMetrics(p.steps); return `<button class="pick" data-act="ws" data-type="process" data-id="${p.id}" data-fkey="wsp-${p.id}" aria-pressed="${ws.process === p.id}"><span class="pk">${esc(p.code)}</span><h4>${esc(p.name)}</h4><p>${esc(p.summary)}</p><span class="chips" style="margin-top:12px"><span class="pill">${fmtDays(m.leadDays)}</span><span class="pill">${m.manual} manuell</span><span class="pill">${m.mediaBreaks} MB</span></span></button>`; }).join('')}</div>`;
     } else if (ws.step === 1) {
       const fs = E.findingsFor(o.proc);
-      body = `<h2 class="h-sub">Where does it hurt?</h2><p class="muted" style="margin:8px 0 20px">${fs.length} simulierte Beobachtungen im Prozess ${esc(o.proc.name)}. Wähle die Schwachstelle, an der wir arbeiten.</p>
+      body = `<h2 class="h-sub">Wo hakt es?</h2><p class="muted" style="margin:8px 0 20px">${fs.length} simulierte Beobachtungen im Prozess ${esc(o.proc.name)}. Wähle die Schwachstelle, an der wir arbeiten.</p>
         ${miniFlow(o.proc.steps, { targets: o.finding ? [o.finding.stepId] : [] })}
         <div class="grid g3" style="margin-top:12px">${fs.map(f => `<button class="pick" data-act="ws" data-type="finding" data-id="${f.key}" data-fkey="wsf-${f.key}" aria-pressed="${ws.finding === f.key}"><span class="pk">${esc(E.CATEGORIES[f.cat].label)} · ${esc(f.stepId)}</span><h4 style="font-size:15px">${esc(f.stepTitle)}</h4><p>${esc(f.obs)}</p></button>`).join('')}</div>`;
     } else if (ws.step === 2) {
       const sts = E.STAKEHOLDERS.filter(st => st.categories.includes(o.finding.cat));
-      body = `<h2 class="h-sub">Who is affected – and what do they need?</h2><p class="muted" style="margin:8px 0 20px">Betroffen von «${esc(E.CATEGORIES[o.finding.cat].label)}» in ${esc(o.finding.stepId)}. Markiere die Bedürfnisse, die die Lösung erfüllen muss.</p>
+      body = `<h2 class="h-sub">Wer ist betroffen – und was braucht es?</h2><p class="muted" style="margin:8px 0 20px">Betroffen von «${esc(E.CATEGORIES[o.finding.cat].label)}» in ${esc(o.finding.stepId)}. Markiere die Bedürfnisse, die die Lösung erfüllen muss.</p>
         <div class="grid g3">${sts.map(st => `<div class="card"><span class="label">${esc(st.short)}</span><h3 class="h-card" style="margin:6px 0 10px">${esc(st.name)}</h3><blockquote class="small" style="margin:0 0 12px;border-left:2px solid var(--accent);padding-left:10px">«${esc(st.quote)}»</blockquote><div class="chips">${st.needs.map(n => { const key = st.id + ':' + n; return `<button class="chip" data-act="ws" data-type="need" data-id="${esc(key)}" data-fkey="wsn-${esc(key)}" aria-pressed="${ws.needs.includes(key)}">${esc(n)}</button>`; }).join('')}</div></div>`).join('')}</div>
         ${ws.needs.length ? `<div class="feedback" role="status">${ws.needs.length} Bedürfnis${ws.needs.length > 1 ? 'se' : ''} ausgewählt – sie werden zu Kriterien für die Massnahme.</div>` : ''}`;
     } else if (ws.step === 3) {
       const ms = E.measuresForFinding(o.finding);
       const affected = E.stepsForCategory(o.proc.steps, o.finding.cat).length;
-      body = `<h2 class="h-sub">What could we change?</h2><p class="muted" style="margin:8px 0 20px">Massnahmen, die zur Kategorie «${esc(E.CATEGORIES[o.finding.cat].label)}» passen. Jede Wirkung ist eine offengelegte Annahme.</p>
+      body = `<h2 class="h-sub">Was könnten wir ändern?</h2><p class="muted" style="margin:8px 0 20px">Massnahmen, die zur Kategorie «${esc(E.CATEGORIES[o.finding.cat].label)}» passen. Jede Wirkung ist eine offengelegte Annahme.</p>
         <div class="grid g3">${ms.map(m => `<button class="pick" data-act="ws" data-type="measure" data-id="${m.id}" data-fkey="wsm-${m.id}" aria-pressed="${ws.measure === m.id}"><span class="pk">${esc(m.id)}</span><h4>${esc(m.title)}</h4><p>${esc(m.desc)}</p><p class="tiny" style="margin-top:10px;color:var(--accent-ink)">Annahme: ${esc(m.assumption)}</p></button>`).join('')}</div>
         <div class="card" style="margin-top:16px;display:flex;gap:24px;flex-wrap:wrap"><label class="switch"><input type="checkbox" data-change="ws-opt" data-key="applyAll" data-fkey="ws-all" ${ws.applyAll ? 'checked' : ''}>Auf alle ${affected} betroffenen Schritte anwenden</label><label class="switch"><input type="checkbox" data-change="ws-opt" data-key="conservative" data-fkey="ws-cons" ${ws.conservative ? 'checked' : ''}>Konservative Annahme (halbe Wirkung)</label></div>`;
     } else if (ws.step === 4) {
       const changed = o.comparison.filter(c => !c.unchanged);
-      body = `<h2 class="h-sub">What changes?</h2><p class="muted" style="margin:8px 0 20px">Berechnet aus dem veränderten Prozessmodell: ${o.targets.length} Schritt${o.targets.length > 1 ? 'e' : ''} angepasst${ws.conservative ? ', konservative Annahme' : ''}.</p>
+      body = `<h2 class="h-sub">Was ändert sich?</h2><p class="muted" style="margin:8px 0 20px">Berechnet aus dem veränderten Prozessmodell: ${o.targets.length} Schritt${o.targets.length > 1 ? 'e' : ''} angepasst${ws.conservative ? ', konservative Annahme' : ''}.</p>
         <div class="kpis k3">${o.comparison.filter(c => ['leadDays', 'procMin', 'manual', 'mediaBreaks', 'digitalShare', 'waitDays'].includes(c.key)).map(c => `<div class="kpi"><div class="k-label">${esc(c.label)}</div><div class="k-row"><span class="k-before">${fmtKpi(c.key, c.before)}</span><span class="k-arrow">→</span><span class="k-after" style="font-size:26px">${fmtKpi(c.key, c.after)}</span></div><div class="k-delta ${c.unchanged ? 'same' : c.improved ? 'good' : 'bad'}">${c.unchanged ? 'unverändert' : c.improved ? 'verbessert' : 'verschlechtert'}</div></div>`).join('')}</div>
         ${changed.length ? '' : '<div class="feedback" style="background:var(--accent-soft);color:var(--accent-ink)">Keine messbare Wirkung in den Prozesskennzahlen – die Wirkung dieser Massnahme ist qualitativ (z. B. Transparenz). Das ist legitim, muss aber anders gemessen werden (z. B. Nachfragen, Zufriedenheit).</div>'}
         <div style="margin-top:20px"><div><span class="label">Vorher</span>${miniFlow(o.proc.steps, { targets: o.targets })}</div><div style="margin-top:8px"><span class="label">Nachher</span>${miniFlow(o.afterSteps, { changed: true })}</div></div>
         <div class="card" style="margin-top:12px"><span class="label">Risiken</span><ul class="ticks small">${o.measure.risks.map(r => `<li>${esc(r)}</li>`).join('')}</ul></div>`;
     } else {
-      body = `<div class="no-print"><h2 class="h-sub">Document the decision.</h2><p class="muted" style="margin:8px 0 16px">Halte fest, warum diese Massnahme gewählt wurde. Die Zusammenfassung ist druckfreundlich.</p>
+      body = `<div class="no-print"><h2 class="h-sub">Entscheid festhalten.</h2><p class="muted" style="margin:8px 0 16px">Halte fest, warum diese Massnahme gewählt wurde. Die Zusammenfassung ist druckfreundlich.</p>
         <label class="label" for="ws-rat">Begründung</label><textarea class="input" id="ws-rat" data-input="ws-rat" style="margin:6px 0 20px" placeholder="z. B. Grösster Hebel auf Wartezeit bei geringem Umsetzungsrisiko; Wirkung im Pilot messen.">${esc(ws.rationale)}</textarea></div>
         <div id="ws-summary">${summaryHtml(ws)}</div>`;
     }
     const canNext = E.canAdvance(ws);
     const hint = ['Wähle einen Prozess.', 'Wähle eine Schwachstelle.', 'Wähle mindestens ein Bedürfnis.', 'Wähle eine Massnahme.', '', ''][ws.step];
     const navR = ws.step < 5 ? `<button class="btn" data-act="ws-next" data-fkey="ws-next" ${canNext ? '' : 'disabled'}>Weiter ${ICON.arrow}</button>`
-      : `<span style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost" data-act="ws-print">Drucken</button><button class="btn" data-act="ws-save" ${ws.saved ? 'disabled' : ''}>${ws.saved ? `Gespeichert als ${esc(ws.savedId)}` : 'Im Decision Log speichern'}</button></span>`;
-    return `${pageHead('08', 'Interactive Workshop Mode', 'Let’s improve this process.', 'Sechs Schritte, drei bis fünf Minuten: so arbeitet ein moderierter Prozessworkshop – vom Problem über die Menschen zur begründeten Entscheidung.', fiction())}
+      : `<span style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost" data-act="ws-print">Drucken</button><button class="btn" data-act="ws-save" ${ws.saved ? 'disabled' : ''}>${ws.saved ? `Gespeichert als ${esc(ws.savedId)}` : 'Im Entscheidungsprotokoll speichern'}</button></span>`;
+    return `${pageHead('05', 'Workshop', 'Gemeinsam einen Prozess verbessern.', 'Sechs Schritte, drei bis fünf Minuten: so arbeitet ein moderierter Prozessworkshop – vom Problem über die Menschen zur begründeten Entscheidung.', fiction())}
       ${stepsNav}<div class="ws-stage">${body}</div>
       <div class="ws-nav"><span style="display:flex;gap:12px;align-items:center"><button class="btn ghost" data-act="ws-back" data-fkey="ws-back" ${ws.step === 0 ? 'disabled' : ''}>← Zurück</button><button class="linkbtn" data-act="ws-restart">Neu starten</button></span><span style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">${!canNext && hint ? `<span class="small muted">${hint}</span>` : ''}${navR}</span></div>
-      ${ws.saved ? `<p class="feedback">Der Entscheid ${esc(ws.savedId)} steht im <a href="#/governance">Decision Log</a>.</p>` : ''}
+      ${ws.saved ? `<p class="feedback">Der Entscheid ${esc(ws.savedId)} steht im <a href="#/entscheide">Entscheidungsprotokoll</a>.</p>` : ''}
       ${nextLink('workshop')}`;
   }
 
   function summaryHtml(ws) {
     const s = E.workshopSummary(ws);
     if (!s) return '';
-    return `<article class="summary-doc" aria-labelledby="sum-h"><span class="label">Education Process Lab · Workshop</span><h2 id="sum-h">Your process transformation summary</h2><p class="small muted">${esc(s.process)} · Fictitious scenario for demonstration purposes</p>
+    return `<article class="summary-doc" aria-labelledby="sum-h"><span class="label">Education Process Lab · Workshop</span><h2 id="sum-h">Zusammenfassung der Prozessverbesserung</h2><p class="small muted">${esc(s.process)} · Fiktives Szenario zu Demonstrationszwecken</p>
       <section><span class="label">Gewähltes Problem</span><div><strong>${esc(s.category)} – ${esc(s.step)}</strong><p class="small" style="margin:4px 0 0">${esc(s.problem)}</p></div></section>
       <section><span class="label">Stakeholder-Bedürfnisse</span><div class="small">${s.stakeholders.map(x => `<p style="margin:0 0 4px"><strong>${esc(x.name)}:</strong> ${x.needs.map(esc).join(', ')}</p>`).join('')}</div></section>
       <section><span class="label">Verbesserungsmassnahme</span><div><strong>${esc(s.measure)}</strong><p class="tiny muted" style="margin:4px 0 0">Annahme: ${esc(s.assumption)}${s.conservative ? ' (konservativ: halbe Wirkung)' : ''} · ${s.affectedSteps} Schritt(e)</p></div></section>
@@ -2749,7 +2772,7 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     const s = store.get();
     store.set({ workshop: Object.assign({}, s.workshop, { rationale: el.value, saved: false }) }, { silent: true });
     const r = $('#sum-rat'); if (r) r.textContent = el.value || '—';
-    const b = $('[data-act="ws-save"]'); if (b) { b.disabled = false; b.textContent = 'Im Decision Log speichern'; }
+    const b = $('[data-act="ws-save"]'); if (b) { b.disabled = false; b.textContent = 'Im Entscheidungsprotokoll speichern'; }
   };
   ACTIONS['ws-save'] = () => {
     const s = store.get();
@@ -2760,42 +2783,51 @@ footer.site h4 { font: 500 11px/1.3 var(--font-mono); text-transform: uppercase;
     if (!dec) return;
     const extra = s.extraDecisions.filter(d => d.id !== id).concat(dec);
     store.set({ extraDecisions: extra, workshop: E.workshopReducer(s.workshop, { type: 'save', id }) });
-    toast(`${id} im Decision Log gespeichert.`);
+    toast(`${id} im Entscheidungsprotokoll gespeichert.`);
   };
 
   /* ======================================================================
      ABOUT
      ====================================================================== */
+  /* Zusammengefasste Seiten: 03 Harmonisieren & Wirkung, 04 Umsetzung (Roadmap, Change, Governance) */
+  function viewHarmoniseImpact(state, params) {
+    return viewHarmonise(state, params) + viewImpact(state, params, { sub: true }) + nextLink('harmonise');
+  }
+  function mountHarmoniseImpact(state, params) { mountHarmonise(state, params); mountImpact(state, params); }
+  function viewUmsetzung(state, params) {
+    return viewRoadmap(state, params) + viewChange(state, params, { sub: true }) + viewGovernance(state, params, { sub: true }) + nextLink('umsetzung');
+  }
+
   function viewAbout() {
-    const appr = [['Understand', 'Menschen und Anforderungen verstehen.'], ['Structure', 'Komplexität sichtbar und diskutierbar machen.'], ['Design', 'Gemeinsam tragfähige Lösungen entwickeln.'], ['Deliver', 'Lösungen schrittweise einführen und überprüfen.'], ['Improve', 'Aus Rückmeldungen und Kennzahlen lernen.']];
-    return `${pageHead('09', 'About the case study', 'Behind the Process', 'This independent concept explores how process ownership, business analysis and digital product thinking can support the harmonisation of continuing education processes.')}
+    const appr = [['Verstehen', 'Menschen und Anforderungen verstehen.'], ['Strukturieren', 'Komplexität sichtbar und diskutierbar machen.'], ['Gestalten', 'Gemeinsam tragfähige Lösungen entwickeln.'], ['Umsetzen', 'Lösungen schrittweise einführen und überprüfen.'], ['Verbessern', 'Aus Rückmeldungen und Kennzahlen lernen.']];
+    return `${pageHead('', 'Über das Projekt', 'Hinter dem Prozess', 'Diese unabhängige Konzeptstudie zeigt, wie Prozessverantwortung, Business-Analyse und digitales Produktdenken helfen, Weiterbildungsprozesse zu harmonisieren.')}
       <div class="approach">${appr.map((a, i) => `<div><span class="label">0${i + 1}</span><h3>${a[0]}</h3><p class="small muted">${a[1]}</p></div>`).join('')}</div>
       <section class="block" aria-labelledby="cr-h2">
         <div class="grid g2" style="gap:48px">
-          <div><span class="label">About the creator</span><h2 class="h-section" id="cr-h2" style="margin:10px 0 18px">Steven Schmid</h2>
-            <ul class="clean" style="font:600 20px/1.5 var(--font-display)"><li>Software Development</li><li>Product Ownership</li><li>Agile Collaboration</li><li>Digital Innovation</li><li>Education</li></ul>
+          <div><span class="label">Zur Person</span><h2 class="h-section" id="cr-h2" style="margin:10px 0 18px">Steven Schmid</h2>
+            <ul class="clean" style="font:600 20px/1.5 var(--font-display)"><li>Softwareentwicklung</li><li>Product Ownership</li><li>Agile Zusammenarbeit</li><li>Digitale Innovation</li><li>Bildung</li></ul>
             <p style="margin-top:20px"><a href="https://stevenschmid.ch" rel="noopener">stevenschmid.ch</a><br><a href="https://officebaden.ch" rel="noopener">officebaden.ch</a></p></div>
-          <div class="stack"><span class="label">Context</span><p>Dieser Prototyp entstand als unabhängige Konzeptstudie im Zusammenhang mit einer Bewerbung als <strong>Process Owner*in Betrieb Weiterbildung</strong> an der Fachhochschule Nordwestschweiz FHNW.</p>
-            <div class="fiction"><span class="mono">Important</span><span>Kein offizielles Projekt der FHNW. Es sind keine internen Prozesse, Daten, Systeme oder Entscheidungen der FHNW bekannt. Alle Prozesse, Stakeholder, Kennzahlen und Szenarien sind fiktive, realitätsnahe Beispiele. Es werden keine offiziellen Logos verwendet.</span></div>
+          <div class="stack"><span class="label">Kontext</span><p>Dieser Prototyp entstand als unabhängige Konzeptstudie im Zusammenhang mit einer Bewerbung als <strong>Process Owner*in Betrieb Weiterbildung</strong> an der Fachhochschule Nordwestschweiz FHNW.</p>
+            <div class="fiction"><span class="mono">Wichtig</span><span>Kein offizielles Projekt der FHNW. Es sind keine internen Prozesse, Daten, Systeme oder Entscheidungen der FHNW bekannt. Alle Prozesse, Stakeholder, Kennzahlen und Szenarien sind fiktive, realitätsnahe Beispiele. Es werden keine offiziellen Logos verwendet.</span></div>
             <p class="muted small">Was der Prototyp zeigen soll, ist nicht die Software, sondern eine Arbeitsweise: zuhören, verstehen, analysieren, abstimmen, gestalten, umsetzen, messen, verbessern.</p></div>
         </div>
       </section>
       <section class="block" aria-labelledby="meth-h">
-        <div class="block-head"><div><span class="label">Methodology & limitations</span><h2 class="h-sub" id="meth-h" style="margin-top:8px">What this prototype is – and isn't.</h2></div></div>
+        <div class="block-head"><div><span class="label">Methode & Grenzen</span><h2 class="h-sub" id="meth-h" style="margin-top:8px">Was dieser Prototyp ist – und was nicht.</h2></div></div>
         <div class="grid g3">
-          <div class="card"><h3 class="h-card">Implementation decisions</h3><ul class="ticks small"><li>Eine einzige, eigenständige HTML-Datei ohne Build-Schritt und ohne Backend.</li><li>Daten (Fixtures), Fachlogik (Kennzahlen, Priorisierung, Varianten, Workshop-Zustand) und Darstellung sind getrennt; die Fachlogik ist unabhängig von der Oberfläche getestet.</li><li>Zustand zentral gespeichert, Persistenz im LocalStorage; «Reset demo» stellt die Standarddaten wieder her.</li><li>Prozessdiagramme als eigene, zugängliche HTML/SVG-Darstellung mit Listen-Alternative.</li></ul></div>
-          <div class="card"><h3 class="h-card">Model assumptions</h3><ul class="ticks small"><li>Sequenzielle Prozessausführung; Durchlaufzeit = Wartezeit + Bearbeitungszeit.</li><li>Optionale Schritte als Erwartungswert (Zeit × Eintrittswahrscheinlichkeit).</li><li>1 Arbeitstag = 8 h; Wartezeiten in Arbeitstagen.</li><li>Alle Parameter sind plausible Annahmen, keine Messwerte, und offen ausgewiesen.</li></ul></div>
-          <div class="card"><h3 class="h-card">Limitations</h3><ul class="ticks small"><li>Keine vollständige BPMN-2.0-Konformität – die Notation ist BPMN-inspiriert.</li><li>Keine Simulation von Kapazitäten, Warteschlangen oder Saisonalität.</li><li>Mehrfache Nachforderungsschleifen werden nicht abgebildet.</li><li>Keine echte Automatisierung: Systemschritte sind modelliert, nicht implementiert.</li><li>Bewertungen (WSJF, Change-Kontext) sind Diskussionshilfen, keine Entscheidungsautomaten.</li></ul></div>
+          <div class="card"><h3 class="h-card">Umsetzungsentscheide</h3><ul class="ticks small"><li>Eine einzige, eigenständige HTML-Datei ohne Build-Schritt und ohne Backend.</li><li>Daten (Fixtures), Fachlogik (Kennzahlen, Priorisierung, Varianten, Workshop-Zustand) und Darstellung sind getrennt; die Fachlogik ist unabhängig von der Oberfläche getestet.</li><li>Zustand zentral gespeichert, Persistenz im LocalStorage; «Demo zurücksetzen» stellt die Standarddaten wieder her.</li><li>Prozessdiagramme als eigene, zugängliche HTML/SVG-Darstellung mit Listen-Alternative.</li></ul></div>
+          <div class="card"><h3 class="h-card">Modellannahmen</h3><ul class="ticks small"><li>Sequenzielle Prozessausführung; Durchlaufzeit = Wartezeit + Bearbeitungszeit.</li><li>Optionale Schritte als Erwartungswert (Zeit × Eintrittswahrscheinlichkeit).</li><li>1 Arbeitstag = 8 h; Wartezeiten in Arbeitstagen.</li><li>Alle Parameter sind plausible Annahmen, keine Messwerte, und offen ausgewiesen.</li></ul></div>
+          <div class="card"><h3 class="h-card">Grenzen</h3><ul class="ticks small"><li>Keine vollständige BPMN-2.0-Konformität – die Notation ist BPMN-inspiriert.</li><li>Keine Simulation von Kapazitäten, Warteschlangen oder Saisonalität.</li><li>Mehrfache Nachforderungsschleifen werden nicht abgebildet.</li><li>Keine echte Automatisierung: Systemschritte sind modelliert, nicht implementiert.</li><li>Bewertungen (WSJF, Change-Kontext) sind Diskussionshilfen, keine Entscheidungsautomaten.</li></ul></div>
         </div>
       </section>
-      <section class="block"><div class="card" style="display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap"><div><span class="label">Demo data</span><p style="margin:6px 0 0">Alle Änderungen werden nur in diesem Browser gespeichert.</p></div><button class="btn ghost" data-act="reset-demo">Reset demo</button></div></section>`;
+      <section class="block"><div class="card" style="display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap"><div><span class="label">Demodaten</span><p style="margin:6px 0 0">Alle Änderungen werden nur in diesem Browser gespeichert.</p></div><button class="btn ghost" data-act="reset-demo">Demo zurücksetzen</button></div></section>`;
   }
 
   /* ======================================================================
      BOOT
      ====================================================================== */
   function shell() {
-    $('#nav-list').innerHTML = ROUTES.filter(r => r.id).map(r => `<li><a href="#/${r.id}" data-route="${r.id}"><span class="n">${r.n}</span>${esc(r.label)}</a></li>`).join('');
+    $('#nav-list').innerHTML = ROUTES.filter(r => r.id && !r.hidden).map(r => `<li><a href="#/${r.id}" data-route="${r.id}"><span class="n">${r.n}</span>${esc(r.label)}</a></li>`).join('');
     const btn = $('#menu-btn'), nav = $('#main-nav');
     btn.addEventListener('click', () => { const o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', String(o)); });
     nav.addEventListener('click', ev => { if (ev.target.closest('a')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
