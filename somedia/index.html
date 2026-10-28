@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI im Arbeitsalltag · Interaktive Microlearning Experience</title>
+<meta name="description" content="Drei Situationen, deine Entscheidungen: eine Microlearning Experience zum souveränen Umgang mit generativer KI im Arbeitsalltag.">
+<meta name="robots" content="noindex">
+<style>
+/* =========================================================
+   KI im Arbeitsalltag – Microlearning Experience
+   Eine Datei, ohne externe Ressourcen. Aufbau:
+   1. Tokens  2. Grundlagen  3. Kopf & Fortschritt  4. Screens
+   5. Entscheidungen & Feedback  6. Szenario 3 (Markieren)
+   7. Wissenscheck  8. Abschluss  9. Behind the Learning
+   10. Navigation & Footer  11. Bewegung
+   ========================================================= */
+
+/* 1. Tokens ------------------------------------------------ */
+:root{
+  --bg:#F3EEE4; --paper:#FBF8F2; --paper-2:#EFE8DB;
+  --ink:#121212; --ink-2:#3B3833; --muted:#6B655B;
+  --hair:rgba(18,18,18,.14); --hair-2:rgba(18,18,18,.28);
+  --bordeaux:#7B1E34; --bordeaux-soft:rgba(123,30,52,.09);
+  --cobalt:#1D3FAE; --cobalt-soft:rgba(29,63,174,.09);
+  --orange:#E2722B; --orange-soft:rgba(226,114,43,.22);
+  --good:var(--cobalt); --mid:#A9531A; --bad:var(--bordeaux);
+  --f-sans:"Helvetica Neue",Helvetica,Arial,"Nimbus Sans","Liberation Sans",sans-serif;
+  --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --r:4px; --ease:cubic-bezier(.2,.7,.2,1);
+  --wrap:1080px; --gut:clamp(16px,4vw,40px);
+}
+
+/* 2. Grundlagen -------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none !important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--f-sans);
+  min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.05}
+p{margin:0 0 1em}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:2px}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--paper);padding:10px 14px;z-index:50;text-decoration:none}
+.skip:focus{top:12px}
+
+.btn{display:inline-flex;align-items:center;gap:.6em;border:2px solid var(--ink);background:var(--ink);color:var(--paper);
+  padding:.8em 1.3em;border-radius:var(--r);font-weight:700;letter-spacing:.01em;text-decoration:none;
+  transition:transform .2s var(--ease),background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn--ghost{background:transparent;color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--paper)}
+.btn--small{padding:.5em .9em;font-size:.92rem}
+.btn .arr{transition:transform .2s var(--ease)}
+.btn:hover .arr{transform:translateX(3px)}
+.linkbtn{background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+
+/* 3. Kopf & Fortschritt ------------------------------------- */
+.top{border-bottom:1px solid var(--hair);background:var(--bg);position:sticky;top:0;z-index:20}
+.top__bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.brand svg{width:34px;height:20px;flex:none}
+.behind-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--hair-2);border-radius:999px;
+  padding:6px 12px;font-size:.85rem;color:var(--ink-2)}
+.behind-btn:hover{border-color:var(--ink);color:var(--ink)}
+.behind-btn i{width:8px;height:8px;background:var(--bordeaux);display:inline-block}
+@media (max-width:520px){
+  .brand{font-size:.92rem;white-space:nowrap}
+  .behind-btn{font-size:.76rem;padding:5px 10px;white-space:nowrap}
+  .navbar__pos .lbl{display:none}
+}
+
+.steps{list-style:none;margin:0;padding:0 0 12px;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;position:relative}
+.steps button{width:100%;background:none;border:0;padding:8px 0 0;text-align:left;display:flex;flex-direction:column;gap:4px;
+  border-top:3px solid var(--hair);transition:border-color .3s}
+.steps .n{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.steps .l{font-size:.8rem;line-height:1.2;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps button.is-done{border-top-color:var(--ink)}
+.steps button.is-done .n::after{content:" ✓";color:var(--cobalt)}
+.steps button[aria-current="step"]{border-top-color:var(--orange)}
+.steps button[aria-current="step"] .n,.steps button[aria-current="step"] .l{color:var(--ink);font-weight:700}
+@media (max-width:640px){
+  .steps .l{display:none}
+  .steps button[aria-current="step"] .l{display:block;position:absolute;left:0;right:0;bottom:-6px;text-align:center;font-size:.78rem}
+  .steps{padding-bottom:22px}
+}
+
+/* 4. Screens ----------------------------------------------- */
+main{flex:1;padding:clamp(24px,4.5vw,52px) 0 40px}
+.screen{display:none}
+.screen.is-active{display:block}
+.screen:focus{outline:none}
+.kicker{display:flex;gap:12px;align-items:baseline;margin-bottom:18px;color:var(--muted)}
+.kicker b{color:var(--ink);font-weight:700}
+.h-xl{font-size:clamp(2.5rem,6.2vw,4.9rem);letter-spacing:-.035em;line-height:.95}
+.h-l{font-size:clamp(2rem,5.2vw,3.6rem);letter-spacing:-.03em}
+.h-m{font-size:clamp(1.3rem,2.6vw,1.7rem)}
+.h-l + .lead{margin-top:16px}
+.lead{font-size:clamp(1.1rem,2.2vw,1.35rem);line-height:1.45;color:var(--ink-2);max-width:36em}
+.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:start}
+@media (max-width:820px){.grid-2{grid-template-columns:1fr}}
+
+/* Willkommen */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,56px);align-items:center}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.hero__art{order:-1;max-width:320px}}
+.hero h1{margin:6px 0 18px}
+.hero h1 em{font-style:normal;color:var(--bordeaux)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin:20px 0;padding:12px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.meta span{display:flex;gap:8px;align-items:center}
+.goals{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:8px;counter-reset:g;font-size:.98rem}
+.goals li{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:baseline;counter-increment:g}
+.goals li::before{content:"0" counter(g);font-family:var(--f-mono);font-size:.8rem;color:var(--muted);border-top:2px solid var(--ink);padding-top:4px}
+.goals li:nth-child(1)::before{border-color:var(--cobalt)}
+.goals li:nth-child(2)::before{border-color:var(--bordeaux)}
+.goals li:nth-child(3)::before{border-color:var(--orange)}
+.resume{margin-top:16px;color:var(--ink-2);font-size:.95rem}
+.hero__art svg{width:100%;height:auto;display:block}
+
+/* Szenario-Kopf und Kontext */
+.scene-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:26px}
+.scene-head svg{width:88px;height:88px;flex:none}
+@media (max-width:520px){.scene-head svg{width:60px;height:60px}}
+.goalchip{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--hair-2);border-radius:999px;padding:4px 12px;margin-top:14px;font-size:.85rem;color:var(--ink-2)}
+.goalchip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.card{background:var(--paper);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(18px,3vw,28px)}
+.mail__meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:.9rem;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--hair)}
+.mail__meta dt{color:var(--muted)}
+.mail__meta dd{margin:0;font-weight:600}
+.mail p{font-size:.98rem}
+.mail p:last-child{margin:0}
+.time{font-family:var(--f-mono);font-size:.8rem;color:var(--bordeaux);letter-spacing:.06em}
+.chat{display:flex;gap:12px;align-items:flex-start;margin:0 0 18px}
+.chat__av{width:40px;height:40px;border-radius:50%;background:var(--cobalt);color:var(--paper);display:grid;place-items:center;font-weight:700;flex:none}
+.chat__b{background:var(--paper);border:1px solid var(--hair);border-radius:0 14px 14px 14px;padding:12px 16px}
+.chat__b p{margin:0}
+.chat__b small{display:block;color:var(--muted);margin-top:4px}
+
+/* Dokument mit Hotspots (Szenario 2) */
+.doc{position:relative;background:var(--paper);border:1px solid var(--hair);padding:clamp(18px,3vw,28px);border-radius:var(--r)}
+.doc::before{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 26px 26px 0;border-color:transparent var(--bg) var(--paper-2) transparent}
+.doc h3{font-size:1.15rem;margin:6px 0 14px}
+.doc p{font-size:.95rem;margin-bottom:.7em}
+.spot{background:none;border:0;border-bottom:2px dashed var(--bordeaux);padding:0 1px;text-align:left;font-size:inherit;line-height:inherit;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+.spot:hover{background:var(--bordeaux-soft)}
+.spot[aria-expanded="true"]{background:var(--bordeaux-soft);border-bottom-style:solid}
+.spotinfo{margin-top:14px;border-left:4px solid var(--bordeaux);background:var(--paper);padding:12px 16px;min-height:3.2em}
+.spotinfo b{display:block}
+.spotcount{font-size:.85rem;color:var(--muted);margin-top:8px}
+.stamp{display:inline-block;border:2px solid var(--bordeaux);color:var(--bordeaux);font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;padding:2px 8px;transform:rotate(-2deg)}
+
+/* 5. Entscheidungen & Feedback ------------------------------ */
+.question{margin:34px 0 14px}
+.hint{color:var(--muted);font-size:.92rem;margin:0 0 16px}
+.options{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.opt{width:100%;display:grid;grid-template-columns:40px 1fr;gap:2px 14px;align-items:start;text-align:left;
+  background:var(--paper);border:1px solid var(--hair-2);border-radius:var(--r);padding:16px 18px;
+  transition:border-color .2s,background .2s,transform .2s var(--ease),box-shadow .2s}
+.opt:hover{border-color:var(--ink);transform:translateX(3px)}
+.opt__k{font-family:var(--f-mono);font-weight:700;width:32px;height:32px;display:grid;place-items:center;border:1.5px solid var(--ink);border-radius:50%}
+.opt__t{padding-top:4px}
+.opt__v{grid-column:2;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.opt__v:empty{display:none}
+.opt.is-viewed{box-shadow:inset 4px 0 0 var(--ink)}
+.opt[data-v="good"] .opt__v{color:var(--good)}
+.opt[data-v="mid"] .opt__v{color:var(--mid)}
+.opt[data-v="bad"] .opt__v{color:var(--bad)}
+.opt[data-v="good"].is-viewed{box-shadow:inset 4px 0 0 var(--good);background:var(--cobalt-soft)}
+.opt[data-v="mid"].is-viewed{box-shadow:inset 4px 0 0 var(--orange);background:rgba(226,114,43,.08)}
+.opt[data-v="bad"].is-viewed{box-shadow:inset 4px 0 0 var(--bad);background:var(--bordeaux-soft)}
+.opt.is-chosen .opt__k{background:var(--ink);color:var(--paper)}
+@media (max-width:520px){.opt{grid-template-columns:34px 1fr;padding:14px}}
+
+.feedback{margin-top:18px}
+.fb{border:1px solid var(--hair);border-top:4px solid var(--ink);background:var(--paper);border-radius:var(--r);padding:clamp(18px,3vw,26px)}
+.fb[data-v="good"]{border-top-color:var(--good)}
+.fb[data-v="mid"]{border-top-color:var(--orange)}
+.fb[data-v="bad"]{border-top-color:var(--bad)}
+.fb__head{display:flex;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.badge{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:2px;color:var(--paper);background:var(--ink)}
+.badge[data-v="good"]{background:var(--good)}
+.badge[data-v="mid"]{background:var(--mid)}
+.badge[data-v="bad"]{background:var(--bad)}
+.fb h4{font-size:1.2rem}
+.fb__cols{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px;margin-top:6px}
+@media (max-width:700px){.fb__cols{grid-template-columns:1fr}}
+.fb__cols h5{margin:0 0 6px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.fb__cols p{margin:0;font-size:.97rem}
+.fb__rec{margin-top:16px;padding-top:14px;border-top:1px solid var(--hair);font-size:.95rem}
+.fb__more{margin-top:12px;font-size:.88rem;color:var(--muted)}
+.rule{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rule > div{padding:14px 16px;border:1px solid var(--hair);border-radius:var(--r);background:var(--paper)}
+.rule h5{margin:0 0 6px;font-size:.95rem}
+.rule ul{margin:0;padding-left:1.1em;font-size:.92rem}
+.rule .yes{border-top:3px solid var(--cobalt)}
+.rule .no{border-top:3px solid var(--bordeaux)}
+@media (max-width:600px){.rule{grid-template-columns:1fr}}
+
+/* 6. Szenario 3: Aussagen markieren ------------------------- */
+.ai{background:var(--paper);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden}
+.ai__prompt{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;background:var(--paper-2);border-bottom:1px solid var(--hair);font-size:.95rem}
+.ai__prompt b{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px;flex:none}
+.ai__body{padding:clamp(18px,3vw,28px)}
+.ai__label{display:flex;align-items:center;gap:8px;margin-bottom:12px;color:var(--cobalt)}
+.ai__label i{width:12px;height:12px;border-radius:50%;background:var(--cobalt);display:inline-block}
+.ai__text{font-size:1.05rem;line-height:1.85}
+.claim{display:inline;background:none;border:0;padding:1px 2px;text-align:left;font-size:inherit;line-height:inherit;
+  border-bottom:1px solid var(--hair-2);border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  transition:background .2s}
+.claim:hover{background:rgba(226,114,43,.12)}
+.claim[aria-pressed="true"]{background:var(--orange-soft);border-bottom:2px solid var(--orange)}
+.claim[aria-pressed="true"]::before{content:"⚑ ";color:var(--mid);font-size:.85em}
+.claim[disabled]{cursor:default}
+.claim.r-hit{background:var(--orange-soft);border-bottom:2px solid var(--orange)}
+.claim.r-ok{border-bottom:2px solid var(--cobalt)}
+.claim.r-miss{border-bottom:2px dashed var(--bordeaux);background:var(--bordeaux-soft)}
+.claim.r-false{background:var(--cobalt-soft);border-bottom:2px dashed var(--cobalt)}
+.claim sup{font-family:var(--f-mono);font-size:.68rem;font-weight:700;margin-left:2px}
+.marktools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.markcount{color:var(--muted);font-size:.92rem}
+.msg{color:var(--bordeaux);font-weight:600;font-size:.95rem;margin:10px 0 0}
+.msg:empty{display:none}
+.results{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.results li{display:grid;grid-template-columns:32px 1fr;gap:12px;padding:14px 16px;background:var(--paper);border:1px solid var(--hair);border-radius:var(--r)}
+.results .no{font-family:var(--f-mono);font-weight:700}
+.results b{display:block;margin-bottom:2px}
+.results p{margin:0;font-size:.95rem}
+.results .tag{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
+.tag.good{color:var(--good)} .tag.bad{color:var(--bad)}
+.score{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:22px 0 4px}
+.score strong{font-size:2.4rem;letter-spacing:-.03em}
+.tips{counter-reset:t;list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tips li{counter-increment:t;padding:14px 16px;border-top:3px solid var(--ink);background:var(--paper);font-size:.93rem}
+.tips li::before{content:"0" counter(t);display:block;font-family:var(--f-mono);font-size:.75rem;color:var(--muted);margin-bottom:4px}
+@media (max-width:700px){.tips{grid-template-columns:1fr}}
+
+/* 7. Wissenscheck ------------------------------------------ */
+.task{padding:clamp(20px,3vw,30px) 0;border-top:1px solid var(--hair)}
+.task:first-of-type{border-top:2px solid var(--ink)}
+.task__head{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.task__type{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.task h3{font-size:clamp(1.15rem,2.4vw,1.45rem);margin:0 0 14px;max-width:34em;line-height:1.25}
+.sort{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sort li{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--paper);border:1px solid var(--hair-2);border-radius:var(--r);padding:12px 14px}
+.sort__txt{font-size:.98rem}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:var(--r);overflow:hidden}
+.seg button{background:transparent;border:0;padding:8px 12px;font-size:.85rem;font-weight:600;white-space:nowrap}
+.seg button + button{border-left:1.5px solid var(--ink)}
+.seg button[aria-pressed="true"][data-cat="ok"]{background:var(--cobalt);color:var(--paper)}
+.seg button[aria-pressed="true"][data-cat="no"]{background:var(--bordeaux);color:var(--paper)}
+.seg button[disabled]{cursor:default}
+.sort__fb{grid-column:1 / -1;font-size:.92rem;margin:0;padding-top:8px;border-top:1px dashed var(--hair-2)}
+.sort li.is-right{border-color:var(--cobalt)}
+.sort li.is-wrong{border-color:var(--bordeaux)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem;color:var(--ink-2);margin:0 0 14px}
+.legend span{display:flex;gap:8px;align-items:center}
+.legend i{width:12px;height:12px;display:inline-block}
+@media (max-width:620px){.sort li{grid-template-columns:1fr}.seg{width:100%}.seg button{flex:1;white-space:normal}}
+
+/* 8. Abschluss --------------------------------------------- */
+.summary{display:grid;grid-template-columns:260px 1fr;gap:clamp(24px,5vw,56px);align-items:start;margin-top:28px}
+@media (max-width:760px){.summary{grid-template-columns:1fr}}
+.ring{position:relative;width:220px;max-width:100%}
+.ring svg{width:100%;height:auto;display:block;transform:rotate(-90deg)}
+.ring__v{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ring__v strong{display:block;font-size:3.2rem;letter-spacing:-.04em;line-height:1}
+.ring__v span{font-size:.85rem;color:var(--muted)}
+.ring circle{fill:none;stroke-width:14}
+.ring .bg{stroke:var(--paper-2)}
+.ring .fg{stroke:var(--cobalt);stroke-linecap:butt;transition:stroke-dashoffset 1s var(--ease)}
+.progressline{margin-top:16px;font-size:.95rem;color:var(--ink-2)}
+.lz{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.lz li{display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:center;padding:16px 0;border-top:1px solid var(--hair)}
+.lz li:first-child{border-top:2px solid var(--ink)}
+.lz h4{font-size:1.05rem;letter-spacing:-.01em}
+.lz .bar{grid-column:1 / -1;height:8px;background:var(--paper-2);position:relative;overflow:hidden}
+.lz .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);transition:width .8s var(--ease)}
+.lz .state{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.lz .detail{grid-column:1 / -1;font-size:.9rem;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.takeaways{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.takeaways li{background:var(--paper);border:1px solid var(--hair);border-radius:var(--r);padding:20px;position:relative}
+.takeaways li svg{width:34px;height:34px;display:block;margin-bottom:12px}
+.takeaways h4{font-size:1.08rem;margin-bottom:8px;letter-spacing:-.01em;line-height:1.2}
+.takeaways p{margin:0;font-size:.94rem;color:var(--ink-2)}
+@media (max-width:820px){.takeaways{grid-template-columns:1fr}}
+.endactions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:1px solid var(--hair)}
+.disclaimer{font-size:.88rem;color:var(--muted);margin-top:14px;max-width:44em}
+
+/* 9. Behind the Learning ------------------------------------ */
+.overlay{position:fixed;inset:0;z-index:60;background:rgba(18,18,18,.55);display:none;align-items:flex-start;justify-content:center;
+  overflow-y:auto;padding:clamp(0px,3vw,32px)}
+.overlay.is-open{display:flex}
+.panel{background:var(--paper);width:100%;max-width:960px;border-radius:var(--r);position:relative;
+  padding:clamp(22px,4vw,48px);box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.panel:focus{outline:none}
+.panel__close{position:sticky;top:0;float:right;margin:-8px -8px 0 12px;width:44px;height:44px;border-radius:50%;
+  border:1.5px solid var(--ink);background:var(--paper);font-size:1.3rem;line-height:1;z-index:2}
+.panel__close:hover{background:var(--ink);color:var(--paper)}
+.panel .kicker{margin-bottom:10px}
+.panel h2{margin-bottom:12px}
+.panel section{padding:24px 0;border-top:1px solid var(--hair)}
+.panel section:first-of-type{margin-top:26px;border-top:2px solid var(--ink)}
+.panel h3{font-size:1.25rem;margin-bottom:10px;display:flex;gap:12px;align-items:baseline}
+.panel h3 span{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.panel p,.panel li{font-size:.97rem}
+.panel ul{padding-left:1.15em;margin:0}
+.panel li{margin-bottom:.35em}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cols > div{border-top:3px solid var(--ink);padding-top:10px}
+.cols h4{font-size:1rem;margin-bottom:6px;letter-spacing:-.01em}
+.cols p{margin:0;font-size:.93rem}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:10px 10px 10px 0;border-bottom:1px solid var(--hair)}
+.tbl th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.tblwrap{overflow-x:auto}
+.journey{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;counter-reset:j}
+.journey li{counter-increment:j;border-top:3px solid var(--ink);padding-top:8px;font-size:.88rem;margin:0}
+.journey li::before{content:"0" counter(j);display:block;font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.journey b{display:block;font-size:.95rem}
+@media (max-width:760px){.journey{grid-template-columns:repeat(2,1fr)}}
+
+/* 10. Navigation & Footer ----------------------------------- */
+.navbar{position:sticky;bottom:0;z-index:15;background:rgba(243,238,228,.94);border-top:1px solid var(--hair);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.navbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px}
+.navbar__pos{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);text-align:center}
+.navbar .spacer{min-width:1px}
+.foot{border-top:1px solid var(--hair);padding:22px 0 26px;font-size:.84rem;color:var(--muted)}
+.foot .wrap{display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap}
+.foot p{margin:0}
+
+/* 11. Bewegung ---------------------------------------------- */
+.screen.is-active{animation:enter .5s var(--ease) both}
+.screen.is-active.from-back{animation-name:enterBack}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes enterBack{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+.fb{animation:pop .4s var(--ease) both}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.float{animation:float 7s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.float-2{animation:float 9s ease-in-out -3s infinite;transform-origin:center;transform-box:fill-box}
+.spin{animation:spin 40s linear infinite;transform-origin:center;transform-box:fill-box}
+.blink{animation:blink 1.1s steps(1) infinite}
+.draw{stroke-dasharray:220;stroke-dashoffset:220;animation:draw 1.6s var(--ease) .3s forwards}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  .draw{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<header class="top">
+  <div class="wrap top__bar">
+    <div class="brand">
+      <svg viewBox="0 0 34 20" aria-hidden="true"><path d="M0 20 L9 2 L18 20 Z" fill="#E2722B"/><rect x="12" y="6" width="10" height="10" fill="#7B1E34"/><circle cx="27" cy="11" r="7" fill="#1D3FAE"/></svg>
+      <span>KI im Arbeitsalltag</span>
+    </div>
+    <button class="behind-btn" type="button" id="behindOpen" aria-haspopup="dialog"><i aria-hidden="true"></i>Behind the Learning</button>
+  </div>
+  <nav class="wrap" aria-label="Lernstationen">
+    <ol class="steps" id="steps"></ol>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <!-- ===== Station 1: Willkommen ===== -->
+    <section class="screen" id="screen-start" aria-labelledby="h-start" tabindex="-1">
+      <div class="hero">
+        <div>
+          <p class="kicker mono"><b>Microlearning</b><span>Generative KI · Arbeitsalltag</span></p>
+          <h1 class="h-xl" id="h-start">KI im <em>Arbeitsalltag.</em></h1>
+          <p class="lead">Drei Situationen. Deine Entscheidungen. Finde heraus, wie souverän du mit KI umgehst.</p>
+          <div class="meta mono" aria-label="Eckdaten">
+            <span>◷ ca. 6 Minuten</span><span>3 Szenarien</span><span>1 Wissenscheck</span>
+          </div>
+          <h2 class="sr-only">Lernziele</h2>
+          <ol class="goals">
+            <li>Du erkennst, wofür sich generative KI im Arbeitsalltag eignet und wofür nicht.</li>
+            <li>Du erkennst Datenschutzrisiken, bevor du Inhalte in ein KI-Tool gibst.</li>
+            <li>Du prüfst KI-generierte Informationen kritisch, bevor du sie weitergibst.</li>
+          </ol>
+          <button class="btn" type="button" data-go="s1">Los geht’s <span class="arr" aria-hidden="true">→</span></button>
+          <p class="resume" id="resume" hidden></p>
+        </div>
+        <div class="hero__art" aria-hidden="true">
+          <svg viewBox="0 0 400 420">
+            <g stroke="#121212" stroke-opacity=".14" stroke-width="1">
+              <path d="M0 60H400M0 140H400M0 220H400M0 300H400M0 380H400M60 0V420M140 0V420M220 0V420M300 0V420"/>
+            </g>
+            <circle class="float" cx="250" cy="160" r="118" fill="#1D3FAE"/>
+            <rect class="float-2" x="40" y="230" width="150" height="150" fill="#7B1E34"/>
+            <path class="float" d="M250 400 L330 260 L400 400 Z" fill="#E2722B"/>
+            <g class="spin"><circle cx="250" cy="160" r="150" fill="none" stroke="#121212" stroke-width="1" stroke-dasharray="2 8"/></g>
+            <!-- Chatfenster -->
+            <g transform="translate(70 90)">
+              <rect width="200" height="128" fill="#FBF8F2" stroke="#121212" stroke-width="2"/>
+              <path d="M0 26H200" stroke="#121212" stroke-width="2"/>
+              <circle cx="14" cy="13" r="4" fill="#121212"/><circle cx="28" cy="13" r="4" fill="none" stroke="#121212" stroke-width="1.5"/>
+              <path class="draw" d="M18 52H150M18 74H178M18 96H120" stroke="#121212" stroke-width="6" stroke-linecap="square"/>
+              <rect class="blink" x="126" y="89" width="4" height="14" fill="#E2722B"/>
+              <path d="M30 128 L30 150 L56 128" fill="#FBF8F2" stroke="#121212" stroke-width="2" stroke-linejoin="miter"/>
+            </g>
+            <text x="300" y="40" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="13" fill="#121212">01 · 02 · 03</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Station 2: Szenario 1 ===== -->
+    <section class="screen" id="screen-s1" aria-labelledby="h-s1" tabindex="-1">
+      <div class="scene-head">
+        <div>
+          <p class="kicker mono"><b>Szenario 1</b><span>Die Kundenanfrage</span></p>
+          <h2 class="h-l" id="h-s1">Montagmorgen, 09:15 Uhr.</h2>
+          <span class="goalchip"><i style="background:var(--cobalt)" aria-hidden="true"></i>Lernziel 1 · Einsatzmöglichkeiten erkennen</span>
+        </div>
+        <svg viewBox="0 0 88 88" aria-hidden="true"><rect x="6" y="20" width="76" height="52" fill="#FBF8F2" stroke="#121212" stroke-width="2.5"/><path d="M6 20 L44 50 L82 20" fill="none" stroke="#121212" stroke-width="2.5"/><circle cx="74" cy="22" r="12" fill="#1D3FAE"/><path d="M74 15v9M74 28v1" stroke="#FBF8F2" stroke-width="3" stroke-linecap="round"/></svg>
+      </div>
+      <div class="grid-2">
+        <div>
+          <p class="lead">Eine anspruchsvolle Kundenanfrage landet in deinem Posteingang. Die Antwort wird bis Mittag erwartet. Im Browser hast du Zugriff auf einen KI-Chat.</p>
+          <article class="card mail" aria-label="E-Mail der Kundin">
+            <dl class="mail__meta">
+              <dt>Von</dt><dd>Sandra Brunner, Leiterin Einkauf, Holzbau Brunner AG</dd>
+              <dt>Betreff</dt><dd>Bestellung 24-1187: erneut verspätet</dd>
+              <dt>Eingang</dt><dd><span class="time">MO 09:15</span></dd>
+            </dl>
+            <p>Guten Tag</p>
+            <p>Zum zweiten Mal in Folge trifft unsere Lieferung nicht zum vereinbarten Termin ein. Ohne die Beschläge steht unsere Baustelle in Winterthur ab Mittwoch still.</p>
+            <p>Ich erwarte bis heute Mittag einen verbindlichen neuen Liefertermin und eine Erklärung, wie Sie solche Verzögerungen künftig verhindern. Andernfalls prüfen wir die vereinbarte Konventionalstrafe.</p>
+            <p>Freundliche Grüsse<br>Sandra Brunner</p>
+          </article>
+        </div>
+        <div>
+          <h3 class="h-m question" id="q-s1">Wie gehst du vor?</h3>
+          <p class="hint">Wähle eine Option. Danach kannst du auch die anderen erkunden. Für die Auswertung zählt deine erste Wahl.</p>
+          <ul class="options" id="opts-s1" aria-labelledby="q-s1"></ul>
+        </div>
+      </div>
+      <div class="feedback" id="fb-s1" aria-live="polite"></div>
+    </section>
+
+    <!-- ===== Station 3: Szenario 2 ===== -->
+    <section class="screen" id="screen-s2" aria-labelledby="h-s2" tabindex="-1">
+      <div class="scene-head">
+        <div>
+          <p class="kicker mono"><b>Szenario 2</b><span>Vertrauliche Daten</span></p>
+          <h2 class="h-l" id="h-s2">«Kannst du das kurz durch die KI lassen?»</h2>
+          <span class="goalchip"><i style="background:var(--bordeaux)" aria-hidden="true"></i>Lernziel 2 · Datenschutzrisiken erkennen</span>
+        </div>
+        <svg viewBox="0 0 88 88" aria-hidden="true"><rect x="14" y="6" width="50" height="66" fill="#FBF8F2" stroke="#121212" stroke-width="2.5"/><path d="M24 22H54M24 32H54M24 42H44" stroke="#121212" stroke-width="2.5"/><rect x="46" y="48" width="34" height="30" fill="#7B1E34"/><path d="M53 48v-7a10 10 0 0 1 20 0v7" fill="none" stroke="#7B1E34" stroke-width="4"/><circle cx="63" cy="62" r="3.5" fill="#FBF8F2"/></svg>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="chat">
+            <span class="chat__av" aria-hidden="true">M</span>
+            <div class="chat__b"><p>«Hoi! Kannst du mir das Dokument im Anhang kurz von der KI zusammenfassen lassen? Ich brauche es bis 11 Uhr für die Geschäftsleitung.»</p><small>Marco, Teamleiter Kundendienst · 10:02</small></div>
+          </div>
+          <article class="doc" aria-labelledby="doc-title">
+            <span class="stamp">Vertraulich</span>
+            <h3 id="doc-title">Personalplanung Kundendienst 2027</h3>
+            <p><button type="button" class="spot" data-spot="0" aria-expanded="false" aria-controls="spotinfo">Klassifizierung: vertraulich, nur für die Geschäftsleitung.</button></p>
+            <p>Ausgangslage: Das Team Kundendienst Zürich umfasst heute 14 Vollzeitstellen. <button type="button" class="spot" data-spot="1" aria-expanded="false" aria-controls="spotinfo">Ab dem 2. Quartal 2027 ist eine Reduktion auf 11 Stellen geplant; das Team ist noch nicht informiert.</button></p>
+            <p><button type="button" class="spot" data-spot="2" aria-expanded="false" aria-controls="spotinfo">Leistungsbeurteilungen 2026: A. Keller «erfüllt teilweise», R. Brändli «übertrifft».</button></p>
+            <p><button type="button" class="spot" data-spot="3" aria-expanded="false" aria-controls="spotinfo">Wiedereinstieg nach längerer Krankheit: D. Meier, ab März mit 60 % Pensum.</button></p>
+          </article>
+          <div class="spotinfo" id="spotinfo" aria-live="polite"><b>Was steckt im Dokument?</b>Tippe auf die markierten Stellen, bevor du entscheidest.</div>
+          <p class="spotcount" id="spotcount">0 von 4 Stellen angeschaut</p>
+        </div>
+        <div>
+          <h3 class="h-m question" id="q-s2">Wie gehst du vor?</h3>
+          <p class="hint">Für die Auswertung zählt deine erste Wahl. Die anderen Optionen kannst du danach erkunden.</p>
+          <ul class="options" id="opts-s2" aria-labelledby="q-s2"></ul>
+        </div>
+      </div>
+      <div class="feedback" id="fb-s2" aria-live="polite"></div>
+    </section>
+
+    <!-- ===== Station 4: Szenario 3 ===== -->
+    <section class="screen" id="screen-s3" aria-labelledby="h-s3" tabindex="-1">
+      <div class="scene-head">
+        <div>
+          <p class="kicker mono"><b>Szenario 3</b><span>Stimmt das wirklich?</span></p>
+          <h2 class="h-l" id="h-s3">Klingt überzeugend. Aber stimmt es?</h2>
+          <span class="goalchip"><i style="background:var(--orange)" aria-hidden="true"></i>Lernziel 3 · KI-Informationen kritisch prüfen</span>
+        </div>
+        <svg viewBox="0 0 88 88" aria-hidden="true"><circle cx="36" cy="36" r="24" fill="#FBF8F2" stroke="#121212" stroke-width="3"/><path d="M54 54 L80 80" stroke="#121212" stroke-width="7" stroke-linecap="square"/><path d="M26 30H46M26 40H40" stroke="#E2722B" stroke-width="4"/></svg>
+      </div>
+      <p class="lead">Für den internen Newsletter hast du eine KI um einen kurzen Überblick gebeten. Einige Aussagen stimmen, andere sind falsch oder unbelegt. <strong>Markiere alle Aussagen, die du so nicht weitergeben würdest.</strong></p>
+      <div class="ai">
+        <div class="ai__prompt"><b>Prompt</b><span>«Fasse für unseren Newsletter zusammen, was Mitarbeitende über KI und Datenschutz wissen müssen.»</span></div>
+        <div class="ai__body">
+          <p class="ai__label mono"><i aria-hidden="true"></i>Antwort der KI</p>
+          <p class="ai__text" id="claims"></p>
+        </div>
+      </div>
+      <div class="marktools">
+        <button class="btn" type="button" id="s3check">Auswerten</button>
+        <button class="btn btn--ghost" type="button" id="s3reset" hidden>Nochmals markieren</button>
+        <span class="markcount" id="markcount" aria-live="polite">0 Aussagen markiert</span>
+      </div>
+      <p class="msg" id="s3msg" role="alert"></p>
+      <div id="s3result" aria-live="polite"></div>
+    </section>
+
+    <!-- ===== Station 5: Wissenscheck ===== -->
+    <section class="screen" id="screen-quiz" aria-labelledby="h-quiz" tabindex="-1">
+      <p class="kicker mono"><b>Wissenscheck</b><span>3 Aufgaben · je ein Lernziel</span></p>
+      <h2 class="h-l" id="h-quiz">Jetzt du.</h2>
+      <p class="lead">Drei kurze Aufgaben, neue Situationen. Nach jeder Antwort erfährst du, warum.</p>
+
+      <div class="task" id="task-q1">
+        <div class="task__head"><span class="task__type">Aufgabe 1 · Single Choice · Lernziel 1</span></div>
+        <h3 id="q-q1">Für welche Aufgabe eignet sich generative KI am ehesten?</h3>
+        <ul class="options" id="opts-q1" aria-labelledby="q-q1"></ul>
+        <div class="feedback" id="fb-q1" aria-live="polite"></div>
+      </div>
+
+      <div class="task" id="task-q2">
+        <div class="task__head"><span class="task__type">Aufgabe 2 · Zuordnung · Lernziel 2</span></div>
+        <h3 id="q-q2">Welche Inhalte darfst du in ein öffentliches KI-Tool geben?</h3>
+        <p class="legend"><span><i style="background:var(--cobalt)" aria-hidden="true"></i>Unbedenklich: auch im öffentlichen KI-Tool</span><span><i style="background:var(--bordeaux)" aria-hidden="true"></i>Heikel: nur im freigegebenen Tool oder gar nicht</span></p>
+        <ul class="sort" id="sort" aria-labelledby="q-q2"></ul>
+        <div class="marktools">
+          <button class="btn" type="button" id="q2check">Zuordnung prüfen</button>
+          <button class="btn btn--ghost" type="button" id="q2reset" hidden>Neu zuordnen</button>
+        </div>
+        <p class="msg" id="q2msg" role="alert"></p>
+        <div id="q2result" aria-live="polite"></div>
+      </div>
+
+      <div class="task" id="task-q3">
+        <div class="task__head"><span class="task__type">Aufgabe 3 · Entscheidung · Lernziel 3</span></div>
+        <h3 id="q-q3">Für einen Kundenbericht liefert dir die KI eine Kennzahl samt Quellenangabe: «Bundesamt für Statistik, 2024». Was tust du?</h3>
+        <ul class="options" id="opts-q3" aria-labelledby="q-q3"></ul>
+        <div class="feedback" id="fb-q3" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ===== Station 6: Abschluss ===== -->
+    <section class="screen" id="screen-end" aria-labelledby="h-end" tabindex="-1">
+      <p class="kicker mono"><b>Abschluss</b><span>Deine Standortbestimmung</span></p>
+      <h2 class="h-l" id="h-end">Das nimmst du mit.</h2>
+      <p class="lead" id="endLead"></p>
+      <div class="summary">
+        <div>
+          <div class="ring" id="ring" role="img" aria-label="">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="50"/><circle class="fg" id="ringFg" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"/></svg>
+            <div class="ring__v" aria-hidden="true"><div><strong id="ringNum">0</strong><span>von 6 Aufgaben<br>gelöst</span></div></div>
+          </div>
+          <p class="progressline" id="progressline"></p>
+        </div>
+        <div>
+          <h3 class="h-m" style="margin-bottom:14px">Nach Lernziel</h3>
+          <ul class="lz" id="lzlist"></ul>
+        </div>
+      </div>
+      <h3 class="h-m" style="margin-top:46px">Drei Takeaways für morgen</h3>
+      <ol class="takeaways">
+        <li><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1D3FAE"/></svg><h4>KI entwirft, du entscheidest.</h4><p>Formulieren, strukturieren, Ideen sammeln: ja. Verbindliche Zusagen und Fakten gibst du erst nach deiner eigenen Prüfung weiter.</p></li>
+        <li><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" fill="#7B1E34"/></svg><h4>Erst einstufen, dann einfügen.</h4><p>Vertrauliches, Personen- und Gesundheitsdaten gehören nur in ein freigegebenes Tool oder gar nicht in eine KI. Im Zweifel fragst du nach.</p></li>
+        <li><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 2 L32 32 H2 Z" fill="#E2722B"/></svg><h4>Überzeugend ist nicht gleich richtig.</h4><p>Quellen öffnen, Zahlen gegenprüfen, bei «immer» und «alle» hellhörig werden. Eine Rückfrage an die KI ersetzt keine Prüfung.</p></li>
+      </ol>
+      <div class="endactions">
+        <button class="btn" type="button" id="restart">Von vorne beginnen <span class="arr" aria-hidden="true">↺</span></button>
+        <button class="btn btn--ghost" type="button" data-go="start">Zur Übersicht</button>
+      </div>
+      <p class="disclaimer">Diese Auswertung ist eine persönliche Standortbestimmung und kein Zertifikat oder Qualifikationsnachweis.</p>
+    </section>
+
+  </div>
+</main>
+
+<div class="navbar">
+  <div class="wrap">
+    <button class="btn btn--ghost btn--small" type="button" id="prev"><span aria-hidden="true">←</span> Zurück</button>
+    <span class="navbar__pos" id="pos" aria-live="polite"></span>
+    <button class="btn btn--small" type="button" id="next">Weiter <span class="arr" aria-hidden="true">→</span></button>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Konzept, Instructional Design &amp; Entwicklung: Steven Schmid</p>
+    <p>Eigenständiger Bewerbungsprototyp · 2026 · Alle Personen, Firmen und Dokumente sind frei erfunden.</p>
+  </div>
+</footer>
+
+<!-- ===== Behind the Learning ===== -->
+<div class="overlay" id="behind" aria-hidden="true">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="h-behind" tabindex="-1">
+    <button class="panel__close" type="button" id="behindClose" aria-label="Behind the Learning schliessen">×</button>
+    <p class="kicker mono"><b>Behind the Learning</b><span>Für das Recruiting-Team</span></p>
+    <h2 class="h-l" id="h-behind">Warum dieser Prototyp so gebaut ist.</h2>
+    <p class="lead">Jede Interaktion folgt einem Lernziel. Hier ist die Begründung, kurz und nachvollziehbar.</p>
+
+    <section>
+      <h3><span>01</span>Zielgruppenanalyse</h3>
+      <div class="cols">
+        <div><h4>Wer</h4><p>Mitarbeitende in Schweizer Unternehmen, vom Kundendienst bis zur Administration. Sie nutzen KI gelegentlich oder gar nicht und haben kein technisches Vorwissen.</p></div>
+        <div><h4>Situation</h4><p>Wenig Zeit, Lernen zwischen zwei Terminen, oft auf dem Handy. Die Haltung reicht von Neugier bis Skepsis, manchmal mit der Sorge, etwas falsch zu machen.</p></div>
+        <div><h4>Bedarf</h4><p>Handlungssicherheit statt Technikwissen: Was darf ich, was bringt mir KI, woran erkenne ich Fehler? Deshalb gibt es keine Theorie über Modelle, sondern Entscheidungen im Arbeitskontext.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h3><span>02</span>Lernziele</h3>
+      <ul>
+        <li><b>LZ 1 · Anwenden:</b> Die Lernenden erkennen geeignete und ungeeignete Einsatzmöglichkeiten generativer KI in Arbeitssituationen.</li>
+        <li><b>LZ 2 · Analysieren:</b> Die Lernenden identifizieren Datenschutzrisiken (Personendaten, besonders schützenswerte Daten, Geschäftsgeheimnisse), bevor sie Inhalte in ein KI-Tool geben.</li>
+        <li><b>LZ 3 · Beurteilen:</b> Die Lernenden prüfen KI-generierte Aussagen kritisch und erkennen typische Warnsignale (erfundene Belege, absolute Formulierungen, falsche Rechtsaussagen).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3><span>03</span>Didaktisches Konzept</h3>
+      <div class="cols">
+        <div><h4>Constructive Alignment</h4><p>Lernziel, Lernaktivität und Überprüfung sind aufeinander abgestimmt: Jedes Ziel hat genau ein Szenario und eine Aufgabe im Wissenscheck (siehe Tabelle unten).</p></div>
+        <div><h4>Szenariobasiertes Lernen</h4><p>Realistische Situationen mit Zeitdruck und Zielkonflikten. Gelernt wird durch Entscheiden und die Konsequenz, nicht durch Lesen.</p></div>
+        <div><h4>Formatives Feedback</h4><p>Jede Rückmeldung zeigt «Was passiert» und «Warum» und gibt eine Empfehlung. Auch Teillösungen («vertretbar») werden differenziert bewertet statt nur richtig oder falsch.</p></div>
+        <div><h4>Cognitive Load</h4><p>Eine Aufgabe pro Screen, kurze Texte, keine Theorieblöcke. Wissen kommt dann, wenn es gebraucht wird, im Feedback und in den Faustregeln.</p></div>
+        <div><h4>Learning by Doing</h4><p>Die Lernenden markieren, ordnen zu, decken auf und entscheiden. Erst die eigene Entscheidung, dann die Erklärung.</p></div>
+        <div><h4>Microlearning</h4><p>Etwa 6 Minuten, frei navigierbar, mit gespeichertem Fortschritt. Jedes Szenario funktioniert auch einzeln, etwa als Auffrischung.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h3><span>04</span>Learning Journey</h3>
+      <ol class="journey">
+        <li><b>Willkommen</b>Ziele und Dauer: Orientierung schafft Motivation.</li>
+        <li><b>Kundenanfrage</b>Nutzen und Grenzen unter Zeitdruck.</li>
+        <li><b>Vertrauliche Daten</b>Erst erkunden, dann entscheiden.</li>
+        <li><b>Stimmt das?</b>Fehler selbst im Text finden.</li>
+        <li><b>Wissenscheck</b>Transfer auf neue Situationen.</li>
+        <li><b>Abschluss</b>Stand je Lernziel, Takeaways, Wiederholen.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3><span>05</span>Begründung der Interaktionen</h3>
+      <ul>
+        <li><b>Entscheidung mit drei Optionen (Szenario 1 und 2):</b> eine riskante, eine vertretbare und eine empfohlene Option. So sind die Distraktoren plausibel und nicht offensichtlich falsch. Nach der ersten Wahl können die anderen Optionen erkundet werden, denn gerade der Vergleich der Konsequenzen schafft Verständnis.</li>
+        <li><b>Hotspots im Dokument (Szenario 2):</b> Datenschutz wird erst greifbar, wenn man sieht, <em>was</em> genau heikel ist. Die Hotspots sind freiwillig, damit niemand gezwungen wird, bereits Bekanntes anzuklicken.</li>
+        <li><b>Textmarkierung (Szenario 3):</b> Die Lernenden prüfen Aussagen im Text so, wie sie es im Alltag mit einer echten KI-Antwort tun müssten. Die Auswertung unterscheidet zwischen gefunden, übersehen und Fehlalarm, denn auch falsches Misstrauen gegenüber korrekten Aussagen ist eine Lernchance.</li>
+        <li><b>Zuordnung statt Drag &amp; Drop (Wissenscheck):</b> Umschaltknöpfe funktionieren mit Maus, Touch und Tastatur gleich gut und sind für Screenreader verständlich.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3><span>06</span>Lernziele und Wissenscheck</h3>
+      <div class="tblwrap">
+        <table class="tbl">
+          <thead><tr><th>Lernziel</th><th>Lernaktivität</th><th>Überprüfung</th><th>Transfer</th></tr></thead>
+          <tbody>
+            <tr><td>LZ 1 · Einsatz erkennen</td><td>Szenario 1: Kundenanfrage</td><td>Aufgabe 1: Single Choice</td><td>Neue Aufgaben (Einladung, Rückerstattung, Lohnliste)</td></tr>
+            <tr><td>LZ 2 · Datenschutz</td><td>Szenario 2: Hotspots und Entscheidung</td><td>Aufgabe 2: Zuordnung</td><td>Arztzeugnis, Kundenliste, öffentliche Texte</td></tr>
+            <tr><td>LZ 3 · Kritisch prüfen</td><td>Szenario 3: Aussagen markieren</td><td>Aufgabe 3: Entscheidung</td><td>Statistik mit scheinbar seriöser Quelle</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px">Die Auswertung am Schluss zeigt den Stand <em>je Lernziel</em> (Szenario plus Aufgabe) und bietet gezielt die Wiederholung des passenden Szenarios an.</p>
+    </section>
+
+    <section>
+      <h3><span>07</span>Technischer Aufbau</h3>
+      <ul>
+        <li>Eine einzige Datei <code>index.html</code>: HTML5, CSS und Vanilla JavaScript, ohne Frameworks, Bibliotheken, Build-Schritt und externe Ressourcen. Läuft offline per Doppelklick.</li>
+        <li>Inhalte (Optionen, Feedback, Aussagen) stehen als Datenobjekte im Skript, die Darstellung wird daraus erzeugt. Texte lassen sich so ändern, ohne das Markup anzufassen.</li>
+        <li>Ein zentrales Zustandsobjekt speichert Entscheidungen und Ergebnisse, sofern verfügbar in <code>localStorage</code>. Ohne Speicher funktioniert alles weiter.</li>
+        <li>Barrierefreiheit: native Buttons, Tastaturbedienung, sichtbarer Fokus, <code>aria-pressed</code>, <code>aria-live</code> für Feedback, ein fokussierbarer Dialog. Farbe ist nie der einzige Informationsträger, und <code>prefers-reduced-motion</code> wird respektiert.</li>
+        <li>Responsiv ab 360 px. Direkte Sprungadressen über den Hash (z. B. <code>#faktencheck</code>).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3><span>08</span>Weiterentwicklung mit Articulate</h3>
+      <div class="cols">
+        <div><h4>Articulate Rise</h4><p>Schnelle, responsive Umsetzung: Szenarien als Scenario-Blöcke, Dokument-Hotspots als Labeled Graphic, die Zuordnung als Sorting Activity und die Fragen als Knowledge Checks. Gut geeignet für den breiten Rollout.</p></div>
+        <div><h4>Articulate Storyline</h4><p>Wenn mehr Steuerung nötig ist: Variablen für die Auswertung je Lernziel, Trigger und Zustände für Markierung und Feedback, verzweigte Szenarien mit Konsequenzen über mehrere Schritte.</p></div>
+        <div><h4>Ins LMS</h4><p>Export als SCORM, xAPI oder cmi5 ins LMS. Ergänzend: Varianten für einzelne Abteilungen, Französisch und Italienisch, ein Kurzvideo als Einstieg und ein Folge-Nudge nach zwei Wochen.</p></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   KI im Arbeitsalltag – Logik
+   Aufbau: 1. Inhalte  2. Zustand & Speicher  3. Navigation
+   4. Entscheidungen  5. Szenario 2 Hotspots  6. Szenario 3
+   7. Zuordnung  8. Auswertung  9. Behind the Learning  10. Start
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------- 1. Inhalte ---------- */
+  var STATIONS = [
+    { id: 'start', hash: 'start', label: 'Willkommen' },
+    { id: 's1', hash: 'kundenanfrage', label: 'Kundenanfrage' },
+    { id: 's2', hash: 'daten', label: 'Vertrauliche Daten' },
+    { id: 's3', hash: 'faktencheck', label: 'Stimmt das?' },
+    { id: 'quiz', hash: 'wissenscheck', label: 'Wissenscheck' },
+    { id: 'end', hash: 'abschluss', label: 'Abschluss' }
+  ];
+
+  // Verdikt-Bezeichnungen: Szenarien bewerten Handlungen, der Wissenscheck Antworten
+  var LABELS = {
+    scene: { good: 'Empfohlen', mid: 'Vertretbar', bad: 'Riskant' },
+    quiz: { good: 'Richtig', mid: 'Nicht ganz', bad: 'Falsch' }
+  };
+
+  var DECISIONS = {
+    s1: {
+      kind: 'scene',
+      recommend: 'Lass die KI beim Formulieren helfen, aber hol die Fakten aus deinen Systemen. Namen und Bestellnummern gehören nicht in ein nicht freigegebenes Tool.',
+      options: [
+        { v: 'bad', text: 'Ich kopiere die ganze Mail in den KI-Chat, lasse eine Antwort mit neuem Liefertermin schreiben und schicke sie direkt ab.',
+          title: 'Schnell, aber mit erfundener Zusage.',
+          what: 'Die KI kennt euren Lieferstatus nicht. Sie formuliert einen plausibel klingenden Termin, der frei erfunden ist. Hält er nicht, eskaliert die Reklamation, und die Zusage gilt als verbindlich, weil sie von dir kommt. Zudem gelangen Name, Firma und Bestellnummer in ein Tool, das nicht freigegeben ist.',
+          why: 'Sprachmodelle erzeugen wahrscheinliche Texte, keine geprüften Fakten. Verbindliche Zusagen, Termine und rechtlich heikle Aussagen (Konventionalstrafe) brauchen echte Daten und deine Verantwortung.' },
+        { v: 'good', text: 'Ich prüfe den Lieferstatus im ERP und lasse mir von der KI einen Entwurf für Aufbau und Tonfall schreiben, ohne Namen und Bestellnummer. Die Fakten setze ich selbst ein.',
+          title: 'Die KI formuliert, du lieferst die Fakten.',
+          what: 'In wenigen Minuten steht eine klare, deeskalierende Antwort. Termin und Massnahmen stammen aus deinen Systemen, die Formulierungshilfe von der KI. Du gewinnst Zeit für das Wesentliche: den Liefertermin intern zu klären.',
+          why: 'Genau hier ist generative KI stark: strukturieren, den richtigen Ton treffen, Entwürfe beschleunigen. Die Verantwortung für Inhalt und Zusagen bleibt bei dir, und ohne Kundendaten bleibt auch der Datenschutz gewahrt.' },
+        { v: 'mid', text: 'Ich verzichte auf KI. Bei einer Reklamation schreibe ich lieber alles selbst.',
+          title: 'Korrekt, aber verschenktes Potenzial.',
+          what: 'Die Antwort wird korrekt, du brauchst aber deutlich länger, und das unter Zeitdruck bis Mittag. Die Zeit fehlt dir dann für die Abklärung mit Logistik und Lieferant.',
+          why: 'Das ist kein Fehler. Ein anonymisierter Entwurf hätte dir aber geholfen, ohne Risiko: Für Struktur und Tonalität ist KI ein gutes Werkzeug, solange du die Fakten selbst einsetzt.' }
+      ],
+      rule: true
+    },
+    s2: {
+      kind: 'scene',
+      recommend: 'Die Klassifizierung entscheidet über das Werkzeug, nicht der Zeitdruck. Ohne freigegebenes Tool fasst du selbst zusammen oder fragst IT bzw. Datenschutz.',
+      options: [
+        { v: 'bad', text: 'Ich kopiere das Dokument in einen kostenlosen KI-Chat. Es geht ja nur um eine Zusammenfassung.',
+          title: 'Die Daten verlassen das Unternehmen.',
+          what: 'Vertrauliche Pläne, Leistungsbeurteilungen und Gesundheitsangaben landen bei einem externen Anbieter. Je nach Anbieter werden Eingaben gespeichert, von Menschen gesichtet oder für das Training genutzt. Rückgängig machen lässt sich das nicht.',
+          why: 'Bei Gratis-Tools fehlt meist ein Vertrag, der regelt, was mit den Daten geschieht. Das Datenschutzgesetz (DSG) verlangt, dass Personendaten angemessen geschützt werden. Bei Gesundheitsdaten, die als besonders schützenswert gelten, ist das so nicht vertretbar.' },
+        { v: 'mid', text: 'Ich ersetze die Namen durch Kürzel und nutze dann den kostenlosen KI-Chat.',
+          title: 'Besser, aber trügerisch.',
+          what: 'Mit Team, Standort und Pensum lassen sich die Personen leicht wiedererkennen. Und die geplante Stellenreduktion bleibt ein Geschäftsgeheimnis, das nun extern liegt, bevor das Team informiert ist.',
+          why: 'Anonymisieren heisst mehr als Namen entfernen. Solange Rückschlüsse auf Personen möglich sind, bleiben es Personendaten. Vertrauliche Geschäftsinformationen sind zudem auch ohne jeden Namen schützenswert.' },
+        { v: 'good', text: 'Ich kläre, ob es ein vom Unternehmen freigegebenes KI-Tool für vertrauliche Daten gibt. Wenn nicht, fasse ich das Dokument selbst zusammen.',
+          title: 'Das Dokument bleibt, wo es hingehört.',
+          what: 'Marco bekommt seine Zusammenfassung, vielleicht zehn Minuten später. Freigegebene Tools sind vertraglich abgesichert, zum Beispiel ohne Training mit euren Daten und mit geregeltem Speicherort.',
+          why: 'Erst einstufen, dann einfügen: Vertraulich klassifizierte Dokumente und besonders schützenswerte Daten gehören nur in Werkzeuge, die dafür freigegeben sind. Im Zweifel fragst du IT oder die Datenschutzverantwortlichen.' }
+      ]
+    },
+    q1: {
+      kind: 'quiz',
+      options: [
+        { v: 'bad', text: 'Verbindlich entscheiden, ob ein Kunde Anspruch auf eine Rückerstattung hat.',
+          title: 'Ein Entscheid braucht Fakten und Verantwortung.',
+          what: 'Ob ein Anspruch besteht, hängt von Vertrag, Kulanzregeln und Einzelfall ab. Das kann die KI nicht verlässlich beurteilen.',
+          why: 'Die KI kann dir helfen, die Antwort zu formulieren. Entscheiden musst du selbst.' },
+        { v: 'good', text: 'Einen ersten Entwurf für die Einladung zum Teamanlass formulieren.',
+          title: 'Genau dafür ist generative KI gemacht.',
+          what: 'Ein Entwurf ohne heikle Daten, den du anschliessend anpasst: schnell, risikoarm und mit echtem Nutzen.',
+          why: 'Formulieren, Ideen sammeln und strukturieren sind die Stärken generativer KI. Du prüfst und ergänzt das Ergebnis.' },
+        { v: 'bad', text: 'Die Lohnliste des Teams hochladen und auf Auffälligkeiten prüfen lassen.',
+          title: 'Lohndaten gehören nicht in ein KI-Tool.',
+          what: 'Löhne mit Namen sind Personendaten. In einem nicht freigegebenen Tool ist das ein Datenschutzverstoss, und «Auffälligkeiten» zu beurteilen braucht Kontext, den die KI nicht hat.',
+          why: 'Erst einstufen, dann einfügen: Hier ist HR mit den dafür vorgesehenen Systemen zuständig.' },
+        { v: 'bad', text: 'Einer Mitarbeiterin verbindlich erklären, was in ihrem Arbeitsvertrag gilt.',
+          title: 'Rechtsauskünfte nicht delegieren.',
+          what: 'KI-Antworten zu Rechtsfragen können veraltet, unvollständig oder falsch sein, auch wenn sie sicher klingen.',
+          why: 'Verbindliche Auskünfte gibt HR oder die Rechtsabteilung auf Basis des konkreten Vertrags.' }
+      ]
+    },
+    q3: {
+      kind: 'quiz',
+      options: [
+        { v: 'bad', text: 'Ich übernehme die Zahl. Die Quelle ist ja angegeben.',
+          title: 'Eine Quellenangabe ist noch kein Beleg.',
+          what: 'KI-Systeme erzeugen mitunter Quellen, die es so nicht gibt, oder ordnen Zahlen falschen Quellen zu.',
+          why: 'Eine Quelle ist erst dann ein Beleg, wenn du sie selbst geöffnet hast.' },
+        { v: 'mid', text: 'Ich frage die KI, ob die Zahl wirklich stimmt.',
+          title: 'Eine Rückfrage ist keine Prüfung.',
+          what: 'Die KI kann ihren eigenen Fehler mit grosser Überzeugung bestätigen oder eine neue, ebenso falsche Zahl liefern.',
+          why: 'Rückfragen können helfen, Unsicherheiten aufzudecken. Den Abgleich mit der Originalquelle ersetzen sie nicht.' },
+        { v: 'good', text: 'Ich suche die Zahl in der Originalpublikation des Bundesamts und übernehme sie erst, wenn sie dort steht.',
+          title: 'So gehört es sich für einen Kundenbericht.',
+          what: 'Du findest die Publikation, prüfst Zahl, Jahr und Definition und zitierst korrekt. Stimmt etwas nicht, korrigierst du es, bevor es der Kunde sieht.',
+          why: 'Zahlen in Kundendokumenten verantwortest du. Die Originalquelle ist der einzige verlässliche Prüfstein.' }
+      ]
+    }
+  };
+
+  // Szenario 3: Aussagen der KI-Antwort (bad = falsch oder unbelegt)
+  var CLAIMS = [
+    { ok: true, text: 'Das revidierte Datenschutzgesetz (DSG) ist in der Schweiz seit dem 1. September 2023 in Kraft.',
+      why: 'Stimmt. Das revidierte DSG gilt seit dem 1. September 2023.' },
+    { ok: false, text: 'Laut einer Studie der ETH Zürich von 2025 setzen bereits 92 % aller Schweizer Unternehmen generative KI produktiv ein.',
+      why: 'Unbelegt. Eine präzise Zahl, eine prominente Quelle, aber kein Titel und kein Link. KI-Systeme erzeugen solche Belege mitunter frei. Ohne Originalquelle gibst du die Zahl nicht weiter.' },
+    { ok: true, text: 'Sprachmodelle berechnen wahrscheinliche Wortfolgen. Deshalb können sie überzeugend formulierte, aber falsche Aussagen erzeugen.',
+      why: 'Stimmt. Genau deshalb braucht es die Prüfung durch dich.' },
+    { ok: false, text: 'Weil eine KI keine Person ist, gilt das DSG nicht für Daten, die du in ein KI-Tool eingibst.',
+      why: 'Falsch. Das DSG gilt für jede Bearbeitung von Personendaten, unabhängig von der Technologie. Der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB) hat das für KI ausdrücklich festgehalten.' },
+    { ok: true, text: 'Gesundheitsdaten gehören nach dem DSG zu den besonders schützenswerten Personendaten.',
+      why: 'Stimmt. Für sie gelten erhöhte Anforderungen.' },
+    { ok: false, text: 'KI-Chatbots sind immer auf dem neuesten Stand, weil sie bei jeder Anfrage das Internet durchsuchen.',
+      why: 'Falsch. Viele Modelle kennen nur Wissen bis zu einem Stichtag. Manche können zusätzlich im Web suchen, aber nicht immer und nicht fehlerfrei. Absolute Wörter wie «immer» sind ein Warnsignal.' }
+  ];
+
+  // Szenario 2: Hotspots im Dokument
+  var SPOTS = [
+    { t: 'Klassifizierung «vertraulich»', d: 'Das Dokument ist eingestuft. Interne Regeln legen fest, wo es bearbeitet werden darf, und das gilt auch für KI-Tools.' },
+    { t: 'Geschäftsgeheimnis', d: 'Eine nicht kommunizierte Reorganisation. Gelangt sie nach aussen, entsteht Schaden, auch ganz ohne Personendaten.' },
+    { t: 'Personendaten', d: 'Namen mit Leistungsbeurteilungen. Das DSG verlangt, dass sie nur zweckgemäss und angemessen geschützt bearbeitet werden.' },
+    { t: 'Besonders schützenswerte Personendaten', d: 'Angaben zur Gesundheit gelten nach DSG als besonders schützenswert. Hier sind die Anforderungen am höchsten.' }
+  ];
+
+  // Wissenscheck Aufgabe 2: Zuordnung
+  var SORT = [
+    { cat: 'ok', text: 'Eine bereits veröffentlichte Medienmitteilung kürzer formulieren',
+      why: 'Öffentliche Inhalte ohne Personendaten sind unbedenklich.' },
+    { cat: 'no', text: 'Ein Arztzeugnis einer Mitarbeiterin zusammenfassen',
+      why: 'Gesundheitsdaten sind besonders schützenswert und gehören nicht in ein öffentliches Tool.' },
+    { cat: 'no', text: 'Eine Kundenliste mit Namen und E-Mail-Adressen bereinigen',
+      why: 'Kundendaten sind Personendaten und dürfen nur in ein freigegebenes Tool.' },
+    { cat: 'ok', text: 'Ideen für den Ablauf eines Team-Workshops sammeln',
+      why: 'Allgemeine Fragen ohne interne Details sind ein guter Einsatz.' }
+  ];
+  var CAT_LABEL = { ok: 'Unbedenklich', no: 'Heikel' };
+
+  /* ---------- 2. Zustand & Speicher ---------- */
+  var KEY = 'ki-arbeitsalltag-v1';
+  function fresh() {
+    return {
+      current: 'start', visited: {},
+      s1: { first: null, seen: [] }, s2: { first: null, seen: [], spots: [] },
+      s3: { marks: [], firstScore: null, checked: false },
+      q1: { first: null, seen: [] }, q2: { answers: {}, firstOk: null, checked: false }, q3: { first: null, seen: [] }
+    };
+  }
+  var state = fresh();
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (raw) {
+        var saved = JSON.parse(raw), base = fresh();
+        Object.keys(base).forEach(function (k) { if (saved[k] !== undefined) state[k] = saved[k]; });
+      }
+    } catch (e) { /* ohne Speicher geht es auch */ }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignorieren */ }
+  }
+
+  /* ---------- Hilfen ---------- */
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function idx(id) { for (var i = 0; i < STATIONS.length; i++) if (STATIONS[i].id === id) return i; return 0; }
+  function reduced() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+  /* ---------- 3. Navigation ---------- */
+  function isDone(id) {
+    if (id === 'start') return !!state.visited.s1;
+    if (id === 's1' || id === 's2') return state[id].first !== null;
+    if (id === 's3') return state.s3.firstScore !== null;
+    if (id === 'quiz') return state.q1.first !== null && state.q2.firstOk !== null && state.q3.first !== null;
+    if (id === 'end') return !!state.visited.end;
+    return false;
+  }
+
+  function renderSteps() {
+    var ol = $('steps');
+    ol.textContent = '';
+    STATIONS.forEach(function (s, i) {
+      var li = el('li'), b = el('button');
+      b.type = 'button';
+      b.appendChild(el('span', 'n', '0' + (i + 1)));
+      b.appendChild(el('span', 'l', s.label));
+      b.setAttribute('aria-label', 'Station ' + (i + 1) + ': ' + s.label + (isDone(s.id) ? ', erledigt' : ''));
+      if (s.id === state.current) b.setAttribute('aria-current', 'step');
+      if (isDone(s.id)) b.classList.add('is-done');
+      b.addEventListener('click', function () { go(s.id); });
+      li.appendChild(b);
+      ol.appendChild(li);
+    });
+  }
+
+  function go(id, opts) {
+    opts = opts || {};
+    var from = idx(state.current), to = idx(id);
+    state.current = id;
+    state.visited[id] = true;
+    save();
+    document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('is-active', 'from-back'); });
+    var scr = $('screen-' + id);
+    if (to < from) scr.classList.add('from-back');
+    scr.classList.add('is-active');
+    if (id === 'end') renderSummary();
+    if (id === 'start') renderResume();
+    renderSteps();
+    updateNav();
+    try { history.replaceState(null, '', '#' + STATIONS[to].hash); } catch (e) { /* file:// in manchen Browsern */ }
+    if (!opts.initial) {
+      window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' });
+      scr.focus({ preventScroll: true });
+    }
+  }
+
+  function updateNav() {
+    var i = idx(state.current);
+    $('prev').hidden = i === 0;
+    $('next').hidden = i === STATIONS.length - 1;
+    var nextLabel = i === 0 ? 'Starten' : (i === STATIONS.length - 2 ? 'Zur Auswertung' : 'Weiter');
+    $('next').firstChild.nodeValue = nextLabel + ' ';
+    var pos = $('pos');
+    pos.textContent = '0' + (i + 1) + ' / 0' + STATIONS.length;
+    pos.appendChild(el('span', 'lbl', ' · ' + STATIONS[i].label));
+  }
+
+  $('prev').addEventListener('click', function () { var i = idx(state.current); if (i > 0) go(STATIONS[i - 1].id); });
+  $('next').addEventListener('click', function () { var i = idx(state.current); if (i < STATIONS.length - 1) go(STATIONS[i + 1].id); });
+  document.querySelectorAll('[data-go]').forEach(function (b) {
+    b.addEventListener('click', function () { go(b.getAttribute('data-go')); });
+  });
+  window.addEventListener('hashchange', function () {
+    var h = location.hash.replace('#', '');
+    if (h === 'behind') { openBehind(); return; }
+    STATIONS.forEach(function (s) { if (s.hash === h && s.id !== state.current) go(s.id); });
+  });
+
+  function renderResume() {
+    var p = $('resume'), last = null;
+    ['s1', 's2', 's3', 'quiz', 'end'].forEach(function (id) { if (state.visited[id]) last = id; });
+    p.textContent = '';
+    if (!last) { p.hidden = true; return; }
+    p.hidden = false;
+    p.appendChild(document.createTextNode('Du warst schon hier. '));
+    var b = el('button', 'linkbtn', 'Weiter bei «' + STATIONS[idx(last)].label + '»');
+    b.type = 'button';
+    b.addEventListener('click', function () { go(last); });
+    p.appendChild(b);
+  }
+
+  /* ---------- 4. Entscheidungen (Szenario 1, 2, Aufgaben 1, 3) ---------- */
+  function renderDecision(key) {
+    var data = DECISIONS[key], st = state[key], list = $('opts-' + key), labels = LABELS[data.kind];
+    list.textContent = '';
+    data.options.forEach(function (o, i) {
+      var li = el('li'), b = el('button', 'opt');
+      b.type = 'button';
+      b.appendChild(el('span', 'opt__k', String.fromCharCode(65 + i)));
+      b.appendChild(el('span', 'opt__t', o.text));
+      var v = el('span', 'opt__v');
+      if (st.first !== null) {
+        b.setAttribute('data-v', o.v);
+        v.textContent = st.seen.indexOf(i) > -1 ? labels[o.v] : 'Erkunden';
+        if (i === st.first) { b.classList.add('is-chosen'); v.textContent = labels[o.v] + ' · Deine Wahl'; }
+      }
+      if (i === st.view) b.classList.add('is-viewed');
+      b.appendChild(v);
+      b.setAttribute('aria-pressed', i === st.view ? 'true' : 'false');
+      b.addEventListener('click', function () { choose(key, i); });
+      li.appendChild(b);
+      list.appendChild(li);
+    });
+    renderFeedback(key);
+  }
+
+  function choose(key, i) {
+    var st = state[key];
+    if (st.first === null) st.first = i;
+    if (st.seen.indexOf(i) < 0) st.seen.push(i);
+    st.view = i;
+    save();
+    renderDecision(key);
+    renderSteps();
+    var fb = $('fb-' + key);
+    if (fb.firstChild && fb.getBoundingClientRect().top > window.innerHeight * 0.75) {
+      fb.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'nearest' });
+    }
+  }
+
+  function renderFeedback(key) {
+    var data = DECISIONS[key], st = state[key], box = $('fb-' + key), labels = LABELS[data.kind];
+    box.textContent = '';
+    if (st.first === null) return;
+    var i = st.view != null ? st.view : st.first, o = data.options[i];
+    var fb = el('div', 'fb');
+    fb.setAttribute('data-v', o.v);
+    var head = el('div', 'fb__head');
+    var badge = el('span', 'badge', labels[o.v]);
+    badge.setAttribute('data-v', o.v);
+    head.appendChild(badge);
+    head.appendChild(el('span', 'mono', 'Option ' + String.fromCharCode(65 + i) + (i === st.first ? ' · deine Wahl' : ' · erkundet')));
+    fb.appendChild(head);
+    fb.appendChild(el('h4', null, o.title));
+    var cols = el('div', 'fb__cols');
+    [['Was passiert', o.what], ['Warum', o.why]].forEach(function (c) {
+      var d = el('div');
+      d.appendChild(el('h5', null, c[0]));
+      d.appendChild(el('p', null, c[1]));
+      cols.appendChild(d);
+    });
+    fb.appendChild(cols);
+    if (data.recommend && o.v !== 'good') {
+      var rec = el('p', 'fb__rec');
+      rec.appendChild(el('strong', null, 'Empfehlung: '));
+      rec.appendChild(document.createTextNode(data.recommend));
+      fb.appendChild(rec);
+    }
+    if (data.kind === 'quiz' && o.v !== 'good') {
+      var right = 0;
+      data.options.forEach(function (x, j) { if (x.v === 'good') right = j; });
+      var r = el('p', 'fb__rec');
+      r.appendChild(el('strong', null, 'Richtig wäre ' + String.fromCharCode(65 + right) + ': '));
+      r.appendChild(document.createTextNode(data.options[right].text));
+      fb.appendChild(r);
+    }
+    var open = data.options.length - st.seen.length;
+    fb.appendChild(el('p', 'fb__more', open > 0
+      ? 'Noch ' + open + (open === 1 ? ' Option' : ' Optionen') + ' zum Erkunden. Tippe sie an, um die Konsequenzen zu vergleichen.'
+      : 'Alle Optionen erkundet.'));
+    if (data.rule) fb.appendChild(ruleBox());
+    box.appendChild(fb);
+  }
+
+  function ruleBox() {
+    var wrap = el('div', 'rule');
+    [['yes', 'Gut geeignet', ['Entwürfe und Umformulierungen', 'Struktur und Tonalität', 'Ideen sammeln, Texte kürzen']],
+     ['no', 'Nicht delegieren', ['Verbindliche Zusagen und Termine', 'Fakten ohne eigene Prüfung', 'Entscheide über Menschen und Recht']]
+    ].forEach(function (r) {
+      var d = el('div', r[0]);
+      d.appendChild(el('h5', null, r[1]));
+      var ul = el('ul');
+      r[2].forEach(function (t) { ul.appendChild(el('li', null, t)); });
+      d.appendChild(ul);
+      wrap.appendChild(d);
+    });
+    return wrap;
+  }
+
+  /* ---------- 5. Szenario 2: Hotspots ---------- */
+  function renderSpots() {
+    document.querySelectorAll('.spot').forEach(function (b) {
+      var i = +b.getAttribute('data-spot');
+      b.setAttribute('aria-expanded', state.s2.openSpot === i ? 'true' : 'false');
+    });
+    var n = state.s2.spots.length;
+    $('spotcount').textContent = n + ' von 4 Stellen angeschaut' + (n === 4 ? ': Jetzt kennst du alle Risiken.' : '');
+  }
+  document.querySelectorAll('.spot').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var i = +b.getAttribute('data-spot'), info = $('spotinfo');
+      if (state.s2.spots.indexOf(i) < 0) state.s2.spots.push(i);
+      state.s2.openSpot = i;
+      info.textContent = '';
+      info.appendChild(el('b', null, SPOTS[i].t));
+      info.appendChild(document.createTextNode(SPOTS[i].d));
+      save();
+      renderSpots();
+    });
+  });
+
+  /* ---------- 6. Szenario 3: Aussagen markieren ---------- */
+  function renderClaims() {
+    var box = $('claims'), st = state.s3;
+    box.textContent = '';
+    CLAIMS.forEach(function (c, i) {
+      var b = el('button', 'claim', c.text);
+      b.type = 'button';
+      var marked = st.marks.indexOf(i) > -1;
+      b.setAttribute('aria-pressed', marked ? 'true' : 'false');
+      if (st.checked) {
+        b.disabled = true;
+        b.removeAttribute('aria-pressed');
+        b.classList.add(!c.ok && marked ? 'r-hit' : !c.ok ? 'r-miss' : marked ? 'r-false' : 'r-ok');
+        b.appendChild(el('sup', null, String(i + 1)));
+      } else {
+        b.addEventListener('click', function () {
+          var k = st.marks.indexOf(i);
+          if (k > -1) st.marks.splice(k, 1); else st.marks.push(i);
+          $('s3msg').textContent = '';
+          save();
+          renderClaims();
+          var again = box.querySelectorAll('.claim')[i];
+          if (again) again.focus();
+        });
+      }
+      box.appendChild(b);
+      box.appendChild(document.createTextNode(' '));
+    });
+    var n = st.marks.length;
+    $('markcount').textContent = n === 1 ? '1 Aussage markiert' : n + ' Aussagen markiert';
+    $('s3check').hidden = st.checked;
+    $('s3reset').hidden = !st.checked;
+    renderS3Result();
+  }
+
+  function s3Score() {
+    var right = 0;
+    CLAIMS.forEach(function (c, i) { if ((state.s3.marks.indexOf(i) > -1) === !c.ok) right++; });
+    return right;
+  }
+
+  $('s3check').addEventListener('click', function () {
+    if (!state.s3.marks.length) {
+      $('s3msg').textContent = 'Markiere zuerst mindestens eine Aussage, die du so nicht weitergeben würdest. Tippe dazu direkt auf den Satz.';
+      return;
+    }
+    state.s3.checked = true;
+    if (state.s3.firstScore === null) state.s3.firstScore = s3Score();
+    save();
+    renderClaims();
+    renderSteps();
+  });
+  $('s3reset').addEventListener('click', function () {
+    state.s3.checked = false;
+    state.s3.marks = [];
+    save();
+    renderClaims();
+    $('claims').querySelector('.claim').focus();
+  });
+
+  function renderS3Result() {
+    var box = $('s3result');
+    box.textContent = '';
+    if (!state.s3.checked) return;
+    var sc = s3Score();
+    var head = el('div', 'score');
+    head.appendChild(el('strong', null, sc + ' / 6'));
+    head.appendChild(el('span', null, sc === 6 ? 'Alle Aussagen richtig eingeschätzt. Stark.'
+      : sc >= 5 ? 'Fast alles richtig eingeschätzt. Schau dir die markierte Abweichung an.'
+      : 'Aussagen richtig eingeschätzt. Die Erklärungen zeigen, worauf du achten kannst.'));
+    box.appendChild(head);
+    if (state.s3.firstScore !== null && state.s3.firstScore !== sc) {
+      box.appendChild(el('p', 'hint', 'Für die Auswertung zählt dein erster Versuch (' + state.s3.firstScore + ' / 6).'));
+    }
+    var ul = el('ul', 'results');
+    CLAIMS.forEach(function (c, i) {
+      var marked = state.s3.marks.indexOf(i) > -1, correct = marked === !c.ok;
+      var li = el('li');
+      li.appendChild(el('span', 'no', String(i + 1)));
+      var d = el('div');
+      var tag = el('span', 'tag ' + (correct ? 'good' : 'bad'),
+        !c.ok ? (marked ? '✓ Gefunden · ' : '✕ Übersehen · ') + (c.why.indexOf('Unbelegt') === 0 ? 'unbelegt' : 'falsch')
+              : (marked ? '✕ Fehlalarm · stimmt' : '✓ Korrekt belassen · stimmt'));
+      d.appendChild(tag);
+      d.appendChild(el('b', null, c.text));
+      d.appendChild(el('p', null, c.why));
+      li.appendChild(d);
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+    var tips = el('ol', 'tips');
+    ['Quelle öffnen statt Quellenangabe glauben.', 'Präzise Zahlen und absolute Wörter wie «immer» oder «alle» hinterfragen.', 'Bei Recht und Zahlen: Originaldokument oder Fachstelle beiziehen.']
+      .forEach(function (t) { tips.appendChild(el('li', null, t)); });
+    box.appendChild(el('h3', 'h-m', 'Drei Prüffragen für jede KI-Antwort')).style.marginTop = '30px';
+    box.appendChild(tips);
+  }
+
+  /* ---------- 7. Wissenscheck Aufgabe 2: Zuordnung ---------- */
+  function renderSort() {
+    var ul = $('sort'), st = state.q2;
+    ul.textContent = '';
+    SORT.forEach(function (it, i) {
+      var li = el('li');
+      var txt = el('span', 'sort__txt', it.text);
+      txt.id = 'sort-' + i;
+      li.appendChild(txt);
+      var seg = el('div', 'seg');
+      seg.setAttribute('role', 'group');
+      seg.setAttribute('aria-labelledby', 'sort-' + i);
+      ['ok', 'no'].forEach(function (cat) {
+        var b = el('button', null, CAT_LABEL[cat]);
+        b.type = 'button';
+        b.setAttribute('data-cat', cat);
+        b.setAttribute('aria-pressed', st.answers[i] === cat ? 'true' : 'false');
+        if (st.checked) b.disabled = true;
+        else b.addEventListener('click', function () {
+          st.answers[i] = cat;
+          $('q2msg').textContent = '';
+          save();
+          renderSort();
+          ul.querySelectorAll('.seg')[i].querySelector('[data-cat="' + cat + '"]').focus();
+        });
+        seg.appendChild(b);
+      });
+      li.appendChild(seg);
+      if (st.checked) {
+        var right = st.answers[i] === it.cat;
+        li.classList.add(right ? 'is-right' : 'is-wrong');
+        var p = el('p', 'sort__fb');
+        p.appendChild(el('strong', null, right ? '✓ Richtig. ' : '✕ Eher «' + CAT_LABEL[it.cat] + '». '));
+        p.appendChild(document.createTextNode(it.why));
+        li.appendChild(p);
+      }
+      ul.appendChild(li);
+    });
+    $('q2check').hidden = st.checked;
+    $('q2reset').hidden = !st.checked;
+    var res = $('q2result');
+    res.textContent = '';
+    if (st.checked) {
+      var n = SORT.filter(function (it, i) { return st.answers[i] === it.cat; }).length;
+      var fb = el('div', 'fb');
+      fb.setAttribute('data-v', n === 4 ? 'good' : n >= 2 ? 'mid' : 'bad');
+      fb.style.marginTop = '16px';
+      fb.appendChild(el('h4', null, n + ' von 4 richtig zugeordnet.'));
+      fb.appendChild(el('p', null, 'Die Faustregel: Öffentliches und Allgemeines ist unbedenklich. Sobald Personen, Gesundheit, Kundendaten oder interne Vertraulichkeit im Spiel sind, nur im freigegebenen Tool oder gar nicht.'));
+      if (st.firstOk !== null && !st.firstOk && n === 4) fb.appendChild(el('p', 'fb__more', 'Für die Auswertung zählt dein erster Versuch.'));
+      res.appendChild(fb);
+    }
+  }
+  $('q2check').addEventListener('click', function () {
+    var st = state.q2, missing = SORT.length - Object.keys(st.answers).length;
+    if (missing > 0) {
+      $('q2msg').textContent = missing === 1 ? 'Eine Situation ist noch nicht zugeordnet.' : 'Noch ' + missing + ' Situationen sind nicht zugeordnet. Wähle bei jeder «Unbedenklich» oder «Heikel».';
+      return;
+    }
+    st.checked = true;
+    if (st.firstOk === null) st.firstOk = SORT.every(function (it, i) { return st.answers[i] === it.cat; });
+    save();
+    renderSort();
+    renderSteps();
+  });
+  $('q2reset').addEventListener('click', function () {
+    state.q2.checked = false;
+    state.q2.answers = {};
+    save();
+    renderSort();
+    $('sort').querySelector('button').focus();
+  });
+
+  /* ---------- 8. Auswertung ---------- */
+  function results() {
+    return {
+      s1: state.s1.first !== null ? DECISIONS.s1.options[state.s1.first].v === 'good' : null,
+      s2: state.s2.first !== null ? DECISIONS.s2.options[state.s2.first].v === 'good' : null,
+      s3: state.s3.firstScore !== null ? state.s3.firstScore >= 5 : null,
+      q1: state.q1.first !== null ? DECISIONS.q1.options[state.q1.first].v === 'good' : null,
+      q2: state.q2.firstOk,
+      q3: state.q3.first !== null ? DECISIONS.q3.options[state.q3.first].v === 'good' : null
+    };
+  }
+
+  function renderSummary() {
+    var r = results(), solved = 0, done = 0;
+    Object.keys(r).forEach(function (k) { if (r[k] === true) solved++; if (r[k] !== null) done++; });
+    var stations = ['s1', 's2', 's3', 'quiz'].filter(isDone).length;
+
+    $('ringNum').textContent = solved;
+    $('ring').setAttribute('aria-label', solved + ' von 6 Aufgaben gelöst');
+    var fg = $('ringFg'), full = 314.16;
+    fg.style.strokeDashoffset = full;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { fg.style.strokeDashoffset = full * (1 - solved / 6); }); });
+    $('progressline').textContent = 'Lernfortschritt: ' + stations + ' von 4 Lernstationen bearbeitet, ' + done + ' von 6 Aufgaben beantwortet.';
+
+    $('endLead').textContent = done === 0
+      ? 'Du hast noch keine Aufgabe bearbeitet. Starte mit dem ersten Szenario, es dauert nur zwei Minuten.'
+      : solved === 6 ? 'Alle sechs Aufgaben gelöst: Du gehst souverän mit KI um. Die Takeaways helfen dir, das im Alltag beizubehalten.'
+      : solved >= 4 ? 'Du bist auf gutem Weg. Unten siehst du, bei welchem Lernziel sich eine Wiederholung lohnt.'
+      : 'Ein guter Anfang. Wiederhole die markierten Szenarien, dort liegt der grösste Hebel.';
+
+    var LZ = [
+      { t: 'Lernziel 1 · Einsatzmöglichkeiten erkennen', scene: 's1', task: 'q1', label: 'Kundenanfrage' },
+      { t: 'Lernziel 2 · Datenschutzrisiken erkennen', scene: 's2', task: 'q2', label: 'Vertrauliche Daten' },
+      { t: 'Lernziel 3 · KI-Informationen prüfen', scene: 's3', task: 'q3', label: 'Stimmt das?' }
+    ];
+    var ul = $('lzlist');
+    ul.textContent = '';
+    LZ.forEach(function (z, n) {
+      var a = r[z.scene], b = r[z.task], pts = (a ? 1 : 0) + (b ? 1 : 0), open = (a === null) + (b === null);
+      var li = el('li');
+      li.appendChild(el('h4', null, z.t));
+      li.appendChild(el('span', 'state', open === 2 ? 'Offen' : pts === 2 ? 'Sicher' : pts === 1 ? 'Auf gutem Weg' : 'Nochmals anschauen'));
+      var bar = el('div', 'bar'), fill = el('i');
+      fill.style.width = (pts / 2 * 100) + '%';
+      fill.style.background = ['var(--cobalt)', 'var(--bordeaux)', 'var(--orange)'][n];
+      bar.appendChild(fill);
+      li.appendChild(bar);
+      var det = el('div', 'detail');
+      det.appendChild(el('span', null, 'Szenario: ' + mark(a) + ' · Wissenscheck: ' + mark(b)));
+      var again = el('button', 'btn btn--ghost btn--small', a === null ? 'Szenario bearbeiten' : 'Szenario wiederholen');
+      again.type = 'button';
+      again.addEventListener('click', function () { retry(z.scene); });
+      det.appendChild(again);
+      li.appendChild(det);
+      ul.appendChild(li);
+    });
+  }
+  function mark(v) { return v === null ? 'offen' : v ? '✓ gelöst' : '✕ noch nicht'; }
+
+  function retry(id) {
+    if (id === 's3') state.s3 = { marks: [], firstScore: null, checked: false };
+    else state[id] = { first: null, seen: [], spots: (state[id].spots || []) };
+    save();
+    renderAll();
+    go(id);
+  }
+
+  $('restart').addEventListener('click', function () {
+    state = fresh();
+    try { window.localStorage.removeItem(KEY); } catch (e) { /* ignorieren */ }
+    var info = $('spotinfo');
+    info.textContent = '';
+    info.appendChild(el('b', null, 'Was steckt im Dokument?'));
+    info.appendChild(document.createTextNode('Tippe auf die markierten Stellen, bevor du entscheidest.'));
+    renderAll();
+    go('start');
+  });
+
+  /* ---------- 9. Behind the Learning (Dialog) ---------- */
+  var overlay = $('behind'), panel = overlay.querySelector('.panel'), lastFocus = null;
+  function focusables() {
+    return Array.prototype.filter.call(panel.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])'),
+      function (n) { return !n.disabled && n.offsetParent !== null; });
+  }
+  function openBehind() {
+    if (overlay.classList.contains('is-open')) return;
+    lastFocus = document.activeElement;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    overlay.scrollTop = 0;
+    panel.focus();
+  }
+  function closeBehind() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (location.hash === '#behind') { try { history.replaceState(null, '', '#' + STATIONS[idx(state.current)].hash); } catch (e) { /* egal */ } }
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $('behindOpen').addEventListener('click', openBehind);
+  $('behindClose').addEventListener('click', closeBehind);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeBehind(); });
+  document.addEventListener('keydown', function (e) {
+    if (!overlay.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeBehind(); return; }
+    if (e.key === 'Tab') {
+      var f = focusables(); if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && (document.activeElement === first || document.activeElement === panel)) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* ---------- 10. Start ---------- */
+  function renderAll() {
+    ['s1', 's2', 'q1', 'q3'].forEach(renderDecision);
+    renderSpots();
+    renderClaims();
+    renderSort();
+    renderSteps();
+  }
+
+  load();
+  // Gespeicherte Ansicht im Feedback auf die erste Wahl zurücksetzen, falls nicht vorhanden
+  ['s1', 's2', 'q1', 'q3'].forEach(function (k) { if (state[k].first !== null && state[k].view == null) state[k].view = state[k].first; });
+  renderAll();
+  var h = location.hash.replace('#', ''), startId = 'start';
+  STATIONS.forEach(function (s) { if (s.hash === h) startId = s.id; });
+  go(startId, { initial: true });
+  if (h === 'behind') openBehind();
+})();
+</script>
+</body>
+</html>
